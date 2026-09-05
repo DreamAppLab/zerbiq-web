@@ -5,36 +5,207 @@ import Link from 'next/link';
 
 const DEMO_URL = 'YOUR_CALENDLY_LINK';
 
-const FEATURES = [
+const ALL_FEATURES = [
+  // ── All Plans ─────────────────────────────────────────────────────────────
   {
     icon: '🗺️',
     title: 'Route Management',
-    desc: 'Build routes, assign crews, drag to reorder stops. Your whole territory organized in minutes.',
+    desc: "Build optimized routes for your crews in minutes — not hours. Assign stops, drag to reorder, and push routes directly to your team's phones with one tap.",
+    badge: 'Included with all plans',
   },
   {
     icon: '📋',
     title: 'Job Tracking',
-    desc: 'Schedule, dispatch, and close jobs from one screen. Every status update in real time.',
+    desc: 'Schedule one-time and recurring jobs from a single screen. Set it once — Zerbiq handles the rest for weekly, biweekly, monthly, and quarterly jobs automatically.',
+    badge: 'Included with all plans',
   },
   {
     icon: '💰',
     title: 'Invoicing & Payments',
-    desc: 'Generate invoices from completed jobs. Send, collect, and track payments without switching apps.',
+    desc: 'Generate invoices the moment a job is marked complete. Send via email or SMS with one click. Collect card payments, ACH, or cash — your choice.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '💬',
+    title: 'Two-Way SMS Messaging',
+    desc: 'Communicate with customers the way they prefer — text. Send appointment reminders, job updates, invoice links, and follow-ups directly from Zerbiq.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '🚗',
+    title: 'Technician On The Way',
+    desc: "When a tech is headed to a job, one tap sends the customer an automatic SMS: their tech's name, estimated arrival time, and a confirmation of what's being done.",
+    badge: 'Included with all plans',
   },
   {
     icon: '👥',
     title: 'Crew Management',
-    desc: 'Timecards, roles, permissions, attendance. Run your team without the back-and-forth texts.',
+    desc: 'Add every team member with a role and permission level. Field techs see only what they need. Admins and managers see everything. No shared logins.',
+    badge: 'Included with all plans',
   },
   {
     icon: '📊',
     title: 'Customer CRM',
-    desc: 'Every customer, every job history, every note — in one place. Never lose track of a relationship.',
+    desc: 'Every customer gets a complete profile: contact info, service history, invoices, notes, photos, and equipment logs — all in one place.',
+    badge: 'Included with all plans',
   },
   {
     icon: '📱',
     title: 'Mobile Crew View',
-    desc: 'Your techs clock in, log jobs, and report issues from their phone. No training required.',
+    desc: 'Your techs get a clean view of their day: where to go, what to do, and how to log it. Works on any smartphone. No app store required.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '💳',
+    title: 'Estimates & Quotes',
+    desc: 'Create professional estimates in seconds. Send via email or SMS. Clients approve with one tap — no login required.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '📋',
+    title: 'Lead Management',
+    desc: 'Capture leads from your website embed form, manual entry, or direct import. Manage them through a visual Kanban pipeline.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '🗺️',
+    title: 'Mileage Tracking',
+    desc: 'Crews log mileage from their phone. IRS reimbursement rates calculated automatically. Know your vehicle costs per job and per route.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '🛠️',
+    title: 'Equipment & Asset Tracking',
+    desc: 'Log every piece of equipment with service history, assignment, condition reports, and maintenance logs.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '📥',
+    title: 'Embeddable Lead Capture Form',
+    desc: 'Add a lead capture form to any website with one line of code. Leads go directly into your Zerbiq pipeline.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '📤',
+    title: 'Data Export',
+    desc: 'Export any data — customers, jobs, invoices, routes, team — to CSV or PDF at any time. Full account ZIP export available.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '🌐',
+    title: 'Customer Portal',
+    desc: 'Every customer gets a private portal to view upcoming jobs, pay invoices, approve quotes, and leave notes — without calling you.',
+    badge: 'Included with all plans',
+  },
+  // ── Field, Command & Enterprise ────────────────────────────────────────────
+  {
+    icon: '📈',
+    title: 'Reports & Analytics',
+    desc: 'Revenue by route, tech, or service type. Overdue invoice aging. Customer retention rates. Job completion percentages. Tech performance rankings.',
+    badge: 'Included with Field, Command & Enterprise',
+  },
+  {
+    icon: '🗓️',
+    title: 'Schedule & Dispatch Board',
+    desc: 'See every job for the day in a calendar view by tech or route. Drag to reschedule. Spot gaps. Respond to last-minute changes without a single phone call.',
+    badge: 'Included with Field, Command & Enterprise',
+  },
+  {
+    icon: '💵',
+    title: 'Partial Payments & Payment Plans',
+    desc: 'Give customers flexibility to pay over time. Set up payment plans, record partial payments, and track balances automatically.',
+    badge: 'Included with Field, Command & Enterprise',
+  },
+  {
+    icon: '📦',
+    title: 'Materials & Inventory',
+    desc: 'Track every product, chemical, and supply your crews use in the field. Log usage per job, set reorder points, and know your stock levels at all times.',
+    badge: 'Included with Field, Command & Enterprise',
+  },
+  {
+    icon: '🛒',
+    title: 'Purchase Orders',
+    desc: 'Generate purchase orders by supplier with one click. Send directly to vendors by email or print on site.',
+    badge: 'Included with Field, Command & Enterprise',
+  },
+  {
+    icon: '⏱️',
+    title: 'Time Tracking & Job Costing',
+    desc: 'See exactly how long every job takes and what it costs in labor and materials. Compare estimated vs. actual in real time.',
+    badge: 'Included with Field, Command & Enterprise',
+  },
+  {
+    icon: '🤝',
+    title: 'Subcontractor Management',
+    desc: 'Add 1099 subcontractors alongside your W-2 employees. Assign jobs, track hours, and manage payments separately.',
+    badge: 'Included with Field, Command & Enterprise',
+  },
+  {
+    icon: '🌟',
+    title: 'Review Request Automation',
+    desc: 'After a job is completed, Zerbiq automatically sends a review request via SMS or email. More reviews, less asking.',
+    badge: 'Included with Field, Command & Enterprise',
+  },
+  {
+    icon: '📬',
+    title: 'Automated Follow-Up Sequences',
+    desc: 'Send a series of follow-up messages to leads and inactive customers automatically. Stay top of mind without manual effort.',
+    badge: 'Included with Field, Command & Enterprise',
+  },
+  // ── Command & Enterprise ───────────────────────────────────────────────────
+  {
+    icon: '📅',
+    title: 'Appointment Reminders',
+    desc: 'Zerbiq automatically sends customers a reminder before every scheduled job. Reduce no-shows and last-minute cancellations without lifting a finger.',
+    badge: 'Included with Command & Enterprise',
+  },
+  {
+    icon: '🔔',
+    title: 'Automated Reminders & Notifications',
+    desc: 'Invoice overdue? Zerbiq reminds the customer automatically. Job not completed on time? You get notified. Set your rules once and Zerbiq runs them every day.',
+    badge: 'Included with Command & Enterprise',
+  },
+  {
+    icon: '⚠️',
+    title: 'Automated Late Fees',
+    desc: 'Set your late fee policy once. Zerbiq applies it automatically to overdue invoices on the date you specify.',
+    badge: 'Included with Command & Enterprise',
+  },
+  {
+    icon: '🔧',
+    title: 'Maintenance Calendar',
+    desc: 'Track service intervals for vehicles and equipment. Get alerts before things break down. Log full maintenance history and costs.',
+    badge: 'Included with Command & Enterprise',
+  },
+  {
+    icon: '📗',
+    title: 'QuickBooks Sync',
+    desc: 'Every invoice, payment, and expense syncs to QuickBooks automatically. Your books stay clean without double entry.',
+    badge: 'Included with Command & Enterprise',
+  },
+  {
+    icon: '🏷️',
+    title: 'White-Label Option',
+    desc: 'Remove Zerbiq branding. Use your own logo and colors throughout the platform. Present it as your own software to your crew and customers.',
+    badge: 'Included with Command & Enterprise',
+  },
+];
+
+const PLAN_GROUPS = [
+  {
+    key: 'all',
+    label: 'All Plans',
+    features: ALL_FEATURES.filter((f) => f.badge === 'Included with all plans'),
+  },
+  {
+    key: 'field',
+    label: 'Field, Command & Enterprise',
+    features: ALL_FEATURES.filter((f) => f.badge === 'Included with Field, Command & Enterprise'),
+  },
+  {
+    key: 'command',
+    label: 'Command & Enterprise',
+    features: ALL_FEATURES.filter((f) => f.badge === 'Included with Command & Enterprise'),
   },
 ];
 
@@ -255,58 +426,87 @@ export default function HomePage() {
             Everything your operation needs. Nothing it doesn&apos;t.
           </h2>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: 20,
-            }}
-          >
-            {FEATURES.map((f) => (
+          {PLAN_GROUPS.map((group) => (
+            <div key={group.key} style={{ marginBottom: 56 }}>
+              {/* Plan group header */}
               <div
-                key={f.title}
-                className="feature-card"
                 style={{
-                  background: 'var(--color-raised)',
-                  border: '1px solid var(--color-white-10)',
-                  borderRadius: 8,
-                  padding: 28,
                   display: 'flex',
-                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: 16,
+                  marginBottom: 28,
                 }}
               >
-                <div style={{ fontSize: 28, marginBottom: 14 }}>{f.icon}</div>
-                <h3 style={{ fontWeight: 700, fontSize: 17, margin: '0 0 10px' }}>{f.title}</h3>
-                <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: '0 0 20px', lineHeight: 1.65, flex: 1 }}>
-                  {f.desc}
-                </p>
-                <div>
-                  <Link
-                    href="/signup"
-                    className="btn-primary"
-                    style={{
-                      display: 'inline-block',
-                      borderRadius: 8,
-                      padding: '10px 20px',
-                      fontWeight: 700,
-                      fontSize: 13,
-                    }}
-                  >
-                    Try it free →
-                  </Link>
-                  <div
-                    style={{
-                      fontSize: 11,
-                      color: 'rgba(255,255,255,0.4)',
-                      marginTop: 6,
-                    }}
-                  >
-                    Included with all plans
-                  </div>
-                </div>
+                <div style={{ flex: 1, height: 1, background: 'var(--color-white-10)' }} />
+                <span
+                  style={{
+                    color: 'var(--color-primary)',
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {group.label}
+                </span>
+                <div style={{ flex: 1, height: 1, background: 'var(--color-white-10)' }} />
               </div>
-            ))}
-          </div>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                  gap: 20,
+                }}
+              >
+                {group.features.map((f) => (
+                  <div
+                    key={f.title}
+                    className="feature-card"
+                    style={{
+                      background: 'var(--color-raised)',
+                      border: '1px solid var(--color-white-10)',
+                      borderRadius: 8,
+                      padding: 28,
+                      display: 'flex',
+                      flexDirection: 'column',
+                    }}
+                  >
+                    <div style={{ fontSize: 28, marginBottom: 14 }}>{f.icon}</div>
+                    <h3 style={{ fontWeight: 700, fontSize: 17, margin: '0 0 10px' }}>{f.title}</h3>
+                    <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: '0 0 20px', lineHeight: 1.65, flex: 1 }}>
+                      {f.desc}
+                    </p>
+                    <div>
+                      <Link
+                        href="/signup"
+                        className="btn-primary"
+                        style={{
+                          display: 'inline-block',
+                          borderRadius: 8,
+                          padding: '10px 20px',
+                          fontWeight: 700,
+                          fontSize: 13,
+                        }}
+                      >
+                        Try it free →
+                      </Link>
+                      <div
+                        style={{
+                          fontSize: 11,
+                          color: 'rgba(255,255,255,0.4)',
+                          marginTop: 6,
+                        }}
+                      >
+                        {f.badge}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
