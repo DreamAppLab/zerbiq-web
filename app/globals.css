@@ -1,27 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #3D5CFF;
+  --color-bg: #0A0A0F;
+  --color-surface: #14141C;
+  --color-raised: #1E1E2A;
+  --color-white-60: rgba(255, 255, 255, 0.6);
+  --color-white-30: rgba(255, 255, 255, 0.3);
+  --color-white-10: rgba(255, 255, 255, 0.1);
+  --font-family: 'Inter', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: #ffffff;
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Dark scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(61, 92, 255, 0.4);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(61, 92, 255, 0.7);
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+/* Marquee animations */
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.marquee-track-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 40s linear infinite;
+}
+
+.marquee-track-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-right 40s linear infinite;
+}
+
+.marquee-wrapper {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* Feature card hover */
+.feature-card {
+  transition: border-color 0.2s ease;
+}
+
+.feature-card:hover {
+  border-color: rgba(61, 92, 255, 0.4) !important;
+}
+
+/* Pricing card glow for popular */
+.card-popular {
+  box-shadow: 0 0 40px rgba(61, 92, 255, 0.15);
+}
+
+/* Nav/footer link hover */
+.link-muted {
+  color: var(--color-white-60);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.link-muted:hover {
+  color: #ffffff;
+}
+
+/* Primary button hover */
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.btn-primary:hover {
+  opacity: 0.88;
+}
+
+/* Outlined button hover */
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-outline:hover {
+  background: rgba(61, 92, 255, 0.08);
+}
+
+/* Ghost button hover */
+.btn-ghost {
+  background: transparent;
+  color: #fff;
+  border: 1px solid var(--color-white-10);
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+.btn-ghost:hover {
+  border-color: rgba(61, 92, 255, 0.4);
+}
+
+/* Blog card hover */
+.blog-card {
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+.blog-card:hover {
+  border-color: rgba(61, 92, 255, 0.4) !important;
+}
+
+/* CTA button filled (for pricing) */
+.btn-cta-filled {
+  display: block;
+  text-align: center;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  margin-bottom: 24px;
+  transition: opacity 0.2s;
+}
+.btn-cta-filled:hover {
+  opacity: 0.85;
+}
+
+.btn-cta-ghost {
+  display: block;
+  text-align: center;
+  background: transparent;
+  color: #fff;
+  border: 1px solid var(--color-white-10);
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  margin-bottom: 24px;
+  transition: border-color 0.2s;
+}
+.btn-cta-ghost:hover {
+  border-color: rgba(61, 92, 255, 0.4);
 }
