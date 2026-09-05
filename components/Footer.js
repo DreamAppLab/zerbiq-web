@@ -66,6 +66,9 @@ export default function Footer() {
             <Link href="/pricing" className="link-muted" style={{ fontSize: 14, fontWeight: 500 }}>
               Pricing
             </Link>
+            <Link href="/compare" className="link-muted" style={{ fontSize: 14, fontWeight: 500 }}>
+              Compare
+            </Link>
             <Link href="/blog" className="link-muted" style={{ fontSize: 14, fontWeight: 500 }}>
               Blog
             </Link>

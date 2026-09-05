@@ -271,13 +271,39 @@ export default function HomePage() {
                   border: '1px solid var(--color-white-10)',
                   borderRadius: 8,
                   padding: 28,
+                  display: 'flex',
+                  flexDirection: 'column',
                 }}
               >
                 <div style={{ fontSize: 28, marginBottom: 14 }}>{f.icon}</div>
                 <h3 style={{ fontWeight: 700, fontSize: 17, margin: '0 0 10px' }}>{f.title}</h3>
-                <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: 0, lineHeight: 1.65 }}>
+                <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: '0 0 20px', lineHeight: 1.65, flex: 1 }}>
                   {f.desc}
                 </p>
+                <div>
+                  <Link
+                    href="/signup"
+                    className="btn-primary"
+                    style={{
+                      display: 'inline-block',
+                      borderRadius: 8,
+                      padding: '10px 20px',
+                      fontWeight: 700,
+                      fontSize: 13,
+                    }}
+                  >
+                    Try it free →
+                  </Link>
+                  <div
+                    style={{
+                      fontSize: 11,
+                      color: 'rgba(255,255,255,0.4)',
+                      marginTop: 6,
+                    }}
+                  >
+                    Included with all plans
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -326,11 +352,184 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* DEMO SECTION */}
+      {/* TWO WAYS TO GET STARTED */}
       <section
         style={{
           padding: '80px 24px',
           background: 'var(--color-surface)',
+        }}
+      >
+        <div style={{ maxWidth: 960, margin: '0 auto' }}>
+          <h2
+            style={{
+              fontWeight: 900,
+              fontSize: 'clamp(28px, 4vw, 44px)',
+              letterSpacing: '-0.03em',
+              textAlign: 'center',
+              margin: '0 0 16px',
+              lineHeight: 1.1,
+            }}
+          >
+            Two ways to get started
+          </h2>
+          <p
+            style={{
+              color: 'var(--color-white-60)',
+              textAlign: 'center',
+              fontSize: 17,
+              lineHeight: 1.7,
+              margin: '0 0 48px',
+              maxWidth: 600,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
+            Whether you set it up yourself or have us handle everything — you&apos;ll be live
+            before your next job runs.
+          </p>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: 24,
+            }}
+          >
+            {/* DIY Card */}
+            <div
+              style={{
+                background: '#1E1E2A',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: 8,
+                padding: 32,
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <div style={{ fontSize: 36, marginBottom: 16 }}>📥</div>
+              <h3
+                style={{
+                  fontWeight: 800,
+                  fontSize: 20,
+                  margin: '0 0 14px',
+                  lineHeight: 1.3,
+                }}
+              >
+                Set it up yourself — in under an hour.
+              </h3>
+              <p
+                style={{
+                  color: 'var(--color-white-60)',
+                  fontSize: 15,
+                  lineHeight: 1.7,
+                  margin: '0 0 28px',
+                  flex: 1,
+                }}
+              >
+                Download our simple spreadsheet templates for customers, routes, and team members.
+                Fill them in, upload, and you&apos;re live. No tech skills required. Most owners
+                are fully set up in under an hour.
+              </p>
+              <div>
+                <Link
+                  href="/signup"
+                  style={{
+                    display: 'inline-block',
+                    background: 'transparent',
+                    border: '1px solid var(--color-primary)',
+                    color: 'var(--color-primary)',
+                    borderRadius: 8,
+                    padding: '12px 24px',
+                    fontWeight: 700,
+                    fontSize: 14,
+                    textDecoration: 'none',
+                    transition: 'background 0.2s, color 0.2s',
+                  }}
+                >
+                  Start Free Trial
+                </Link>
+                <div
+                  style={{
+                    fontSize: 12,
+                    color: 'rgba(255,255,255,0.4)',
+                    marginTop: 8,
+                  }}
+                >
+                  Free with every plan
+                </div>
+              </div>
+            </div>
+
+            {/* White-Glove Card */}
+            <div
+              style={{
+                background: '#1E1E2A',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: 8,
+                padding: 32,
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <div style={{ fontSize: 36, marginBottom: 16 }}>🤝</div>
+              <h3
+                style={{
+                  fontWeight: 800,
+                  fontSize: 20,
+                  margin: '0 0 14px',
+                  lineHeight: 1.3,
+                }}
+              >
+                Want us to handle everything?
+              </h3>
+              <p
+                style={{
+                  color: 'var(--color-white-60)',
+                  fontSize: 15,
+                  lineHeight: 1.7,
+                  margin: '0 0 28px',
+                  flex: 1,
+                }}
+              >
+                Our White-Glove Onboarding is a one-time $599 add-on. We Zoom with you for
+                60–90 minutes, import your customer list, build your routes, add your team, and
+                configure everything — guaranteed live before the call ends.
+              </p>
+              <div>
+                <a
+                  href="mailto:hello@zerbiq.com"
+                  className="btn-primary"
+                  style={{
+                    display: 'inline-block',
+                    borderRadius: 8,
+                    padding: '12px 24px',
+                    fontWeight: 700,
+                    fontSize: 14,
+                    textDecoration: 'none',
+                  }}
+                >
+                  Book White-Glove Setup
+                </a>
+                <div
+                  style={{
+                    fontSize: 12,
+                    color: 'rgba(255,255,255,0.4)',
+                    marginTop: 8,
+                  }}
+                >
+                  One-time $599 · Available for all plans
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* DEMO SECTION */}
+      <section
+        style={{
+          padding: '80px 24px',
+          background: 'var(--color-bg)',
           textAlign: 'center',
         }}
       >

@@ -20,8 +20,12 @@ const FAQ = [
     a: 'Yes — upgrade or downgrade anytime. Changes take effect immediately and are prorated automatically.',
   },
   {
+    q: 'What is the DIY setup option?',
+    a: 'Every plan includes downloadable spreadsheet templates for customers, routes, and team members. Fill in your information and upload — most owners are fully set up in under an hour. No tech skills required.',
+  },
+  {
     q: 'What is White-Glove Onboarding?',
-    a: "A one-time $599 add-on. We Zoom with you for 60–90 minutes, import your customer list, build your routes, add your team, configure your settings, and guarantee you're live before the call ends.",
+    a: 'Want us to handle the setup for you? Our White-Glove Onboarding is a one-time $599 add-on. We Zoom with you for 60–90 minutes, import your customer list, build your routes, add your team, and configure everything — guaranteed live before the call ends.',
   },
   {
     q: 'Do you offer annual billing?',
