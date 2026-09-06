@@ -1,9 +1,9 @@
 'use client';
 import { useEffect, useRef } from 'react';
 
-// Z-bolt lightning shape (from the letter Z): two horizontal bars + diagonal
-// Approximate bounding box: x 2-14, y 2-18 → center ~(8, 10)
-const ZBOLT_PATH = 'M 8 2 L 2 10 L 6 10 L 2 18 L 14 8 L 10 8 Z';
+// Zerbiq logo mark: 24×24 rounded square with white Z letterform inside.
+// Z path: top bar (6,7)→(18,7), diagonal (18,7)→(6,17), bottom bar (6,17)→(18,17)
+const LOGO_Z_PATH = 'M 6 7 L 18 7 L 6 17 L 18 17';
 
 function rand(min, max) {
   return Math.random() * (max - min) + min;
@@ -102,26 +102,38 @@ export default function HeroBackground() {
       if (zBolts.length >= MAX_ZBOLTS) return;
 
       const { w, h } = sizeRef.current;
-      const scale = rand(1.4, 2.6); // icon roughly 17-32 px across
-      // Center the icon at a random point (icon center is at path coord (8,10))
+      // Center the 24×24 logo mark at a random point
       const cx = rand(w * 0.05, w * 0.92);
       const cy = rand(h * 0.05, h * 0.88);
 
       const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      g.setAttribute(
-        'transform',
-        `translate(${cx - 8 * scale} ${cy - 10 * scale}) scale(${scale})`
-      );
+      g.setAttribute('transform', `translate(${cx - 12} ${cy - 12})`);
       g.style.opacity = '0';
 
+      // 1. Rounded square background
+      const rectEl = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rectEl.setAttribute('x', '0');
+      rectEl.setAttribute('y', '0');
+      rectEl.setAttribute('width', '24');
+      rectEl.setAttribute('height', '24');
+      rectEl.setAttribute('rx', '4');
+      rectEl.setAttribute('fill', '#3D5CFF');
+      g.appendChild(rectEl);
+
+      // 2. White Z letterform inside
       const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      pathEl.setAttribute('d', ZBOLT_PATH);
-      pathEl.setAttribute('fill', '#3D5CFF');
+      pathEl.setAttribute('d', LOGO_Z_PATH);
+      pathEl.setAttribute('fill', 'none');
+      pathEl.setAttribute('stroke', 'white');
+      pathEl.setAttribute('stroke-width', '2');
+      pathEl.setAttribute('stroke-linecap', 'round');
+      pathEl.setAttribute('stroke-linejoin', 'round');
       g.appendChild(pathEl);
+
       svg.appendChild(g);
       zBolts.push(g);
 
-      const targetOpacity = 0.35; // subtle but visible waypoint
+      const targetOpacity = 0.20; // subtle but visible waypoint
       // Total cycle = 2 s: 600 ms fade-in + 800 ms hold + 600 ms fade-out
       const fadeInMs = 600;
       const holdMs = 800;
