@@ -6,7 +6,7 @@ export const metadata = {
   description: 'Start your free trial with Zerbiq.',
 };
 
-const DEMO_URL = 'YOUR_CALENDLY_LINK';
+const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
 export default function SignupPage() {
   return (

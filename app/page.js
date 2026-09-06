@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import Link from 'next/link';
 
-const DEMO_URL = 'YOUR_CALENDLY_LINK';
+const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
 const ALL_FEATURES = [
   // ── All Plans ─────────────────────────────────────────────────────────────
