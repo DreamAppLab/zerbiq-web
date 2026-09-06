@@ -44,7 +44,7 @@ const FEATURE_GROUPS = [
       { label: 'Credits & refunds', values: [true, true, true, true] },
       { label: 'Partial payments & payment plans', values: [false, true, true, true] },
       { label: 'Automated late fees', values: [false, false, true, true] },
-      { label: 'QuickBooks sync', values: [false, false, true, true] },
+      { label: 'QuickBooks sync (coming soon)', values: [false, false, true, true] },
     ],
   },
   {
@@ -124,7 +124,6 @@ const FEATURE_GROUPS = [
       { label: 'Mobile crew view (no app store)', values: [true, true, true, true] },
       { label: 'PWA (install on phone)', values: [true, true, true, true] },
       { label: 'Time tracking & job costing', values: [false, true, true, true] },
-      { label: 'White-label option', values: [false, false, true, true] },
       { label: 'Priority support', values: [false, false, true, true] },
       { label: 'Dedicated onboarding', values: [false, false, false, true] },
       { label: 'Custom integrations', values: [false, false, false, true] },
