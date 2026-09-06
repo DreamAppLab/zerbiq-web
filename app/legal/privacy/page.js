@@ -11,7 +11,7 @@ export default function PrivacyPage() {
     <>
       <Navbar />
 
-      <section style={{ padding: '72px 24px 100px', background: 'var(--color-bg)' }}>
+      <section style={{ padding: '72px 24px 100px' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <h1
             style={{

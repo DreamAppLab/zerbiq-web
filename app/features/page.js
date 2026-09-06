@@ -310,7 +310,6 @@ export default function FeaturesPage() {
         style={{
           padding: '80px 24px 60px',
           textAlign: 'center',
-          background: 'var(--color-bg)',
         }}
       >
         <div style={{ maxWidth: 700, margin: '0 auto' }}>
@@ -346,7 +345,7 @@ export default function FeaturesPage() {
             key={feature.title + i}
             style={{
               padding: '60px 24px',
-              background: isEven ? 'var(--color-surface)' : 'var(--color-bg)',
+              background: isEven ? 'var(--color-surface)' : undefined,
             }}
           >
             <div

@@ -44,7 +44,7 @@ export default function BlogPage() {
       <Navbar />
 
       <section
-        style={{ padding: '80px 24px 56px', textAlign: 'center', background: 'var(--color-bg)' }}
+        style={{ padding: '80px 24px 56px', textAlign: 'center' }}
       >
         <div style={{ maxWidth: 700, margin: '0 auto' }}>
           <h1
@@ -65,7 +65,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <section style={{ padding: '0 24px 100px', background: 'var(--color-bg)' }}>
+      <section style={{ padding: '0 24px 100px' }}>
         <div
           style={{
             maxWidth: 1100,

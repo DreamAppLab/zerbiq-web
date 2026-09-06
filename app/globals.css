@@ -47,16 +47,18 @@ body {
   background: rgba(61, 92, 255, 0.7);
 }
 
-/* ── Fixed animation background coverage ─────────────────────────────────────
-   All sections get a solid background by default so the fixed route-line
-   animation is hidden behind content. The .hero-section intentionally omits
-   a background so the animation is visible there.
-   Inline styles (e.g. background: var(--color-surface)) override this rule. */
+/* ── Animation visibility strategy ───────────────────────────────────────────
+   Sections default to transparent so the fixed canvas animation (z-index: -1)
+   shows through them — the dark body colour appears identical visually but the
+   canvas lines and Z-marks render above it.
+   Sections that carry var(--color-surface) set their background via inline
+   style and remain fully opaque, hiding the animation behind dense content.
+   Cards, nav, and footer are always opaque (set below or via inline style). */
 section {
-  background-color: var(--color-bg);
+  background-color: transparent;
 }
 
-/* Hero section: transparent so the fixed animation shows through */
+/* Hero section: explicitly transparent (belt-and-suspenders) */
 .hero-section {
   background-color: transparent !important;
 }

@@ -379,7 +379,7 @@ export default function HomePage() {
       </section>
 
       {/* INDUSTRY MARQUEE */}
-      <section style={{ padding: '60px 0 48px', overflow: 'hidden', background: 'var(--color-bg)' }}>
+      <section style={{ padding: '60px 0 48px', overflow: 'hidden' }}>
         <p
           style={{
             textAlign: 'center',
@@ -512,7 +512,7 @@ export default function HomePage() {
       </section>
 
       {/* PRICING */}
-      <section id="pricing" style={{ padding: '80px 24px', background: 'var(--color-bg)' }}>
+      <section id="pricing" style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <p
             style={{
@@ -730,7 +730,6 @@ export default function HomePage() {
       <section
         style={{
           padding: '80px 24px',
-          background: 'var(--color-bg)',
           textAlign: 'center',
         }}
       >

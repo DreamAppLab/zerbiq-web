@@ -47,7 +47,7 @@ export default function PricingPage() {
     <>
       <Navbar />
 
-      <section style={{ padding: '80px 24px 40px', textAlign: 'center', background: 'var(--color-bg)' }}>
+      <section style={{ padding: '80px 24px 40px', textAlign: 'center' }}>
         <div style={{ maxWidth: 700, margin: '0 auto' }}>
           <h1
             style={{
@@ -66,7 +66,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section style={{ padding: '0 24px 80px', background: 'var(--color-bg)' }}>
+      <section style={{ padding: '0 24px 80px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <PricingCards />
         </div>

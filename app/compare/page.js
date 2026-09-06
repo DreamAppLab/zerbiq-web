@@ -169,7 +169,6 @@ export default function ComparePage() {
         style={{
           padding: '80px 24px 60px',
           textAlign: 'center',
-          background: 'var(--color-bg)',
         }}
       >
         <div style={{ maxWidth: 700, margin: '0 auto' }}>
@@ -217,7 +216,7 @@ export default function ComparePage() {
       </section>
 
       {/* Table */}
-      <section style={{ padding: '0 24px 80px', background: 'var(--color-bg)' }}>
+      <section style={{ padding: '0 24px 80px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', overflowX: 'auto' }}>
           <table
             style={{
