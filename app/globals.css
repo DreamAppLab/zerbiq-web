@@ -47,6 +47,37 @@ body {
   background: rgba(61, 92, 255, 0.7);
 }
 
+/* ── Fixed animation background coverage ─────────────────────────────────────
+   All sections get a solid background by default so the fixed route-line
+   animation is hidden behind content. The .hero-section intentionally omits
+   a background so the animation is visible there.
+   Inline styles (e.g. background: var(--color-surface)) override this rule. */
+section {
+  background-color: var(--color-bg);
+}
+
+/* Hero section: transparent so the fixed animation shows through */
+.hero-section {
+  background-color: transparent !important;
+}
+
+/* Nav header always opaque so animation doesn't bleed through */
+header {
+  background-color: var(--color-bg);
+}
+
+/* Footer always opaque */
+footer {
+  background-color: var(--color-bg);
+}
+
+/* Feature / pricing / blog cards always opaque */
+.feature-card,
+.pricing-card,
+.blog-card {
+  background-color: var(--color-raised);
+}
+
 /* Selection color */
 ::selection {
   background-color: var(--color-primary);

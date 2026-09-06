@@ -24,25 +24,16 @@ export default function HeroBackground() {
     let active = true;
     const zBolts = []; // track live z-bolt elements
 
-    // ── Track SVG size via ResizeObserver ──────────────────────────────────
-    const ro = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        sizeRef.current = {
-          w: entry.contentRect.width,
-          h: entry.contentRect.height,
-        };
-      }
-    });
-    ro.observe(svg);
+    // ── Track viewport size via window resize ──────────────────────────────
+    sizeRef.current = { w: window.innerWidth, h: window.innerHeight };
 
-    // Seed initial size from bounding rect
-    const initialRect = svg.getBoundingClientRect();
-    if (initialRect.width > 0) {
-      sizeRef.current = { w: initialRect.width, h: initialRect.height };
-    }
+    const onResize = () => {
+      sizeRef.current = { w: window.innerWidth, h: window.innerHeight };
+    };
+    window.addEventListener('resize', onResize);
 
     // ── Route Lines ────────────────────────────────────────────────────────
-    // Each line: draws itself over 3-5 s, holds briefly, fades out, repeats.
+    // Each line: draws itself over 1.5-2.5 s, holds briefly, fades out, repeats.
     function spawnLine() {
       if (!active) return;
       const { w, h } = sizeRef.current;
@@ -68,10 +59,10 @@ export default function HeroBackground() {
       lineEl.setAttribute('stroke-linecap', 'round');
       lineEl.style.strokeDasharray = length;
       lineEl.style.strokeDashoffset = length;
-      lineEl.style.opacity = '0.15';
+      lineEl.style.opacity = '0.20';
       svg.appendChild(lineEl);
 
-      const drawDuration = rand(3000, 5000);
+      const drawDuration = rand(1500, 2500); // draw in ~2 seconds
 
       // Phase 1: draw the line (stroke-dashoffset → 0)
       const drawAnim = lineEl.animate(
@@ -89,7 +80,7 @@ export default function HeroBackground() {
         setTimeout(() => {
           if (!active) { lineEl.remove(); return; }
           const fadeAnim = lineEl.animate(
-            [{ opacity: 0.15 }, { opacity: 0 }],
+            [{ opacity: 0.20 }, { opacity: 0 }],
             { duration: 700, easing: 'ease-out', fill: 'forwards' }
           );
           fadeAnim.onfinish = () => {
@@ -101,7 +92,7 @@ export default function HeroBackground() {
     }
 
     // ── Z Waypoints ────────────────────────────────────────────────────────
-    // Fade in over 1.5 s → hold 2-3 s → fade out 0.8 s.  Max 3-5 visible.
+    // Fade in over 1.5 s → hold 2-3 s → fade out 0.8 s.  Max 4 visible.
     const MAX_ZBOLTS = 4;
 
     function spawnZbolt() {
@@ -128,7 +119,7 @@ export default function HeroBackground() {
       svg.appendChild(g);
       zBolts.push(g);
 
-      const targetOpacity = rand(0.08, 0.10);
+      const targetOpacity = rand(0.13, 0.16); // ~0.15 — visible but subtle
       const holdMs = rand(2000, 3000);
       const fadeInMs = 1500;
       const fadeOutMs = 800;
@@ -165,37 +156,24 @@ export default function HeroBackground() {
 
     return () => {
       active = false;
-      ro.disconnect();
+      window.removeEventListener('resize', onResize);
     };
   }, []);
 
   return (
-    <div
+    <svg
+      ref={svgRef}
       aria-hidden="true"
       style={{
-        position: 'absolute',
-        inset: 0,
-        overflow: 'hidden',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: -1,
         pointerEvents: 'none',
-        zIndex: 0,
+        overflow: 'hidden',
       }}
-    >
-      {/* Animated SVG layer */}
-      <svg
-        ref={svgRef}
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-      />
-
-      {/* Radial gradient: reveals center, fades to --color-bg at edges so
-          the canvas doesn't bleed into the next section */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background:
-            'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 25%, var(--color-bg) 72%)',
-        }}
-      />
-    </div>
+    />
   );
 }

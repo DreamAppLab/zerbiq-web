@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
+import HeroBackground from '@/components/HeroBackground';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -27,7 +28,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body>{children}</body>
+      <body>
+        {/* Fixed full-viewport route animation — sits behind all page content */}
+        <HeroBackground />
+        {children}
+      </body>
     </html>
   );
 }
