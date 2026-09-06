@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
+import HeroBackground from '@/components/HeroBackground';
 import Link from 'next/link';
 
 const DEMO_URL = 'YOUR_CALENDLY_LINK';
@@ -259,12 +260,14 @@ export default function HomePage() {
       {/* HERO */}
       <section
         style={{
+          position: 'relative',
           background: 'var(--color-bg)',
           padding: '100px 24px 80px',
           textAlign: 'center',
         }}
       >
-        <div style={{ maxWidth: 760, margin: '0 auto' }}>
+        <HeroBackground />
+        <div style={{ maxWidth: 760, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           {/* Eyebrow pill */}
           <div
             style={{
