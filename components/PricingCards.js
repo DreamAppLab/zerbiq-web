@@ -432,41 +432,6 @@ export default function PricingCards() {
         ))}
       </div>
 
-      {/* White-glove callout */}
-      <div
-        style={{
-          marginTop: 40,
-          background: 'var(--color-surface)',
-          border: '1px solid var(--color-white-10)',
-          borderRadius: 12,
-          padding: '24px 28px',
-          textAlign: 'center',
-        }}
-      >
-        <p
-          style={{
-            fontSize: 15,
-            color: '#fff',
-            margin: '0 0 8px',
-            fontWeight: 600,
-          }}
-        >
-          Need help getting set up fast?
-        </p>
-        <p
-          style={{
-            fontSize: 14,
-            color: 'var(--color-white-60)',
-            margin: 0,
-            lineHeight: 1.7,
-          }}
-        >
-          Our <strong style={{ color: '#fff' }}>White-Glove Onboarding</strong> is a one-time{' '}
-          <strong style={{ color: '#fff' }}>$599</strong> add-on. We Zoom with you for 60–90
-          minutes, import your customer list, build your routes, add your team, configure your
-          settings — and guarantee you&apos;re live before the call ends.
-        </p>
-      </div>
     </div>
   );
 }
