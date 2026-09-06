@@ -115,8 +115,6 @@ const PLANS = [
       'Everything in Command',
       'Dedicated onboarding',
       'Custom integrations',
-      'SLA guarantee',
-      'Assigned account manager',
     ],
     excluded: [],
   },

@@ -128,8 +128,6 @@ const FEATURE_GROUPS = [
       { label: 'Priority support', values: [false, false, true, true] },
       { label: 'Dedicated onboarding', values: [false, false, false, true] },
       { label: 'Custom integrations', values: [false, false, false, true] },
-      { label: 'SLA guarantee', values: [false, false, false, true] },
-      { label: 'Account manager', values: [false, false, false, true] },
     ],
   },
 ];
