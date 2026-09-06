@@ -262,10 +262,10 @@ const FEATURES = [
     badge: 'Included with all plans',
   },
   {
-    icon: '🏷️',
-    title: 'White-Label Option',
+    icon: '🎨',
+    title: 'Custom Branding',
     desc: [
-      'Remove Zerbiq branding. Use your own logo and colors throughout the platform. Present it as your own software to your crew and customers.',
+      'Upload your company logo and brand color. Your logo appears throughout the platform so your team sees your brand every time they log in.',
     ],
     badge: 'Included with Command & Enterprise',
   },
