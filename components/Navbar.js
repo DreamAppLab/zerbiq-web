@@ -5,6 +5,7 @@ import Link from 'next/link';
 import ZIcon from './ZIcon';
 
 const NAV_LINKS = [
+  { label: 'Home', href: '/' },
   { label: 'Features', href: '/features' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Compare', href: '/compare' },
