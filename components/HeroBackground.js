@@ -18,6 +18,8 @@ export default function HeroBackground() {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (mq.matches) return;
 
+    console.log('HeroBackground mounted');
+
     const svg = svgRef.current;
     if (!svg) return;
 
@@ -59,10 +61,10 @@ export default function HeroBackground() {
       lineEl.setAttribute('stroke-linecap', 'round');
       lineEl.style.strokeDasharray = length;
       lineEl.style.strokeDashoffset = length;
-      lineEl.style.opacity = '0.20';
+      lineEl.style.opacity = '0.45';
       svg.appendChild(lineEl);
 
-      const drawDuration = rand(1500, 2500); // draw in ~2 seconds
+      const drawDuration = 1500; // draw in 1.5 seconds
 
       // Phase 1: draw the line (stroke-dashoffset → 0)
       const drawAnim = lineEl.animate(
@@ -80,7 +82,7 @@ export default function HeroBackground() {
         setTimeout(() => {
           if (!active) { lineEl.remove(); return; }
           const fadeAnim = lineEl.animate(
-            [{ opacity: 0.20 }, { opacity: 0 }],
+            [{ opacity: 0.45 }, { opacity: 0 }],
             { duration: 700, easing: 'ease-out', fill: 'forwards' }
           );
           fadeAnim.onfinish = () => {
@@ -119,10 +121,11 @@ export default function HeroBackground() {
       svg.appendChild(g);
       zBolts.push(g);
 
-      const targetOpacity = rand(0.13, 0.16); // ~0.15 — visible but subtle
-      const holdMs = rand(2000, 3000);
-      const fadeInMs = 1500;
-      const fadeOutMs = 800;
+      const targetOpacity = 0.35; // subtle but visible waypoint
+      // Total cycle = 2 s: 600 ms fade-in + 800 ms hold + 600 ms fade-out
+      const fadeInMs = 600;
+      const holdMs = 800;
+      const fadeOutMs = 600;
       const totalMs = fadeInMs + holdMs + fadeOutMs;
 
       const anim = g.animate(
