@@ -280,23 +280,24 @@ const FEATURES = [
   },
 ];
 
-function Placeholder({ label }) {
+function FeatureImage({ index, label }) {
+  const num = String(index + 1).padStart(2, '0');
   return (
     <div
       style={{
-        background: 'var(--color-raised)',
-        border: '1px solid var(--color-white-10)',
         borderRadius: 14,
+        overflow: 'hidden',
+        border: '1px solid var(--color-white-10)',
         aspectRatio: '16/10',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         minHeight: 220,
+        background: 'var(--color-raised)',
       }}
     >
-      <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 14, fontWeight: 500 }}>
-        {label} — Screenshot Coming Soon
-      </span>
+      <img
+        src={`/screenshots/zerbiq-${num}.png`}
+        alt={label}
+        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+      />
     </div>
   );
 }
@@ -409,9 +410,9 @@ export default function FeaturesPage() {
                 </div>
               </div>
 
-              {/* Screenshot placeholder side */}
+              {/* Screenshot side */}
               <div style={{ order: isEven ? 1 : 0 }}>
-                <Placeholder label={feature.title} />
+                <FeatureImage index={i} label={feature.title} />
               </div>
             </div>
           </section>
