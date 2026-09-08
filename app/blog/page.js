@@ -1,5 +1,11 @@
+import Link from 'next/link';
+import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import { categoryStyle } from '@/lib/categories';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: 'Blog — Zerbiq',
@@ -7,45 +13,35 @@ export const metadata = {
     'Field service insights for owner-operators. Operations, business tips, and invoicing guides.',
 };
 
-// <!-- Blog posts will be added via MassBlogger workflow -->
-const POSTS = [
-  {
-    title: '5 Ways Lawn Care Businesses Lose Money Without a CRM',
-    date: 'June 2026',
-    category: 'Business Tips',
-    categoryColor: 'rgba(61,92,255,0.15)',
-    categoryText: 'var(--color-primary)',
-    excerpt:
-      "Most lawn care operators don't realize how much revenue slips through the cracks. Missed follow-ups, forgotten recurring jobs, and disorganized customer records add up fast.",
-  },
-  {
-    title: 'How to Build Efficient Routes for Your Pressure Washing Crew',
-    date: 'July 2026',
-    category: 'Operations',
-    categoryColor: 'rgba(0,180,120,0.15)',
-    categoryText: '#00c87a',
-    excerpt:
-      'Drive time is lost time. Learn how top pressure washing operators structure their routes to fit more jobs per day — without burning out their crews.',
-  },
-  {
-    title: "The Owner-Operator's Guide to Getting Paid Faster",
-    date: 'August 2026',
-    category: 'Invoicing',
-    categoryColor: 'rgba(255,160,0,0.15)',
-    categoryText: '#ffb020',
-    excerpt:
-      'Getting the job done is half the battle. Getting paid on time is the other half. Here are the habits and tools that top operators use to keep cash flowing.',
-  },
-];
+async function getPublishedPosts() {
+  try {
+    const q = query(
+      collection(db, 'posts'),
+      where('status', '==', 'published'),
+      orderBy('publishedAt', 'desc'),
+    );
+    const snap = await getDocs(q);
+    return snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  } catch (err) {
+    console.error('Failed to load posts:', err);
+    return [];
+  }
+}
 
-export default function BlogPage() {
+function formatDate(ts) {
+  if (!ts) return '';
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+}
+
+export default async function BlogPage() {
+  const posts = await getPublishedPosts();
+
   return (
     <>
       <Navbar />
 
-      <section
-        style={{ padding: '80px 24px 56px', textAlign: 'center' }}
-      >
+      <section style={{ padding: '80px 24px 56px', textAlign: 'center' }}>
         <div style={{ maxWidth: 700, margin: '0 auto' }}>
           <h1
             style={{
@@ -66,80 +62,104 @@ export default function BlogPage() {
       </section>
 
       <section style={{ padding: '0 24px 100px' }}>
-        <div
-          style={{
-            maxWidth: 1100,
-            margin: '0 auto',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: 24,
-          }}
-        >
-          {POSTS.map((post) => (
-            <article
-              key={post.title}
-              className="blog-card"
-              style={{
-                background: 'var(--color-raised)',
-                border: '1px solid var(--color-white-10)',
-                borderRadius: 12,
-                padding: 28,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 12,
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span
+        {posts.length === 0 ? (
+          <p
+            style={{
+              textAlign: 'center',
+              color: 'var(--color-white-60)',
+              fontSize: 16,
+              padding: '40px 0',
+            }}
+          >
+            No posts published yet. Check back soon.
+          </p>
+        ) : (
+          <div
+            style={{
+              maxWidth: 1100,
+              margin: '0 auto',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: 24,
+            }}
+          >
+            {posts.map((post) => {
+              const colors = categoryStyle(post.category);
+              return (
+                <article
+                  key={post.id}
+                  className="blog-card"
                   style={{
-                    background: post.categoryColor,
-                    color: post.categoryText,
-                    borderRadius: 6,
-                    padding: '3px 10px',
-                    fontSize: 11,
-                    fontWeight: 700,
-                    letterSpacing: '0.04em',
-                    textTransform: 'uppercase',
+                    background: 'var(--color-raised)',
+                    border: '1px solid var(--color-white-10)',
+                    borderRadius: 12,
+                    padding: 28,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 12,
                   }}
                 >
-                  {post.category}
-                </span>
-                <span style={{ color: 'var(--color-white-60)', fontSize: 13 }}>{post.date}</span>
-              </div>
+                  {/* Category + Date */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <span
+                      style={{
+                        background: colors.bg,
+                        color: colors.text,
+                        borderRadius: 6,
+                        padding: '3px 10px',
+                        fontSize: 11,
+                        fontWeight: 700,
+                        letterSpacing: '0.04em',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      {post.category}
+                    </span>
+                    <span style={{ color: 'var(--color-white-60)', fontSize: 13 }}>
+                      {formatDate(post.publishedAt)}
+                    </span>
+                  </div>
 
-              <h2 style={{ fontWeight: 800, fontSize: 18, margin: 0, lineHeight: 1.35 }}>
-                {post.title}
-              </h2>
+                  {/* Title */}
+                  <h2 style={{ fontWeight: 800, fontSize: 18, margin: 0, lineHeight: 1.35 }}>
+                    {post.title}
+                  </h2>
 
-              <p
-                style={{
-                  color: 'var(--color-white-60)',
-                  fontSize: 14,
-                  lineHeight: 1.65,
-                  margin: 0,
-                  flex: 1,
-                  display: '-webkit-box',
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                }}
-              >
-                {post.excerpt}
-              </p>
+                  {/* Excerpt */}
+                  <p
+                    style={{
+                      color: 'var(--color-white-60)',
+                      fontSize: 14,
+                      lineHeight: 1.65,
+                      margin: 0,
+                      flex: 1,
+                      display: '-webkit-box',
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {post.excerpt}
+                  </p>
 
-              <span
-                style={{
-                  color: 'var(--color-primary)',
-                  fontSize: 14,
-                  fontWeight: 600,
-                  marginTop: 4,
-                }}
-              >
-                Read more →
-              </span>
-            </article>
-          ))}
-        </div>
+                  {/* Read more */}
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    style={{
+                      color: 'var(--color-primary)',
+                      fontSize: 14,
+                      fontWeight: 600,
+                      marginTop: 4,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Read more →
+                  </Link>
+                </article>
+              );
+            })}
+          </div>
+        )}
       </section>
 
       <Footer />
