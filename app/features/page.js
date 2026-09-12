@@ -323,7 +323,7 @@ export default function FeaturesPage() {
               lineHeight: 1.05,
             }}
           >
-            Built for the owner. Trusted by the crew.
+            Built for the field. Loved by the office.
           </h1>
           <p
             style={{

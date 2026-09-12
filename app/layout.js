@@ -5,11 +5,11 @@ import HeroBackground from '@/components/HeroBackground';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata = {
-  title: 'Zerbiq — Run every crew. Own every job.',
+  title: 'Zerbiq — Built for the field. Loved by the office.',
   description:
     'Zerbiq is the field service operations platform for owner-operators. Schedule jobs, dispatch crews, invoice customers, and manage your whole operation from one screen.',
   openGraph: {
-    title: 'Zerbiq — Run every crew. Own every job.',
+    title: 'Zerbiq — Built for the field. Loved by the office.',
     description:
       'Zerbiq is the field service operations platform for owner-operators. Schedule jobs, dispatch crews, invoice customers, and manage your whole operation from one screen.',
     images: [{ url: '/og-image.png' }], // <!-- Replace with real OG image -->

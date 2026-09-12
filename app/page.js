@@ -294,8 +294,8 @@ export default function HomePage() {
               color: '#fff',
             }}
           >
-            Run every crew.<br />
-            Own every job.
+            Built for the field.<br />
+            Loved by the office.
           </h1>
 
           <p
