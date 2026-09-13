@@ -49,9 +49,6 @@ export default function Footer() {
             <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: 0 }}>
               Run every crew. Own every job.
             </p>
-            <p style={{ color: 'var(--color-white-60)', fontSize: 13, margin: '4px 0 0' }}>
-              St. Augustine, FL
-            </p>
           </div>
 
           {/* Nav links */}
