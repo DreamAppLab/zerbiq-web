@@ -50,7 +50,7 @@ export default function Footer() {
               Run every crew. Own every job.
             </p>
             <p style={{ color: 'var(--color-white-60)', fontSize: 13, margin: '4px 0 0' }}>
-              681 Tintamarre Dr, St. Augustine, FL 32092
+              St. Augustine, FL
             </p>
           </div>
 
@@ -116,7 +116,7 @@ export default function Footer() {
           }}
         >
           <p style={{ color: 'var(--color-white-60)', fontSize: 13, margin: 0 }}>
-            © 2026 Dream App Lab. All rights reserved.
+            © 2026 Zerbiq. All rights reserved.
           </p>
           <div style={{ display: 'flex', gap: 20 }}>
             <Link
