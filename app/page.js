@@ -356,25 +356,29 @@ export default function HomePage() {
             No credit card required · 7-day free trial · Cancel anytime
           </p>
 
-          {/* App screenshot placeholder */}
-          {/* Replace with real app screenshot */}
-          <div
+          {/* App screenshot */}
+          <img
+            src="/screenshots/dashboard-screenshot.png"
+            alt="Zerbiq Dashboard — customizable field service management"
             style={{
-              background: 'var(--color-raised)',
-              border: '1px solid var(--color-white-10)',
-              borderRadius: 14,
-              aspectRatio: '16/10',
+              display: 'block',
+              width: '100%',
               maxWidth: 900,
               margin: '0 auto',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              borderRadius: 14,
+              boxShadow: '0 8px 48px rgba(0,0,0,0.45)',
+            }}
+          />
+          <p
+            style={{
+              textAlign: 'center',
+              color: 'var(--color-white-60)',
+              fontSize: 13,
+              marginTop: 16,
             }}
           >
-            <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 16, fontWeight: 500 }}>
-              App Screenshot Coming Soon
-            </span>
-          </div>
+            Your customizable dashboard — see exactly what matters to your business at a glance.
+          </p>
         </div>
       </section>
 
