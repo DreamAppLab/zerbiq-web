@@ -47,7 +47,7 @@ export default function Footer() {
               </span>
             </Link>
             <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: 0 }}>
-              Run every crew. Own every job.
+              Built for the field. Loved by the office.
             </p>
           </div>
 
