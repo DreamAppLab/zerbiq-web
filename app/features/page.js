@@ -39,10 +39,10 @@ const FEATURES = [
   },
   {
     icon: '💬',
-    title: 'Two-Way SMS Messaging',
+    title: 'Automated Customer Notifications',
     desc: [
-      'Communicate with customers the way they prefer — text. Send appointment reminders, job updates, invoice links, and follow-ups directly from Zerbiq.',
-      'Customers reply and you see it instantly in your inbox. Full TCPA compliance built in. Every conversation is logged to the customer record automatically.',
+      'Send appointment reminders, job updates, on-the-way alerts, completion confirmations, and invoice reminders automatically via SMS or email.',
+      'Every notification is logged to the customer record. Full TCPA compliance built in.',
     ],
     badge: 'Included with all plans',
   },
@@ -62,7 +62,7 @@ const FEATURES = [
       'Zerbiq automatically sends customers a reminder before every scheduled job. Reduce no-shows and last-minute cancellations without lifting a finger.',
       'Reminders go out via SMS at your chosen interval. Customers can confirm or request a reschedule — all without calling your office.',
     ],
-    badge: 'Included with Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '👥',
@@ -98,7 +98,7 @@ const FEATURES = [
       'Create professional estimates in seconds. Send via email or SMS. Clients approve with one tap — no login required.',
       'Approved estimates convert to jobs and invoices automatically. No re-entering data, no dropped balls.',
     ],
-    badge: 'Included with all plans',
+    badge: 'Included with Field, Command & Enterprise',
   },
   {
     icon: '📈',
@@ -107,7 +107,7 @@ const FEATURES = [
       'Revenue by route, tech, or service type. Overdue invoice aging. Customer retention rates. Job completion percentages. Tech performance rankings.',
       'Eight reporting tabs give you the numbers that matter. Export any report to CSV or PDF. Know your most profitable jobs, customers, and routes — and make smarter decisions.',
     ],
-    badge: 'Included with Field, Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '🗓️',
@@ -116,7 +116,7 @@ const FEATURES = [
       'See every job for the day in a calendar view by tech or route. Drag to reschedule. Spot gaps. Respond to last-minute changes without a single phone call.',
       'Week and day views, tech-colored job cards, overlap detection, and drag-to-schedule. Your whole operation visible at a glance.',
     ],
-    badge: 'Included with Field, Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '💵',
@@ -134,7 +134,7 @@ const FEATURES = [
       'Track every product, chemical, and supply your crews use in the field. Log usage per job, set reorder points, and know your stock levels at all times.',
       'Generate purchase orders automatically when stock runs low. Every cost tied to every job — no guessing on margins.',
     ],
-    badge: 'Included with Field, Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '🛒',
@@ -170,7 +170,7 @@ const FEATURES = [
       'After a job is completed, Zerbiq automatically sends a review request via SMS or email. More reviews, less asking.',
       'Direct customers straight to Google, Facebook, or wherever you want reviews. Set it once and watch your rating climb.',
     ],
-    badge: 'Included with Field, Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '📬',
@@ -179,7 +179,7 @@ const FEATURES = [
       'Send a series of follow-up messages to leads and inactive customers automatically. Stay top of mind without manual effort.',
       'Set up sequences once — Zerbiq handles timing, personalization, and delivery. Convert more leads into customers.',
     ],
-    badge: 'Included with Field, Command & Enterprise',
+    badge: 'Included with Command & Enterprise',
   },
   {
     icon: '📋',
@@ -188,7 +188,7 @@ const FEATURES = [
       'Capture leads from your website embed form, manual entry, or direct import. Manage them through a visual Kanban pipeline.',
       'Track every lead from first contact to converted customer. Know your conversion rate, lead sources, and pipeline value at a glance.',
     ],
-    badge: 'Included with all plans',
+    badge: 'Included with Field, Command & Enterprise',
   },
   {
     icon: '🔔',
@@ -197,16 +197,7 @@ const FEATURES = [
       'Invoice overdue? Zerbiq reminds the customer automatically. Job not completed on time? You get notified. Maintenance due? Scheduled alert fires before it becomes a problem.',
       'Set your rules once. Zerbiq runs them every day without you thinking about it.',
     ],
-    badge: 'Included with Command & Enterprise',
-  },
-  {
-    icon: '⚠️',
-    title: 'Automated Late Fees',
-    desc: [
-      'Set your late fee policy once. Zerbiq applies it automatically to overdue invoices on the date you specify.',
-      'No awkward conversations. No manual tracking. Just consistent policy enforcement that gets you paid faster.',
-    ],
-    badge: 'Included with Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '🔧',
@@ -251,7 +242,7 @@ const FEATURES = [
       'Add a lead capture form to any website with one line of code. Leads go directly into your Zerbiq pipeline.',
       'Customize fields, add your branding, and stop losing leads to contact forms that go nowhere.',
     ],
-    badge: 'Included with all plans',
+    badge: 'Included with Field, Command & Enterprise',
   },
   {
     icon: '📤',
@@ -277,7 +268,7 @@ const FEATURES = [
       'Every customer gets a private portal to view upcoming jobs, pay invoices, approve quotes, and leave notes — without calling you.',
       'Reduce inbound calls. Give clients the transparency they want.',
     ],
-    badge: 'Included with all plans',
+    badge: 'Included with Field, Command & Enterprise',
   },
 ];
 
