@@ -78,7 +78,6 @@ const FEATURES = [
     title: 'Customer CRM',
     desc: [
       'Every customer gets a complete profile: contact info, service history, invoices, notes, photos, and equipment logs — all in one place.',
-      'The customer portal lets clients view upcoming jobs, pay invoices online, approve quotes, and leave notes. Fewer calls. Happier customers.',
     ],
     badge: 'Included with all plans',
   },
@@ -152,7 +151,7 @@ const FEATURES = [
       'See exactly how long every job takes and what it costs in labor and materials. Compare estimated vs. actual in real time.',
       'Know your most profitable jobs, customers, and routes. Spot where time and money are being lost — and fix it.',
     ],
-    badge: 'Included with Field, Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '🤝',
@@ -206,7 +205,7 @@ const FEATURES = [
       'Track service intervals for vehicles and equipment. Get alerts before things break down. Log full maintenance history and costs.',
       'Never miss an oil change, equipment inspection, or service interval again. Keep your fleet and tools running longer.',
     ],
-    badge: 'Included with Command & Enterprise',
+    badge: 'Included with Field, Command & Enterprise',
   },
   {
     icon: '📗',
@@ -267,6 +266,51 @@ const FEATURES = [
     desc: [
       'Every customer gets a private portal to view upcoming jobs, pay invoices, approve quotes, and leave notes — without calling you.',
       'Reduce inbound calls. Give clients the transparency they want.',
+    ],
+    badge: 'Included with Field, Command & Enterprise',
+  },
+  {
+    icon: '🏅',
+    title: 'Performance Reviews',
+    desc: [
+      'Managers conduct structured reviews with star ratings across punctuality, work quality, customer feedback, and teamwork. Previous review shown alongside for full context.',
+      'Every review is saved to the employee record with date and reviewing manager name.',
+    ],
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '📦',
+    title: 'Employee Asset Checkout',
+    desc: [
+      'Issue company assets to employees at hire — keys, uniforms, tablets, equipment. Track what\'s out, mark items returned, and see outstanding assets at a glance.',
+      'Outstanding assets are surfaced automatically during the termination workflow so nothing gets missed.',
+    ],
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '🚨',
+    title: 'Incident Tracking',
+    desc: [
+      'Log and track workplace incidents by type and status. Full incident history on every employee record.',
+      'Keep a clear paper trail for HR purposes without juggling spreadsheets or separate systems.',
+    ],
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '💳',
+    title: 'Credits & Refunds',
+    desc: [
+      'Issue customer credits manually, apply to open invoices, and track credit balances per customer.',
+      'Credits flow automatically through your billing — no manual math, no lost adjustments.',
+    ],
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '📅',
+    title: 'Payment Plans',
+    desc: [
+      'Set up installment payment plans for customers. Enter total amount and number of payments or monthly amount — Zerbiq calculates the schedule automatically and tracks every payment.',
+      'Continues until balance is paid off. Outstanding installments surface automatically in your monthly invoice run.',
     ],
     badge: 'Included with Field, Command & Enterprise',
   },

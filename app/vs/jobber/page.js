@@ -65,7 +65,7 @@ const TIERS = [
       { label: 'In-app team messaging',            z: true,       c: false   },
       { label: 'QuickBooks sync',                  z: 'Coming soon', c: true },
       { label: 'AI support chatbot',               z: true,       c: false   },
-      { label: 'Unlimited team members',           z: true,       c: false, note: 'Jobber Grow limited to 15 users' },
+      { label: 'Unlimited team members',           z: true,       c: false, note: 'Jobber Grow limited to 10 users' },
       { label: 'Priority support',                 z: true,       c: true    },
     ],
   },
@@ -109,7 +109,7 @@ function TierTable({ tier }) {
     <div style={{ marginBottom: 64 }}>
       {/* Tier header */}
       <h3 style={{ fontWeight: 900, fontSize: 'clamp(18px, 3vw, 24px)', letterSpacing: '-0.03em', margin: '0 0 12px', color: '#fff', textAlign: 'center' }}>
-        Zerbiq {tier.zLabel}
+        <ZerbiqBrand /> {tier.zLabel}
         <span style={{ color: '#3D5CFF', fontWeight: 500, fontSize: '0.65em', marginLeft: 8 }}>{tier.zPrice}</span>
         <span style={{ color: 'rgba(255,255,255,0.3)', fontWeight: 400, margin: '0 10px' }}>vs</span>
         Jobber {tier.cLabel}

@@ -6,7 +6,7 @@ import { brandify } from '@/components/ZerbiqBrand';
 const FAQ = [
   {
     q: 'Is there really no credit card required for the trial?',
-    a: "Correct. Start your 7-day free trial with just your email. No card until you decide to subscribe.",
+    a: "Correct. Start your 14-day free trial with just your email. No card until you decide to subscribe.",
   },
   {
     q: 'What is an active customer?',
@@ -26,7 +26,7 @@ const FAQ = [
   },
   {
     q: 'What is White-Glove Onboarding?',
-    a: 'Want us to handle the setup for you? Our White-Glove Onboarding is a one-time $599 add-on. We Zoom with you for 60–90 minutes, import your customer list, build your routes, add your team, and configure everything — guaranteed live before the call ends.',
+    a: 'Our White-Glove Onboarding is a one-time add-on — $299 for Core, $499 for Field, $699 for Command. We handle your entire setup and configure everything for you.',
   },
   {
     q: 'Do you offer annual billing?',

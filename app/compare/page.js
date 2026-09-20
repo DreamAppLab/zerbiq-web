@@ -132,7 +132,7 @@ const FEATURE_GROUPS = [
       { label: 'Automations & rules engine',       values: [false, false, true,  true]  },
       { label: 'AI support chatbot',               values: [false, false, true,  true]  },
       { label: 'Priority support',                 values: [false, false, true,  true]  },
-      { label: 'Dedicated onboarding',             values: [false, false, true,  true]  },
+      { label: 'Dedicated onboarding',             values: [false, false, false, true]  },
       { label: 'Custom integrations',              values: [false, false, false, true]  },
     ],
   },
