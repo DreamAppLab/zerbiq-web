@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
+import { brandify } from '@/components/ZerbiqBrand';
 
 const FAQ = [
   {
@@ -115,7 +116,7 @@ export default function PricingPage() {
                     lineHeight: 1.7,
                   }}
                 >
-                  {item.a}
+                  {brandify(item.a)}
                 </p>
               </div>
             ))}

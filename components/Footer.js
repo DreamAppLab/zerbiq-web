@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import ZIcon from './ZIcon';
+import ZerbiqBrand from '@/components/ZerbiqBrand';
 
 export default function Footer() {
   return (
@@ -43,7 +44,7 @@ export default function Footer() {
                   color: '#fff',
                 }}
               >
-                ZERBI<span style={{ color: 'var(--color-primary)' }}>Q</span>
+                <ZerbiqBrand />
               </span>
             </Link>
             <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: 0 }}>
@@ -113,7 +114,7 @@ export default function Footer() {
           }}
         >
           <p style={{ color: 'var(--color-white-60)', fontSize: 13, margin: 0 }}>
-            © 2026 ZERBI<span style={{ color: 'var(--color-primary)' }}>Q</span>. All rights reserved.
+            © 2026 <ZerbiqBrand />. All rights reserved.
           </p>
           <div style={{ display: 'flex', gap: 20 }}>
             <Link

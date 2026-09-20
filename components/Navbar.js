@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import ZerbiqBrand from '@/components/ZerbiqBrand';
 import Link from 'next/link';
 import ZIcon from './ZIcon';
 
@@ -203,7 +204,7 @@ export default function Navbar() {
                 lineHeight: 1,
               }}
             >
-              ZERBI<span style={{ color: 'var(--color-primary)' }}>Q</span>
+              <ZerbiqBrand />
             </span>
           </Link>
 

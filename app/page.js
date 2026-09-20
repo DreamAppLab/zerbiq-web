@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import Link from 'next/link';
+import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
 
 const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
@@ -307,7 +308,7 @@ export default function HomePage() {
               margin: '0 auto 36px',
             }}
           >
-            Zerbiq replaces the whiteboard, the spreadsheet, and the group text. Your crews know
+            <ZerbiqBrand /> replaces the whiteboard, the spreadsheet, and the group text. Your crews know
             where to be. Your customers know when to expect them. You know what&apos;s happening —
             from anywhere.
           </p>
@@ -481,7 +482,7 @@ export default function HomePage() {
                     <div style={{ fontSize: 28, marginBottom: 14 }}>{f.icon}</div>
                     <h3 style={{ fontWeight: 700, fontSize: 17, margin: '0 0 10px' }}>{f.title}</h3>
                     <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: '0 0 20px', lineHeight: 1.65, flex: 1 }}>
-                      {f.desc}
+                      {brandify(f.desc)}
                     </p>
                     <div>
                       <Link
@@ -747,7 +748,7 @@ export default function HomePage() {
               lineHeight: 1.1,
             }}
           >
-            See ZERBI<span style={{ color: 'var(--color-primary)' }}>Q</span> in action.
+            See <ZerbiqBrand /> in action.
           </h2>
           <p
             style={{

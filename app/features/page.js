@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
 
 export const metadata = {
   title: 'Features — Zerbiq',
@@ -333,7 +334,7 @@ export default function FeaturesPage() {
               margin: 0,
             }}
           >
-            Every feature in Zerbiq is designed for one purpose: helping field service businesses
+            Every feature in <ZerbiqBrand /> is designed for one purpose: helping field service businesses
             run cleaner, get paid faster, and grow without chaos.
           </p>
         </div>
@@ -383,7 +384,7 @@ export default function FeaturesPage() {
                       margin: j < feature.desc.length - 1 ? '0 0 16px' : '0 0 28px',
                     }}
                   >
-                    {p}
+                    {brandify(p)}
                   </p>
                 ))}
                 <Link

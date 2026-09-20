@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroBackground from '@/components/HeroBackground';
 import Link from 'next/link';
+import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
 
 export const metadata = {
   title: 'Zerbiq vs Jobber — Side-by-Side Comparison (2026)',
@@ -116,7 +117,7 @@ function TierTable({ tier }) {
       </h3>
       {tier.cNote && (
         <p style={{ fontSize: 13, color: '#fbbf24', margin: '0 0 20px', padding: '10px 14px', background: 'rgba(251,191,36,0.07)', borderRadius: 8, border: '1px solid rgba(251,191,36,0.22)', lineHeight: 1.55, textAlign: 'left' }}>
-          ⚠️ {tier.cNote}
+          ⚠️ {brandify(tier.cNote)}
         </p>
       )}
       <div style={{ overflowX: 'auto' }}>
@@ -125,7 +126,7 @@ function TierTable({ tier }) {
             <tr>
               <th style={{ textAlign: 'left', padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)', fontSize: 12, fontWeight: 600, width: '55%' }}>Feature</th>
               <th style={{ textAlign: 'center', padding: '12px 16px', borderBottom: '2px solid #3D5CFF', background: 'rgba(61,92,255,0.1)', color: '#fff', fontSize: 14, fontWeight: 800 }}>
-                ZERBI<span style={{ color: '#3D5CFF' }}>Q</span> {tier.zLabel}
+                <ZerbiqBrand /> {tier.zLabel}
               </th>
               <th style={{ textAlign: 'center', padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)', fontSize: 14, fontWeight: 700 }}>
                 Jobber {tier.cLabel}
@@ -169,7 +170,7 @@ export default function VsJobberPage() {
             Head-to-Head Comparison
           </div>
           <h1 style={{ fontWeight: 900, fontSize: 'clamp(36px, 6vw, 64px)', letterSpacing: '-0.04em', lineHeight: 1.05, margin: '0 0 24px', color: '#fff' }}>
-            ZERBI<span style={{ color: '#3D5CFF' }}>Q</span> vs Jobber
+            <ZerbiqBrand /> vs Jobber
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 18, lineHeight: 1.7, margin: '0 0 40px' }}>
             Three tiers, side by side — at every price point. See exactly what you get
@@ -177,7 +178,7 @@ export default function VsJobberPage() {
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/signup" className="btn-primary" style={{ borderRadius: 10, padding: '14px 32px', fontWeight: 700, fontSize: 16, display: 'inline-block' }}>
-              Try Zerbiq Free — 14 Days
+              Try <ZerbiqBrand /> Free — 14 Days
             </Link>
             <Link href="/pricing" style={{ display: 'inline-block', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 10, padding: '14px 32px', fontWeight: 600, fontSize: 16, color: 'rgba(255,255,255,0.8)', textDecoration: 'none' }}>
               See Pricing
@@ -193,7 +194,7 @@ export default function VsJobberPage() {
             <div key={c.headline} style={{ background: 'var(--color-raised)', border: '1px solid var(--color-white-10)', borderRadius: 12, padding: '24px 20px' }}>
               <div style={{ fontSize: 32, marginBottom: 12 }}>{c.icon}</div>
               <h3 style={{ fontWeight: 800, fontSize: 16, margin: '0 0 8px', color: '#fff' }}>{c.headline}</h3>
-              <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: 0, lineHeight: 1.65 }}>{c.body}</p>
+              <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: 0, lineHeight: 1.65 }}>{brandify(c.body)}</p>
             </div>
           ))}
         </div>
@@ -229,8 +230,8 @@ export default function VsJobberPage() {
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
           <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: 0, lineHeight: 1.7 }}>
             Competitor information is based on publicly available data as of September 2026. Pricing and features
-            may have changed. Zerbiq makes no warranty regarding the accuracy of third-party information.
-            Jobber® is a registered trademark of Jobber Software Inc. and is not affiliated with Zerbiq.
+            may have changed. <ZerbiqBrand /> makes no warranty regarding the accuracy of third-party information.
+            Jobber® is a registered trademark of Jobber Software Inc. and is not affiliated with <ZerbiqBrand />.
           </p>
         </div>
       </section>
