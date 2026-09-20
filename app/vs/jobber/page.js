@@ -16,7 +16,7 @@ const TIERS = [
     id: 'core',
     zLabel: 'Core',      zPrice: '$79/mo',
     cLabel: 'Core',      cPrice: '$49/mo',
-    cNote: '1 user only — every additional user requires a higher plan',
+    cNote: 'Jobber Core is limited to 1 user only — every additional user requires a higher-priced plan. Zerbiq Core includes unlimited users.',
     rows: [
       { label: 'Job scheduling & dispatch',        z: true,       c: true    },
       { label: 'Recurring jobs',                   z: true,       c: true    },
@@ -39,7 +39,7 @@ const TIERS = [
     id: 'field',
     zLabel: 'Field',     zPrice: '$129/mo',
     cLabel: 'Connect',   cPrice: '$139/mo',
-    cNote: 'Up to 5 users',
+    cNote: 'Jobber Connect is limited to 5 users — $29/mo per additional user. Zerbiq Field includes unlimited users.',
     rows: [
       { label: 'Everything in Core tier',          z: true,       c: true    },
       { label: 'Leads & quote management',         z: true,       c: true    },
@@ -57,7 +57,7 @@ const TIERS = [
     id: 'command',
     zLabel: 'Command',   zPrice: '$179/mo',
     cLabel: 'Grow',      cPrice: '$199/mo',
-    cNote: 'Up to 15 users',
+    cNote: 'Jobber Grow is limited to 10 users — $29/mo per additional user. Zerbiq Command includes unlimited users.',
     rows: [
       { label: 'Everything in Field tier',         z: true,       c: true    },
       { label: 'Automations & rules engine',       z: true,       c: true    },
@@ -115,7 +115,7 @@ function TierTable({ tier }) {
         <span style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 500, fontSize: '0.65em', marginLeft: 8 }}>{tier.cPrice}</span>
       </h3>
       {tier.cNote && (
-        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', marginBottom: 16, margin: '0 0 16px', padding: '7px 12px', background: 'rgba(255,255,255,0.03)', borderRadius: 6, border: '1px solid rgba(255,255,255,0.07)', textAlign: 'center' }}>
+        <p style={{ fontSize: 13, color: '#fbbf24', margin: '0 0 20px', padding: '10px 14px', background: 'rgba(251,191,36,0.07)', borderRadius: 8, border: '1px solid rgba(251,191,36,0.22)', lineHeight: 1.55, textAlign: 'left' }}>
           ⚠️ {tier.cNote}
         </p>
       )}
