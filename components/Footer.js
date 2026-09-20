@@ -100,7 +100,7 @@ export default function Footer() {
             className="link-muted"
             style={{ fontSize: 14 }}
           >
-            hello@zerbiq.com
+            hello@<ZerbiqBrand />.com
           </a>
         </div>
 

@@ -1,7 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroBackground from '@/components/HeroBackground';
-import ZerbiqBrand from '@/components/ZerbiqBrand';
+import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
 import Link from 'next/link';
 
 export const metadata = {
@@ -17,12 +17,12 @@ export default function AboutPage() {
       <HeroBackground />
 
       {/* Hero */}
-      <section style={{ padding: '100px 24px 80px', position: 'relative', zIndex: 1 }}>
+      <section style={{ padding: '100px 24px 80px', position: 'relative', zIndex: 1, textAlign: 'center' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <div style={{ display: 'inline-block', border: '1px solid var(--color-primary)', borderRadius: 20, padding: '5px 16px', fontSize: 12, fontWeight: 600, color: 'var(--color-primary)', letterSpacing: '0.04em', marginBottom: 32, textTransform: 'uppercase' }}>
             Our Story
           </div>
-          <h1 style={{ fontWeight: 900, fontSize: 'clamp(32px, 5vw, 56px)', letterSpacing: '-0.04em', lineHeight: 1.05, margin: '0 0 0', color: '#fff' }}>
+          <h1 style={{ fontWeight: 900, fontSize: 'clamp(32px, 5vw, 56px)', letterSpacing: '-0.04em', lineHeight: 1.05, margin: 0, color: '#fff' }}>
             Why we built <ZerbiqBrand />
           </h1>
         </div>
@@ -42,14 +42,15 @@ export default function AboutPage() {
             <p
               key={i}
               style={{
-                fontSize: i === 1 ? 22 : 17,
-                fontWeight: i === 1 ? 700 : 400,
+                fontSize: i === 1 ? 24 : 17,
+                fontWeight: i === 1 ? 800 : 400,
                 color: i === 1 ? '#ffffff' : 'var(--color-white-60)',
                 lineHeight: i === 1 ? 1.3 : 1.8,
-                margin: i === 1 ? '36px 0' : '0 0 28px',
+                margin: i === 1 ? '40px 0' : '0 0 28px',
+                textAlign: i === 1 ? 'center' : 'left',
               }}
             >
-              {para}
+              {i === 1 ? para : brandify(para)}
             </p>
           ))}
 

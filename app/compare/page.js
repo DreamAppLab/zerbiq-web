@@ -8,9 +8,9 @@ export const metadata = {
 };
 
 const PLANS = [
-  { name: 'Core',       price: '$49',    href: '/signup',               subtitle: '500 customers · 250 recurring' },
-  { name: 'Field',      price: '$99',    href: '/signup',               subtitle: '1,000 customers · 750 recurring' },
-  { name: 'Command',    price: '$149',   href: '/signup',  popular: true, subtitle: '5,000 customers · 1,500 recurring' },
+  { name: 'Core',       price: '$79',    href: '/signup',               subtitle: '500 customers · 250 recurring' },
+  { name: 'Field',      price: '$129',   href: '/signup',               subtitle: '1,000 customers · 750 recurring' },
+  { name: 'Command',    price: '$179',   href: '/signup',  popular: true, subtitle: '5,000 customers · 1,500 recurring' },
   { name: 'Enterprise', price: 'Custom', href: 'mailto:hello@zerbiq.com', isContact: true, subtitle: 'Unlimited' },
 ];
 

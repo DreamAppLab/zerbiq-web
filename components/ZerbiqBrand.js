@@ -11,7 +11,7 @@
 
 export default function ZerbiqBrand() {
   return (
-    <>ZERBI<span style={{ color: 'var(--color-primary)' }}>Q</span></>
+    <><span style={{ color: '#ffffff' }}>ZERBI</span><span style={{ color: 'var(--color-primary)' }}>Q</span></>
   );
 }
 
