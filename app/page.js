@@ -524,13 +524,14 @@ export default function HomePage() {
               fontWeight: 900,
               fontSize: 'clamp(22px, 3.5vw, 36px)',
               letterSpacing: '-0.03em',
-              lineHeight: 1.15,
+              lineHeight: 1.25,
               margin: '0 0 28px',
               color: '#fff',
+              textAlign: 'center',
             }}
           >
-            Built by someone who ran the business.{' '}
-            <span style={{ color: 'var(--color-white-60)', fontWeight: 700 }}>Not just studied it.</span>
+            <span style={{ display: 'block' }}>Built by someone who ran the business.</span>
+            <span style={{ display: 'block', color: 'var(--color-primary)' }}>Not just studied it.</span>
           </h2>
           <p style={{ fontSize: 16, color: 'var(--color-white-60)', lineHeight: 1.8, margin: '0 0 20px', maxWidth: 620 }}>
             Zerbiq was built by a field service operator who managed crews, ran routes, chased invoices, dealt with no-shows,
