@@ -8,125 +8,134 @@ export const metadata = {
 };
 
 const PLANS = [
-  { name: 'Core', price: '$49', href: '/signup' },
-  { name: 'Field', price: '$99', href: '/signup' },
-  { name: 'Command', price: '$149', popular: true, href: '/signup' },
-  { name: 'Enterprise', price: 'Custom', href: 'mailto:hello@zerbiq.com', isContact: true },
+  { name: 'Core',       price: '$49',    href: '/signup',               subtitle: '500 customers · 250 recurring' },
+  { name: 'Field',      price: '$99',    href: '/signup',               subtitle: '1,000 customers · 750 recurring' },
+  { name: 'Command',    price: '$149',   href: '/signup',  popular: true, subtitle: '5,000 customers · 1,500 recurring' },
+  { name: 'Enterprise', price: 'Custom', href: 'mailto:hello@zerbiq.com', isContact: true, subtitle: 'Unlimited' },
 ];
 
 // true = included, false = not included, string = custom value
+// Plan gates per confirmed structure (Sep 2026):
+//   Core ($49):    customer DB, scheduling, routes, invoicing, transactions, inventory,
+//                  team, analytics, SMS/reviews, vehicles, attendance, timecards
+//   Field ($99):   Core + leads, online payments, subcontractors, maintenance, portal
+//   Command ($149): Field + automations, in-app messaging, QuickBooks, AI chatbot
 const FEATURE_GROUPS = [
   {
     group: 'Customer Limits',
     rows: [
-      { label: 'Active customers', values: ['500', '1,500', '5,000', 'Unlimited'] },
-      { label: 'Recurring customers', values: ['150', '400', '1,000', 'Unlimited'] },
-      { label: 'Unlimited routes', values: [true, true, true, true] },
-      { label: 'Unlimited team members', values: [true, true, true, true] },
+      { label: 'Active customers',    values: ['500', '1,000', '5,000', 'Unlimited'] },
+      { label: 'Recurring customers', values: ['250', '750',   '1,500', 'Unlimited'] },
+      { label: 'Unlimited routes',        values: [true, true, true, true] },
+      { label: 'Unlimited team members',  values: [true, true, true, true] },
     ],
   },
   {
     group: 'Jobs & Scheduling',
     rows: [
-      { label: 'Job scheduling & tracking', values: [true, true, true, true] },
-      { label: 'Recurring jobs', values: [true, true, true, true] },
-      { label: 'Job cancellations with fees', values: [true, true, true, true] },
-      { label: 'Schedule & dispatch board', values: [false, true, true, true] },
-      { label: 'Drag-to-schedule calendar', values: [false, true, true, true] },
-      { label: 'Missed stop tracking', values: [true, true, true, true] },
+      { label: 'Job scheduling & tracking',    values: [true, true, true, true] },
+      { label: 'Recurring jobs',               values: [true, true, true, true] },
+      { label: 'Route management',             values: [true, true, true, true] },
+      { label: 'Schedule & dispatch board',    values: [true, true, true, true] },
+      { label: 'Drag-to-schedule calendar',    values: [true, true, true, true] },
+      { label: 'Job cancellations with fees',  values: [true, true, true, true] },
+      { label: 'Missed stop tracking',         values: [true, true, true, true] },
     ],
   },
   {
     group: 'Invoicing & Payments',
     rows: [
-      { label: 'Invoicing & payments', values: [true, true, true, true] },
-      { label: 'Estimates & quotes', values: [true, true, true, true] },
-      { label: 'Credits & refunds', values: [true, true, true, true] },
-      { label: 'Partial payments & payment plans', values: [false, true, true, true] },
-      { label: 'Automated late fees', values: [false, false, true, true] },
-      { label: 'QuickBooks sync (coming soon)', values: [false, false, true, true] },
+      { label: 'Invoicing',                         values: [true,  true,  true, true] },
+      { label: 'Transaction & bank register',        values: [true,  true,  true, true] },
+      { label: 'Estimates & quotes',                 values: [true,  true,  true, true] },
+      { label: 'Credits & refunds',                  values: [true,  true,  true, true] },
+      { label: 'Online payment processing (card/ACH)', values: [false, true, true, true] },
+      { label: 'Partial payments & payment plans',   values: [false, true,  true, true] },
+      { label: 'Purchase orders',                    values: [false, true,  true, true] },
+      { label: 'Automated late fees',                values: [false, false, true, true] },
+      { label: 'QuickBooks sync (coming soon)',       values: [false, false, true, true] },
     ],
   },
   {
     group: 'SMS & Communications',
     rows: [
-      { label: 'Two-way SMS inbox', values: [true, true, true, true] },
-      { label: 'Technician on the way SMS', values: [true, true, true, true] },
-      { label: 'Job completion SMS', values: [true, true, true, true] },
-      { label: 'Appointment reminders', values: [false, false, true, true] },
-      { label: 'Automated invoice reminders', values: [false, false, true, true] },
-      { label: 'Automated follow-up sequences', values: [false, true, true, true] },
-      { label: 'Review request automation', values: [false, true, true, true] },
+      { label: 'Two-way SMS inbox',             values: [true,  true,  true,  true] },
+      { label: 'Technician on the way SMS',     values: [true,  true,  true,  true] },
+      { label: 'Job completion SMS',            values: [true,  true,  true,  true] },
+      { label: 'Appointment reminders',         values: [true,  true,  true,  true] },
+      { label: 'Automated invoice reminders',   values: [true,  true,  true,  true] },
+      { label: 'Review request automation',     values: [true,  true,  true,  true] },
+      { label: 'Automated follow-up sequences', values: [false, true,  true,  true] },
+      { label: 'In-app messaging',              values: [false, false, true,  true] },
     ],
   },
   {
     group: 'Customers & CRM',
     rows: [
-      { label: 'Customer CRM', values: [true, true, true, true] },
-      { label: 'Customer portal', values: [true, true, true, true] },
-      { label: 'Multiple service locations', values: [true, true, true, true] },
-      { label: 'Custom fields', values: [true, true, true, true] },
-      { label: 'Lead management (Kanban)', values: [true, true, true, true] },
-      { label: 'Embeddable lead capture form', values: [true, true, true, true] },
-      { label: 'Complaints tracking', values: [true, true, true, true] },
+      { label: 'Customer CRM',                  values: [true,  true, true, true] },
+      { label: 'Multiple service locations',    values: [true,  true, true, true] },
+      { label: 'Custom fields',                 values: [true,  true, true, true] },
+      { label: 'Complaints tracking',           values: [true,  true, true, true] },
+      { label: 'Customer portal',               values: [false, true, true, true] },
+      { label: 'Lead management (Kanban)',       values: [false, true, true, true] },
+      { label: 'Embeddable lead capture form',  values: [false, true, true, true] },
     ],
   },
   {
     group: 'Routes & Field Operations',
     rows: [
-      { label: 'Route management', values: [true, true, true, true] },
-      { label: 'Route sheet', values: [true, true, true, true] },
-      { label: 'Mileage tracking (IRS rates)', values: [true, true, true, true] },
-      { label: 'GPS tracking', values: [true, true, true, true] },
-      { label: 'Job photos & digital signatures', values: [true, true, true, true] },
-      { label: 'Chemical & material logs', values: [true, true, true, true] },
+      { label: 'Route sheet',                      values: [true, true, true, true] },
+      { label: 'Mileage tracking (IRS rates)',      values: [true, true, true, true] },
+      { label: 'GPS tracking',                      values: [true, true, true, true] },
+      { label: 'Job photos & digital signatures',   values: [true, true, true, true] },
+      { label: 'Chemical & material logs',          values: [true, true, true, true] },
     ],
   },
   {
     group: 'Team & HR',
     rows: [
-      { label: 'Unlimited team members', values: [true, true, true, true] },
-      { label: 'Roles & permissions', values: [true, true, true, true] },
-      { label: 'Timecards & attendance', values: [true, true, true, true] },
-      { label: 'Time off & PTO tracking', values: [true, true, true, true] },
-      { label: 'Performance reviews', values: [true, true, true, true] },
-      { label: 'Incident tracking', values: [true, true, true, true] },
-      { label: 'Employee termination workflow', values: [true, true, true, true] },
-      { label: 'Subcontractor management', values: [false, true, true, true] },
+      { label: 'Roles & permissions',              values: [true,  true,  true, true] },
+      { label: 'Timecards & time tracking',         values: [true,  true,  true, true] },
+      { label: 'Attendance tracking',               values: [true,  true,  true, true] },
+      { label: 'Time off & PTO tracking',           values: [true,  true,  true, true] },
+      { label: 'Performance reviews',               values: [true,  true,  true, true] },
+      { label: 'Incident tracking',                 values: [true,  true,  true, true] },
+      { label: 'Employee termination workflow',     values: [true,  true,  true, true] },
+      { label: 'Vehicle & equipment tracking',      values: [true,  true,  true, true] },
+      { label: 'Subcontractor management',          values: [false, true,  true, true] },
     ],
   },
   {
     group: 'Inventory & Equipment',
     rows: [
-      { label: 'Materials catalog', values: [false, true, true, true] },
-      { label: 'Inventory management', values: [false, true, true, true] },
-      { label: 'Purchase orders', values: [false, true, true, true] },
-      { label: 'Equipment & asset tracking', values: [true, true, true, true] },
-      { label: 'Maintenance calendar', values: [false, false, true, true] },
+      { label: 'Materials catalog & inventory', values: [true,  true,  true, true] },
+      { label: 'Equipment & asset tracking',    values: [true,  true,  true, true] },
+      { label: 'Maintenance scheduling',        values: [false, true,  true, true] },
     ],
   },
   {
     group: 'Reporting & Analytics',
     rows: [
-      { label: 'Dashboard (16 widgets)', values: [true, true, true, true] },
-      { label: 'Revenue reports', values: [false, true, true, true] },
-      { label: 'Job completion reports', values: [false, true, true, true] },
-      { label: 'Tech performance reports', values: [false, true, true, true] },
-      { label: 'Route profitability reports', values: [false, true, true, true] },
-      { label: 'Customer retention reports', values: [false, true, true, true] },
-      { label: 'Overdue invoice aging', values: [false, true, true, true] },
-      { label: 'Data export (CSV/PDF/ZIP)', values: [true, true, true, true] },
+      { label: 'Dashboard (16+ widgets)',         values: [true, true, true, true] },
+      { label: 'Revenue reports',                 values: [true, true, true, true] },
+      { label: 'Job completion reports',          values: [true, true, true, true] },
+      { label: 'Tech performance reports',        values: [true, true, true, true] },
+      { label: 'Route profitability reports',     values: [true, true, true, true] },
+      { label: 'Customer retention reports',      values: [true, true, true, true] },
+      { label: 'Overdue invoice aging',           values: [true, true, true, true] },
+      { label: 'Data export (CSV/PDF/ZIP)',        values: [true, true, true, true] },
     ],
   },
   {
     group: 'Platform & Support',
     rows: [
-      { label: 'Mobile crew view (no app store)', values: [true, true, true, true] },
-      { label: 'PWA (install on phone)', values: [true, true, true, true] },
-      { label: 'Time tracking & job costing', values: [false, true, true, true] },
-      { label: 'Priority support', values: [false, false, true, true] },
-      { label: 'Dedicated onboarding', values: [false, false, false, true] },
-      { label: 'Custom integrations', values: [false, false, false, true] },
+      { label: 'Mobile crew view (no app store)', values: [true,  true,  true,  true]  },
+      { label: 'PWA (install on phone)',           values: [true,  true,  true,  true]  },
+      { label: 'Automations & rules engine',       values: [false, false, true,  true]  },
+      { label: 'AI support chatbot',               values: [false, false, true,  true]  },
+      { label: 'Priority support',                 values: [false, false, true,  true]  },
+      { label: 'Dedicated onboarding',             values: [false, false, false, true]  },
+      { label: 'Custom integrations',              values: [false, false, false, true]  },
     ],
   },
 ];
@@ -288,6 +297,7 @@ export default function ComparePage() {
                         color: 'var(--color-white-60)',
                         fontSize: 14,
                         fontWeight: 500,
+                        marginBottom: plan.subtitle ? 4 : 0,
                       }}
                     >
                       {plan.price}
@@ -295,6 +305,11 @@ export default function ComparePage() {
                         <span style={{ fontSize: 12 }}>/mo</span>
                       )}
                     </div>
+                    {plan.subtitle && (
+                      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', fontWeight: 400 }}>
+                        {plan.subtitle}
+                      </div>
+                    )}
                   </th>
                 ))}
               </tr>
