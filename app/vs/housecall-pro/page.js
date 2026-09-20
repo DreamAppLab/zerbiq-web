@@ -168,7 +168,7 @@ export default function VsHouseCallProPage() {
             Head-to-Head Comparison
           </div>
           <h1 style={{ fontWeight: 900, fontSize: 'clamp(36px, 6vw, 64px)', letterSpacing: '-0.04em', lineHeight: 1.05, margin: '0 0 24px', color: '#fff' }}>
-            Zerbiq vs HouseCall Pro
+            ZERBI<span style={{ color: '#3D5CFF' }}>Q</span> vs HouseCall Pro
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 18, lineHeight: 1.7, margin: '0 0 40px' }}>
             Three tiers, side by side — at every price point. See exactly what you get

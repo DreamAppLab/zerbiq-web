@@ -747,7 +747,7 @@ export default function HomePage() {
               lineHeight: 1.1,
             }}
           >
-            See Zerbiq in action.
+            See ZERBI<span style={{ color: 'var(--color-primary)' }}>Q</span> in action.
           </h2>
           <p
             style={{
