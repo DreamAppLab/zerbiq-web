@@ -516,6 +516,49 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* FOUNDER STORY STRIP */}
+      <section style={{ padding: '80px 24px', background: 'rgba(255,255,255,0.025)', borderTop: '1px solid var(--color-white-10)', borderBottom: '1px solid var(--color-white-10)' }}>
+        <div style={{ maxWidth: 760, margin: '0 auto' }}>
+          <h2
+            style={{
+              fontWeight: 900,
+              fontSize: 'clamp(22px, 3.5vw, 36px)',
+              letterSpacing: '-0.03em',
+              lineHeight: 1.15,
+              margin: '0 0 28px',
+              color: '#fff',
+            }}
+          >
+            Built by someone who ran the business.{' '}
+            <span style={{ color: 'var(--color-white-60)', fontWeight: 700 }}>Not just studied it.</span>
+          </h2>
+          <p style={{ fontSize: 16, color: 'var(--color-white-60)', lineHeight: 1.8, margin: '0 0 20px', maxWidth: 620 }}>
+            Zerbiq was built by a field service operator who managed crews, ran routes, chased invoices, dealt with no-shows,
+            and eventually sold the business to private equity. We spent years using software that was built by people who had
+            never dispatched a tech, never explained an invoice to a frustrated customer, and never stayed up worrying about
+            whether the routes were covered.
+          </p>
+          <p style={{ fontSize: 16, color: 'var(--color-white-60)', lineHeight: 1.8, margin: '0 0 32px', maxWidth: 620 }}>
+            So we built what we always needed. Every feature in Zerbiq exists because a real service business needed it —
+            not because a product manager thought it sounded good.
+          </p>
+          <a
+            href="/about"
+            style={{
+              color: 'var(--color-primary)',
+              fontSize: 15,
+              fontWeight: 600,
+              textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+            }}
+          >
+            Read our story →
+          </a>
+        </div>
+      </section>
+
       {/* PRICING */}
       <section id="pricing" style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>

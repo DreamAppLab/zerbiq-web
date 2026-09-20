@@ -61,6 +61,9 @@ export default function Footer() {
               alignItems: 'center',
             }}
           >
+            <Link href="/about" className="link-muted" style={{ fontSize: 14, fontWeight: 500 }}>
+              About
+            </Link>
             <Link href="/features" className="link-muted" style={{ fontSize: 14, fontWeight: 500 }}>
               Features
             </Link>
