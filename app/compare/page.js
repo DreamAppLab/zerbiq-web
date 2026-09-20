@@ -45,40 +45,39 @@ const FEATURE_GROUPS = [
   {
     group: 'Invoicing & Payments',
     rows: [
-      { label: 'Invoicing',                         values: [true,  true,  true, true] },
-      { label: 'Transaction & bank register',        values: [true,  true,  true, true] },
-      { label: 'Estimates & quotes',                 values: [true,  true,  true, true] },
-      { label: 'Credits & refunds',                  values: [true,  true,  true, true] },
-      { label: 'Online payment processing (card/ACH)', values: [false, true, true, true] },
-      { label: 'Partial payments & payment plans',   values: [false, true,  true, true] },
-      { label: 'Purchase orders',                    values: [false, true,  true, true] },
-      { label: 'Automated late fees',                values: [false, false, true, true] },
-      { label: 'QuickBooks sync (coming soon)',       values: [false, false, true, true] },
+      { label: 'Invoicing',                            values: [true,  true,  true,  true] },
+      { label: 'Transaction & bank register',           values: [true,  true,  true,  true] },
+      { label: 'Credits & refunds',                     values: [true,  true,  true,  true] },
+      { label: 'Partial payments',                      values: [true,  true,  true,  true] },
+      { label: 'Estimates & quotes',                    values: [false, true,  true,  true] },
+      { label: 'Online payment processing (card/ACH)',  values: [false, true,  true,  true] },
+      { label: 'Payment plans',                         values: [false, true,  true,  true] },
+      { label: 'Purchase orders',                       values: [false, true,  true,  true] },
+      { label: 'QuickBooks sync (coming soon)',          values: [false, false, true,  true] },
     ],
   },
   {
     group: 'SMS & Communications',
     rows: [
-      { label: 'Two-way SMS inbox',             values: [true,  true,  true,  true] },
       { label: 'Technician on the way SMS',     values: [true,  true,  true,  true] },
       { label: 'Job completion SMS',            values: [true,  true,  true,  true] },
       { label: 'Appointment reminders',         values: [true,  true,  true,  true] },
       { label: 'Automated invoice reminders',   values: [true,  true,  true,  true] },
       { label: 'Review request automation',     values: [true,  true,  true,  true] },
-      { label: 'Automated follow-up sequences', values: [false, true,  true,  true] },
+      { label: 'Automated follow-up sequences', values: [false, false, true,  true] },
       { label: 'In-app messaging',              values: [false, false, true,  true] },
     ],
   },
   {
     group: 'Customers & CRM',
     rows: [
-      { label: 'Customer CRM',                  values: [true,  true, true, true] },
-      { label: 'Multiple service locations',    values: [true,  true, true, true] },
-      { label: 'Custom fields',                 values: [true,  true, true, true] },
-      { label: 'Complaints tracking',           values: [true,  true, true, true] },
-      { label: 'Customer portal',               values: [false, true, true, true] },
-      { label: 'Lead management (Kanban)',       values: [false, true, true, true] },
-      { label: 'Embeddable lead capture form',  values: [false, true, true, true] },
+      { label: 'Customer CRM',                          values: [true,  true, true, true] },
+      { label: 'Custom fields',                         values: [true,  true, true, true] },
+      { label: 'Complaints tracking',                   values: [true,  true, true, true] },
+      { label: 'Customer portal',                       values: [false, true, true, true] },
+      { label: 'Lead management (Kanban)',               values: [false, true, true, true] },
+      { label: 'Embeddable lead capture form',          values: [false, true, true, true] },
+      { label: 'Multiple service locations ¹',          values: [false, true, true, true] },
     ],
   },
   {
@@ -86,7 +85,6 @@ const FEATURE_GROUPS = [
     rows: [
       { label: 'Route sheet',                      values: [true, true, true, true] },
       { label: 'Mileage tracking (IRS rates)',      values: [true, true, true, true] },
-      { label: 'GPS tracking',                      values: [true, true, true, true] },
       { label: 'Job photos & digital signatures',   values: [true, true, true, true] },
       { label: 'Chemical & material logs',          values: [true, true, true, true] },
     ],
@@ -94,15 +92,15 @@ const FEATURE_GROUPS = [
   {
     group: 'Team & HR',
     rows: [
-      { label: 'Roles & permissions',              values: [true,  true,  true, true] },
-      { label: 'Timecards & time tracking',         values: [true,  true,  true, true] },
-      { label: 'Attendance tracking',               values: [true,  true,  true, true] },
-      { label: 'Time off & PTO tracking',           values: [true,  true,  true, true] },
-      { label: 'Performance reviews',               values: [true,  true,  true, true] },
-      { label: 'Incident tracking',                 values: [true,  true,  true, true] },
-      { label: 'Employee termination workflow',     values: [true,  true,  true, true] },
-      { label: 'Vehicle & equipment tracking',      values: [true,  true,  true, true] },
-      { label: 'Subcontractor management',          values: [false, true,  true, true] },
+      { label: 'Roles & permissions',              values: [true,  true,  true,  true] },
+      { label: 'Timecards & time tracking',         values: [true,  true,  true,  true] },
+      { label: 'Attendance tracking',               values: [true,  true,  true,  true] },
+      { label: 'Time off & PTO tracking',           values: [true,  true,  true,  true] },
+      { label: 'Performance reviews',               values: [true,  true,  true,  true] },
+      { label: 'Incident tracking',                 values: [true,  true,  true,  true] },
+      { label: 'Vehicle & equipment tracking',      values: [true,  true,  true,  true] },
+      { label: 'Employee termination workflow',     values: [false, true,  true,  true] },
+      { label: 'Subcontractor management',          values: [false, true,  true,  true] },
     ],
   },
   {
@@ -134,7 +132,7 @@ const FEATURE_GROUPS = [
       { label: 'Automations & rules engine',       values: [false, false, true,  true]  },
       { label: 'AI support chatbot',               values: [false, false, true,  true]  },
       { label: 'Priority support',                 values: [false, false, true,  true]  },
-      { label: 'Dedicated onboarding',             values: [false, false, false, true]  },
+      { label: 'Dedicated onboarding',             values: [false, false, true,  true]  },
       { label: 'Custom integrations',              values: [false, false, false, true]  },
     ],
   },
@@ -444,6 +442,15 @@ export default function ComparePage() {
               </tr>
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* Footnotes */}
+      <section style={{ padding: '0 24px 48px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', margin: 0, lineHeight: 1.7 }}>
+            ¹ Multiple service locations available on Field and above. Per-location pricing applies for locations beyond your plan limit. Contact us for details.
+          </p>
         </div>
       </section>
 
