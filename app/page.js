@@ -60,13 +60,13 @@ const ALL_FEATURES = [
     icon: '💳',
     title: 'Estimates & Quotes',
     desc: 'Create professional estimates in seconds. Send via email or SMS. Clients approve with one tap — no login required.',
-    badge: 'Included with all plans',
+    badge: 'Included with Field, Command & Enterprise',
   },
   {
     icon: '📋',
     title: 'Lead Management',
     desc: 'Capture leads from your website embed form, manual entry, or direct import. Manage them through a visual Kanban pipeline.',
-    badge: 'Included with all plans',
+    badge: 'Included with Field, Command & Enterprise',
   },
   {
     icon: '🗺️',
