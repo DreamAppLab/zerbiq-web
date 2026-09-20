@@ -446,10 +446,12 @@ export default function ComparePage() {
       </section>
 
       {/* Footnotes */}
-      <section style={{ padding: '0 24px 48px' }}>
+      <section style={{ padding: '0 24px 56px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', margin: 0, lineHeight: 1.7 }}>
-            ¹ Multiple service locations available on Field and above. Per-location pricing applies for locations beyond your plan limit. Contact us for details.
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
+            ¹ Multiple service locations available on Field and above.
+            Field plans: +$59/mo per additional location.
+            Command plans: +$79/mo per additional location.
           </p>
         </div>
       </section>

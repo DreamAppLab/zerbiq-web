@@ -1,25 +1,43 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import ZIcon from './ZIcon';
 
+const COMPARE_ITEMS = [
+  { label: 'Our Plans',             href: '/compare' },
+  { label: 'Zerbiq vs Jobber',      href: '/vs/jobber' },
+  { label: 'Zerbiq vs HouseCall Pro', href: '/vs/housecall-pro' },
+];
+
 const NAV_LINKS = [
-  { label: 'Home', href: '/' },
+  { label: 'Home',     href: '/' },
   { label: 'Features', href: '/features' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Compare', href: '/compare' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Pricing',  href: '/pricing' },
+  { label: 'Blog',     href: '/blog' },
 ];
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen]         = useState(false);
+  const [scrolled, setScrolled]         = useState(false);
+  const [compareOpen, setCompareOpen]   = useState(false);
+  const compareRef                       = useRef(null);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handler);
     return () => window.removeEventListener('scroll', handler);
+  }, []);
+
+  // Close compare dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (compareRef.current && !compareRef.current.contains(e.target)) {
+        setCompareOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   useEffect(() => {
@@ -83,6 +101,55 @@ export default function Navbar() {
           display: block;
         }
 
+        .compare-dropdown {
+          position: relative;
+        }
+        .compare-trigger {
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: rgba(255,255,255,0.6);
+          font-size: 15px;
+          font-weight: 500;
+          font-family: inherit;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          padding: 0;
+          transition: color 0.2s;
+        }
+        .compare-trigger:hover { color: #ffffff; }
+        .compare-trigger.open  { color: #ffffff; }
+        .compare-menu {
+          position: absolute;
+          top: calc(100% + 12px);
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(10,10,15,0.97);
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 10px;
+          padding: 6px;
+          min-width: 220px;
+          box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+          z-index: 200;
+          backdrop-filter: blur(16px);
+        }
+        .compare-item {
+          display: block;
+          padding: 9px 14px;
+          color: rgba(255,255,255,0.75);
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 500;
+          border-radius: 7px;
+          transition: background 0.15s, color 0.15s;
+          white-space: nowrap;
+        }
+        .compare-item:hover {
+          background: rgba(61,92,255,0.12);
+          color: #fff;
+        }
+
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .hamburger-btn { display: flex !important; }
@@ -142,11 +209,47 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <div className="desktop-nav">
-            {NAV_LINKS.map((link) => (
+            {NAV_LINKS.slice(0, 2).map((link) => (
               <Link key={link.href} href={link.href} className="nav-link">
                 {link.label}
               </Link>
             ))}
+
+            {/* Pricing */}
+            <Link href="/pricing" className="nav-link">Pricing</Link>
+
+            {/* Compare dropdown */}
+            <div className="compare-dropdown" ref={compareRef}>
+              <button
+                className={`compare-trigger${compareOpen ? ' open' : ''}`}
+                onClick={() => setCompareOpen((o) => !o)}
+                aria-expanded={compareOpen}
+                aria-haspopup="true"
+              >
+                Compare
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ transform: compareOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
+                  <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+              {compareOpen && (
+                <div className="compare-menu" role="menu">
+                  {COMPARE_ITEMS.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="compare-item"
+                      role="menuitem"
+                      onClick={() => setCompareOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Blog */}
+            <Link href="/blog" className="nav-link">Blog</Link>
             <a
               href="https://app.zerbiq.com/login"
               target="_blank"
@@ -202,16 +305,23 @@ export default function Navbar() {
             padding: '100px 32px 40px',
           }}
         >
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="mobile-nav-link"
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.label}
+          {['/', '/features', '/pricing'].map((href) => {
+            const label = { '/': 'Home', '/features': 'Features', '/pricing': 'Pricing' }[href];
+            return (
+              <Link key={href} href={href} className="mobile-nav-link" onClick={() => setMenuOpen(false)}>
+                {label}
+              </Link>
+            );
+          })}
+          {COMPARE_ITEMS.map((item) => (
+            <Link key={item.href} href={item.href} className="mobile-nav-link" onClick={() => setMenuOpen(false)}
+              style={{ fontSize: 20, paddingLeft: 12, color: 'rgba(255,255,255,0.7)' }}>
+              {item.label}
             </Link>
           ))}
+          <Link href="/blog" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>
+            Blog
+          </Link>
           <a
             href="https://app.zerbiq.com/login"
             target="_blank"
