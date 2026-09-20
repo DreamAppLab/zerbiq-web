@@ -107,17 +107,15 @@ function TierTable({ tier }) {
   return (
     <div style={{ marginBottom: 64 }}>
       {/* Tier header */}
-      <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 20, flexWrap: 'wrap' }}>
-        <h3 style={{ fontWeight: 900, fontSize: 'clamp(18px, 3vw, 24px)', letterSpacing: '-0.03em', margin: 0, color: '#fff' }}>
-          Zerbiq {tier.zLabel}
-          <span style={{ color: '#3D5CFF', fontWeight: 500, fontSize: '0.65em', marginLeft: 8 }}>{tier.zPrice}</span>
-          <span style={{ color: 'rgba(255,255,255,0.3)', fontWeight: 400, margin: '0 10px' }}>vs</span>
-          Jobber {tier.cLabel}
-          <span style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 500, fontSize: '0.65em', marginLeft: 8 }}>{tier.cPrice}</span>
-        </h3>
-      </div>
+      <h3 style={{ fontWeight: 900, fontSize: 'clamp(18px, 3vw, 24px)', letterSpacing: '-0.03em', margin: '0 0 12px', color: '#fff', textAlign: 'center' }}>
+        Zerbiq {tier.zLabel}
+        <span style={{ color: '#3D5CFF', fontWeight: 500, fontSize: '0.65em', marginLeft: 8 }}>{tier.zPrice}</span>
+        <span style={{ color: 'rgba(255,255,255,0.3)', fontWeight: 400, margin: '0 10px' }}>vs</span>
+        Jobber {tier.cLabel}
+        <span style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 500, fontSize: '0.65em', marginLeft: 8 }}>{tier.cPrice}</span>
+      </h3>
       {tier.cNote && (
-        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', marginBottom: 16, margin: '0 0 16px', padding: '7px 12px', background: 'rgba(255,255,255,0.03)', borderRadius: 6, border: '1px solid rgba(255,255,255,0.07)', display: 'inline-block' }}>
+        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', marginBottom: 16, margin: '0 0 16px', padding: '7px 12px', background: 'rgba(255,255,255,0.03)', borderRadius: 6, border: '1px solid rgba(255,255,255,0.07)', textAlign: 'center' }}>
           ⚠️ {tier.cNote}
         </p>
       )}
