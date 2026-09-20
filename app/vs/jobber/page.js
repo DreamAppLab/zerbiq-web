@@ -4,84 +4,159 @@ import HeroBackground from '@/components/HeroBackground';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Zerbiq vs Jobber — Compare Field Service Software (2026)',
+  title: 'Zerbiq vs Jobber — Side-by-Side Comparison (2026)',
   description:
-    'See how Zerbiq stacks up against Jobber. Unlimited team members, lower price, payment plans built in, and every feature you need — no per-seat fees.',
+    'Compare Zerbiq and Jobber across all three plan tiers. See which platform gives you more for your money at every level.',
 };
 
-// ── Comparison data ────────────────────────────────────────────────────────────
+// ── Tier definitions ───────────────────────────────────────────────────────────
 
-const ROWS = [
-  // label, zerbiq, jobber, note
-  { label: 'Starting price',                 z: '$49/mo',        j: '$49/mo*',      note: '*Jobber Core is 1 user only' },
-  { label: 'Unlimited team members',         z: true,            j: false,          note: 'Jobber charges per seat' },
-  { label: 'Job scheduling & dispatch',      z: true,            j: true            },
-  { label: 'Recurring jobs',                 z: true,            j: true            },
-  { label: 'Route management',               z: true,            j: 'Limited'       },
-  { label: 'Invoicing',                      z: true,            j: true            },
-  { label: 'Online payment processing',      z: true,            j: true            },
-  { label: 'Payment plans',                  z: true,            j: false           },
-  { label: 'Transaction & bank register',    z: true,            j: false           },
-  { label: 'Estimates & quotes',             z: true,            j: true            },
-  { label: 'Customer CRM & portal',          z: true,            j: true            },
-  { label: 'Two-way SMS messaging',          z: true,            j: 'Add-on'        },
-  { label: 'Automated notifications',        z: true,            j: true            },
-  { label: 'Review request automation',      z: true,            j: true            },
-  { label: 'Materials & inventory tracking', z: true,            j: 'Higher tier'   },
-  { label: 'Subcontractor management',       z: true,            j: 'Limited'       },
-  { label: 'Time tracking & timecards',      z: true,            j: true            },
-  { label: 'Analytics & reporting',          z: true,            j: 'Higher tier'   },
-  { label: 'Automations & rules engine',     z: true,            j: 'Grow plan only' },
-  { label: 'QuickBooks sync',                z: 'Coming soon',   j: true            },
-  { label: 'Performance reviews',            z: true,            j: false           },
-  { label: 'Employee asset checkout',        z: true,            j: false           },
-  { label: 'Mobile crew view',               z: true,            j: true            },
-  { label: 'No setup fees',                  z: true,            j: true            },
-  { label: '14-day free trial',              z: true,            j: true            },
+const TIERS = [
+  {
+    id: 'core',
+    zLabel: 'Core',      zPrice: '$79/mo',
+    cLabel: 'Core',      cPrice: '$49/mo',
+    cNote: '1 user only — every additional user requires a higher plan',
+    rows: [
+      { label: 'Job scheduling & dispatch',        z: true,       c: true    },
+      { label: 'Recurring jobs',                   z: true,       c: true    },
+      { label: 'Route management',                 z: true,       c: 'Limited' },
+      { label: 'Invoicing',                        z: true,       c: true    },
+      { label: 'Transaction & bank register',      z: true,       c: false   },
+      { label: 'Materials & inventory tracking',   z: true,       c: false   },
+      { label: 'Unlimited team members',           z: true,       c: false, note: 'Jobber Core is single-user' },
+      { label: 'Analytics & reporting dashboard',  z: true,       c: 'Limited' },
+      { label: 'Automated SMS notifications',      z: true,       c: 'Add-on' },
+      { label: 'Review request automation',        z: true,       c: false   },
+      { label: 'Vehicle & equipment tracking',     z: true,       c: false   },
+      { label: 'Attendance & time off tracking',   z: true,       c: false   },
+      { label: 'Time tracking & timecards',        z: true,       c: 'Limited' },
+      { label: 'Mobile crew view',                 z: true,       c: true    },
+      { label: '14-day free trial',                z: true,       c: true    },
+    ],
+  },
+  {
+    id: 'field',
+    zLabel: 'Field',     zPrice: '$129/mo',
+    cLabel: 'Connect',   cPrice: '$139/mo',
+    cNote: 'Up to 5 users',
+    rows: [
+      { label: 'Everything in Core tier',          z: true,       c: true    },
+      { label: 'Leads & quote management',         z: true,       c: true    },
+      { label: 'Estimates & quotes',               z: true,       c: true    },
+      { label: 'Online payment processing',        z: true,       c: true    },
+      { label: 'Customer portal',                  z: true,       c: true    },
+      { label: 'Subcontractor management',         z: true,       c: 'Limited' },
+      { label: 'Maintenance scheduling',           z: true,       c: false   },
+      { label: 'Payment plans',                    z: true,       c: false   },
+      { label: 'Unlimited team members',           z: true,       c: false, note: 'Jobber Connect limited to 5 users' },
+      { label: 'Purchase orders',                  z: true,       c: false   },
+    ],
+  },
+  {
+    id: 'command',
+    zLabel: 'Command',   zPrice: '$179/mo',
+    cLabel: 'Grow',      cPrice: '$199/mo',
+    cNote: 'Up to 15 users',
+    rows: [
+      { label: 'Everything in Field tier',         z: true,       c: true    },
+      { label: 'Automations & rules engine',       z: true,       c: true    },
+      { label: 'In-app team messaging',            z: true,       c: false   },
+      { label: 'QuickBooks sync',                  z: 'Coming soon', c: true },
+      { label: 'AI support chatbot',               z: true,       c: false   },
+      { label: 'Unlimited team members',           z: true,       c: false, note: 'Jobber Grow limited to 15 users' },
+      { label: 'Priority support',                 z: true,       c: true    },
+    ],
+  },
 ];
+
+// ── Callouts ───────────────────────────────────────────────────────────────────
 
 const CALLOUTS = [
   {
     icon: '👥',
-    headline: 'Truly unlimited seats',
-    body: "Jobber's Core plan is one user. Their team pricing jumps fast. Zerbiq starts with unlimited team members on every plan — add your whole crew from day one.",
-  },
-  {
-    icon: '💳',
-    headline: 'Payment plans built in',
-    body: 'Need to let a customer pay over 6 months? Zerbiq has payment plans built into Field and above. Jobber doesn\'t offer this.',
+    headline: 'One price, unlimited team members',
+    body: "Add 20 technicians for the same price as 1. Jobber charges per seat — every hire grows your bill. Zerbiq pricing is per account, not per person.",
   },
   {
     icon: '📊',
-    headline: 'Analytics on Core',
-    body: 'Zerbiq includes your full analytics and reporting dashboard on every plan. Jobber requires Grow ($149/mo) to unlock most reporting.',
+    headline: 'Analytics on every plan',
+    body: 'Full analytics and reporting dashboard included from Core onwards. Jobber restricts most reporting to their Grow plan ($199/mo).',
   },
   {
-    icon: '💰',
-    headline: 'No per-seat tax',
-    body: "As your team grows, Jobber's bill climbs. Zerbiq's pricing is per account, not per user — add 20 technicians for the same price as 2.",
+    icon: '🏦',
+    headline: 'Bank register included',
+    body: 'Zerbiq Core includes a full transaction and bank register. Jobber has no equivalent feature at any tier.',
+  },
+  {
+    icon: '📆',
+    headline: 'Payment plans on Field and above',
+    body: 'From $129/mo, Zerbiq lets you set up instalment payment plans for customers. Jobber doesn\'t offer this at any price point.',
   },
 ];
 
-// ── Cell renderer ──────────────────────────────────────────────────────────────
+// ── Sub-components ─────────────────────────────────────────────────────────────
 
-function Cell({ value, highlight }) {
-  if (value === true) {
-    return (
-      <span style={{ color: highlight ? '#3D5CFF' : '#4ade80', fontWeight: 700, fontSize: 18 }}>✓</span>
-    );
-  }
-  if (value === false) {
-    return <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: 18 }}>✗</span>;
-  }
+function Cell({ value, isZ }) {
+  if (value === true)  return <span style={{ color: isZ ? '#3D5CFF' : '#4ade80', fontWeight: 700, fontSize: 20 }}>✓</span>;
+  if (value === false) return <span style={{ color: 'rgba(255,255,255,0.18)', fontSize: 20 }}>✗</span>;
+  return <span style={{ fontSize: 12, color: isZ ? '#93c5fd' : 'rgba(255,255,255,0.45)', fontWeight: 500, lineHeight: 1.3, display: 'inline-block' }}>{value}</span>;
+}
+
+function TierTable({ tier }) {
   return (
-    <span style={{ fontSize: 13, color: highlight ? '#93c5fd' : 'rgba(255,255,255,0.5)', fontWeight: 500 }}>
-      {value}
-    </span>
+    <div style={{ marginBottom: 64 }}>
+      {/* Tier header */}
+      <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 20, flexWrap: 'wrap' }}>
+        <h3 style={{ fontWeight: 900, fontSize: 'clamp(18px, 3vw, 24px)', letterSpacing: '-0.03em', margin: 0, color: '#fff' }}>
+          Zerbiq {tier.zLabel}
+          <span style={{ color: '#3D5CFF', fontWeight: 500, fontSize: '0.65em', marginLeft: 8 }}>{tier.zPrice}</span>
+          <span style={{ color: 'rgba(255,255,255,0.3)', fontWeight: 400, margin: '0 10px' }}>vs</span>
+          Jobber {tier.cLabel}
+          <span style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 500, fontSize: '0.65em', marginLeft: 8 }}>{tier.cPrice}</span>
+        </h3>
+      </div>
+      {tier.cNote && (
+        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', marginBottom: 16, margin: '0 0 16px', padding: '7px 12px', background: 'rgba(255,255,255,0.03)', borderRadius: 6, border: '1px solid rgba(255,255,255,0.07)', display: 'inline-block' }}>
+          ⚠️ {tier.cNote}
+        </p>
+      )}
+      <div style={{ overflowX: 'auto' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 480 }}>
+          <thead>
+            <tr>
+              <th style={{ textAlign: 'left', padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)', fontSize: 12, fontWeight: 600, width: '55%' }}>Feature</th>
+              <th style={{ textAlign: 'center', padding: '12px 16px', borderBottom: '2px solid #3D5CFF', background: 'rgba(61,92,255,0.1)', color: '#fff', fontSize: 14, fontWeight: 800 }}>
+                ZERBI<span style={{ color: '#3D5CFF' }}>Q</span> {tier.zLabel}
+              </th>
+              <th style={{ textAlign: 'center', padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)', fontSize: 14, fontWeight: 700 }}>
+                Jobber {tier.cLabel}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {tier.rows.map((row, i) => (
+              <tr key={row.label} style={{ background: i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
+                <td style={{ padding: '11px 16px', fontSize: 13, color: 'rgba(255,255,255,0.8)', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+                  {row.label}
+                  {row.note && <span style={{ display: 'block', fontSize: 11, color: 'rgba(255,255,255,0.3)', marginTop: 2 }}>{row.note}</span>}
+                </td>
+                <td style={{ textAlign: 'center', padding: '11px 16px', borderBottom: '1px solid rgba(255,255,255,0.04)', background: i % 2 === 0 ? 'rgba(61,92,255,0.06)' : 'rgba(61,92,255,0.03)', borderLeft: '1px solid rgba(61,92,255,0.25)', borderRight: '1px solid rgba(61,92,255,0.25)' }}>
+                  <Cell value={row.z} isZ />
+                </td>
+                <td style={{ textAlign: 'center', padding: '11px 16px', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+                  <Cell value={row.c} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// ── Page ───────────────────────────────────────────────────────────────────────
 
 export default function VsJobberPage() {
   return (
@@ -99,8 +174,8 @@ export default function VsJobberPage() {
             Zerbiq vs Jobber
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 18, lineHeight: 1.7, margin: '0 0 40px' }}>
-            Both built for field service. But Zerbiq gives you unlimited team members, payment plans,
-            and analytics — without the per-seat fees.
+            Three tiers, side by side — at every price point. See exactly what you get
+            from each platform before you commit.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/signup" className="btn-primary" style={{ borderRadius: 10, padding: '14px 32px', fontWeight: 700, fontSize: 16, display: 'inline-block' }}>
@@ -126,44 +201,13 @@ export default function VsJobberPage() {
         </div>
       </section>
 
-      {/* Comparison table */}
+      {/* Three-tier comparison */}
       <section style={{ padding: '0 24px 80px', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
-          <h2 style={{ fontWeight: 900, fontSize: 'clamp(22px, 3vw, 32px)', letterSpacing: '-0.03em', textAlign: 'center', marginBottom: 40, color: '#fff' }}>
-            Feature by feature
-          </h2>
-
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 520 }}>
-              <thead>
-                <tr>
-                  <th style={{ textAlign: 'left', padding: '16px 20px', borderBottom: '2px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', fontSize: 13, fontWeight: 600, width: '55%' }}>Feature</th>
-                  <th style={{ textAlign: 'center', padding: '16px 20px', borderBottom: '2px solid #3D5CFF', background: 'rgba(61,92,255,0.08)', color: '#fff', fontSize: 16, fontWeight: 900 }}>
-                    ZERBI<span style={{ color: '#3D5CFF' }}>Q</span>
-                  </th>
-                  <th style={{ textAlign: 'center', padding: '16px 20px', borderBottom: '2px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.4)', fontSize: 16, fontWeight: 700 }}>Jobber</th>
-                </tr>
-              </thead>
-              <tbody>
-                {ROWS.map((row, i) => (
-                  <tr key={row.label} style={{ background: i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
-                    <td style={{ padding: '13px 20px', fontSize: 14, color: 'rgba(255,255,255,0.8)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                      {row.label}
-                      {row.note && (
-                        <span style={{ display: 'block', fontSize: 11, color: 'rgba(255,255,255,0.35)', marginTop: 2 }}>{row.note}</span>
-                      )}
-                    </td>
-                    <td style={{ textAlign: 'center', padding: '13px 20px', borderBottom: '1px solid rgba(255,255,255,0.05)', background: i % 2 === 0 ? 'rgba(61,92,255,0.06)' : 'rgba(61,92,255,0.03)', borderLeft: '1px solid rgba(61,92,255,0.3)', borderRight: '1px solid rgba(61,92,255,0.3)' }}>
-                      <Cell value={row.z} highlight />
-                    </td>
-                    <td style={{ textAlign: 'center', padding: '13px 20px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                      <Cell value={row.j} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div style={{ background: 'rgba(61,92,255,0.06)', border: '1px solid rgba(61,92,255,0.2)', borderRadius: 8, padding: '10px 16px', marginBottom: 40, fontSize: 12, color: 'rgba(255,255,255,0.45)', lineHeight: 1.6 }}>
+            ℹ️ Competitor pricing and features based on publicly available information as of September 2026. Subject to change.
           </div>
+          {TIERS.map((tier) => <TierTable key={tier.id} tier={tier} />)}
         </div>
       </section>
 
@@ -182,7 +226,7 @@ export default function VsJobberPage() {
         </div>
       </section>
 
-      {/* Disclaimer */}
+      {/* Legal */}
       <section style={{ padding: '32px 24px', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
           <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: 0, lineHeight: 1.7 }}>
