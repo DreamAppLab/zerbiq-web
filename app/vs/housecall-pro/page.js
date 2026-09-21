@@ -209,6 +209,83 @@ export default function VsHouseCallProPage() {
         </div>
       </section>
 
+      {/* Migration guide */}
+      <section style={{ padding: '0 24px 80px', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: 820, margin: '0 auto' }}>
+          <h2 style={{ fontWeight: 900, fontSize: 'clamp(22px, 3.5vw, 34px)', letterSpacing: '-0.03em', margin: '0 0 16px', color: '#fff' }}>
+            Switching from HouseCall Pro? Here&rsquo;s what to expect.
+          </h2>
+          <p style={{ color: 'var(--color-white-60)', fontSize: 15, lineHeight: 1.75, margin: '0 0 32px' }}>
+            HouseCall Pro&rsquo;s export process is more limited than most platforms. Here&rsquo;s an
+            honest breakdown so you know what to expect before you switch.
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20, marginBottom: 32 }}>
+            {/* Imports cleanly */}
+            <div style={{ background: 'var(--color-raised)', border: '1px solid var(--color-white-10)', borderRadius: 12, padding: '20px 22px' }}>
+              <p style={{ fontWeight: 700, fontSize: 13, color: '#4ade80', letterSpacing: '0.05em', textTransform: 'uppercase', margin: '0 0 14px' }}>What imports cleanly into Zerbiq</p>
+              {[
+                'Customer list (name, address, contact info)',
+                'Job history (dates, service type, status)',
+                'Invoice history (amounts, dates, payment status)',
+              ].map((item) => (
+                <div key={item} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', marginBottom: 10 }}>
+                  <span style={{ color: '#4ade80', fontWeight: 700, fontSize: 18, lineHeight: 1.3, flexShrink: 0 }}>✓</span>
+                  <span style={{ color: 'var(--color-white-60)', fontSize: 14, lineHeight: 1.6 }}>{item}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Does not transfer */}
+            <div style={{ background: 'var(--color-raised)', border: '1px solid var(--color-white-10)', borderRadius: 12, padding: '20px 22px' }}>
+              <p style={{ fontWeight: 700, fontSize: 13, color: 'rgba(248,113,113,0.85)', letterSpacing: '0.05em', textTransform: 'uppercase', margin: '0 0 14px' }}>What typically does not transfer</p>
+              {[
+                'Job notes, photos, and file attachments',
+                'Recurring job schedules (need to be recreated)',
+                'Customer portal history',
+                'Payment processing history (Stripe connection is separate)',
+                'Custom automations and triggers',
+              ].map((item) => (
+                <div key={item} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', marginBottom: 10 }}>
+                  <span style={{ color: 'rgba(248,113,113,0.75)', fontWeight: 700, fontSize: 18, lineHeight: 1.3, flexShrink: 0 }}>✗</span>
+                  <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, lineHeight: 1.6 }}>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* HCP export note */}
+          <div style={{ background: 'rgba(251,191,36,0.05)', border: '1px solid rgba(251,191,36,0.2)', borderRadius: 12, padding: '16px 22px', marginBottom: 20 }}>
+            <p style={{ fontWeight: 700, fontSize: 13, color: '#fbbf24', letterSpacing: '0.05em', textTransform: 'uppercase', margin: '0 0 10px' }}>A note on HouseCall Pro exports</p>
+            <p style={{ color: 'var(--color-white-60)', fontSize: 14, lineHeight: 1.75, margin: 0 }}>
+              Their export CSVs use inconsistent column naming across different account types. During Zerbiq
+              onboarding our import tool will help you match your columns — but budget a little extra time
+              compared to a Jobber migration. We&rsquo;d rather tell you that upfront than have you find out mid-import.
+            </p>
+          </div>
+
+          {/* How it works */}
+          <div style={{ background: 'rgba(61,92,255,0.06)', border: '1px solid rgba(61,92,255,0.2)', borderRadius: 12, padding: '20px 22px', marginBottom: 20 }}>
+            <p style={{ fontWeight: 700, fontSize: 13, color: '#93c5fd', letterSpacing: '0.05em', textTransform: 'uppercase', margin: '0 0 10px' }}>How it works</p>
+            <p style={{ color: 'var(--color-white-60)', fontSize: 14, lineHeight: 1.75, margin: 0 }}>
+              Contact HouseCall Pro support to request a data export, or use their{' '}
+              <strong style={{ color: 'rgba(255,255,255,0.8)' }}>Settings → Export</strong> option if available on
+              your plan. During Zerbiq onboarding you&rsquo;ll be guided through importing your data via CSV upload.
+              Budget a little extra time compared to a Jobber migration — their export formatting is less consistent.
+            </p>
+          </div>
+
+          {/* White-glove callout */}
+          <div style={{ background: 'var(--color-raised)', border: '1px solid var(--color-white-10)', borderRadius: 12, padding: '16px 22px', display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+            <span style={{ fontSize: 22, flexShrink: 0, marginTop: 1 }}>🤝</span>
+            <p style={{ color: 'var(--color-white-60)', fontSize: 14, lineHeight: 1.7, margin: 0 }}>
+              <strong style={{ color: '#fff', fontWeight: 700 }}>Prefer to have it done for you?</strong>{' '}
+              Our white-glove onboarding includes full data import — you hand us the files and we handle the rest.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section style={{ padding: '80px 24px', background: 'var(--color-surface)', textAlign: 'center', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
