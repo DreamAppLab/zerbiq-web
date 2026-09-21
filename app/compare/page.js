@@ -10,8 +10,8 @@ export const metadata = {
 const PLANS = [
   { name: 'Core',       price: '$79',    href: '/signup',               subtitle: '500 customers · 250 recurring' },
   { name: 'Field',      price: '$129',   href: '/signup',               subtitle: '1,000 customers · 750 recurring' },
-  { name: 'Command',    price: '$179',   href: '/signup',  popular: true, subtitle: '5,000 customers · 1,500 recurring' },
-  { name: 'Enterprise', price: 'Custom', href: 'mailto:hello@zerbiq.com', isContact: true, subtitle: 'Unlimited' },
+  { name: 'Command',    price: '$179',   href: '/signup',  popular: true, subtitle: '2,500 customers · 750 recurring' },
+  { name: 'Enterprise', price: 'Custom', href: 'mailto:hello@zerbiq.com', isContact: true, subtitle: '2,500+ customers' },
 ];
 
 // true = included, false = not included, string = custom value
@@ -24,8 +24,8 @@ const FEATURE_GROUPS = [
   {
     group: 'Customer Limits',
     rows: [
-      { label: 'Active customers',    values: ['500', '1,000', '5,000', 'Unlimited'] },
-      { label: 'Recurring customers', values: ['250', '750',   '1,500', 'Unlimited'] },
+      { label: 'Active customers',    values: ['500', '1,000', '2,500', 'Unlimited'] },
+      { label: 'Recurring customers', values: ['250', '750',   '750',   'Unlimited'] },
       { label: 'Unlimited routes',        values: [true, true, true, true] },
       { label: 'Unlimited team members',  values: [true, true, true, true] },
     ],
@@ -403,24 +403,31 @@ export default function ComparePage() {
                     }}
                   >
                     {plan.isContact ? (
-                      <a
-                        href={plan.href}
-                        style={{
-                          display: 'inline-block',
-                          background: 'transparent',
-                          border: '1px solid rgba(255,255,255,0.3)',
-                          color: '#fff',
-                          borderRadius: 8,
-                          padding: '11px 20px',
-                          fontWeight: 700,
-                          fontSize: 14,
-                          textDecoration: 'none',
-                          whiteSpace: 'nowrap',
-                          transition: 'border-color 0.2s',
-                        }}
-                      >
-                        Contact Us
-                      </a>
+                      <>
+                        <a
+                          href={plan.href}
+                          style={{
+                            display: 'inline-block',
+                            background: 'transparent',
+                            border: '1px solid rgba(255,255,255,0.3)',
+                            color: '#fff',
+                            borderRadius: 8,
+                            padding: '11px 20px',
+                            fontWeight: 700,
+                            fontSize: 14,
+                            textDecoration: 'none',
+                            whiteSpace: 'nowrap',
+                            transition: 'border-color 0.2s',
+                          }}
+                        >
+                          Contact Us
+                        </a>
+                        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', lineHeight: 1.55, margin: '12px 0 0', padding: '0 4px' }}>
+                          Managing 2,500+ customers?{' '}
+                          <a href="mailto:hello@zerbiq.com" style={{ color: '#93c5fd', textDecoration: 'none', fontWeight: 600 }}>Contact us</a>
+                          {' '}for custom pricing.
+                        </p>
+                      </>
                     ) : (
                       <Link
                         href={plan.href}

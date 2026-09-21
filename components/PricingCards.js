@@ -80,8 +80,8 @@ const PLANS = [
     monthlyPrice: 179,
     annualPrice: 1969,
     subtitle: 'For established businesses running at scale',
-    activeCustomers: 'Up to 5,000',
-    recurringCustomers: 'Up to 1,500',
+    activeCustomers: 'Up to 2,500',
+    recurringCustomers: 'Up to 750',
     badge: 'Most Popular',
     popular: true,
     cta: 'Start Free Trial',
@@ -102,9 +102,10 @@ const PLANS = [
     name: 'Enterprise',
     monthlyPrice: null,
     annualPrice: null,
-    subtitle: 'For large operations that need more',
+    subtitle: 'For businesses managing 2,500+ customers',
     activeCustomers: 'Unlimited',
     recurringCustomers: 'Unlimited',
+    limitNote: 'Managing 2,500+ customers? Enterprise is built for you — contact us for custom pricing.',
     popular: false,
     cta: 'Contact Us',
     ctaHref: 'mailto:hello@zerbiq.com',
@@ -365,6 +366,15 @@ export default function PricingCards() {
                 <span style={{ fontWeight: 600 }}>{plan.recurringCustomers}</span>
               </div>
             </div>
+
+            {/* Enterprise 2,500+ note */}
+            {plan.limitNote && (
+              <div style={{ background: 'rgba(61,92,255,0.07)', border: '1px solid rgba(61,92,255,0.2)', borderRadius: 8, padding: '10px 14px', marginBottom: 20, fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.55 }}>
+                Managing 2,500+ customers? Enterprise is built for you —{' '}
+                <a href="mailto:hello@zerbiq.com" style={{ color: '#93c5fd', fontWeight: 600, textDecoration: 'none' }}>contact us</a>
+                {' '}for custom pricing.
+              </div>
+            )}
 
             {/* CTA */}
             {plan.ctaExternal ? (
