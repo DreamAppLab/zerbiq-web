@@ -429,7 +429,7 @@ export default function HomePage() {
               color: '#fff',
             }}
           >
-            Priced per company.{' '}
+            Priced per company.<br />
             <span style={{ color: 'var(--color-primary)' }}>Not per person.</span>
           </h2>
           <p
