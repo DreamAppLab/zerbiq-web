@@ -203,6 +203,19 @@ export default function VsJobberPage() {
       {/* Three-tier comparison */}
       <section style={{ padding: '0 24px 80px', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
+          {/* Per-user callout */}
+          <div style={{ background: 'rgba(61,92,255,0.1)', border: '2px solid rgba(61,92,255,0.45)', borderRadius: 12, padding: '28px 32px', marginBottom: 40 }}>
+            <h2 style={{ fontWeight: 900, fontSize: 'clamp(20px, 3vw, 26px)', letterSpacing: '-0.02em', margin: '0 0 14px', color: '#fff' }}>
+              Tired of paying per user?
+            </h2>
+            <p style={{ color: 'var(--color-white-60)', fontSize: 15, lineHeight: 1.75, margin: 0 }}>
+              Jobber charges per user — which means every new hire, every seasonal worker, and every admin you add costs more.
+              Forget to cancel a license when someone quits? That&rsquo;s on you. Need one extra user for two weeks?
+              You&rsquo;re upgrading your whole plan. Zerbiq charges one flat monthly price for your entire company.
+              Hire freely. No surprises.
+            </p>
+          </div>
+
           <div style={{ background: 'rgba(61,92,255,0.06)', border: '1px solid rgba(61,92,255,0.2)', borderRadius: 8, padding: '10px 16px', marginBottom: 40, fontSize: 12, color: 'rgba(255,255,255,0.45)', lineHeight: 1.6 }}>
             ℹ️ Competitor pricing and features based on publicly available information as of September 2026. Subject to change.
           </div>

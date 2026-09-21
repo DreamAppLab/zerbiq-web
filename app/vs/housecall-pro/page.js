@@ -202,6 +202,19 @@ export default function VsHouseCallProPage() {
       {/* Three-tier comparison */}
       <section style={{ padding: '0 24px 80px', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
+          {/* Per-user callout */}
+          <div style={{ background: 'rgba(61,92,255,0.1)', border: '2px solid rgba(61,92,255,0.45)', borderRadius: 12, padding: '28px 32px', marginBottom: 40 }}>
+            <h2 style={{ fontWeight: 900, fontSize: 'clamp(20px, 3vw, 26px)', letterSpacing: '-0.02em', margin: '0 0 14px', color: '#fff' }}>
+              One price. Your whole team.
+            </h2>
+            <p style={{ color: 'var(--color-white-60)', fontSize: 15, lineHeight: 1.75, margin: 0 }}>
+              HouseCall Pro&rsquo;s per-user pricing means your software bill grows every time your team does.
+              Seasonal crews, part-time admins, techs who come and go — every seat costs money.
+              Zerbiq is priced per company, not per person. Add your entire team on day one.
+              No upgrades, no per-seat math, no leftover licenses when someone moves on.
+            </p>
+          </div>
+
           <div style={{ background: 'rgba(61,92,255,0.06)', border: '1px solid rgba(61,92,255,0.2)', borderRadius: 8, padding: '10px 16px', marginBottom: 40, fontSize: 12, color: 'rgba(255,255,255,0.45)', lineHeight: 1.6 }}>
             ℹ️ Competitor pricing and features based on publicly available information as of September 2026. Subject to change.
           </div>

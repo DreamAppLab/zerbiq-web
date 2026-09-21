@@ -81,7 +81,7 @@ const PLANS = [
     annualPrice: 1969,
     subtitle: 'For established businesses running at scale',
     activeCustomers: 'Up to 2,500',
-    recurringCustomers: 'Up to 750',
+    recurringCustomers: 'Up to 1,500',
     badge: 'Most Popular',
     popular: true,
     cta: 'Start Free Trial',
@@ -341,6 +341,13 @@ export default function PricingCards() {
               )}
             </div>
 
+            {/* Unlimited users callout */}
+            <div style={{ marginBottom: 14 }}>
+              <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-primary)' }}>
+                Unlimited users included — no per-seat fees.
+              </span>
+            </div>
+
             {/* Limits */}
             <div
               style={{
@@ -358,11 +365,11 @@ export default function PricingCards() {
                   marginBottom: 6,
                 }}
               >
-                <span style={{ color: 'var(--color-white-60)' }}>Active customers</span>
+                <span style={{ color: 'var(--color-white-60)' }}>Active customers:</span>
                 <span style={{ fontWeight: 600 }}>{plan.activeCustomers}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--color-white-60)' }}>Recurring customers</span>
+                <span style={{ color: 'var(--color-white-60)' }}>Recurring customers:</span>
                 <span style={{ fontWeight: 600 }}>{plan.recurringCustomers}</span>
               </div>
             </div>
