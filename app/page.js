@@ -408,6 +408,50 @@ export default function HomePage() {
         <MarqueeRow items={MARQUEE_ROW_2} direction="right" />
       </section>
 
+      {/* PER-COMPANY PRICING CALLOUT */}
+      <section
+        style={{
+          padding: '80px 24px',
+          background: '#0D0D14',
+          borderTop: '1px solid var(--color-white-10)',
+          borderBottom: '1px solid var(--color-white-10)',
+          textAlign: 'center',
+        }}
+      >
+        <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <h2
+            style={{
+              fontWeight: 900,
+              fontSize: 'clamp(28px, 4.5vw, 48px)',
+              letterSpacing: '-0.03em',
+              lineHeight: 1.1,
+              margin: '0 0 28px',
+              color: '#fff',
+            }}
+          >
+            Priced per company.{' '}
+            <span style={{ color: 'var(--color-primary)' }}>Not per person.</span>
+          </h2>
+          <p
+            style={{
+              fontSize: 17,
+              color: 'var(--color-white-60)',
+              lineHeight: 1.8,
+              margin: 0,
+              maxWidth: 640,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
+            Per-user pricing was one of the most frustrating parts of running a service business.
+            Every new hire cost more. Every seasonal worker needed a license. Someone quits and you
+            forget to cancel their seat — that&apos;s on you. We built Zerbiq on a flat monthly price
+            for your entire company. Add your whole team on day one. No per-seat math. No surprise
+            charges. No licenses to cancel when someone moves on.
+          </p>
+        </div>
+      </section>
+
       {/* FEATURES */}
       <section id="features" style={{ padding: '80px 24px', background: 'var(--color-surface)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>

@@ -12,8 +12,8 @@ const PLANS = [
     monthlyPrice: 79,
     annualPrice: 869,
     subtitle: 'For solo operators just getting started',
-    activeCustomers: 'Up to 500',
-    recurringCustomers: 'Up to 250',
+    activeCustomers: '500',
+    recurringCustomers: '250',
     cta: 'Start Free Trial',
     ctaHref: '/signup',
     ctaExternal: false,
@@ -49,8 +49,8 @@ const PLANS = [
     monthlyPrice: 129,
     annualPrice: 1419,
     subtitle: 'For growing operations with multiple crews',
-    activeCustomers: 'Up to 1,000',
-    recurringCustomers: 'Up to 750',
+    activeCustomers: '1,000',
+    recurringCustomers: '750',
     cta: 'Start Free Trial',
     ctaHref: '/signup',
     ctaExternal: false,
@@ -80,8 +80,8 @@ const PLANS = [
     monthlyPrice: 179,
     annualPrice: 1969,
     subtitle: 'For established businesses running at scale',
-    activeCustomers: 'Up to 2,500',
-    recurringCustomers: 'Up to 1,500',
+    activeCustomers: '2,500',
+    recurringCustomers: '1,500',
     badge: 'Most Popular',
     popular: true,
     cta: 'Start Free Trial',
@@ -94,7 +94,6 @@ const PLANS = [
       'QuickBooks sync (coming soon)',
       'AI support chatbot',
       'Priority support',
-      // Note: Dedicated onboarding is Enterprise-only
     ],
     excluded: [],
   },
@@ -102,10 +101,9 @@ const PLANS = [
     name: 'Enterprise',
     monthlyPrice: null,
     annualPrice: null,
-    subtitle: 'Everything in Command, no customer limits. Priced based on your operation size. Includes white-glove onboarding and direct support.',
+    subtitle: 'For operations managing 2,500+ customers',
     activeCustomers: 'Unlimited',
     recurringCustomers: 'Unlimited',
-    limitNote: 'Managing 2,500+ customers? Enterprise is built for you — contact us for custom pricing.',
     popular: false,
     cta: 'Contact Us',
     ctaHref: 'mailto:hello@zerbiq.com',
@@ -115,6 +113,7 @@ const PLANS = [
       'No active customer limit',
       'White-glove onboarding',
       'Direct support',
+      'Custom pricing',
     ],
     excluded: [],
   },
@@ -337,7 +336,7 @@ export default function PricingCards() {
                   )}
                 </>
               ) : (
-                <span style={{ fontSize: 36, fontWeight: 900 }}>Custom</span>
+                <span style={{ fontSize: 40, fontWeight: 900, letterSpacing: '-0.03em' }}>Custom</span>
               )}
             </div>
 
@@ -362,26 +361,20 @@ export default function PricingCards() {
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
+                  alignItems: 'center',
+                  flexWrap: 'nowrap',
+                  gap: 8,
                   marginBottom: 6,
                 }}
               >
-                <span style={{ color: 'var(--color-white-60)' }}>Active customers:</span>
-                <span style={{ fontWeight: 600 }}>{plan.activeCustomers}</span>
+                <span style={{ color: 'var(--color-white-60)', whiteSpace: 'nowrap' }}>Active customers:</span>
+                <span style={{ fontWeight: 600, whiteSpace: 'nowrap' }}>{plan.activeCustomers}</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--color-white-60)' }}>Recurring customers:</span>
-                <span style={{ fontWeight: 600 }}>{plan.recurringCustomers}</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'nowrap', gap: 8 }}>
+                <span style={{ color: 'var(--color-white-60)', whiteSpace: 'nowrap' }}>Recurring customers:</span>
+                <span style={{ fontWeight: 600, whiteSpace: 'nowrap' }}>{plan.recurringCustomers}</span>
               </div>
             </div>
-
-            {/* Enterprise 2,500+ note */}
-            {plan.limitNote && (
-              <div style={{ background: 'rgba(61,92,255,0.07)', border: '1px solid rgba(61,92,255,0.2)', borderRadius: 8, padding: '10px 14px', marginBottom: 20, fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.55 }}>
-                Managing 2,500+ customers? Enterprise is built for you —{' '}
-                <a href="mailto:hello@zerbiq.com" style={{ color: '#93c5fd', fontWeight: 600, textDecoration: 'none' }}>contact us</a>
-                {' '}for custom pricing.
-              </div>
-            )}
 
             {/* CTA */}
             {plan.ctaExternal ? (
