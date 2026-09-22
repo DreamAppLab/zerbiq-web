@@ -382,7 +382,7 @@ export default function HomePage() {
               margin: '0 auto 36px',
             }}
           >
-            <ZerbiqBrand /> replaces the whiteboard, the spreadsheet, and the group text. Your crews know
+            <ZerbiqBrand /> replaces the whiteboard, the spreadsheet, and the group text. Your team knows
             where to be. Your customers know when to expect them. You know what&apos;s happening —
             from anywhere.
           </p>
