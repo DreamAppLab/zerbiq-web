@@ -203,7 +203,7 @@ function CellValue({ value, isCommand }) {
         style={{
           fontSize: 18,
           fontWeight: 700,
-          color: value ? '#3D5CFF' : 'rgba(255,255,255,0.25)',
+          color: value ? '#3D5CFF' : '#fff',
         }}
       >
         {value ? '✓' : '✗'}
@@ -215,7 +215,7 @@ function CellValue({ value, isCommand }) {
       style={{
         fontSize: 13,
         fontWeight: 600,
-        color: isCommand ? '#fff' : 'rgba(255,255,255,0.75)',
+        color: '#fff',
       }}
     >
       {value}
@@ -230,9 +230,18 @@ export default function ComparePage() {
 
       <style>{`
         .compare-scroll-hint-row { display: none; }
+        .pyramid-pills {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 5px;
+          flex: 1;
+          min-width: 0;
+        }
         @media (max-width: 768px) {
           .compare-scroll-hint-row { display: table-row; }
-          .pyramid-tier { width: 100% !important; }
+          .pyramid-container { overflow: hidden; }
+          .pyramid-tier { width: 100% !important; max-width: 100% !important; box-sizing: border-box; }
+          .pyramid-pills { grid-template-columns: repeat(2, 1fr) !important; }
           .pyramid-inner { flex-wrap: wrap !important; }
           .pyramid-price { text-align: left !important; width: 100%; margin-top: 8px; }
         }
@@ -391,7 +400,7 @@ export default function ComparePage() {
                       )}
                     </div>
                     {plan.subtitle && (
-                      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', fontWeight: 400 }}>
+                      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.65)', fontWeight: 400 }}>
                         {plan.subtitle}
                       </div>
                     )}
@@ -436,7 +445,7 @@ export default function ComparePage() {
                           style={{
                             padding: '14px 16px',
                             fontSize: 14,
-                            color: 'rgba(255,255,255,0.8)',
+                            color: '#fff',
                             borderBottom: '1px solid rgba(255,255,255,0.05)',
                           }}
                         >
@@ -565,7 +574,7 @@ export default function ComparePage() {
           >
             How the plans build on each other
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+          <div className="pyramid-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
             {PYRAMID_TIERS.map((tier) => (
               <div
                 key={tier.name}
@@ -592,7 +601,7 @@ export default function ComparePage() {
                     <span style={{ color: tier.labelColor, fontSize: 12, marginLeft: 8, fontWeight: 500 }}>{tier.label}</span>
                   </div>
                   {/* Middle: feature pills */}
-                  <div style={{ flex: 1, display: 'flex', flexWrap: 'wrap', gap: 5, minWidth: 0 }}>
+                  <div className="pyramid-pills">
                     {tier.features.map((f) => (
                       <span
                         key={f}
@@ -603,7 +612,6 @@ export default function ComparePage() {
                           fontWeight: 500,
                           padding: '3px 9px',
                           borderRadius: 20,
-                          whiteSpace: 'nowrap',
                         }}
                       >
                         {f}
