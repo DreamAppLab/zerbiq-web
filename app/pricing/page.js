@@ -26,7 +26,7 @@ const FAQ = [
   },
   {
     q: 'What is White-Glove Onboarding?',
-    a: 'Our White-Glove Onboarding is a one-time add-on — $299 for Core, $499 for Field, $699 for Command. We handle your entire setup and configure everything for you.',
+    a: 'Our White-Glove Onboarding is a one-time add-on — $299 for Core, $499 for Field, $699 for Command. We Zoom with you for 60–90 minutes, import your customer list, build your routes, add your team, and configure everything — guaranteed live before the call ends.',
   },
   {
     q: 'Do you offer annual billing?',
@@ -35,6 +35,26 @@ const FAQ = [
   {
     q: 'What is a recurring customer?',
     a: "A recurring customer has a billing frequency set (weekly, biweekly, monthly, or quarterly). One-time customers don't count toward your recurring limit.",
+  },
+  {
+    q: 'Do I need to download an app?',
+    a: 'No. Zerbiq runs in any browser and installs as a PWA (progressive web app) directly from your phone\'s browser — no app store required. Your techs are up and running in minutes with nothing to download.',
+  },
+  {
+    q: 'Can I import my existing customers?',
+    a: 'Yes. Every plan includes DIY spreadsheet import — download our template, fill in your customers, routes, and team, and upload. Most owners are fully set up in under an hour. White-Glove Onboarding includes full data migration handled by our team.',
+  },
+  {
+    q: 'What payment processors do you support?',
+    a: 'Zerbiq supports Stripe, Square, and PayPal/Venmo for online payments. You can also accept cash, check, and onsite card payments on any plan without connecting a processor.',
+  },
+  {
+    q: 'Is my data secure?',
+    a: 'Yes. All data is encrypted in transit and at rest. Zerbiq uses enterprise-grade database hosting with row-level security — meaning each account\'s data is isolated and never accessible to other users.',
+  },
+  {
+    q: 'What happens to my data if I cancel?',
+    a: 'Your data is saved for 30 days after cancellation. You can export everything — customers, jobs, invoices, timecards, inventory — at any time before or after cancelling. Your data always belongs to you.',
   },
 ];
 
