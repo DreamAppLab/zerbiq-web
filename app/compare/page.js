@@ -55,7 +55,7 @@ const FEATURE_GROUPS = [
       { label: 'Credits & refunds',                     values: [true,  true,  true,  true] },
       { label: 'Partial payments and payment plans',          values: [false, true,  true,  true] },
       { label: 'Estimates & quotes',                    values: [false, true,  true,  true] },
-      { label: 'Online payment processing (card/ACH)',  values: [false, true,  true,  true] },
+      { label: 'Online payment processing (card/ACH)',  values: [true,  true,  true,  true] },
       { label: 'Purchase orders',                            values: [true,  true,  true,  true] },
       { label: 'QuickBooks sync',                          values: [false, false, true,  true] },
     ],
