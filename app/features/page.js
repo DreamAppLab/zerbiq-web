@@ -592,7 +592,7 @@ function GroupDivider({ label }) {
             fontWeight: 700,
             letterSpacing: '0.12em',
             textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.35)',
+            color: 'var(--color-primary)',
             whiteSpace: 'nowrap',
           }}
         >

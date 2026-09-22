@@ -229,21 +229,45 @@ export default function ComparePage() {
       <Navbar />
 
       <style>{`
-        .compare-scroll-hint-row { display: none; }
+        @keyframes hint-nudge-right {
+          0%, 100% { opacity: 0.6; transform: translateX(0); }
+          50%       { opacity: 1;   transform: translateX(4px); }
+        }
+        @keyframes hint-nudge-left {
+          0%, 100% { opacity: 0.6; transform: translateX(0); }
+          50%       { opacity: 1;   transform: translateX(-4px); }
+        }
+        .compare-scroll-hint-outer {
+          display: none;
+          text-align: center;
+          color: #ffffff;
+          font-size: 13px;
+          padding: 8px 0 12px;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          letter-spacing: 0.02em;
+        }
+        .hint-arrow-left  { display: inline-block; animation: hint-nudge-left  1.6s ease-in-out infinite; }
+        .hint-arrow-right { display: inline-block; animation: hint-nudge-right 1.6s ease-in-out infinite; }
         .pyramid-pills {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 5px;
-          flex: 1;
-          min-width: 0;
+          gap: 4px 8px;
+          align-content: start;
         }
         @media (max-width: 768px) {
-          .compare-scroll-hint-row { display: table-row; }
+          .compare-scroll-hint-outer { display: flex; }
           .pyramid-container { overflow: hidden; }
-          .pyramid-tier { width: 100% !important; max-width: 100% !important; box-sizing: border-box; }
-          .pyramid-pills { grid-template-columns: repeat(2, 1fr) !important; }
-          .pyramid-inner { flex-wrap: wrap !important; }
-          .pyramid-price { text-align: left !important; width: 100%; margin-top: 8px; }
+          .pyramid-tier  { width: 100% !important; max-width: 100% !important; box-sizing: border-box; }
+          .pyramid-inner { flex-direction: column !important; }
+          .pyramid-left  {
+            width: 100% !important; min-width: unset !important;
+            border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.15) !important;
+            padding-right: 0 !important; margin-right: 0 !important;
+            padding-bottom: 12px !important; margin-bottom: 12px !important;
+          }
+          .pyramid-pills { grid-template-columns: repeat(2, 1fr) !important; font-size: 12px !important; }
         }
       `}</style>
 
@@ -300,7 +324,13 @@ export default function ComparePage() {
 
       {/* Table */}
       <section style={{ padding: '48px 24px 80px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', overflowX: 'auto' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div className="compare-scroll-hint-outer">
+            <span className="hint-arrow-left">‹</span>
+            Scroll to see all plans
+            <span className="hint-arrow-right">›</span>
+          </div>
+          <div style={{ overflowX: 'auto' }}>
           <table
             style={{
               width: '100%',
@@ -310,21 +340,6 @@ export default function ComparePage() {
           >
             {/* Sticky header */}
             <thead>
-              <tr className="compare-scroll-hint-row">
-                <td
-                  colSpan={5}
-                  style={{
-                    textAlign: 'center',
-                    padding: '10px 16px 0',
-                    fontSize: 13,
-                    color: 'rgba(255,255,255,0.4)',
-                    letterSpacing: '0.02em',
-                    background: 'var(--color-bg)',
-                  }}
-                >
-                  <span>‹</span>{' '}Scroll to see all plans{' '}<span>›</span>
-                </td>
-              </tr>
               <tr>
                 <th
                   style={{
@@ -545,6 +560,7 @@ export default function ComparePage() {
               </tr>
             </tbody>
           </table>
+          </div>
         </div>
       </section>
 
@@ -583,61 +599,43 @@ export default function ComparePage() {
                   width: tier.width,
                   background: tier.bg,
                   borderRadius: 12,
-                  padding: '18px 24px',
+                  padding: '20px 24px',
                 }}
               >
                 <div
                   className="pyramid-inner"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: 16,
-                    flexWrap: 'wrap',
-                  }}
+                  style={{ display: 'flex', gap: 0, alignItems: 'stretch' }}
                 >
-                  {/* Left: plan name + label */}
-                  <div style={{ minWidth: 150, flexShrink: 0 }}>
-                    <span style={{ fontWeight: 900, fontSize: 17, color: tier.color }}>{tier.name}</span>
-                    <span style={{ color: tier.labelColor, fontSize: 12, marginLeft: 8, fontWeight: 500 }}>{tier.label}</span>
-                  </div>
-                  {/* Middle: feature pills */}
-                  <div className="pyramid-pills">
-                    {tier.features.map((f) => (
-                      <span
-                        key={f}
-                        style={{
-                          background: 'rgba(255,255,255,0.1)',
-                          color: tier.color,
-                          fontSize: 11,
-                          fontWeight: 500,
-                          padding: '3px 9px',
-                          borderRadius: 20,
-                        }}
-                      >
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                  {/* Right: price + customers */}
+                  {/* Left: plan identity */}
                   <div
-                    className="pyramid-price"
-                    style={{ textAlign: 'right', flexShrink: 0 }}
+                    className="pyramid-left"
+                    style={{
+                      width: 180,
+                      minWidth: 180,
+                      paddingRight: 20,
+                      marginRight: 20,
+                      borderRight: '1px solid rgba(255,255,255,0.15)',
+                      flexShrink: 0,
+                    }}
                   >
-                    <div style={{ fontWeight: 700, fontSize: 15, color: tier.color }}>{tier.price}</div>
-                    <div style={{ fontSize: 11, color: tier.labelColor, marginTop: 2 }}>{tier.customers}</div>
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ fontWeight: 900, fontSize: 17, color: tier.color }}>{tier.name}</div>
+                      <div style={{ color: tier.labelColor, fontSize: 12, fontWeight: 500, marginTop: 2 }}>{tier.label}</div>
+                    </div>
+                    <div style={{ fontWeight: 900, fontSize: 22, color: tier.color, lineHeight: 1 }}>{tier.price}</div>
+                    <div style={{ fontSize: 12, color: tier.labelColor, marginTop: 4 }}>{tier.customers}</div>
+                  </div>
+                  {/* Right: feature grid */}
+                  <div className="pyramid-pills" style={{ flex: 1, minWidth: 0 }}>
+                    {tier.features.map((f) => (
+                      <span key={f} style={{ fontSize: 13, color: '#fff', fontWeight: 400 }}>{f}</span>
+                    ))}
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <p
-            style={{
-              textAlign: 'center',
-              color: 'rgba(255,255,255,0.3)',
-              fontSize: 13,
-              margin: '24px 0 0',
-            }}
-          >
+          <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: 13, margin: '24px 0 0' }}>
             No per-seat fees · 14-day free trial · Cancel anytime
           </p>
         </div>

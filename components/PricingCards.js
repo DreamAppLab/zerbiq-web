@@ -151,7 +151,7 @@ function CheckIcon({ included }) {
       <circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.05)" />
       <path
         d="M10 6L6 10M6 6l4 4"
-        stroke="rgba(255,255,255,0.25)"
+        stroke="rgba(255,255,255,0.6)"
         strokeWidth="1.5"
         strokeLinecap="round"
       />
