@@ -698,7 +698,7 @@ export default function ComparePage() {
                 Jobber
               </h3>
               <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 16px' }}>
-                Jobber charges per user seat — meaning your monthly cost goes up every time you add a
+                Jobber is a well-established platform and a legitimate choice for many field service businesses. Where we differ: Jobber charges per user seat — meaning your monthly cost goes up every time you add a
                 technician. For a team of 5–10 people, that adds up fast. We know because we lived it.{' '}
                 <ZerbiqBrand /> includes unlimited team members on every plan, always, with no per-seat fees.
               </p>
@@ -746,11 +746,8 @@ export default function ComparePage() {
                 Housecall Pro
               </h3>
               <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 16px' }}>
-                Housecall Pro is a capable platform, and we respect what they&apos;ve built. Where we
-                differ: <ZerbiqBrand /> was designed from the ground up specifically for recurring
-                route-based field service — lawn care, pool service, pest control, and similar businesses.
-                Housecall Pro serves a much broader range of trades, which means some of the workflow depth
-                that matters most to route-based operators isn&apos;t there.
+                Housecall Pro is a capable platform, and we respect what they&apos;ve built.{' '}
+                <ZerbiqBrand /> was designed from the ground up for field service businesses of all types — whether you run recurring routes, one-time jobs, or a mix of both. Where we differ: Housecall Pro serves a much broader range of trades, which means some of the workflow depth that matters most to field service operators isn&apos;t there.
               </p>
               <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 16px' }}>
                 Like Jobber, we cannot independently verify Housecall Pro&apos;s current data export
