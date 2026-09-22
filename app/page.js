@@ -77,7 +77,7 @@ const ALL_FEATURES = [
   {
     icon: '🗺️',
     title: 'Mileage Tracking',
-    desc: 'Crews log mileage from their phone. IRS reimbursement rates calculated automatically. Know your vehicle costs per job and per route.',
+    desc: 'Team members log mileage from their phone. IRS reimbursement rates calculated automatically. Know your vehicle costs per job and per route.',
     badge: 'Included with all plans',
   },
   {
@@ -428,7 +428,7 @@ export default function HomePage() {
           </div>
 
           <p style={{ color: 'var(--color-white-60)', fontSize: 13, margin: '0 0 56px' }}>
-            No credit card required · 7-day free trial · Cancel anytime
+            No credit card required · 14-day free trial · Cancel anytime
           </p>
 
           {/* App screenshot */}

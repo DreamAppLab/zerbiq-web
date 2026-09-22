@@ -37,7 +37,6 @@ const PLANS = [
       'Data export',
       'Route management',
       'Credits & refunds',
-      'Partial payments',
       'Performance reviews',
       'Incident tracking',
       'Holiday Management',
