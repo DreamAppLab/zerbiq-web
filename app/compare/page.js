@@ -9,9 +9,9 @@ export const metadata = {
 };
 
 const PLANS = [
-  { name: 'Core',       price: '$79',    href: '/signup',               subtitle: '500 customers · 250 recurring' },
-  { name: 'Field',      price: '$129',   href: '/signup',               subtitle: '1,000 customers · 750 recurring' },
-  { name: 'Command',    price: '$179',   href: '/signup',  popular: true, subtitle: '2,500 customers · 1,500 recurring' },
+  { name: 'Core',       price: '$79',    href: '/signup',               subtitle: '500 active customers' },
+  { name: 'Field',      price: '$129',   href: '/signup',               subtitle: '1,000 active customers' },
+  { name: 'Command',    price: '$179',   href: '/signup',  popular: true, subtitle: '2,500 active customers' },
   { name: 'Enterprise', price: 'Custom', href: 'mailto:hello@zerbiq.com', isContact: true, subtitle: '2,500+ customers' },
 ];
 
@@ -27,7 +27,6 @@ const FEATURE_GROUPS = [
     rows: [
       { label: 'Users included',          values: ['Unlimited', 'Unlimited', 'Unlimited', 'Unlimited'] },
       { label: 'Active customers',        values: ['500', '1,000', '2,500', 'Unlimited'] },
-      { label: 'Recurring customers',     values: ['250', '750',   '1,500', 'Unlimited'] },
       { label: 'Unlimited routes',        values: [true, true, true, true] },
       { label: 'Unlimited team members',  values: [true, true, true, true] },
     ],

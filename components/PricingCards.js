@@ -13,7 +13,6 @@ const PLANS = [
     annualPrice: 869,
     subtitle: 'For solo operators just getting started',
     activeCustomers: '500',
-    recurringCustomers: '250',
     cta: 'Start Free Trial',
     ctaHref: '/signup',
     ctaExternal: false,
@@ -59,7 +58,6 @@ const PLANS = [
     annualPrice: 1419,
     subtitle: 'For growing operations with multiple crews',
     activeCustomers: '1,000',
-    recurringCustomers: '750',
     cta: 'Start Free Trial',
     ctaHref: '/signup',
     ctaExternal: false,
@@ -85,7 +83,6 @@ const PLANS = [
     annualPrice: 1969,
     subtitle: 'For established businesses running at scale',
     activeCustomers: '2,500',
-    recurringCustomers: '1,500',
     badge: 'Most Popular',
     popular: true,
     cta: 'Start Free Trial',
@@ -108,7 +105,6 @@ const PLANS = [
     annualPrice: null,
     subtitle: 'For operations managing 2,500+ customers',
     activeCustomers: 'Unlimited',
-    recurringCustomers: 'Unlimited',
     popular: false,
     cta: 'Contact Us',
     ctaHref: 'mailto:hello@zerbiq.com',
@@ -374,10 +370,6 @@ export default function PricingCards() {
               >
                 <span style={{ color: 'var(--color-white-60)', whiteSpace: 'nowrap' }}>Active customers:</span>
                 <span style={{ fontWeight: 600, whiteSpace: 'nowrap' }}>{plan.activeCustomers}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'nowrap', gap: 8 }}>
-                <span style={{ color: 'var(--color-white-60)', whiteSpace: 'nowrap' }}>Recurring customers:</span>
-                <span style={{ fontWeight: 600, whiteSpace: 'nowrap' }}>{plan.recurringCustomers}</span>
               </div>
             </div>
 

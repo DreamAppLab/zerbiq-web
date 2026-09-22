@@ -33,10 +33,6 @@ const FAQ = [
     a: 'Yes — annual billing saves you one full month compared to paying monthly.',
   },
   {
-    q: 'What is a recurring customer?',
-    a: "A recurring customer has a billing frequency set (weekly, biweekly, monthly, or quarterly). One-time customers don't count toward your recurring limit.",
-  },
-  {
     q: 'Do I need to download an app?',
     a: 'Zerbiq is available as a native app on iOS and Android — download it from the App Store or Google Play. It also runs in any browser and installs as a PWA directly from your phone without going through an app store. Your techs can be up and running in minutes on any device.',
   },
