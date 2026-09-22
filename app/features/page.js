@@ -616,6 +616,13 @@ export default function FeaturesPage() {
     <>
       <Navbar />
 
+      <style>{`
+        @media (max-width: 768px) {
+          .feat-text { order: 2 !important; }
+          .feat-img  { order: 1 !important; }
+        }
+      `}</style>
+
       <section
         style={{
           padding: '80px 24px 60px',
@@ -669,7 +676,7 @@ export default function FeaturesPage() {
                 alignItems: 'center',
               }}
             >
-              <div style={{ order: isEven ? 0 : 1 }}>
+              <div className="feat-text" style={{ order: isEven ? 0 : 1 }}>
                 <div style={{ fontSize: 36, marginBottom: 16 }}>{feature.icon}</div>
                 <h2
                   style={{
@@ -718,7 +725,7 @@ export default function FeaturesPage() {
                   {feature.badge}
                 </div>
               </div>
-              <div style={{ order: isEven ? 1 : 0 }}>
+              <div className="feat-img" style={{ order: isEven ? 1 : 0 }}>
                 <FeatureImage screenshot={feature.screenshot} label={feature.title} />
               </div>
             </div>
@@ -751,7 +758,7 @@ export default function FeaturesPage() {
                   }}
                 >
                   {/* Text side */}
-                  <div style={{ order: isEven ? 0 : 1 }}>
+                  <div className="feat-text" style={{ order: isEven ? 0 : 1 }}>
                     <div style={{ fontSize: 36, marginBottom: 16 }}>{feature.icon}</div>
                     <h2
                       style={{
@@ -802,7 +809,7 @@ export default function FeaturesPage() {
                   </div>
 
                   {/* Screenshot side */}
-                  <div style={{ order: isEven ? 1 : 0 }}>
+                  <div className="feat-img" style={{ order: isEven ? 1 : 0 }}>
                     <FeatureImage screenshot={feature.screenshot} label={feature.title} />
                   </div>
                 </div>

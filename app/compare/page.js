@@ -149,6 +149,53 @@ const FEATURE_GROUPS = [
   },
 ];
 
+const PYRAMID_TIERS = [
+  {
+    name: 'Enterprise',
+    label: '— adds',
+    bg: '#26215C',
+    color: '#CECBF6',
+    labelColor: '#AFA9EC',
+    price: 'Custom',
+    customers: 'Unlimited active',
+    width: '100%',
+    features: ['Custom integrations', 'Dedicated onboarding', 'Direct support', 'Unlimited customers'],
+  },
+  {
+    name: 'Command',
+    label: '— adds',
+    bg: '#085041',
+    color: '#9FE1CB',
+    labelColor: '#5DCAA5',
+    price: '$179/mo',
+    customers: '2,500 active',
+    width: '88%',
+    features: ['AI support chatbot', 'Automated late fees', 'Automations engine', 'Follow-up sequences', 'In-app messaging', 'Priority support', 'QuickBooks sync'],
+  },
+  {
+    name: 'Field',
+    label: '— adds',
+    bg: '#0C447C',
+    color: '#B5D4F4',
+    labelColor: '#85B7EB',
+    price: '$129/mo',
+    customers: '1,000 active',
+    width: '76%',
+    features: ['Customer portal', 'Employee asset checkout', 'Estimates and quotes', 'Lead capture form', 'Lead management', 'Maintenance calendar', 'Multiple service locations', 'Online payments', 'Payment plans', 'Route intelligence', 'Subcontractor mgmt', 'Termination workflow'],
+  },
+  {
+    name: 'Core',
+    label: '— foundation',
+    bg: '#712B13',
+    color: '#F5C4B3',
+    labelColor: '#F0997B',
+    price: '$79/mo',
+    customers: '500 active',
+    width: '64%',
+    features: ['Appointment reminders', 'Attendance and time off', 'Billing cycles', 'Credits and refunds', 'Custom branding', 'Customer CRM', 'Daily truck inspection', 'Data export', 'Equipment tracking', 'GPS field tracking', 'Holiday management', 'Incident tracking', 'Invoicing and payments', 'Job scheduling', 'Light and dark mode', 'Materials and inventory', 'Mileage tracking', 'Mobile team view', 'Online payment processing', 'Parts on order', 'Performance reviews', 'Personalized shortcuts bar', 'PIN login', 'Purchase orders', 'Reporting and analytics', 'Review requests', 'Route management', 'Schedule and dispatch', 'SMS notifications', 'Team management', 'Time tracking', 'Two-way SMS'],
+  },
+];
+
 function CellValue({ value, isCommand }) {
   if (typeof value === 'boolean') {
     return (
@@ -180,6 +227,23 @@ export default function ComparePage() {
   return (
     <>
       <Navbar />
+
+      <style>{`
+        .compare-scroll-hint {
+          display: none;
+          text-align: center;
+          padding: 10px 0 2px;
+          font-size: 13px;
+          color: rgba(255,255,255,0.4);
+          gap: 8px;
+          align-items: center;
+          justify-content: center;
+          letter-spacing: 0.02em;
+        }
+        @media (max-width: 768px) {
+          .compare-scroll-hint { display: flex; }
+        }
+      `}</style>
 
       {/* Hero */}
       <section
@@ -232,9 +296,94 @@ export default function ComparePage() {
         </div>
       </section>
 
+      {/* Plan Pyramid */}
+      <section style={{ padding: '72px 24px 0' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <h2
+            style={{
+              fontWeight: 900,
+              fontSize: 'clamp(22px, 3.5vw, 36px)',
+              letterSpacing: '-0.03em',
+              textAlign: 'center',
+              margin: '0 0 40px',
+              lineHeight: 1.1,
+            }}
+          >
+            How the plans build on each other
+          </h2>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+            {PYRAMID_TIERS.map((tier) => (
+              <div
+                key={tier.name}
+                style={{
+                  width: tier.width,
+                  background: tier.bg,
+                  borderRadius: 12,
+                  padding: '18px 24px',
+                }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: 16,
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  {/* Left: plan name + label */}
+                  <div style={{ minWidth: 150, flexShrink: 0 }}>
+                    <span style={{ fontWeight: 900, fontSize: 17, color: tier.color }}>{tier.name}</span>
+                    <span style={{ color: tier.labelColor, fontSize: 12, marginLeft: 8, fontWeight: 500 }}>{tier.label}</span>
+                  </div>
+                  {/* Middle: feature pills */}
+                  <div style={{ flex: 1, display: 'flex', flexWrap: 'wrap', gap: 5, minWidth: 0 }}>
+                    {tier.features.map((f) => (
+                      <span
+                        key={f}
+                        style={{
+                          background: 'rgba(255,255,255,0.1)',
+                          color: tier.color,
+                          fontSize: 11,
+                          fontWeight: 500,
+                          padding: '3px 9px',
+                          borderRadius: 20,
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                  {/* Right: price + customers */}
+                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                    <div style={{ fontWeight: 700, fontSize: 15, color: tier.color }}>{tier.price}</div>
+                    <div style={{ fontSize: 11, color: tier.labelColor, marginTop: 2 }}>{tier.customers}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p
+            style={{
+              textAlign: 'center',
+              color: 'rgba(255,255,255,0.3)',
+              fontSize: 13,
+              margin: '24px 0 0',
+            }}
+          >
+            No per-seat fees · 14-day free trial · Cancel anytime
+          </p>
+        </div>
+      </section>
+
       {/* Table */}
       <section style={{ padding: '48px 24px 80px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', overflowX: 'auto' }}>
+          <div className="compare-scroll-hint">
+            <span>‹</span>
+            <span>Scroll to compare all plans</span>
+            <span>›</span>
+          </div>
           <table
             style={{
               width: '100%',
