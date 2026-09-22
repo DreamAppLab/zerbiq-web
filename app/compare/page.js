@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import ZerbiqBrand from '@/components/ZerbiqBrand';
 
 export const metadata = {
   title: 'Compare Plans — Zerbiq',
@@ -41,6 +42,9 @@ const FEATURE_GROUPS = [
       { label: 'Drag-to-schedule calendar',    values: [true, true, true, true] },
       { label: 'Job cancellations with fees',  values: [true, true, true, true] },
       { label: 'Missed stop tracking',         values: [true, true, true, true] },
+      { label: 'Holiday Management',                       values: [true, true, true, true] },
+      { label: 'Billing Cycles',                           values: [true, true, true, true] },
+      { label: 'Daily Truck Inspection and Checklists',    values: [true, true, true, true] },
     ],
   },
   {
@@ -54,7 +58,7 @@ const FEATURE_GROUPS = [
       { label: 'Online payment processing (card/ACH)',  values: [false, true,  true,  true] },
       { label: 'Payment plans',                         values: [false, true,  true,  true] },
       { label: 'Purchase orders',                       values: [false, true,  true,  true] },
-      { label: 'QuickBooks sync (coming soon)',          values: [false, false, true,  true] },
+      { label: 'QuickBooks sync',                          values: [false, false, true,  true] },
     ],
   },
   {
@@ -84,10 +88,13 @@ const FEATURE_GROUPS = [
   {
     group: 'Routes & Field Operations',
     rows: [
-      { label: 'Route sheet',                      values: [true, true, true, true] },
-      { label: 'Mileage tracking (IRS rates)',      values: [true, true, true, true] },
-      { label: 'Job photos & digital signatures',   values: [true, true, true, true] },
-      { label: 'Chemical & material logs',          values: [true, true, true, true] },
+      { label: 'Route sheet',                                   values: [true, true, true, true] },
+      { label: 'Mileage tracking (IRS rates)',                  values: [true, true, true, true] },
+      { label: 'Job photos & digital signatures',               values: [true, true, true, true] },
+      { label: 'Chemical & material logs',                      values: [true, true, true, true] },
+      { label: 'GPS Field Tracking (phone-based, no hardware)', values: [true,  true,  true,  true] },
+      { label: 'Route Intelligence (AI stop optimization)',      values: [false, true,  true,  true] },
+      { label: 'Parts on Order',                                values: [true,  true,  true,  true] },
     ],
   },
   {
@@ -102,6 +109,8 @@ const FEATURE_GROUPS = [
       { label: 'Vehicle & equipment tracking',      values: [true,  true,  true,  true] },
       { label: 'Employee termination workflow',     values: [false, true,  true,  true] },
       { label: 'Subcontractor management',          values: [false, true,  true,  true] },
+      { label: 'Employee ID and PIN Login',         values: [true,  true,  true,  true] },
+      { label: 'Employee Asset Checkout',           values: [false, true,  true,  true] },
     ],
   },
   {
@@ -130,6 +139,7 @@ const FEATURE_GROUPS = [
     rows: [
       { label: 'Mobile crew view (no app store)', values: [true,  true,  true,  true]  },
       { label: 'PWA (install on phone)',           values: [true,  true,  true,  true]  },
+      { label: 'Custom Branding',                  values: [true,  true,  true,  true]  },
       { label: 'Automations & rules engine',       values: [false, false, true,  true]  },
       { label: 'AI support chatbot',               values: [false, false, true,  true]  },
       { label: 'Priority support',                 values: [false, false, true,  true]  },
@@ -461,6 +471,131 @@ export default function ComparePage() {
             Field plans: +$59/mo per additional location.
             Command plans: +$79/mo per additional location.
           </p>
+        </div>
+      </section>
+      {/* ------------------------------------------------------------------ */}
+      {/* Competitor Disclaimer                                              */}
+      {/* ------------------------------------------------------------------ */}
+      <section style={{ padding: '0 24px 80px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          {/* Section heading */}
+          <h2
+            style={{
+              fontWeight: 900,
+              fontSize: 'clamp(22px, 3vw, 32px)',
+              letterSpacing: '-0.03em',
+              margin: '0 0 32px',
+              lineHeight: 1.15,
+            }}
+          >
+            A note on Jobber and Housecall Pro
+          </h2>
+
+          {/* Two cards */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: 24,
+            }}
+          >
+            {/* Jobber card */}
+            <div
+              style={{
+                background: 'var(--color-surface)',
+                border: '1px solid var(--color-white-10)',
+                borderRadius: 14,
+                padding: '32px 28px',
+              }}
+            >
+              <h3
+                style={{
+                  fontWeight: 800,
+                  fontSize: 18,
+                  margin: '0 0 20px',
+                  color: '#fff',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                Jobber
+              </h3>
+              <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 16px' }}>
+                Jobber charges per user seat — meaning your monthly cost goes up every time you add a
+                technician. For a team of 5–10 people, that adds up fast. We know because we lived it.{' '}
+                <ZerbiqBrand /> includes unlimited team members on every plan, always, with no per-seat fees.
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 16px' }}>
+                Jobber does offer data export on certain plans, but we cannot independently verify exactly
+                what data is exportable, in what formats, or whether that changes by plan tier. If data
+                portability matters to you — and it should — ask them directly before you commit. With{' '}
+                <ZerbiqBrand />, your full export (customers, jobs, invoices, timecards, inventory) is always
+                available to every plan, in CSV, PDF, and ZIP, at no charge.
+              </p>
+              <p
+                style={{
+                  color: 'rgba(255,255,255,0.4)',
+                  fontSize: 13,
+                  lineHeight: 1.65,
+                  margin: 0,
+                  borderTop: '1px solid rgba(255,255,255,0.08)',
+                  paddingTop: 16,
+                  fontStyle: 'italic',
+                }}
+              >
+                Pricing and features are based on publicly available information and our own experience as
+                former Jobber customers. Always verify current pricing at jobber.com.
+              </p>
+            </div>
+
+            {/* Housecall Pro card */}
+            <div
+              style={{
+                background: 'var(--color-surface)',
+                border: '1px solid var(--color-white-10)',
+                borderRadius: 14,
+                padding: '32px 28px',
+              }}
+            >
+              <h3
+                style={{
+                  fontWeight: 800,
+                  fontSize: 18,
+                  margin: '0 0 20px',
+                  color: '#fff',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                Housecall Pro
+              </h3>
+              <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 16px' }}>
+                Housecall Pro is a capable platform, and we respect what they&apos;ve built. Where we
+                differ: <ZerbiqBrand /> was designed from the ground up specifically for recurring
+                route-based field service — lawn care, pool service, pest control, and similar businesses.
+                Housecall Pro serves a much broader range of trades, which means some of the workflow depth
+                that matters most to route-based operators isn&apos;t there.
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 16px' }}>
+                Like Jobber, we cannot independently verify Housecall Pro&apos;s current data export
+                capabilities, import options, or how those vary by plan. What we can tell you is that{' '}
+                <ZerbiqBrand /> gives you full data portability on every plan — no plan upgrade required to
+                take your own data with you.
+              </p>
+              <p
+                style={{
+                  color: 'rgba(255,255,255,0.4)',
+                  fontSize: 13,
+                  lineHeight: 1.65,
+                  margin: 0,
+                  borderTop: '1px solid rgba(255,255,255,0.08)',
+                  paddingTop: 16,
+                  fontStyle: 'italic',
+                }}
+              >
+                Pricing and features are based on publicly available information. Always verify current
+                pricing at housecallpro.com.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
