@@ -139,6 +139,8 @@ const FEATURE_GROUPS = [
     rows: [
       { label: 'Mobile crew view (no app store)', values: [true,  true,  true,  true]  },
       { label: 'PWA (install on phone)',           values: [true,  true,  true,  true]  },
+      { label: 'Light Mode and Dark Mode',         values: [true,  true,  true,  true]  },
+      { label: 'Personalized Shortcuts Bar',       values: [true,  true,  true,  true]  },
       { label: 'Custom Branding',                  values: [true,  true,  true,  true]  },
       { label: 'Automations & rules engine',       values: [false, false, true,  true]  },
       { label: 'AI support chatbot',               values: [false, false, true,  true]  },

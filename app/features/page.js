@@ -10,6 +10,33 @@ export const metadata = {
 };
 
 // ---------------------------------------------------------------------------
+// Intro features — shown before the group sections, after the hero
+// ---------------------------------------------------------------------------
+
+const INTRO_FEATURES = [
+  {
+    icon: '☀️',
+    title: 'Light Mode and Dark Mode',
+    screenshot: '45-light-mode.png',
+    desc: [
+      "Your eyes, your choice. Zerbiq runs in a clean light mode or a deep dark mode — switch anytime from the top bar. Your preference is saved to your account so it follows you across every device.",
+      "No squinting at a white screen at 6 AM, no straining at a dark one in a bright office. The platform adapts to the way you work, not the other way around.",
+    ],
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '⚡',
+    title: 'Personalized Shortcuts Bar',
+    screenshot: '46-shortcuts-bar.png',
+    desc: [
+      "Every person on your team uses Zerbiq differently. The office manager lives in Invoices and Leads. The field supervisor lives in Routes and Dispatch. The owner checks Reports first thing every morning. The shortcuts bar lets each user drag any item from the left menu and pin it directly below the header — one click away, always visible, completely personal.",
+      "Add up to six shortcuts, remove them, reorder them, change them whenever your priorities change. No admin approval needed. No one else's shortcuts are affected. Your Zerbiq, your way.",
+    ],
+    badge: 'Included with all plans',
+  },
+];
+
+// ---------------------------------------------------------------------------
 // Feature groups — 44 sections in specified order with group labels
 // ---------------------------------------------------------------------------
 
@@ -602,6 +629,84 @@ export default function FeaturesPage() {
           </p>
         </div>
       </section>
+
+      {INTRO_FEATURES.map((feature) => {
+        const i = globalIndex++;
+        const isEven = i % 2 === 0;
+        return (
+          <section
+            key={feature.title}
+            style={{
+              padding: '60px 24px',
+              background: isEven ? 'var(--color-surface)' : undefined,
+            }}
+          >
+            <div
+              style={{
+                maxWidth: 1100,
+                margin: '0 auto',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                gap: 48,
+                alignItems: 'center',
+              }}
+            >
+              <div style={{ order: isEven ? 0 : 1 }}>
+                <div style={{ fontSize: 36, marginBottom: 16 }}>{feature.icon}</div>
+                <h2
+                  style={{
+                    fontWeight: 900,
+                    fontSize: 'clamp(24px, 3vw, 36px)',
+                    letterSpacing: '-0.03em',
+                    margin: '0 0 20px',
+                    lineHeight: 1.15,
+                  }}
+                >
+                  {feature.title}
+                </h2>
+                {feature.desc.map((p, j) => (
+                  <p
+                    key={j}
+                    style={{
+                      color: 'var(--color-white-60)',
+                      fontSize: 16,
+                      lineHeight: 1.75,
+                      margin: j < feature.desc.length - 1 ? '0 0 16px' : '0 0 28px',
+                    }}
+                  >
+                    {brandify(p)}
+                  </p>
+                ))}
+                <Link
+                  href="/signup"
+                  className="btn-primary"
+                  style={{
+                    display: 'inline-block',
+                    borderRadius: 8,
+                    padding: '12px 24px',
+                    fontWeight: 700,
+                    fontSize: 14,
+                  }}
+                >
+                  Try it free →
+                </Link>
+                <div
+                  style={{
+                    fontSize: 11,
+                    color: 'rgba(255,255,255,0.4)',
+                    marginTop: 6,
+                  }}
+                >
+                  {feature.badge}
+                </div>
+              </div>
+              <div style={{ order: isEven ? 1 : 0 }}>
+                <FeatureImage screenshot={feature.screenshot} label={feature.title} />
+              </div>
+            </div>
+          </section>
+        );
+      })}
 
       {FEATURE_GROUPS.map((group) => (
         <div key={group.group}>
