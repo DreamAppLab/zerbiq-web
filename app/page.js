@@ -46,7 +46,7 @@ const ALL_FEATURES = [
   },
   {
     icon: '👥',
-    title: 'Crew Management',
+    title: 'Team Management',
     desc: 'Add every team member with a role and permission level. Field techs see only what they need. Admins and managers see everything. No shared logins.',
     badge: 'Included with all plans',
   },
@@ -58,7 +58,7 @@ const ALL_FEATURES = [
   },
   {
     icon: '📱',
-    title: 'Mobile Crew View',
+    title: 'Mobile Team View',
     desc: 'Your techs get a clean view of their day: where to go, what to do, and how to log it. Works on any smartphone. No app store required.',
     badge: 'Included with all plans',
   },
@@ -90,7 +90,7 @@ const ALL_FEATURES = [
     icon: '📥',
     title: 'Embeddable Lead Capture Form',
     desc: 'Add a lead capture form to any website with one line of code. Leads go directly into your Zerbiq pipeline.',
-    badge: 'Included with all plans',
+    badge: 'Included with Field, Command & Enterprise',
   },
   {
     icon: '📤',
@@ -102,20 +102,20 @@ const ALL_FEATURES = [
     icon: '🌐',
     title: 'Customer Portal',
     desc: 'Every customer gets a private portal to view upcoming jobs, pay invoices, approve quotes, and leave notes — without calling you.',
-    badge: 'Included with all plans',
+    badge: 'Included with Field, Command & Enterprise',
   },
   // ── Field, Command & Enterprise ────────────────────────────────────────────
   {
     icon: '📈',
     title: 'Reports & Analytics',
     desc: 'Revenue by route, tech, or service type. Overdue invoice aging. Customer retention rates. Job completion percentages. Tech performance rankings.',
-    badge: 'Included with Field, Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '🗓️',
     title: 'Schedule & Dispatch Board',
     desc: 'See every job for the day in a calendar view by tech or route. Drag to reschedule. Spot gaps. Respond to last-minute changes without a single phone call.',
-    badge: 'Included with Field, Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '💵',
@@ -133,7 +133,7 @@ const ALL_FEATURES = [
     icon: '🛒',
     title: 'Purchase Orders',
     desc: 'Generate purchase orders by supplier with one click. Send directly to vendors by email or print on site.',
-    badge: 'Included with Field, Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '⏱️',
@@ -151,7 +151,7 @@ const ALL_FEATURES = [
     icon: '🌟',
     title: 'Review Request Automation',
     desc: 'After a job is completed, Zerbiq automatically sends a review request via SMS or email. More reviews, less asking.',
-    badge: 'Included with Field, Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '📬',
@@ -164,13 +164,13 @@ const ALL_FEATURES = [
     icon: '📅',
     title: 'Appointment Reminders',
     desc: 'Zerbiq automatically sends customers a reminder before every scheduled job. Reduce no-shows and last-minute cancellations without lifting a finger.',
-    badge: 'Included with Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '🔔',
     title: 'Automated Reminders & Notifications',
     desc: 'Invoice overdue? Zerbiq reminds the customer automatically. Job not completed on time? You get notified. Set your rules once and Zerbiq runs them every day.',
-    badge: 'Included with Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '⚠️',
@@ -182,7 +182,7 @@ const ALL_FEATURES = [
     icon: '🔧',
     title: 'Maintenance Calendar',
     desc: 'Track service intervals for vehicles and equipment. Get alerts before things break down. Log full maintenance history and costs.',
-    badge: 'Included with Command & Enterprise',
+    badge: 'Included with Field, Command & Enterprise',
   },
   {
     icon: '📗',
@@ -195,6 +195,74 @@ const ALL_FEATURES = [
     title: 'White-Label Option',
     desc: 'Remove Zerbiq branding. Use your own logo and colors throughout the platform. Present it as your own software to your crew and customers.',
     badge: 'Included with Command & Enterprise',
+  },
+  // ── New All Plans cards ────────────────────────────────────────────────────
+  {
+    icon: '📅',
+    title: 'Holiday Management',
+    desc: "Tell Zerbiq once which days you're closed. It handles the rest — skip the service, bump it to the next day, or schedule a makeup visit. Customers get automatically notified so you're not fielding calls wondering why no one showed up.",
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '🔄',
+    title: 'Billing Cycles',
+    desc: 'Create named billing cycles — monthly on the 1st, bi-weekly, quarterly — and assign routes to them. At the end of each cycle, Zerbiq generates one clean invoice per customer. No manual tallying, no missed charges.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '📍',
+    title: 'GPS Field Tracking',
+    desc: 'See where your team is in real time from any phone — no hardware required. Verify stops were made, spot techs running behind, and dispatch the nearest available person to an urgent job.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '🚛',
+    title: 'Daily Truck Inspection and Checklists',
+    desc: 'Before techs hit the road they complete a digital inspection on their phone — tires, lights, fluids, equipment secured. 90 seconds. Timestamped record. Catches problems before they become breakdowns or liabilities.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '🔐',
+    title: 'Employee ID and PIN Login',
+    desc: 'Techs log in with a simple employee ID and 4-digit PIN — no email, no forgotten passwords. Fast at 7 AM when the day is already moving. You control who has access and what they can see.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '🔩',
+    title: 'Parts on Order',
+    desc: "When a job is waiting on a part, Zerbiq tracks it — what's needed, what PO it's tied to, and when it's expected. When the part arrives you're notified and the return visit gets scheduled.",
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '🎨',
+    title: 'Custom Branding',
+    desc: "Upload your logo and set your brand color. Every invoice, estimate, customer portal, and notification your customers see carries your identity — not ours. Included with every plan.",
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '☀️',
+    title: 'Light Mode and Dark Mode',
+    desc: 'Switch between a clean light mode and a deep dark mode from the top bar. Your preference is saved to your account and follows you across every device.',
+    badge: 'Included with all plans',
+  },
+  {
+    icon: '⚡',
+    title: 'Personalized Shortcuts Bar',
+    desc: "Each user drags any item from the left menu and pins it below the header — one click away, always visible, completely personal. Up to six shortcuts per user. No one else's setup is affected.",
+    badge: 'Included with all plans',
+  },
+  // ── New Field, Command & Enterprise cards ─────────────────────────────────
+  {
+    icon: '🧠',
+    title: 'Route Intelligence',
+    desc: "Zerbiq's optimization engine sequences your stops to minimize drive time and fuel — saving the average route 30–45 minutes per day. When an urgent job comes in it instantly finds the nearest available tech.",
+    badge: 'Included with Field, Command & Enterprise',
+  },
+  {
+    icon: '📦',
+    title: 'Employee Asset Checkout',
+    desc: "Know who has the iPad, the gas card, the backpack sprayer. Log checkout and return in seconds. If something goes missing you'll know exactly who had it last.",
+    badge: 'Included with Field, Command & Enterprise',
   },
 ];
 
@@ -791,9 +859,10 @@ export default function HomePage() {
                   flex: 1,
                 }}
               >
-                Our White-Glove Onboarding is a one-time $599 add-on. We Zoom with you for
-                60–90 minutes, import your customer list, build your routes, add your team, and
-                configure everything — guaranteed live before the call ends.
+                Our White-Glove Onboarding is a one-time add-on. We handle your entire setup — import
+                your customer list, build your routes, add your team, and configure everything,
+                guaranteed live before the call ends. Pricing: $299 for Core, $499 for Field, $699
+                for Command.
               </p>
               <div>
                 <a
@@ -817,7 +886,7 @@ export default function HomePage() {
                     marginTop: 8,
                   }}
                 >
-                  One-time $599 · Available for all plans
+                  One-time add-on · $299 Core / $499 Field / $699 Command
                 </div>
               </div>
             </div>
