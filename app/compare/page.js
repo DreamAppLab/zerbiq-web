@@ -149,50 +149,38 @@ const FEATURE_GROUPS = [
   },
 ];
 
-const PYRAMID_TIERS = [
-  {
-    name: 'Enterprise',
-    label: '— adds',
-    bg: '#26215C',
-    color: '#CECBF6',
-    labelColor: '#AFA9EC',
-    price: 'Custom',
-    customers: 'Unlimited active',
-    width: '100%',
-    features: ['Custom integrations', 'Dedicated onboarding', 'Direct support', 'Unlimited customers'],
-  },
-  {
-    name: 'Command',
-    label: '— adds',
-    bg: '#085041',
-    color: '#9FE1CB',
-    labelColor: '#5DCAA5',
-    price: '$199/mo',
-    customers: '2,500 active',
-    width: '88%',
-    features: ['AI support chatbot', 'Automated late fees', 'Automations engine', 'Follow-up sequences', 'In-app messaging', 'Priority support', 'QuickBooks sync'],
-  },
-  {
-    name: 'Field',
-    label: '— adds',
-    bg: '#0C447C',
-    color: '#B5D4F4',
-    labelColor: '#85B7EB',
-    price: '$149/mo',
-    customers: '1,000 active',
-    width: '76%',
-    features: ['Customer portal', 'Employee asset checkout', 'Estimates and quotes', 'Lead capture form', 'Lead management', 'Maintenance calendar', 'Multiple service locations', 'Online payments', 'Payment plans', 'Route intelligence', 'Subcontractor mgmt', 'Termination workflow'],
-  },
+const PLAN_CARDS = [
   {
     name: 'Core',
     label: '— foundation',
-    bg: '#712B13',
-    color: '#F5C4B3',
-    labelColor: '#F0997B',
+    color: '#f97316',
     price: '$99/mo',
-    customers: '500 active',
-    width: '64%',
-    features: ['Appointment reminders', 'Attendance and time off', 'Billing cycles', 'Credits and refunds', 'Custom branding', 'Customer CRM', 'Daily truck inspection', 'Data export', 'Equipment tracking', 'GPS field tracking', 'Holiday management', 'Incident tracking', 'Invoicing and payments', 'Job scheduling', 'Light and dark mode', 'Materials and inventory', 'Mileage tracking', 'Mobile team view', 'Online payment processing', 'Parts on order', 'Performance reviews', 'Personalized shortcuts bar', 'PIN login', 'Purchase orders', 'Reporting and analytics', 'Review requests', 'Route management', 'Schedule and dispatch', 'SMS notifications', 'Team management', 'Time tracking', 'Two-way SMS'],
+    customers: '500 active customers',
+    features: ['Route management', 'Job scheduling', 'Invoicing & payments', 'Online payment processing', 'Customer CRM', 'Team management', 'GPS field tracking', 'SMS notifications', 'Appointment reminders', 'Holiday management', 'Billing cycles', 'Truck inspection', 'PIN login', 'Custom branding', 'Reports & analytics', 'Data export', 'Mileage tracking', 'Time tracking', 'Attendance & time off', 'Purchase orders', 'Parts on order', 'Performance reviews', 'Incident tracking', 'Equipment tracking', 'Credits & refunds', 'Materials & inventory', 'Schedule & dispatch', 'Two-way SMS', 'Light & dark mode', 'Personalized shortcuts bar', 'Mobile team view'],
+  },
+  {
+    name: 'Field',
+    label: '— everything in Core, plus',
+    color: '#3b82f6',
+    price: '$149/mo',
+    customers: '1,000 active customers',
+    features: ['Estimates & quotes', 'Customer portal', 'Route intelligence', 'Lead management', 'Payment plans', 'Employee asset checkout', 'Subcontractor management', 'Maintenance calendar', 'Multiple service locations (+$59/mo per location)', 'Lead capture form', 'Employee termination workflow'],
+  },
+  {
+    name: 'Command',
+    label: '— everything in Field, plus',
+    color: '#10b981',
+    price: '$199/mo',
+    customers: '2,500 active customers',
+    features: ['AI support chatbot', 'Automations engine', 'QuickBooks sync', 'Follow-up sequences', 'In-app messaging', 'Automated late fees', 'Priority support'],
+  },
+  {
+    name: 'Enterprise',
+    label: '— everything in Command, plus',
+    color: '#8b5cf6',
+    price: 'Custom',
+    customers: 'Unlimited active customers',
+    features: ['Unlimited customers', 'Dedicated onboarding', 'Custom integrations', 'Direct support'],
   },
 ];
 
@@ -229,6 +217,14 @@ export default function ComparePage() {
       <Navbar />
 
       <style>{`
+        @keyframes shimmer {
+          0%   { transform: translateX(-100%); }
+          100% { transform: translateX(500%); }
+        }
+        @keyframes strike-draw {
+          0%   { width: 0; }
+          100% { width: 100%; }
+        }
         @keyframes hint-nudge-right {
           0%, 100% { opacity: 0.6; transform: translateX(0); }
           50%       { opacity: 1;   transform: translateX(4px); }
@@ -236,6 +232,19 @@ export default function ComparePage() {
         @keyframes hint-nudge-left {
           0%, 100% { opacity: 0.6; transform: translateX(0); }
           50%       { opacity: 1;   transform: translateX(-4px); }
+        }
+        .banner-shimmer {
+          position: absolute;
+          top: 0; left: 0;
+          width: 20%; height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(61,92,255,0.1), transparent);
+          animation: shimmer 3s ease-in-out infinite;
+          pointer-events: none;
+        }
+        .plan-cards-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
         }
         .compare-scroll-hint-outer {
           display: none;
@@ -250,24 +259,9 @@ export default function ComparePage() {
         }
         .hint-arrow-left  { display: inline-block; animation: hint-nudge-left  1.6s ease-in-out infinite; }
         .hint-arrow-right { display: inline-block; animation: hint-nudge-right 1.6s ease-in-out infinite; }
-        .pyramid-pills {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 4px 8px;
-          align-content: start;
-        }
         @media (max-width: 768px) {
           .compare-scroll-hint-outer { display: flex; }
-          .pyramid-container { overflow: hidden; }
-          .pyramid-tier  { width: 100% !important; max-width: 100% !important; box-sizing: border-box; }
-          .pyramid-inner { flex-direction: column !important; }
-          .pyramid-left  {
-            width: 100% !important; min-width: unset !important;
-            border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.15) !important;
-            padding-right: 0 !important; margin-right: 0 !important;
-            padding-bottom: 12px !important; margin-bottom: 12px !important;
-          }
-          .pyramid-pills { grid-template-columns: repeat(2, 1fr) !important; font-size: 12px !important; }
+          .plan-cards-grid { grid-template-columns: 1fr; }
         }
       `}</style>
 
@@ -318,6 +312,74 @@ export default function ComparePage() {
               An active customer is any customer currently managed in your account. Archive customers
               you&apos;re no longer serving to free up your slot count — all their history stays saved.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Animated Pricing Banner */}
+      <section style={{ padding: '0 24px 32px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ position: 'relative', overflow: 'hidden', background: '#0A0A14', border: '2px solid #3D5CFF', borderRadius: 16, padding: '36px 40px' }}>
+            <div className="banner-shimmer" />
+            <h2 style={{ fontWeight: 900, fontSize: 'clamp(22px, 3.5vw, 40px)', letterSpacing: '-0.03em', margin: '0 0 12px', lineHeight: 1.1, position: 'relative' }}>
+              Priced per company.{' '}
+              <span style={{ color: '#3D5CFF' }}>Not per person.</span>
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 0 24px', maxWidth: 560, position: 'relative' }}>
+              One flat price for your entire operation — no matter how many people you add.
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative' }}>
+              {[
+                { text: '❌ $29/user/month extra techs', delay: '0.5s' },
+                { text: '❌ $29/seat office staff',       delay: '0.8s' },
+                { text: '❌ Extra license seasonal workers', delay: '1.1s' },
+              ].map(({ text, delay }) => (
+                <div key={text} style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', padding: '6px 14px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: 6, fontSize: 13, color: 'rgba(255,255,255,0.65)', overflow: 'hidden' }}>
+                  {text}
+                  <div style={{ position: 'absolute', top: '50%', left: 0, height: 2, background: '#ef4444', width: 0, animationName: 'strike-draw', animationDuration: '0.5s', animationDelay: delay, animationFillMode: 'forwards', animationTimingFunction: 'ease-out' }} />
+                </div>
+              ))}
+            </div>
+            <div style={{ display: 'inline-block', background: 'rgba(61,92,255,0.15)', border: '1px solid rgba(61,92,255,0.4)', borderRadius: 8, padding: '8px 16px', fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 20, position: 'relative' }}>
+              ✓ Unlimited owners, office staff, techs, and seasonal workers — one price
+            </div>
+            <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, margin: 0, lineHeight: 1.7, position: 'relative' }}>
+              Add your whole team on day one. No per-seat math. No surprise charges. No licenses to cancel when someone leaves.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Plan Cards */}
+      <section style={{ padding: '0 24px 48px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div className="plan-cards-grid">
+            {PLAN_CARDS.map((plan) => (
+              <div
+                key={plan.name}
+                style={{
+                  background: 'var(--color-raised)',
+                  border: `1px solid ${plan.color}33`,
+                  borderRadius: 12,
+                  padding: '24px 20px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <div style={{ fontWeight: 900, fontSize: 20, color: plan.color, marginBottom: 2 }}>{plan.name}</div>
+                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginBottom: 14, lineHeight: 1.4 }}>{plan.label}</div>
+                <div style={{ fontWeight: 900, fontSize: 26, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>{plan.price}</div>
+                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', paddingBottom: 14, marginBottom: 14, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>{plan.customers}</div>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {plan.features.map((f) => (
+                    <li key={f} style={{ fontSize: 13, color: '#fff', display: 'flex', gap: 6, alignItems: 'flex-start', lineHeight: 1.45 }}>
+                      <span style={{ color: plan.color, fontWeight: 700, flexShrink: 0 }}>+</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -571,72 +633,6 @@ export default function ComparePage() {
             ¹ Multiple service locations available on Field and above.
             Field plans: +$59/mo per additional location.
             Command plans: +$79/mo per additional location.
-          </p>
-        </div>
-      </section>
-
-      {/* Plan Pyramid */}
-      <section style={{ padding: '72px 24px 40px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <h2
-            style={{
-              fontWeight: 900,
-              fontSize: 'clamp(22px, 3.5vw, 36px)',
-              letterSpacing: '-0.03em',
-              textAlign: 'center',
-              margin: '0 0 40px',
-              lineHeight: 1.1,
-            }}
-          >
-            How the plans build on each other
-          </h2>
-          <div className="pyramid-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-            {PYRAMID_TIERS.map((tier) => (
-              <div
-                key={tier.name}
-                className="pyramid-tier"
-                style={{
-                  width: tier.width,
-                  background: tier.bg,
-                  borderRadius: 12,
-                  padding: '20px 24px',
-                }}
-              >
-                <div
-                  className="pyramid-inner"
-                  style={{ display: 'flex', gap: 0, alignItems: 'stretch' }}
-                >
-                  {/* Left: plan identity */}
-                  <div
-                    className="pyramid-left"
-                    style={{
-                      width: 180,
-                      minWidth: 180,
-                      paddingRight: 20,
-                      marginRight: 20,
-                      borderRight: '1px solid rgba(255,255,255,0.15)',
-                      flexShrink: 0,
-                    }}
-                  >
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 900, fontSize: 17, color: tier.color }}>{tier.name}</div>
-                      <div style={{ color: tier.labelColor, fontSize: 12, fontWeight: 500, marginTop: 2 }}>{tier.label}</div>
-                    </div>
-                    <div style={{ fontWeight: 900, fontSize: 22, color: tier.color, lineHeight: 1 }}>{tier.price}</div>
-                    <div style={{ fontSize: 12, color: tier.labelColor, marginTop: 4 }}>{tier.customers}</div>
-                  </div>
-                  {/* Right: feature grid */}
-                  <div className="pyramid-pills" style={{ flex: 1, minWidth: 0 }}>
-                    {tier.features.map((f) => (
-                      <span key={f} style={{ fontSize: 13, color: '#fff', fontWeight: 400 }}>{f}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: 13, margin: '24px 0 0' }}>
-            No per-seat fees · 14-day free trial · Cancel anytime
           </p>
         </div>
       </section>

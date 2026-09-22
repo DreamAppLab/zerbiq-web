@@ -483,40 +483,54 @@ export default function HomePage() {
           background: '#0D0D14',
           borderTop: '1px solid var(--color-white-10)',
           borderBottom: '1px solid var(--color-white-10)',
-          textAlign: 'center',
         }}
       >
-        <div style={{ maxWidth: 720, margin: '0 auto' }}>
-          <h2
-            style={{
-              fontWeight: 900,
-              fontSize: 'clamp(28px, 4.5vw, 48px)',
-              letterSpacing: '-0.03em',
-              lineHeight: 1.1,
-              margin: '0 0 28px',
-              color: '#fff',
-            }}
-          >
-            Priced per company.<br />
-            <span style={{ color: 'var(--color-primary)' }}>Not per person.</span>
-          </h2>
-          <p
-            style={{
-              fontSize: 17,
-              color: 'var(--color-white-60)',
-              lineHeight: 1.8,
-              margin: 0,
-              maxWidth: 640,
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          >
-            Per-user pricing was one of the most frustrating parts of running a service business.
-            Every new hire cost more. Every seasonal worker needed a license. Someone quits and you
-            forget to cancel their seat — that&apos;s on you. We built Zerbiq on a flat monthly price
-            for your entire company. Add your whole team on day one. No per-seat math. No surprise
-            charges. No licenses to cancel when someone moves on.
-          </p>
+        <style>{`
+          @keyframes shimmer-home {
+            0%   { transform: translateX(-100%); }
+            100% { transform: translateX(500%); }
+          }
+          @keyframes strike-draw-home {
+            0%   { width: 0; }
+            100% { width: 100%; }
+          }
+          .banner-shimmer-home {
+            position: absolute; top: 0; left: 0;
+            width: 20%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(61,92,255,0.1), transparent);
+            animation: shimmer-home 3s ease-in-out infinite;
+            pointer-events: none;
+          }
+        `}</style>
+        <div style={{ maxWidth: 900, margin: '0 auto' }}>
+          <div style={{ position: 'relative', overflow: 'hidden', background: '#0A0A14', border: '2px solid #3D5CFF', borderRadius: 16, padding: '40px 48px' }}>
+            <div className="banner-shimmer-home" />
+            <h2 style={{ fontWeight: 900, fontSize: 'clamp(26px, 4vw, 44px)', letterSpacing: '-0.03em', margin: '0 0 12px', lineHeight: 1.1, position: 'relative' }}>
+              Priced per company.{' '}
+              <span style={{ color: '#3D5CFF' }}>Not per person.</span>
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 0 24px', maxWidth: 560, position: 'relative' }}>
+              One flat price for your entire operation — no matter how many people you add.
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative' }}>
+              {[
+                { text: '❌ $29/user/month extra techs', delay: '0.5s' },
+                { text: '❌ $29/seat office staff',       delay: '0.8s' },
+                { text: '❌ Extra license seasonal workers', delay: '1.1s' },
+              ].map(({ text, delay }) => (
+                <div key={text} style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', padding: '6px 14px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: 6, fontSize: 13, color: 'rgba(255,255,255,0.65)', overflow: 'hidden' }}>
+                  {text}
+                  <div style={{ position: 'absolute', top: '50%', left: 0, height: 2, background: '#ef4444', width: 0, animationName: 'strike-draw-home', animationDuration: '0.5s', animationDelay: delay, animationFillMode: 'forwards', animationTimingFunction: 'ease-out' }} />
+                </div>
+              ))}
+            </div>
+            <div style={{ display: 'inline-block', background: 'rgba(61,92,255,0.15)', border: '1px solid rgba(61,92,255,0.4)', borderRadius: 8, padding: '8px 16px', fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 20, position: 'relative' }}>
+              ✓ Unlimited owners, office staff, techs, and seasonal workers — one price
+            </div>
+            <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, margin: 0, lineHeight: 1.7, position: 'relative' }}>
+              Add your whole team on day one. No per-seat math. No surprise charges. No licenses to cancel when someone leaves.
+            </p>
+          </div>
         </div>
       </section>
 
