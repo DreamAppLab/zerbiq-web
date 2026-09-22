@@ -75,7 +75,7 @@ const FEATURE_GROUPS = [
       },
       {
         icon: '📱',
-        title: 'Mobile Crew View',
+        title: 'Mobile Team View',
         screenshot: '04-mobile-crew-view.png',
         desc: [
           "Your techs don't need training manuals. They clock in, see their stops in order, tap to start a job, tap to complete it. Photos, notes, gate codes — everything they need is right there.",
