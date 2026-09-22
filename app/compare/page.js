@@ -9,9 +9,9 @@ export const metadata = {
 };
 
 const PLANS = [
-  { name: 'Core',       price: '$79',    href: '/signup',               subtitle: '500 active customers' },
-  { name: 'Field',      price: '$129',   href: '/signup',               subtitle: '1,000 active customers' },
-  { name: 'Command',    price: '$179',   href: '/signup',  popular: true, subtitle: '2,500 active customers' },
+  { name: 'Core',       price: '$99',    href: '/signup',               subtitle: '500 active customers' },
+  { name: 'Field',      price: '$149',   href: '/signup',               subtitle: '1,000 active customers' },
+  { name: 'Command',    price: '$199',   href: '/signup',  popular: true, subtitle: '2,500 active customers' },
   { name: 'Enterprise', price: 'Custom', href: 'mailto:hello@zerbiq.com', isContact: true, subtitle: '2,500+ customers' },
 ];
 
@@ -167,7 +167,7 @@ const PYRAMID_TIERS = [
     bg: '#085041',
     color: '#9FE1CB',
     labelColor: '#5DCAA5',
-    price: '$179/mo',
+    price: '$199/mo',
     customers: '2,500 active',
     width: '88%',
     features: ['AI support chatbot', 'Automated late fees', 'Automations engine', 'Follow-up sequences', 'In-app messaging', 'Priority support', 'QuickBooks sync'],
@@ -178,7 +178,7 @@ const PYRAMID_TIERS = [
     bg: '#0C447C',
     color: '#B5D4F4',
     labelColor: '#85B7EB',
-    price: '$129/mo',
+    price: '$149/mo',
     customers: '1,000 active',
     width: '76%',
     features: ['Customer portal', 'Employee asset checkout', 'Estimates and quotes', 'Lead capture form', 'Lead management', 'Maintenance calendar', 'Multiple service locations', 'Online payments', 'Payment plans', 'Route intelligence', 'Subcontractor mgmt', 'Termination workflow'],
@@ -189,7 +189,7 @@ const PYRAMID_TIERS = [
     bg: '#712B13',
     color: '#F5C4B3',
     labelColor: '#F0997B',
-    price: '$79/mo',
+    price: '$99/mo',
     customers: '500 active',
     width: '64%',
     features: ['Appointment reminders', 'Attendance and time off', 'Billing cycles', 'Credits and refunds', 'Custom branding', 'Customer CRM', 'Daily truck inspection', 'Data export', 'Equipment tracking', 'GPS field tracking', 'Holiday management', 'Incident tracking', 'Invoicing and payments', 'Job scheduling', 'Light and dark mode', 'Materials and inventory', 'Mileage tracking', 'Mobile team view', 'Online payment processing', 'Parts on order', 'Performance reviews', 'Personalized shortcuts bar', 'PIN login', 'Purchase orders', 'Reporting and analytics', 'Review requests', 'Route management', 'Schedule and dispatch', 'SMS notifications', 'Team management', 'Time tracking', 'Two-way SMS'],

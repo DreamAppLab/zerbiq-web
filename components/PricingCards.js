@@ -9,8 +9,8 @@ const ACTIVE_CUSTOMER_DEF =
 const PLANS = [
   {
     name: 'Core',
-    monthlyPrice: 79,
-    annualPrice: 869,
+    monthlyPrice: 99,
+    annualPrice: 1089,
     subtitle: 'Up to 500 active customers',
     activeCustomers: '500',
     cta: 'Start Free Trial',
@@ -54,8 +54,8 @@ const PLANS = [
   },
   {
     name: 'Field',
-    monthlyPrice: 129,
-    annualPrice: 1419,
+    monthlyPrice: 149,
+    annualPrice: 1639,
     subtitle: 'Up to 1,000 active customers',
     activeCustomers: '1,000',
     cta: 'Start Free Trial',
@@ -80,8 +80,8 @@ const PLANS = [
   },
   {
     name: 'Command',
-    monthlyPrice: 179,
-    annualPrice: 1969,
+    monthlyPrice: 199,
+    annualPrice: 2189,
     subtitle: 'Up to 2,500 active customers',
     activeCustomers: '2,500',
     badge: 'Most Popular',
@@ -344,10 +344,18 @@ export default function PricingCards() {
             </div>
 
             {/* Unlimited users callout */}
-            <div style={{ marginBottom: 14 }}>
-              <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-primary)' }}>
-                Unlimited users included — no per-seat fees.
-              </span>
+            <div
+              style={{
+                marginBottom: 14,
+                background: 'rgba(61,92,255,0.12)',
+                border: '1px solid rgba(61,92,255,0.4)',
+                borderRadius: 8,
+                padding: '12px 14px',
+              }}
+            >
+              <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.55 }}>
+                Unlimited users included — owners, office staff, and every tech in the field. One flat price. No per-seat fees. Ever.
+              </p>
             </div>
 
             {/* Limits */}
