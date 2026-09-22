@@ -190,12 +190,6 @@ const ALL_FEATURES = [
     desc: 'Every invoice, payment, and expense syncs to QuickBooks automatically. Your books stay clean without double entry.',
     badge: 'Included with Command & Enterprise',
   },
-  {
-    icon: '🏷️',
-    title: 'White-Label Option',
-    desc: 'Remove Zerbiq branding. Use your own logo and colors throughout the platform. Present it as your own software to your team and customers.',
-    badge: 'Included with Command & Enterprise',
-  },
   // ── New All Plans cards ────────────────────────────────────────────────────
   {
     icon: '📅',
@@ -262,6 +256,12 @@ const ALL_FEATURES = [
     icon: '📦',
     title: 'Employee Asset Checkout',
     desc: "Know who has the iPad, the gas card, the backpack sprayer. Log checkout and return in seconds. If something goes missing you'll know exactly who had it last.",
+    badge: 'Included with Field, Command & Enterprise',
+  },
+  {
+    icon: '📍',
+    title: 'Multiple Service Locations',
+    desc: 'Running more than one location? Add additional service areas and manage them all from one login. Routes, teams, customers, and billing stay organized by location. Available on Field and above — $59/mo per additional location on Field, $79/mo on Command and Enterprise.',
     badge: 'Included with Field, Command & Enterprise',
   },
 ];
