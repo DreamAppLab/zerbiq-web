@@ -126,7 +126,7 @@ const ALL_FEATURES = [
   {
     icon: '📦',
     title: 'Materials & Inventory',
-    desc: 'Track every product, chemical, and supply your crews use in the field. Log usage per job, set reorder points, and know your stock levels at all times.',
+    desc: 'Track every product, chemical, and supply your team uses in the field. Log usage per job, set reorder points, and know your stock levels at all times.',
     badge: 'Included with all plans',
   },
   {
@@ -157,7 +157,7 @@ const ALL_FEATURES = [
     icon: '📬',
     title: 'Automated Follow-Up Sequences',
     desc: 'Send a series of follow-up messages to leads and inactive customers automatically. Stay top of mind without manual effort.',
-    badge: 'Included with Field, Command & Enterprise',
+    badge: 'Included with Command & Enterprise',
   },
   // ── Command & Enterprise ───────────────────────────────────────────────────
   {
@@ -652,7 +652,7 @@ export default function HomePage() {
             <span style={{ display: 'block', color: 'var(--color-primary)' }}>Not just studied it.</span>
           </h2>
           <p style={{ fontSize: 16, color: 'var(--color-white-60)', lineHeight: 1.8, margin: '0 auto 20px', maxWidth: 620, textAlign: 'center' }}>
-            Zerbiq was built by a field service operator who managed crews, ran routes, chased invoices, dealt with no-shows,
+            Zerbiq was built by a field service operator who managed teams, ran routes, chased invoices, dealt with no-shows,
             and eventually sold the business to private equity. We spent years using software that was built by people who had
             never dispatched a tech, never explained an invoice to a frustrated customer, and never stayed up worrying about
             whether the routes were covered.
