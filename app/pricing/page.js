@@ -30,7 +30,7 @@ const FAQ = [
   },
   {
     q: 'Do you offer annual billing?',
-    a: 'Yes — annual billing saves you one full month compared to paying monthly.',
+    a: 'Yes — annual billing saves you two full months. Get 12 months for the price of 10.',
   },
   {
     q: 'Do I need to download an app?',

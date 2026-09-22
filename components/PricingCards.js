@@ -10,7 +10,7 @@ const PLANS = [
   {
     name: 'Core',
     monthlyPrice: 99,
-    annualPrice: 1089,
+    annualPrice: 990,
     subtitle: 'Up to 500 active customers',
     activeCustomers: '500',
     cta: 'Start Free Trial',
@@ -55,7 +55,7 @@ const PLANS = [
   {
     name: 'Field',
     monthlyPrice: 149,
-    annualPrice: 1639,
+    annualPrice: 1490,
     subtitle: 'Up to 1,000 active customers',
     activeCustomers: '1,000',
     cta: 'Start Free Trial',
@@ -81,7 +81,7 @@ const PLANS = [
   {
     name: 'Command',
     monthlyPrice: 199,
-    annualPrice: 2189,
+    annualPrice: 1990,
     subtitle: 'Up to 2,500 active customers',
     activeCustomers: '2,500',
     badge: 'Most Popular',
@@ -219,13 +219,13 @@ export default function PricingCards() {
                 fontWeight: 700,
               }}
             >
-              Save 1 month
+              2 months free
             </span>
           )}
         </button>
         {!annual && (
           <span style={{ color: 'var(--color-white-60)', fontSize: 13 }}>
-            → Switch to Annual &amp; save one month&apos;s cost
+            → Switch to Annual &amp; get 2 months free
           </span>
         )}
       </div>
