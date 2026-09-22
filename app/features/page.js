@@ -113,6 +113,16 @@ const FEATURE_GROUPS = [
         ],
         badge: 'Included with all plans',
       },
+      {
+        icon: '📍',
+        title: 'Multiple Service Locations',
+        screenshot: null,
+        desc: [
+          "Running more than one location? Add additional service areas to your account and manage them all from one login. Routes, teams, customers, and billing stay organized by location.",
+          "Available on Field and above — each additional location is $59/mo on Field and $79/mo on Command and Enterprise.",
+        ],
+        badge: 'Included with Field, Command & Enterprise',
+      },
     ],
   },
   {
@@ -517,6 +527,23 @@ const FEATURE_GROUPS = [
 // ---------------------------------------------------------------------------
 
 function FeatureImage({ screenshot, label }) {
+  if (!screenshot) return (
+    <div
+      style={{
+        borderRadius: 14,
+        overflow: 'hidden',
+        border: '1px solid var(--color-white-10)',
+        aspectRatio: '16/10',
+        minHeight: 220,
+        background: 'var(--color-raised)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <span style={{ fontSize: 48, opacity: 0.15 }}>🖼️</span>
+    </div>
+  );
   return (
     <div
       style={{
