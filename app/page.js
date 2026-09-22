@@ -17,7 +17,7 @@ const ALL_FEATURES = [
   {
     icon: '🗺️',
     title: 'Route Management',
-    desc: "Build optimized routes for your crews in minutes — not hours. Assign stops, drag to reorder, and push routes directly to your team's phones with one tap.",
+    desc: "Build optimized routes for your team in minutes — not hours. Assign stops, drag to reorder, and push routes directly to your team's phones with one tap.",
     badge: 'Included with all plans',
   },
   {
@@ -59,7 +59,7 @@ const ALL_FEATURES = [
   {
     icon: '📱',
     title: 'Mobile Team View',
-    desc: 'Your techs get a clean view of their day: where to go, what to do, and how to log it. Works on any smartphone. No app store required.',
+    desc: "Your techs get a clean view of their day: where to go, what to do, and how to log it. Available as a native app on iOS and Android, and runs in any browser on any smartphone.",
     badge: 'Included with all plans',
   },
   {
@@ -127,7 +127,7 @@ const ALL_FEATURES = [
     icon: '📦',
     title: 'Materials & Inventory',
     desc: 'Track every product, chemical, and supply your crews use in the field. Log usage per job, set reorder points, and know your stock levels at all times.',
-    badge: 'Included with Field, Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '🛒',
@@ -139,7 +139,7 @@ const ALL_FEATURES = [
     icon: '⏱️',
     title: 'Time Tracking & Job Costing',
     desc: 'See exactly how long every job takes and what it costs in labor and materials. Compare estimated vs. actual in real time.',
-    badge: 'Included with Field, Command & Enterprise',
+    badge: 'Included with all plans',
   },
   {
     icon: '🤝',
@@ -193,7 +193,7 @@ const ALL_FEATURES = [
   {
     icon: '🏷️',
     title: 'White-Label Option',
-    desc: 'Remove Zerbiq branding. Use your own logo and colors throughout the platform. Present it as your own software to your crew and customers.',
+    desc: 'Remove Zerbiq branding. Use your own logo and colors throughout the platform. Present it as your own software to your team and customers.',
     badge: 'Included with Command & Enterprise',
   },
   // ── New All Plans cards ────────────────────────────────────────────────────

@@ -71,7 +71,7 @@ const PLANS = [
       'Customer portal',
       'Subcontractor management',
       'Maintenance scheduling',
-      'Payment plans',
+      'Partial payments and payment plans',
       'Embeddable lead capture form',
       'Employee termination workflow',
       'Route Intelligence',
