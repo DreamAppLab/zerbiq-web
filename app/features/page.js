@@ -143,18 +143,8 @@ const FEATURE_GROUPS = [
         title: 'Partial Payments and Payment Plans',
         screenshot: '10-partial-payments.png',
         desc: [
-          "Some jobs are big. Give customers the option to split a large invoice into scheduled payments — and Zerbiq tracks every installment, sends reminders automatically, and updates the balance in real time.",
-          "More flexibility for them, more closed deals for you.",
-        ],
-        badge: 'Included with Field, Command & Enterprise',
-      },
-      {
-        icon: '📆',
-        title: 'Payment Plans',
-        screenshot: '44-payment-plans.png',
-        desc: [
-          "Offer customers a structured payment schedule for larger jobs — sod installs, irrigation systems, commercial contracts. Set the total, the number of payments, and the due dates. Zerbiq bills each installment automatically and tracks the balance.",
-          "More customers say yes when yes is easier to afford.",
+          "Some jobs are big. Some customers need flexibility. Zerbiq gives you both. Split any invoice into scheduled installments — you set the total, the number of payments, and the due dates. Zerbiq bills each installment automatically, sends payment reminders, and tracks the running balance in real time.",
+          "Whether it's a one-time split or a structured monthly plan for a commercial contract, the whole thing runs without you chasing anyone. More customers say yes when yes is easier to afford.",
         ],
         badge: 'Included with Field, Command & Enterprise',
       },
@@ -375,12 +365,13 @@ const FEATURE_GROUPS = [
       {
         icon: '📦',
         title: 'Employee Asset Checkout',
+
         screenshot: '31-employee-asset-checkout.png',
         desc: [
           "Know who has the iPad, the gas card, the backpack sprayer. Log asset checkout and return in seconds.",
           "If something goes missing, you'll know exactly who had it last — and so will they.",
         ],
-        badge: 'Included with all plans',
+        badge: 'Included with Field, Command & Enterprise',
       },
       {
         icon: '🔐',
@@ -435,7 +426,7 @@ const FEATURE_GROUPS = [
           "Create and send POs to your suppliers, track delivery status, and match received items to what was ordered. No more verbal orders with no paper trail. No more receiving surprises.",
           "Clean purchasing records that feed directly into your job costs.",
         ],
-        badge: 'Included with Field, Command & Enterprise',
+        badge: 'Included with all plans',
       },
       {
         icon: '🔩',
@@ -480,7 +471,7 @@ const FEATURE_GROUPS = [
           "Let the math do the driving. Zerbiq's optimization engine sequences your stops to minimize drive time and fuel — saving the average route 30–45 minutes per day.",
           "When an urgent job comes in, it instantly finds the nearest available tech. Smarter routing, lower costs, more jobs per day.",
         ],
-        badge: 'Included with Command & Enterprise',
+        badge: 'Included with Field, Command & Enterprise',
       },
       {
         icon: '📈',
