@@ -136,8 +136,8 @@ const FEATURE_GROUPS = [
   {
     group: 'Platform & Support',
     rows: [
-      { label: 'Mobile crew view (no app store)', values: [true,  true,  true,  true]  },
-      { label: 'PWA (install on phone)',           values: [true,  true,  true,  true]  },
+      { label: 'Mobile team view (iOS, Android & browser)', values: [true,  true,  true,  true]  },
+      { label: 'PWA (install from browser, no download required)', values: [true,  true,  true,  true]  },
       { label: 'Light Mode and Dark Mode',         values: [true,  true,  true,  true]  },
       { label: 'Personalized Shortcuts Bar',       values: [true,  true,  true,  true]  },
       { label: 'Custom Branding',                  values: [true,  true,  true,  true]  },
@@ -234,7 +234,7 @@ export default function ComparePage() {
       </section>
 
       {/* Table */}
-      <section style={{ padding: '0 24px 80px' }}>
+      <section style={{ padding: '48px 24px 80px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', overflowX: 'auto' }}>
           <table
             style={{
@@ -268,6 +268,7 @@ export default function ComparePage() {
                       top: 64,
                       background: plan.popular ? 'rgba(61,92,255,0.08)' : 'var(--color-bg)',
                       zIndex: 10,
+                      borderTop: plan.popular ? '2px solid rgba(61,92,255,0.4)' : 'none',
                       borderBottom: '2px solid rgba(255,255,255,0.1)',
                       borderLeft: plan.popular ? '1px solid rgba(61,92,255,0.4)' : 'none',
                       borderRight: plan.popular ? '1px solid rgba(61,92,255,0.4)' : 'none',
