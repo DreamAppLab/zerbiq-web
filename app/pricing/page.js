@@ -38,7 +38,7 @@ const FAQ = [
   },
   {
     q: 'Do I need to download an app?',
-    a: 'No. Zerbiq runs in any browser and installs as a PWA (progressive web app) directly from your phone\'s browser — no app store required. Your techs are up and running in minutes with nothing to download.',
+    a: 'Zerbiq is available as a native app on iOS and Android — download it from the App Store or Google Play. It also runs in any browser and installs as a PWA directly from your phone without going through an app store. Your techs can be up and running in minutes on any device.',
   },
   {
     q: 'Can I import my existing customers?',
