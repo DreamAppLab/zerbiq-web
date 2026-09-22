@@ -248,7 +248,7 @@ export default function ComparePage() {
                 <th
                   style={{
                     textAlign: 'left',
-                    padding: '20px 16px',
+                    padding: '40px 16px 20px',
                     position: 'sticky',
                     top: 64,
                     background: 'var(--color-bg)',
@@ -262,7 +262,7 @@ export default function ComparePage() {
                     key={plan.name}
                     style={{
                       textAlign: 'center',
-                      padding: '20px 16px',
+                      padding: '40px 16px 20px',
                       position: 'sticky',
                       top: 64,
                       background: plan.popular ? 'rgba(61,92,255,0.08)' : 'var(--color-bg)',
@@ -277,7 +277,10 @@ export default function ComparePage() {
                     {plan.popular && (
                       <div
                         style={{
-                          display: 'inline-block',
+                          position: 'absolute',
+                          top: 10,
+                          left: '50%',
+                          transform: 'translateX(-50%)',
                           background: 'var(--color-primary)',
                           color: '#fff',
                           fontSize: 10,
@@ -286,7 +289,7 @@ export default function ComparePage() {
                           textTransform: 'uppercase',
                           padding: '3px 10px',
                           borderRadius: 20,
-                          marginBottom: 8,
+                          whiteSpace: 'nowrap',
                         }}
                       >
                         Most Popular
