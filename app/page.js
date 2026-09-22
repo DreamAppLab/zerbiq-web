@@ -483,6 +483,7 @@ export default function HomePage() {
           background: '#0D0D14',
           borderTop: '1px solid var(--color-white-10)',
           borderBottom: '1px solid var(--color-white-10)',
+          overflowX: 'hidden',
         }}
       >
         <style>{`
@@ -501,33 +502,42 @@ export default function HomePage() {
             animation: shimmer-home 3s ease-in-out infinite;
             pointer-events: none;
           }
+          @media (max-width: 768px) {
+            .pricing-banner-card    { padding: 16px !important; }
+            .pricing-banner-heading { font-size: 20px !important; }
+            .pricing-banner-subtitle{ font-size: 13px !important; }
+            .strike-badges-row      { flex-direction: column !important; }
+            .strike-badge           { width: 100%; max-width: 100%; box-sizing: border-box; font-size: 12px !important; }
+            .confirm-badge          { width: 100%; box-sizing: border-box; display: block !important; font-size: 12px !important; }
+            .banner-bottom-text     { font-size: 12px !important; }
+          }
         `}</style>
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <div style={{ position: 'relative', overflow: 'hidden', background: '#0A0A14', border: '2px solid #3D5CFF', borderRadius: 16, padding: '40px 48px' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', boxSizing: 'border-box' }}>
+          <div className="pricing-banner-card" style={{ position: 'relative', overflow: 'hidden', background: '#0A0A14', border: '2px solid #3D5CFF', borderRadius: 16, padding: '40px 48px', boxSizing: 'border-box' }}>
             <div className="banner-shimmer-home" />
-            <h2 style={{ fontWeight: 900, fontSize: 'clamp(26px, 4vw, 44px)', letterSpacing: '-0.03em', margin: '0 0 12px', lineHeight: 1.1, position: 'relative' }}>
+            <h2 className="pricing-banner-heading" style={{ fontWeight: 900, fontSize: 'clamp(26px, 4vw, 44px)', letterSpacing: '-0.03em', margin: '0 0 12px', lineHeight: 1.1, position: 'relative' }}>
               Priced per company.{' '}
               <span style={{ color: '#3D5CFF' }}>Not per person.</span>
             </h2>
-            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 0 24px', maxWidth: 560, position: 'relative' }}>
+            <p className="pricing-banner-subtitle" style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 0 24px', maxWidth: 560, position: 'relative' }}>
               One flat price for your entire operation — no matter how many people you add.
             </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative' }}>
+            <div className="strike-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative' }}>
               {[
                 { text: '❌ $29/user/month extra techs', delay: '0.5s' },
                 { text: '❌ $29/seat office staff',       delay: '0.8s' },
                 { text: '❌ Extra license seasonal workers', delay: '1.1s' },
               ].map(({ text, delay }) => (
-                <div key={text} style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', padding: '6px 14px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: 6, fontSize: 13, color: 'rgba(255,255,255,0.65)', overflow: 'hidden' }}>
+                <div key={text} className="strike-badge" style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', padding: '6px 14px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: 6, fontSize: 13, color: 'rgba(255,255,255,0.65)', overflow: 'hidden', boxSizing: 'border-box' }}>
                   {text}
                   <div style={{ position: 'absolute', top: '50%', left: 0, height: 2, background: '#ef4444', width: 0, animationName: 'strike-draw-home', animationDuration: '0.5s', animationDelay: delay, animationFillMode: 'forwards', animationTimingFunction: 'ease-out' }} />
                 </div>
               ))}
             </div>
-            <div style={{ display: 'inline-block', background: 'rgba(61,92,255,0.15)', border: '1px solid rgba(61,92,255,0.4)', borderRadius: 8, padding: '8px 16px', fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 20, position: 'relative' }}>
+            <div className="confirm-badge" style={{ display: 'inline-block', background: 'rgba(61,92,255,0.15)', border: '1px solid rgba(61,92,255,0.4)', borderRadius: 8, padding: '8px 16px', fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 20, position: 'relative', boxSizing: 'border-box' }}>
               ✓ Unlimited owners, office staff, techs, and seasonal workers — one price
             </div>
-            <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, margin: 0, lineHeight: 1.7, position: 'relative' }}>
+            <p className="banner-bottom-text" style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, margin: 0, lineHeight: 1.7, position: 'relative' }}>
               Add your whole team on day one. No per-seat math. No surprise charges. No licenses to cancel when someone leaves.
             </p>
           </div>

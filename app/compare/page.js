@@ -261,7 +261,19 @@ export default function ComparePage() {
         .hint-arrow-right { display: inline-block; animation: hint-nudge-right 1.6s ease-in-out infinite; }
         @media (max-width: 768px) {
           .compare-scroll-hint-outer { display: flex; }
-          .plan-cards-grid { grid-template-columns: 1fr; }
+          .plan-cards-grid { grid-template-columns: 1fr; gap: 12px; }
+          /* Banner mobile */
+          .pricing-banner-card    { padding: 16px !important; }
+          .pricing-banner-heading { font-size: 20px !important; }
+          .pricing-banner-subtitle{ font-size: 13px !important; }
+          .strike-badges-row      { flex-direction: column !important; }
+          .strike-badge           { width: 100%; max-width: 100%; box-sizing: border-box; font-size: 12px !important; }
+          .confirm-badge          { width: 100%; box-sizing: border-box; display: block !important; font-size: 12px !important; }
+          .banner-bottom-text     { font-size: 12px !important; }
+          /* Plan cards mobile */
+          .plan-card-name    { font-size: 14px !important; }
+          .plan-card-price   { font-size: 20px !important; }
+          .plan-feature-item { font-size: 12px !important; }
         }
       `}</style>
 
@@ -317,33 +329,33 @@ export default function ComparePage() {
       </section>
 
       {/* Animated Pricing Banner */}
-      <section style={{ padding: '0 24px 32px' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ position: 'relative', overflow: 'hidden', background: '#0A0A14', border: '2px solid #3D5CFF', borderRadius: 16, padding: '36px 40px' }}>
+      <section style={{ padding: '0 24px 32px', overflowX: 'hidden' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto', boxSizing: 'border-box' }}>
+          <div className="pricing-banner-card" style={{ position: 'relative', overflow: 'hidden', background: '#0A0A14', border: '2px solid #3D5CFF', borderRadius: 16, padding: '36px 40px', boxSizing: 'border-box' }}>
             <div className="banner-shimmer" />
-            <h2 style={{ fontWeight: 900, fontSize: 'clamp(22px, 3.5vw, 40px)', letterSpacing: '-0.03em', margin: '0 0 12px', lineHeight: 1.1, position: 'relative' }}>
+            <h2 className="pricing-banner-heading" style={{ fontWeight: 900, fontSize: 'clamp(22px, 3.5vw, 40px)', letterSpacing: '-0.03em', margin: '0 0 12px', lineHeight: 1.1, position: 'relative' }}>
               Priced per company.{' '}
               <span style={{ color: '#3D5CFF' }}>Not per person.</span>
             </h2>
-            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 0 24px', maxWidth: 560, position: 'relative' }}>
+            <p className="pricing-banner-subtitle" style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 0 24px', maxWidth: 560, position: 'relative' }}>
               One flat price for your entire operation — no matter how many people you add.
             </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative' }}>
+            <div className="strike-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative' }}>
               {[
                 { text: '❌ $29/user/month extra techs', delay: '0.5s' },
                 { text: '❌ $29/seat office staff',       delay: '0.8s' },
                 { text: '❌ Extra license seasonal workers', delay: '1.1s' },
               ].map(({ text, delay }) => (
-                <div key={text} style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', padding: '6px 14px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: 6, fontSize: 13, color: 'rgba(255,255,255,0.65)', overflow: 'hidden' }}>
+                <div key={text} className="strike-badge" style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', padding: '6px 14px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: 6, fontSize: 13, color: 'rgba(255,255,255,0.65)', overflow: 'hidden', boxSizing: 'border-box' }}>
                   {text}
                   <div style={{ position: 'absolute', top: '50%', left: 0, height: 2, background: '#ef4444', width: 0, animationName: 'strike-draw', animationDuration: '0.5s', animationDelay: delay, animationFillMode: 'forwards', animationTimingFunction: 'ease-out' }} />
                 </div>
               ))}
             </div>
-            <div style={{ display: 'inline-block', background: 'rgba(61,92,255,0.15)', border: '1px solid rgba(61,92,255,0.4)', borderRadius: 8, padding: '8px 16px', fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 20, position: 'relative' }}>
+            <div className="confirm-badge" style={{ display: 'inline-block', background: 'rgba(61,92,255,0.15)', border: '1px solid rgba(61,92,255,0.4)', borderRadius: 8, padding: '8px 16px', fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 20, position: 'relative', boxSizing: 'border-box' }}>
               ✓ Unlimited owners, office staff, techs, and seasonal workers — one price
             </div>
-            <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, margin: 0, lineHeight: 1.7, position: 'relative' }}>
+            <p className="banner-bottom-text" style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, margin: 0, lineHeight: 1.7, position: 'relative' }}>
               Add your whole team on day one. No per-seat math. No surprise charges. No licenses to cancel when someone leaves.
             </p>
           </div>
@@ -351,8 +363,8 @@ export default function ComparePage() {
       </section>
 
       {/* Plan Cards */}
-      <section style={{ padding: '0 24px 48px' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+      <section style={{ padding: '0 24px 48px', overflowX: 'hidden' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto', boxSizing: 'border-box' }}>
           <div className="plan-cards-grid">
             {PLAN_CARDS.map((plan) => (
               <div
@@ -364,15 +376,17 @@ export default function ComparePage() {
                   padding: '24px 20px',
                   display: 'flex',
                   flexDirection: 'column',
+                  boxSizing: 'border-box',
+                  maxWidth: '100%',
                 }}
               >
-                <div style={{ fontWeight: 900, fontSize: 20, color: plan.color, marginBottom: 2 }}>{plan.name}</div>
+                <div className="plan-card-name" style={{ fontWeight: 900, fontSize: 20, color: plan.color, marginBottom: 2 }}>{plan.name}</div>
                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginBottom: 14, lineHeight: 1.4 }}>{plan.label}</div>
-                <div style={{ fontWeight: 900, fontSize: 26, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>{plan.price}</div>
+                <div className="plan-card-price" style={{ fontWeight: 900, fontSize: 26, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>{plan.price}</div>
                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', paddingBottom: 14, marginBottom: 14, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>{plan.customers}</div>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {plan.features.map((f) => (
-                    <li key={f} style={{ fontSize: 13, color: '#fff', display: 'flex', gap: 6, alignItems: 'flex-start', lineHeight: 1.45 }}>
+                    <li key={f} className="plan-feature-item" style={{ fontSize: 13, color: '#fff', display: 'flex', gap: 6, alignItems: 'flex-start', lineHeight: 1.45 }}>
                       <span style={{ color: plan.color, fontWeight: 700, flexShrink: 0 }}>+</span>
                       {f}
                     </li>
