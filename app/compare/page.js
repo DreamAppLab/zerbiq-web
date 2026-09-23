@@ -331,7 +331,7 @@ export default function ComparePage() {
       {/* Animated Pricing Banner */}
       <section style={{ padding: '0 24px 32px', overflowX: 'hidden' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', boxSizing: 'border-box' }}>
-          <div className="pricing-banner-card" style={{ position: 'relative', overflow: 'hidden', background: '#0A0A14', border: '2px solid #3D5CFF', borderRadius: 16, padding: '36px 40px', boxSizing: 'border-box' }}>
+          <div className="pricing-banner-card" style={{ position: 'relative', overflow: 'hidden', background: '#0A0A14', border: '2px solid #3D5CFF', borderRadius: 16, padding: '36px 40px', boxSizing: 'border-box', textAlign: 'center' }}>
             <div className="banner-shimmer" />
             <h2 className="pricing-banner-heading" style={{ fontWeight: 900, fontSize: 'clamp(22px, 3.5vw, 40px)', letterSpacing: '-0.03em', margin: '0 0 12px', lineHeight: 1.2, position: 'relative' }}>
               <span style={{ display: 'block', textDecoration: 'underline', textDecorationColor: '#fff' }}>Priced per company.</span>
@@ -343,7 +343,7 @@ export default function ComparePage() {
             <p className="pricing-banner-subtitle" style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 0 24px', maxWidth: 560, position: 'relative' }}>
               One flat price for your entire operation — no matter how many people you add.
             </p>
-            <div className="strike-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative' }}>
+            <div className="strike-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative', justifyContent: 'center' }}>
               {[
                 { text: '❌ $29/user/month extra techs', delay: '0.5s' },
                 { text: '❌ $29/seat office staff',       delay: '0.8s' },

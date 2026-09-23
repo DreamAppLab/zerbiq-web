@@ -125,7 +125,7 @@ export default function PricingPage() {
         <div style={{ maxWidth: 1200, margin: '0 auto', boxSizing: 'border-box' }}>
           <div
             className="pricing-page-banner-card"
-            style={{ position: 'relative', overflow: 'hidden', background: '#0A0A14', border: '2px solid #3D5CFF', borderRadius: 16, padding: '36px 40px', boxSizing: 'border-box' }}
+            style={{ position: 'relative', overflow: 'hidden', background: '#0A0A14', border: '2px solid #3D5CFF', borderRadius: 16, padding: '36px 40px', boxSizing: 'border-box', textAlign: 'center' }}
           >
             <div className="banner-shimmer-pricing" />
             <h2
@@ -144,7 +144,7 @@ export default function PricingPage() {
             >
               One flat price for your entire operation — no matter how many people you add.
             </p>
-            <div className="pricing-page-strike-row" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative' }}>
+            <div className="pricing-page-strike-row" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative', justifyContent: 'center' }}>
               {[
                 { text: '❌ $29/user/month extra techs',      delay: '0.5s' },
                 { text: '❌ $29/seat office staff',            delay: '0.8s' },

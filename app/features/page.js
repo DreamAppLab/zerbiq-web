@@ -655,6 +655,88 @@ export default function FeaturesPage() {
         </div>
       </section>
 
+      {/* Animated Pricing Banner */}
+      <section style={{ padding: '0 24px 40px', overflowX: 'hidden' }}>
+        <style>{`
+          @keyframes shimmer-features {
+            0%   { transform: translateX(-100%); }
+            100% { transform: translateX(500%); }
+          }
+          @keyframes strike-draw-features {
+            0%   { width: 0; }
+            100% { width: 100%; }
+          }
+          .banner-shimmer-features {
+            position: absolute; top: 0; left: 0;
+            width: 20%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(61,92,255,0.1), transparent);
+            animation: shimmer-features 3s ease-in-out infinite;
+            pointer-events: none;
+          }
+          @media (max-width: 768px) {
+            .features-banner-card     { padding: 16px !important; }
+            .features-banner-heading  { font-size: 20px !important; }
+            .features-banner-subtitle { font-size: 13px !important; }
+            .features-strike-row      { flex-direction: column !important; align-items: center !important; }
+            .features-strike-badge    { width: 100%; max-width: 100%; box-sizing: border-box; font-size: 14px !important; }
+            .features-confirm-badge   { width: 100%; box-sizing: border-box; display: block !important; font-size: 12px !important; }
+            .features-banner-bottom   { font-size: 12px !important; }
+          }
+        `}</style>
+        <div style={{ maxWidth: 1100, margin: '0 auto', boxSizing: 'border-box' }}>
+          <div
+            className="features-banner-card"
+            style={{ position: 'relative', overflow: 'hidden', background: '#0A0A14', border: '2px solid #3D5CFF', borderRadius: 16, padding: '36px 40px', boxSizing: 'border-box', textAlign: 'center' }}
+          >
+            <div className="banner-shimmer-features" />
+            <h2
+              className="features-banner-heading"
+              style={{ fontWeight: 900, fontSize: 'clamp(22px, 3.5vw, 40px)', letterSpacing: '-0.03em', margin: '0 0 12px', lineHeight: 1.2, position: 'relative' }}
+            >
+              <span style={{ display: 'block', textDecoration: 'underline', textDecorationColor: '#fff' }}>Priced per company.</span>
+              <span style={{ display: 'block' }}>
+                <span style={{ color: '#3D5CFF' }}>Not per person</span>
+                <span style={{ background: 'linear-gradient(to bottom, #ffffff 50%, #3D5CFF 50%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>!</span>
+              </span>
+            </h2>
+            <p
+              className="features-banner-subtitle"
+              style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 auto 24px', maxWidth: 560, position: 'relative' }}
+            >
+              One flat price for your entire operation — no matter how many people you add.
+            </p>
+            <div className="features-strike-row" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative', justifyContent: 'center' }}>
+              {[
+                { text: '❌ $29/user/month extra techs',    delay: '0.5s' },
+                { text: '❌ $29/seat office staff',          delay: '0.8s' },
+                { text: '❌ Extra license seasonal workers', delay: '1.1s' },
+              ].map(({ text, delay }) => (
+                <div
+                  key={text}
+                  className="features-strike-badge"
+                  style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', padding: '6px 14px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: 6, fontSize: 16, color: 'rgba(255,255,255,0.65)', overflow: 'hidden', boxSizing: 'border-box' }}
+                >
+                  {text}
+                  <div style={{ position: 'absolute', top: '50%', left: 0, height: 2, background: '#ef4444', width: 0, animationName: 'strike-draw-features', animationDuration: '0.5s', animationDelay: delay, animationFillMode: 'forwards', animationTimingFunction: 'ease-out' }} />
+                </div>
+              ))}
+            </div>
+            <div
+              className="features-confirm-badge"
+              style={{ display: 'inline-block', background: 'rgba(61,92,255,0.15)', border: '1px solid rgba(61,92,255,0.4)', borderRadius: 8, padding: '8px 16px', fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 20, position: 'relative', boxSizing: 'border-box' }}
+            >
+              ✓ Unlimited owners, office staff, techs, and seasonal workers — one price
+            </div>
+            <p
+              className="features-banner-bottom"
+              style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, margin: 0, lineHeight: 1.7, position: 'relative' }}
+            >
+              Add your whole team on day one. No per-seat math. No surprise charges. No licenses to cancel when someone leaves.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {INTRO_FEATURES.map((feature) => {
         const i = globalIndex++;
         const isEven = i % 2 === 0;
