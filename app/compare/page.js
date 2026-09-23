@@ -267,7 +267,7 @@ export default function ComparePage() {
           .pricing-banner-heading { font-size: 20px !important; }
           .pricing-banner-subtitle{ font-size: 13px !important; }
           .strike-badges-row      { flex-direction: column !important; }
-          .strike-badge           { width: 100%; max-width: 100%; box-sizing: border-box; font-size: 12px !important; }
+          .strike-badge           { width: 100%; max-width: 100%; box-sizing: border-box; font-size: 14px !important; }
           .confirm-badge          { width: 100%; box-sizing: border-box; display: block !important; font-size: 12px !important; }
           .banner-bottom-text     { font-size: 12px !important; }
           /* Plan cards mobile */
@@ -333,9 +333,12 @@ export default function ComparePage() {
         <div style={{ maxWidth: 1100, margin: '0 auto', boxSizing: 'border-box' }}>
           <div className="pricing-banner-card" style={{ position: 'relative', overflow: 'hidden', background: '#0A0A14', border: '2px solid #3D5CFF', borderRadius: 16, padding: '36px 40px', boxSizing: 'border-box' }}>
             <div className="banner-shimmer" />
-            <h2 className="pricing-banner-heading" style={{ fontWeight: 900, fontSize: 'clamp(22px, 3.5vw, 40px)', letterSpacing: '-0.03em', margin: '0 0 12px', lineHeight: 1.1, position: 'relative' }}>
-              Priced per company.{' '}
-              <span style={{ color: '#3D5CFF' }}>Not per person.</span>
+            <h2 className="pricing-banner-heading" style={{ fontWeight: 900, fontSize: 'clamp(22px, 3.5vw, 40px)', letterSpacing: '-0.03em', margin: '0 0 12px', lineHeight: 1.2, position: 'relative' }}>
+              <span style={{ display: 'block', textDecoration: 'underline', textDecorationColor: '#fff' }}>Priced per company.</span>
+              <span style={{ display: 'block' }}>
+                <span style={{ color: '#3D5CFF' }}>Not per person</span>
+                <span style={{ background: 'linear-gradient(to bottom, #ffffff 50%, #3D5CFF 50%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>!</span>
+              </span>
             </h2>
             <p className="pricing-banner-subtitle" style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 0 24px', maxWidth: 560, position: 'relative' }}>
               One flat price for your entire operation — no matter how many people you add.
@@ -346,7 +349,7 @@ export default function ComparePage() {
                 { text: '❌ $29/seat office staff',       delay: '0.8s' },
                 { text: '❌ Extra license seasonal workers', delay: '1.1s' },
               ].map(({ text, delay }) => (
-                <div key={text} className="strike-badge" style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', padding: '6px 14px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: 6, fontSize: 13, color: 'rgba(255,255,255,0.65)', overflow: 'hidden', boxSizing: 'border-box' }}>
+                <div key={text} className="strike-badge" style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', padding: '6px 14px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: 6, fontSize: 16, color: 'rgba(255,255,255,0.65)', overflow: 'hidden', boxSizing: 'border-box' }}>
                   {text}
                   <div style={{ position: 'absolute', top: '50%', left: 0, height: 2, background: '#ef4444', width: 0, animationName: 'strike-draw', animationDuration: '0.5s', animationDelay: delay, animationFillMode: 'forwards', animationTimingFunction: 'ease-out' }} />
                 </div>
