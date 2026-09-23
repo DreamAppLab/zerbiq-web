@@ -140,7 +140,7 @@ export default function PricingPage() {
             </h2>
             <p
               className="pricing-page-banner-subtitle"
-              style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 0 24px', maxWidth: 560, position: 'relative' }}
+              style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 auto 24px', maxWidth: 560, position: 'relative', textAlign: 'center' }}
             >
               One flat price for your entire operation — no matter how many people you add.
             </p>
