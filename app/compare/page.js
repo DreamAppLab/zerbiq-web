@@ -2,153 +2,162 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import ZerbiqBrand from '@/components/ZerbiqBrand';
+import { PLAN_METADATA, FEATURE_GATE, gateToValues } from '@/lib/planData';
 
 export const metadata = {
   title: 'Compare Plans — Zerbiq',
   description: 'Every feature, every plan — side by side. Compare Core, Field, Command, and Enterprise.',
 };
 
-const PLANS = [
-  { name: 'Core',       price: '$99',    href: '/signup',               subtitle: '500 active customers' },
-  { name: 'Field',      price: '$149',   href: '/signup',               subtitle: '1,000 active customers' },
-  { name: 'Command',    price: '$199',   href: '/signup',  popular: true, subtitle: '2,500 active customers' },
-  { name: 'Enterprise', price: 'Custom', href: 'mailto:hello@zerbiq.com', isContact: true, subtitle: '2,500+ customers' },
-];
+// Plan header data for the comparison table (derived from PLAN_METADATA).
+const PLANS = PLAN_METADATA.map((p) => ({
+  name: p.name,
+  price: p.monthlyPrice ? `$${p.monthlyPrice}` : 'Custom',
+  href: p.ctaHref,
+  isContact: p.ctaExternal,
+  popular: p.popular,
+  subtitle: `${p.activeCustomers} active customers`,
+}));
 
-// true = included, false = not included, string = custom value
-// Plan gates per confirmed structure (Sep 2026):
-//   Core ($49):    customer DB, scheduling, routes, invoicing, transactions, inventory,
-//                  team, analytics, SMS/reviews, vehicles, attendance, timecards
-//   Field ($99):   Core + leads, online payments, subcontractors, maintenance, portal
-//   Command ($149): Field + automations, in-app messaging, QuickBooks, AI chatbot
+// ── Comparison table feature groups ──────────────────────────────────────────
+// Boolean values are derived from lib/planData.js FEATURE_GATE — do not
+// hard-code [true/false, …] arrays here. Update FEATURE_GATE in planData.js
+// and every table row, badge, and pricing card reflects the change automatically.
+//
+// Plan column order: [Core, Field, Command, Enterprise]
 const FEATURE_GROUPS = [
   {
     group: 'Customer Limits',
     rows: [
       { label: 'Users included',          values: ['Unlimited', 'Unlimited', 'Unlimited', 'Unlimited'] },
       { label: 'Active customers',        values: ['500', '1,000', '2,500', 'Unlimited'] },
-      { label: 'Unlimited routes',        values: [true, true, true, true] },
-      { label: 'Unlimited team members',  values: [true, true, true, true] },
+      { label: 'Unlimited routes',        values: gateToValues(FEATURE_GATE.routeManagement) },
+      { label: 'Unlimited team members',  values: gateToValues(FEATURE_GATE.rolesPermissions) },
     ],
   },
   {
     group: 'Jobs & Scheduling',
     rows: [
-      { label: 'Job scheduling & tracking',    values: [true, true, true, true] },
-      { label: 'Recurring jobs',               values: [true, true, true, true] },
-      { label: 'Route management',             values: [true, true, true, true] },
-      { label: 'Schedule & dispatch board',    values: [true, true, true, true] },
-      { label: 'Drag-to-schedule calendar',    values: [true, true, true, true] },
-      { label: 'Job cancellations with fees',  values: [true, true, true, true] },
-      { label: 'Missed stop tracking',         values: [true, true, true, true] },
-      { label: 'Holiday Management',                       values: [true, true, true, true] },
-      { label: 'Billing Cycles',                           values: [true, true, true, true] },
-      { label: 'Daily Truck Inspection and Checklists',    values: [true, true, true, true] },
+      { label: 'Job scheduling & tracking',                  values: gateToValues(FEATURE_GATE.jobScheduling) },
+      { label: 'Recurring jobs',                             values: gateToValues(FEATURE_GATE.recurringJobs) },
+      { label: 'Route management',                           values: gateToValues(FEATURE_GATE.routeManagement) },
+      { label: 'Schedule & dispatch board',                  values: gateToValues(FEATURE_GATE.scheduleDispatch) },
+      { label: 'Drag-to-schedule calendar',                  values: gateToValues(FEATURE_GATE.dragCalendar) },
+      { label: 'Job cancellations with fees',                values: gateToValues(FEATURE_GATE.jobCancellations) },
+      { label: 'Missed stop tracking',                       values: gateToValues(FEATURE_GATE.missedStopTracking) },
+      { label: 'Holiday Management',                         values: gateToValues(FEATURE_GATE.holidayManagement) },
+      { label: 'Billing Cycles',                             values: gateToValues(FEATURE_GATE.billingCycles) },
+      { label: 'Daily Truck Inspection and Checklists',      values: gateToValues(FEATURE_GATE.truckInspection) },
     ],
   },
   {
     group: 'Invoicing & Payments',
     rows: [
-      { label: 'Invoicing',                            values: [true,  true,  true,  true] },
-      { label: 'Transaction & bank register',           values: [true,  true,  true,  true] },
-      { label: 'Credits & refunds',                     values: [true,  true,  true,  true] },
-      { label: 'Partial payments and payment plans',          values: [false, true,  true,  true] },
-      { label: 'Estimates & quotes',                    values: [false, true,  true,  true] },
-      { label: 'Online payment processing (card/ACH)',  values: [true,  true,  true,  true] },
-      { label: 'Purchase orders',                            values: [true,  true,  true,  true] },
-      { label: 'QuickBooks sync',                          values: [false, false, true,  true] },
+      { label: 'Invoicing',                                        values: gateToValues(FEATURE_GATE.invoicing) },
+      { label: 'Transaction & bank register',                      values: gateToValues(FEATURE_GATE.transactionRegister) },
+      { label: 'Credits & refunds',                                values: gateToValues(FEATURE_GATE.creditsRefunds) },
+      { label: 'Partial payments and payment plans',               values: gateToValues(FEATURE_GATE.partialPayments) },
+      { label: 'Estimates & quotes',                               values: gateToValues(FEATURE_GATE.estimatesQuotes) },
+      { label: 'Online payment processing (card/ACH) ²',          values: gateToValues(FEATURE_GATE.onlinePayments) },
+      { label: 'Purchase orders',                                  values: gateToValues(FEATURE_GATE.purchaseOrders) },
+      { label: 'QuickBooks sync',                                  values: gateToValues(FEATURE_GATE.quickbooksSync) },
     ],
   },
   {
     group: 'SMS & Communications',
     rows: [
-      { label: 'Technician on the way SMS',     values: [true,  true,  true,  true] },
-      { label: 'Job completion SMS',            values: [true,  true,  true,  true] },
-      { label: 'Appointment reminders',         values: [true,  true,  true,  true] },
-      { label: 'Automated invoice reminders',   values: [true,  true,  true,  true] },
-      { label: 'Review request automation',     values: [true,  true,  true,  true] },
-      { label: 'Automated follow-up sequences', values: [false, false, true,  true] },
-      { label: 'In-app messaging',              values: [false, false, true,  true] },
+      { label: 'Technician on the way SMS',      values: gateToValues(FEATURE_GATE.onTheWaySms) },
+      { label: 'Job completion SMS',             values: gateToValues(FEATURE_GATE.jobCompletionSms) },
+      { label: 'Appointment reminders',          values: gateToValues(FEATURE_GATE.appointmentReminders) },
+      { label: 'Automated invoice reminders',    values: gateToValues(FEATURE_GATE.invoiceReminders) },
+      { label: 'Review request automation',      values: gateToValues(FEATURE_GATE.reviewRequests) },
+      { label: 'Automated follow-up sequences',  values: gateToValues(FEATURE_GATE.followUpSequences) },
+      { label: 'In-app messaging',               values: gateToValues(FEATURE_GATE.inAppMessaging) },
     ],
   },
   {
     group: 'Customers & CRM',
     rows: [
-      { label: 'Customer CRM',                          values: [true,  true, true, true] },
-      { label: 'Custom fields',                         values: [true,  true, true, true] },
-      { label: 'Complaints tracking',                   values: [true,  true, true, true] },
-      { label: 'Customer portal',                       values: [false, true, true, true] },
-      { label: 'Lead management (Kanban)',               values: [false, true, true, true] },
-      { label: 'Embeddable lead capture form',          values: [false, true, true, true] },
-      { label: 'Multiple service locations ¹',          values: [false, true, true, true] },
+      { label: 'Customer CRM',                            values: gateToValues(FEATURE_GATE.customerCrm) },
+      { label: 'Custom fields',                           values: gateToValues(FEATURE_GATE.customFields) },
+      { label: 'Complaints tracking',                     values: gateToValues(FEATURE_GATE.complaintsTracking) },
+      // Customer portal is on every plan. Portal also shows quote approval (Field+) and messaging (Command+).
+      // Online invoice payment requires a connected payment processor. See footnote ².
+      { label: 'Customer portal ²',                       values: gateToValues(FEATURE_GATE.customerPortal) },
+      { label: 'Lead management (Kanban)',                 values: gateToValues(FEATURE_GATE.leadManagement) },
+      { label: 'Embeddable lead capture form',            values: gateToValues(FEATURE_GATE.leadCaptureForm) },
+      { label: 'Multiple service locations ¹',            values: gateToValues(FEATURE_GATE.multipleLocations) },
     ],
   },
   {
     group: 'Routes & Field Operations',
     rows: [
-      { label: 'Route sheet',                                   values: [true, true, true, true] },
-      { label: 'Mileage tracking (IRS rates)',                  values: [true, true, true, true] },
-      { label: 'Job photos & digital signatures',               values: [true, true, true, true] },
-      { label: 'Chemical & material logs',                      values: [true, true, true, true] },
-      { label: 'GPS Field Tracking (phone-based, no hardware)', values: [true,  true,  true,  true] },
-      { label: 'Route Intelligence (AI stop optimization)',      values: [false, true,  true,  true] },
-      { label: 'Parts on Order',                                values: [true,  true,  true,  true] },
+      { label: 'Route sheet',                                    values: gateToValues(FEATURE_GATE.routeSheet) },
+      { label: 'Mileage tracking (IRS rates)',                   values: gateToValues(FEATURE_GATE.mileageTracking) },
+      { label: 'Job photos & digital signatures',                values: gateToValues(FEATURE_GATE.jobPhotos) },
+      { label: 'Chemical & material logs',                       values: gateToValues(FEATURE_GATE.chemicalLogs) },
+      { label: 'GPS Field Tracking (phone-based, no hardware)',  values: gateToValues(FEATURE_GATE.gpsFieldTracking) },
+      { label: 'Route Intelligence (AI stop optimization)',      values: gateToValues(FEATURE_GATE.routeIntelligence) },
+      { label: 'Parts on Order',                                 values: gateToValues(FEATURE_GATE.partsOnOrder) },
     ],
   },
   {
     group: 'Team & HR',
     rows: [
-      { label: 'Roles & permissions',              values: [true,  true,  true,  true] },
-      { label: 'Timecards & time tracking',         values: [true,  true,  true,  true] },
-      { label: 'Attendance tracking',               values: [true,  true,  true,  true] },
-      { label: 'Time off & PTO tracking',           values: [true,  true,  true,  true] },
-      { label: 'Performance reviews',               values: [true,  true,  true,  true] },
-      { label: 'Incident tracking',                 values: [true,  true,  true,  true] },
-      { label: 'Vehicle & equipment tracking',      values: [true,  true,  true,  true] },
-      { label: 'Employee termination workflow',     values: [false, true,  true,  true] },
-      { label: 'Subcontractor management',          values: [false, true,  true,  true] },
-      { label: 'Employee ID and PIN Login',         values: [true,  true,  true,  true] },
-      { label: 'Employee Asset Checkout',           values: [false, true,  true,  true] },
+      { label: 'Roles & permissions',               values: gateToValues(FEATURE_GATE.rolesPermissions) },
+      { label: 'Timecards & time tracking',         values: gateToValues(FEATURE_GATE.timecards) },
+      { label: 'Attendance tracking',               values: gateToValues(FEATURE_GATE.attendanceTracking) },
+      { label: 'Time off & PTO tracking',           values: gateToValues(FEATURE_GATE.timeOff) },
+      { label: 'Performance reviews',               values: gateToValues(FEATURE_GATE.performanceReviews) },
+      { label: 'Incident tracking',                 values: gateToValues(FEATURE_GATE.incidentTracking) },
+      { label: 'Vehicle & equipment tracking',      values: gateToValues(FEATURE_GATE.vehicleTracking) },
+      { label: 'Employee termination workflow',     values: gateToValues(FEATURE_GATE.employeeTermination) },
+      { label: 'Subcontractor management',          values: gateToValues(FEATURE_GATE.subcontractors) },
+      { label: 'Employee ID and PIN Login',         values: gateToValues(FEATURE_GATE.employeeIdPin) },
+      { label: 'Employee Asset Checkout',           values: gateToValues(FEATURE_GATE.assetCheckout) },
     ],
   },
   {
     group: 'Inventory & Equipment',
     rows: [
-      { label: 'Materials catalog & inventory', values: [true,  true,  true, true] },
-      { label: 'Equipment & asset tracking',    values: [true,  true,  true, true] },
-      { label: 'Maintenance scheduling',        values: [false, true,  true, true] },
+      { label: 'Materials catalog & inventory',  values: gateToValues(FEATURE_GATE.materialsCatalog) },
+      { label: 'Equipment & asset tracking',     values: gateToValues(FEATURE_GATE.equipmentTracking) },
+      { label: 'Maintenance scheduling',         values: gateToValues(FEATURE_GATE.maintenanceScheduling) },
     ],
   },
   {
     group: 'Reporting & Analytics',
     rows: [
-      { label: 'Dashboard (16+ widgets)',         values: [true, true, true, true] },
-      { label: 'Revenue reports',                 values: [true, true, true, true] },
-      { label: 'Job completion reports',          values: [true, true, true, true] },
-      { label: 'Tech performance reports',        values: [true, true, true, true] },
-      { label: 'Route profitability reports',     values: [true, true, true, true] },
-      { label: 'Customer retention reports',      values: [true, true, true, true] },
-      { label: 'Overdue invoice aging',           values: [true, true, true, true] },
-      { label: 'Data export (CSV/PDF/ZIP)',        values: [true, true, true, true] },
+      { label: 'Dashboard (16+ widgets)',        values: gateToValues(FEATURE_GATE.dashboard) },
+      { label: 'Revenue reports',                values: gateToValues(FEATURE_GATE.revenueReports) },
+      { label: 'Job completion reports',         values: gateToValues(FEATURE_GATE.jobCompletionReports) },
+      { label: 'Tech performance reports',       values: gateToValues(FEATURE_GATE.techPerformance) },
+      { label: 'Route profitability reports',    values: gateToValues(FEATURE_GATE.routeProfitability) },
+      { label: 'Customer retention reports',     values: gateToValues(FEATURE_GATE.customerRetention) },
+      { label: 'Overdue invoice aging',          values: gateToValues(FEATURE_GATE.overdueInvoiceAging) },
+      { label: 'Data export (CSV/PDF/ZIP)',       values: gateToValues(FEATURE_GATE.dataExport) },
     ],
   },
   {
     group: 'Platform & Support',
     rows: [
-      { label: 'Mobile team view (iOS, Android & browser)', values: [true,  true,  true,  true]  },
-      { label: 'PWA (install from browser, no download required)', values: [true,  true,  true,  true]  },
-      { label: 'Light Mode and Dark Mode',         values: [true,  true,  true,  true]  },
-      { label: 'Personalized Shortcuts Bar',       values: [true,  true,  true,  true]  },
-      { label: 'Custom Branding',                  values: [true,  true,  true,  true]  },
-      { label: 'Automations & rules engine',       values: [false, false, true,  true]  },
-      { label: 'AI support chatbot',               values: [false, false, true,  true]  },
-      { label: 'Priority support',                 values: [false, false, true,  true]  },
-      { label: 'Dedicated onboarding',             values: [false, false, false, true]  },
-      { label: 'Custom integrations',              values: [false, false, false, true]  },
+      { label: 'Mobile team view (iOS, Android & browser)',       values: gateToValues(FEATURE_GATE.mobileApp) },
+      { label: 'PWA (install from browser, no download required)',values: gateToValues(FEATURE_GATE.pwa) },
+      { label: 'Light Mode and Dark Mode',                        values: gateToValues(FEATURE_GATE.lightDarkMode) },
+      { label: 'Personalized Shortcuts Bar',                      values: gateToValues(FEATURE_GATE.shortcutsBar) },
+      { label: 'Custom Branding',                                 values: gateToValues(FEATURE_GATE.customBranding) },
+      { label: 'Automations & rules engine',                      values: gateToValues(FEATURE_GATE.automationsEngine) },
+      { label: 'AI support chatbot',                              values: gateToValues(FEATURE_GATE.aiChatbot) },
+      { label: 'Priority support',                                values: gateToValues(FEATURE_GATE.prioritySupport) },
+      { label: 'Dedicated onboarding',                            values: gateToValues(FEATURE_GATE.dedicatedOnboarding) },
+      { label: 'Custom integrations',                             values: gateToValues(FEATURE_GATE.customIntegrations) },
     ],
   },
 ];
 
+// ── Plan summary cards (shown above the comparison table) ─────────────────────
+// Core features that are not yet in Core are not listed here since Core says
+// "all plans include X" — they're in the table above.
 const PLAN_CARDS = [
   {
     name: 'Core',
@@ -156,7 +165,17 @@ const PLAN_CARDS = [
     color: '#f97316',
     price: '$99/mo',
     customers: '500 active customers',
-    features: ['Route management', 'Job scheduling', 'Invoicing & payments', 'Online payment processing', 'Customer CRM', 'Team management', 'GPS field tracking', 'SMS notifications', 'Appointment reminders', 'Holiday management', 'Billing cycles', 'Truck inspection', 'PIN login', 'Custom branding', 'Reports & analytics', 'Data export', 'Mileage tracking', 'Time tracking', 'Attendance & time off', 'Purchase orders', 'Parts on order', 'Performance reviews', 'Incident tracking', 'Equipment tracking', 'Credits & refunds', 'Materials & inventory', 'Schedule & dispatch', 'Two-way SMS', 'Light & dark mode', 'Personalized shortcuts bar', 'Mobile team view'],
+    features: [
+      'Customer portal', 'Online payments (card & ACH)',
+      'Route management', 'Job scheduling', 'Invoicing & payments', 'Customer CRM',
+      'Team management', 'GPS field tracking', 'SMS notifications', 'Appointment reminders',
+      'Holiday management', 'Billing cycles', 'Truck inspection', 'PIN login',
+      'Custom branding', 'Reports & analytics', 'Data export', 'Mileage tracking',
+      'Time tracking', 'Attendance & time off', 'Purchase orders', 'Parts on order',
+      'Performance reviews', 'Incident tracking', 'Equipment tracking',
+      'Credits & refunds', 'Materials & inventory', 'Schedule & dispatch',
+      'Two-way SMS', 'Light & dark mode', 'Personalized shortcuts bar', 'Mobile team view',
+    ],
   },
   {
     name: 'Field',
@@ -164,7 +183,13 @@ const PLAN_CARDS = [
     color: '#3b82f6',
     price: '$149/mo',
     customers: '1,000 active customers',
-    features: ['Estimates & quotes', 'Customer portal', 'Route intelligence', 'Lead management', 'Payment plans', 'Employee asset checkout', 'Subcontractor management', 'Maintenance calendar', 'Multiple service locations (+$59/mo per location)', 'Lead capture form', 'Employee termination workflow'],
+    features: [
+      'Estimates & quotes', 'Quote approval in portal', 'Route intelligence',
+      'Lead management', 'Payment plans', 'Employee asset checkout',
+      'Subcontractor management', 'Maintenance calendar',
+      'Multiple service locations (+$59/mo per location)', 'Lead capture form',
+      'Employee termination workflow',
+    ],
   },
   {
     name: 'Command',
@@ -172,7 +197,11 @@ const PLAN_CARDS = [
     color: '#10b981',
     price: '$199/mo',
     customers: '2,500 active customers',
-    features: ['AI support chatbot', 'Automations engine', 'QuickBooks sync', 'Follow-up sequences', 'In-app messaging', 'Automated late fees', 'Priority support'],
+    features: [
+      'AI support chatbot', 'Automations engine', 'QuickBooks sync',
+      'Follow-up sequences', 'In-app messaging', 'Messaging in portal',
+      'Automated late fees', 'Priority support',
+    ],
   },
   {
     name: 'Enterprise',
@@ -184,7 +213,7 @@ const PLAN_CARDS = [
   },
 ];
 
-function CellValue({ value, isCommand }) {
+function CellValue({ value }) {
   if (typeof value === 'boolean') {
     return (
       <span
@@ -306,6 +335,25 @@ export default function ComparePage() {
           >
             Every feature, every plan — side by side.
           </p>
+
+          {/* Portal & payments note */}
+          <div
+            style={{
+              background: 'rgba(61,92,255,0.1)',
+              border: '1px solid rgba(61,92,255,0.35)',
+              borderRadius: 8,
+              padding: '16px 20px',
+              textAlign: 'left',
+              maxWidth: 600,
+              margin: '0 auto 20px',
+            }}
+          >
+            <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: 14, margin: 0, lineHeight: 1.65 }}>
+              <strong style={{ color: '#fff' }}>Every plan includes a customer portal and online payments.</strong>{' '}
+              No add-ons, no upcharges. Customers sign in by secure link or one-time code — no password required.
+              Online invoice payment (card &amp; ACH) requires connecting a supported payment processor.
+            </p>
+          </div>
 
           {/* Active customer info box */}
           <div
@@ -567,7 +615,7 @@ export default function ComparePage() {
                                   : 'none',
                               }}
                             >
-                              <CellValue value={val} isCommand={isCommand} />
+                              <CellValue value={val} />
                             </td>
                           );
                         })}
@@ -646,10 +694,14 @@ export default function ComparePage() {
       {/* Footnotes */}
       <section style={{ padding: '0 24px 56px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '0 0 8px', lineHeight: 1.75 }}>
             ¹ Multiple service locations available on Field and above.
             Field plans: +$59/mo per additional location.
             Command plans: +$79/mo per additional location.
+          </p>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
+            ² Online payment processing (card &amp; ACH) and online invoice payment through the customer portal are included on every plan.
+            Requires connecting a supported payment processor (Stripe, Square, or PayPal). Cash, check, and onsite card payments are always available on every plan without a connected processor.
           </p>
         </div>
       </section>

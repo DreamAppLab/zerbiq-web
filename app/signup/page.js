@@ -1,12 +1,13 @@
 import ZIcon from '@/components/ZIcon';
 import Link from 'next/link';
+import { TRIAL } from '@/lib/planData';
+
+const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
 export const metadata = {
   title: 'Sign Up — Zerbiq',
-  description: 'Start your free trial with Zerbiq.',
+  description: `Start your ${TRIAL.days}-day free trial with Zerbiq. No credit card required.`,
 };
-
-const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
 export default function SignupPage() {
   return (
@@ -22,6 +23,7 @@ export default function SignupPage() {
         textAlign: 'center',
       }}
     >
+      {/* Logo */}
       <Link
         href="/"
         style={{
@@ -29,7 +31,7 @@ export default function SignupPage() {
           alignItems: 'center',
           gap: 10,
           textDecoration: 'none',
-          marginBottom: 32,
+          marginBottom: 40,
         }}
       >
         <ZIcon size={48} />
@@ -45,44 +47,93 @@ export default function SignupPage() {
         </span>
       </Link>
 
+      {/* Heading */}
       <h1
         style={{
           fontWeight: 900,
           fontSize: 'clamp(32px, 5vw, 52px)',
           letterSpacing: '-0.04em',
-          margin: '0 0 16px',
+          margin: '0 0 12px',
           lineHeight: 1.05,
         }}
       >
-        Coming Soon
+        Start Your Free Trial
       </h1>
 
+      {/* Trial terms */}
       <p
         style={{
           color: 'var(--color-white-60)',
           fontSize: 17,
-          lineHeight: 1.7,
-          maxWidth: 440,
+          lineHeight: 1.6,
           margin: '0 auto 36px',
         }}
       >
-        Free trial signup is on the way. Book a demo to get early access.
+        {TRIAL.days}-day free trial. No credit card required.
       </p>
 
+      {/* Primary CTA */}
       <a
-        href={DEMO_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={TRIAL.signupUrl}
         className="btn-primary"
         style={{
           display: 'inline-block',
           borderRadius: 10,
-          padding: '16px 36px',
+          padding: '16px 40px',
           fontWeight: 700,
-          fontSize: 16,
+          fontSize: 17,
+          textDecoration: 'none',
+          marginBottom: 32,
         }}
       >
-        Book a Demo
+        Start free trial
+      </a>
+
+      {/* Divider */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 16,
+          width: '100%',
+          maxWidth: 360,
+          marginBottom: 32,
+        }}
+      >
+        <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.1)' }} />
+        <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 13 }}>or</span>
+        <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.1)' }} />
+      </div>
+
+      {/* Secondary CTA */}
+      <p
+        style={{
+          color: 'var(--color-white-60)',
+          fontSize: 15,
+          margin: '0 0 14px',
+          lineHeight: 1.6,
+        }}
+      >
+        Prefer a walkthrough? Book a 30-minute live demo.
+      </p>
+      <a
+        href={DEMO_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          display: 'inline-block',
+          background: 'transparent',
+          border: '1px solid rgba(255,255,255,0.25)',
+          color: '#fff',
+          borderRadius: 10,
+          padding: '14px 36px',
+          fontWeight: 700,
+          fontSize: 15,
+          textDecoration: 'none',
+          transition: 'border-color 0.2s',
+        }}
+      >
+        Book a demo
       </a>
     </div>
   );
