@@ -661,9 +661,7 @@ export default function ComparePage() {
                           Contact Us
                         </a>
                         <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', lineHeight: 1.55, margin: '12px 0 0', padding: '0 4px' }}>
-                          Managing 2,500+ customers?{' '}
-                          <a href="mailto:hello@zerbiq.com" style={{ color: '#93c5fd', textDecoration: 'none', fontWeight: 600 }}>Contact us</a>
-                          {' '}for custom pricing.
+                          Managing 2,500+ customers? Ask about custom pricing.
                         </p>
                       </>
                     ) : (
