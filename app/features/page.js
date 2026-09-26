@@ -23,7 +23,7 @@ const INTRO_FEATURES = [
       "Your eyes, your choice. Zerbiq runs in a clean light mode or a deep dark mode — switch anytime from the top bar. Your preference is saved to your account so it follows you across every device.",
       "No squinting at a white screen at 6 AM, no straining at a dark one in a bright office. The platform adapts to the way you work, not the other way around.",
     ],
-    badge: 'Included with all plans',
+    badge: BADGE.all,
   },
   {
     icon: '⚡',
@@ -33,7 +33,7 @@ const INTRO_FEATURES = [
       "Every person on your team uses Zerbiq differently. The office manager lives in Invoices and Leads. The field supervisor lives in Routes and Dispatch. The owner checks Reports first thing every morning. The shortcuts bar lets each user drag any item from the left menu and pin it directly below the header — one click away, always visible, completely personal.",
       "Add up to six shortcuts, remove them, reorder them, change them whenever your priorities change. No admin approval needed. No one else's shortcuts are affected. Your Zerbiq, your way.",
     ],
-    badge: 'Included with all plans',
+    badge: BADGE.all,
   },
 ];
 
@@ -53,7 +53,7 @@ const FEATURE_GROUPS = [
           "Stop rebuilding your route from scratch every week. Zerbiq organizes your stops into named, recurring routes — assigned to a tech, a truck, and a schedule. Add a new customer and they drop right into the right route.",
           "Drag to reorder. Skip a stop, bump it, or mark it done from anywhere. Your whole operation runs on the same list, in real time.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '📋',
@@ -63,7 +63,7 @@ const FEATURE_GROUPS = [
           "See every tech, every job, and every hour of the day on one screen. Drag jobs between techs, spot gaps before they become problems, and assign that new urgent call in seconds.",
           "When something changes in the field, the board updates — no phone tag, no whiteboards, no spreadsheets.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '✅',
@@ -72,7 +72,7 @@ const FEATURE_GROUPS = [
         desc: [
           "Every job has a status. Every status tells you what happens next. From Quote Approved to Ready to Bill, Zerbiq moves jobs through your pipeline automatically — so nothing falls through the cracks and nothing stays unbilled.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '📱',
@@ -82,7 +82,7 @@ const FEATURE_GROUPS = [
           "Your techs don't need training manuals. They clock in, see their stops in order, tap to start a job, tap to complete it. Photos, notes, gate codes — everything they need is right there.",
           "No paper, no group texts, no confusion about who's doing what.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '👥',
@@ -92,7 +92,7 @@ const FEATURE_GROUPS = [
           "Know who's working, what they're assigned to, and how they're doing — without asking. Every team member has a profile, a route, a truck, and a skill set.",
           "Add someone new in minutes. See their whole day at a glance.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '📅',
@@ -102,7 +102,7 @@ const FEATURE_GROUPS = [
           "Tell Zerbiq once which days you're closed. It handles the rest — skip the service, bump it to the next day, or schedule a makeup visit.",
           "Customers get automatically notified so you're not fielding calls on Thanksgiving wondering why no one showed up.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🔄',
@@ -112,7 +112,7 @@ const FEATURE_GROUPS = [
           "Batch invoicing done right. Create named billing cycles — monthly on the 1st, bi-weekly, quarterly — and assign routes to them.",
           "At the end of each cycle, Zerbiq generates one clean invoice per customer covering everything they received. No manual tallying, no missed charges.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '📍',
@@ -122,7 +122,7 @@ const FEATURE_GROUPS = [
           "Running more than one location? Add additional service areas to your account and manage them all from one login. Routes, teams, customers, and billing stay organized by location.",
           "Available on Field and above — each additional location is $59/mo on Field and $79/mo on Command and Enterprise.",
         ],
-        badge: 'Included with Field, Command & Enterprise',
+        badge: BADGE.field,
       },
     ],
   },
@@ -137,7 +137,7 @@ const FEATURE_GROUPS = [
           "Get paid faster with invoices that go out the moment a job is done. Customers can pay by card, ACH, or check. You see exactly what's outstanding, what's overdue, and what came in today — all in one place.",
           "No QuickBooks required to get started.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '💳',
@@ -147,7 +147,7 @@ const FEATURE_GROUPS = [
           "Send a professional quote in minutes, right from the job site or your desk. Customers approve online with one tap.",
           "Once approved, the job is created automatically — no double entry, no lost emails, no \"did they ever get back to you?\"",
         ],
-        badge: 'Included with Field, Command & Enterprise',
+        badge: BADGE.field,
       },
       {
         icon: '💵',
@@ -157,7 +157,7 @@ const FEATURE_GROUPS = [
           "Some jobs are big. Some customers need flexibility. Zerbiq gives you both. Split any invoice into scheduled installments — you set the total, the number of payments, and the due dates. Zerbiq bills each installment automatically, sends payment reminders, and tracks the running balance in real time.",
           "Whether it's a one-time split or a structured monthly plan for a commercial contract, the whole thing runs without you chasing anyone. More customers say yes when yes is easier to afford.",
         ],
-        badge: 'Included with Field, Command & Enterprise',
+        badge: BADGE.field,
       },
       {
         icon: '🔄',
@@ -167,7 +167,7 @@ const FEATURE_GROUPS = [
           "Mistakes happen. A skipped visit, an overcharge, a goodwill gesture — issue a credit in seconds and apply it to the next invoice automatically.",
           "Full audit trail, no awkward conversations, no manual math.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '📗',
@@ -177,7 +177,7 @@ const FEATURE_GROUPS = [
           "Already using QuickBooks? Keep it. Zerbiq syncs invoices, payments, and expenses to QuickBooks Online automatically — so your books stay clean without anyone re-entering data.",
           "Two systems, zero duplication.",
         ],
-        badge: 'Included with Command & Enterprise',
+        badge: BADGE.cmd,
       },
     ],
   },
@@ -192,7 +192,7 @@ const FEATURE_GROUPS = [
           "Every customer has a file. Every file has their full history — jobs, invoices, notes, equipment, route assignment, lifetime value, preferred contact method.",
           "Know who your best customers are before you walk in the door.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🌐',
@@ -213,7 +213,7 @@ const FEATURE_GROUPS = [
           "Track every potential customer from first contact to signed deal. See exactly where each lead is in your pipeline, when you last reached out, and what it will take to close them.",
           "Never lose a lead to a forgotten follow-up again.",
         ],
-        badge: 'Included with Field, Command & Enterprise',
+        badge: BADGE.field,
       },
       {
         icon: '📥',
@@ -222,7 +222,7 @@ const FEATURE_GROUPS = [
         desc: [
           "One line of code on your website. That's all it takes to start capturing leads directly into Zerbiq. The form matches your brand, asks the right questions, and drops new leads right into your pipeline — ready to quote.",
         ],
-        badge: 'Included with Field, Command & Enterprise',
+        badge: BADGE.field,
       },
       {
         icon: '⭐',
@@ -232,7 +232,7 @@ const FEATURE_GROUPS = [
           "Your reputation is your pipeline. Zerbiq makes it easy to ask for reviews at exactly the right moment — right after a job well done.",
           "Track your request-to-review rate, see what customers are saying, and build the kind of reputation that sells for you.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
     ],
   },
@@ -247,7 +247,7 @@ const FEATURE_GROUPS = [
           "Customers hate surprises. Zerbiq sends them the right message at the right time — job reminders, completion confirmations, invoice notices, overdue reminders — all automatic, all in your voice, all with your branding.",
           "Fewer calls to you. Happier customers.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🔔',
@@ -257,7 +257,7 @@ const FEATURE_GROUPS = [
           "A simple text the day before drops no-shows and complaints by a wide margin. Zerbiq sends it automatically, lets customers confirm or reschedule with a single reply, and logs the response.",
           "You don't lift a finger.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🚗',
@@ -267,7 +267,7 @@ const FEATURE_GROUPS = [
           '"Is someone coming today?" Stop answering that question. When your tech starts driving to a customer, Zerbiq sends an automatic "on the way" text with the tech\'s name and ETA.',
           "Customers feel taken care of. Techs stay focused on the job.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🌟',
@@ -277,7 +277,7 @@ const FEATURE_GROUPS = [
           "Two hours after a job is marked complete, Zerbiq texts the customer asking for a review. Not a generic blast — a personal message tied to that specific visit.",
           "More reviews, better reviews, less effort from you.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '📧',
@@ -287,7 +287,7 @@ const FEATURE_GROUPS = [
           "A lost lead isn't always a dead lead. Zerbiq can automatically follow up with prospects who didn't respond to a quote, customers who haven't booked in 60 days, or anyone who fell out of your pipeline.",
           "Set the sequence once — it runs forever.",
         ],
-        badge: 'Included with Command & Enterprise',
+        badge: BADGE.cmd,
       },
       {
         icon: '🔔',
@@ -297,7 +297,7 @@ const FEATURE_GROUPS = [
           "Beyond customer messages — Zerbiq keeps your whole operation on track with internal alerts. Low inventory? You'll know. A vehicle service is due? Flagged. A job wasn't completed by end of day? Your manager gets notified.",
           "The system watches so you don't have to.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🤖',
@@ -307,7 +307,7 @@ const FEATURE_GROUPS = [
           'Ask Zerbiq anything about your business and get a real answer — not a report to dig through. "Which tech made us the most money last month?" "How many invoices are overdue?" "What\'s on the schedule tomorrow?"',
           "Your AI assistant knows your data and answers in plain English.",
         ],
-        badge: 'Included with Command & Enterprise',
+        badge: BADGE.cmd,
       },
     ],
   },
@@ -322,7 +322,7 @@ const FEATURE_GROUPS = [
           "Know what a job actually costs — not just what you charged. Zerbiq tracks clock-in and clock-out, assigns labor to each job, and shows you your real margin after labor and materials.",
           "When you know your numbers, you price better and profit more.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🗓️',
@@ -332,7 +332,7 @@ const FEATURE_GROUPS = [
           "Techs clock in from the app. You see who's on the clock, who's out, and who requested time off — all from one screen. Approve or deny requests with a tap.",
           "No paper timesheets, no payroll guessing.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🤝',
@@ -342,7 +342,7 @@ const FEATURE_GROUPS = [
           "Use subs for the work you don't do in-house. Zerbiq tracks what jobs they completed, how many hours they logged, and what you owe them — separately from your W-2 team.",
           "Clean records for tax time, clear expectations year-round.",
         ],
-        badge: 'Included with Field, Command & Enterprise',
+        badge: BADGE.field,
       },
       {
         icon: '🗺️',
@@ -352,7 +352,7 @@ const FEATURE_GROUPS = [
           "Every route has miles. Every mile has value. Zerbiq logs odometer readings at clock-in and clock-out, calculates reimbursable mileage at the IRS rate, and gives you a clean monthly report.",
           "No apps to install, no logs to maintain.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '📍',
@@ -362,7 +362,7 @@ const FEATURE_GROUPS = [
           "See where your team is in real time — from any phone, no hardware required. Verify stops were made, spot techs who are running behind, and dispatch the nearest available person to an urgent job.",
           "Works with any smartphone your team already carries.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🏅',
@@ -372,7 +372,7 @@ const FEATURE_GROUPS = [
           "Give your team real feedback backed by real data. Customer ratings, completion rates, punctuality, job quality — Zerbiq has the numbers. Document reviews, set goals, and recognize your top performers.",
           "Build a team that wants to stay.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '📦',
@@ -383,7 +383,7 @@ const FEATURE_GROUPS = [
           "Know who has the iPad, the gas card, the backpack sprayer. Log asset checkout and return in seconds.",
           "If something goes missing, you'll know exactly who had it last — and so will they.",
         ],
-        badge: 'Included with Field, Command & Enterprise',
+        badge: BADGE.field,
       },
       {
         icon: '🔐',
@@ -393,7 +393,7 @@ const FEATURE_GROUPS = [
           "Techs log into the mobile app with a simple employee ID and 4-digit PIN — no email, no forgotten passwords. Fast at 7 AM when hands are cold and coffee hasn't kicked in.",
           "You control who has access and what they can see.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🚨',
@@ -403,7 +403,7 @@ const FEATURE_GROUPS = [
           "Document workplace incidents the moment they happen. Safety issue, vehicle damage, customer complaint, equipment failure — log it with details, assign a follow-up, and track resolution.",
           "Creates the paper trail you need if anything escalates.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🚛',
@@ -413,7 +413,7 @@ const FEATURE_GROUPS = [
           "Before techs hit the road, they run through a digital inspection on their phone — tires, lights, fluid levels, equipment secured. Takes 90 seconds. Creates a timestamped record.",
           "Catches problems before they become breakdowns or liabilities.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
     ],
   },
@@ -428,7 +428,7 @@ const FEATURE_GROUPS = [
           "Know what you have before you need it. Track every product and supply across your operation, set reorder points, and get alerts when stock runs low.",
           "When a tech uses materials on a job, it comes off the inventory automatically.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🛒',
@@ -438,7 +438,7 @@ const FEATURE_GROUPS = [
           "Create and send POs to your suppliers, track delivery status, and match received items to what was ordered. No more verbal orders with no paper trail. No more receiving surprises.",
           "Clean purchasing records that feed directly into your job costs.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🔩',
@@ -448,7 +448,7 @@ const FEATURE_GROUPS = [
           "When a job is waiting on a part, it shouldn't fall off your radar. Zerbiq tracks every job on hold, what part is needed, what PO it's tied to, and when it's expected.",
           "When the part arrives, you're notified — and the return visit gets scheduled.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🛠️',
@@ -458,7 +458,7 @@ const FEATURE_GROUPS = [
           "Your equipment is one of your biggest investments. Track every piece — mowers, blowers, trailers, pressure washers — with service history, current condition, and assignment.",
           "Know what's in use, what needs repair, and what's due for maintenance before something breaks.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '🔧',
@@ -468,7 +468,7 @@ const FEATURE_GROUPS = [
           "Oil changes, blade sharpenings, DOT inspections, annual tune-ups — scheduled automatically based on mileage or time intervals. Zerbiq tells you what's coming up, what's overdue, and what's been done.",
           "Your fleet stays road-ready. Your costs stay predictable.",
         ],
-        badge: 'Included with Field, Command & Enterprise',
+        badge: BADGE.field,
       },
     ],
   },
@@ -483,7 +483,7 @@ const FEATURE_GROUPS = [
           "Let the math do the driving. Zerbiq's optimization engine sequences your stops to minimize drive time and fuel — saving the average route 30–45 minutes per day.",
           "When an urgent job comes in, it instantly finds the nearest available tech. Smarter routing, lower costs, more jobs per day.",
         ],
-        badge: 'Included with Field, Command & Enterprise',
+        badge: BADGE.field,
       },
       {
         icon: '📈',
@@ -493,7 +493,7 @@ const FEATURE_GROUPS = [
           "Ten reporting tabs that actually tell you something useful. Revenue by service, job costing by tech, receivables aging, mileage by route, review conversion rates — the numbers that run your business, organized and ready.",
           "Export any report to CSV or PDF in one click.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
       {
         icon: '📤',
@@ -503,7 +503,7 @@ const FEATURE_GROUPS = [
           "Your data belongs to you — all of it, always. Export your customers, jobs, invoices, timecards, and inventory to CSV or PDF whenever you want.",
           "No hoops, no fees, no waiting. If you ever want to leave, you take everything with you.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
     ],
   },
@@ -518,7 +518,7 @@ const FEATURE_GROUPS = [
           "Zerbiq works in your brand — not ours. Upload your logo, set your brand color, and every invoice, estimate, portal page, and notification your customers see carries your identity.",
           "Included with every plan. Because your business deserves to look like your business.",
         ],
-        badge: 'Included with all plans',
+        badge: BADGE.all,
       },
     ],
   },

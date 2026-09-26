@@ -54,7 +54,7 @@ export default function SignupPage() {
           lineHeight: 1.05,
         }}
       >
-        Coming Soon
+        Start Your Free Trial
       </h1>
 
       <p
@@ -66,7 +66,7 @@ export default function SignupPage() {
           margin: '0 auto 36px',
         }}
       >
-        Free trial signup is on the way. Book a demo to get early access.
+        Book a 30-minute demo and we&apos;ll walk you through the platform live, answer your questions, and get you set up — no credit card required.
       </p>
 
       <a
