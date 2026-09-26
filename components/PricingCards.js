@@ -2,125 +2,88 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { PLAN_METADATA } from '@/lib/planData';
 
 const ACTIVE_CUSTOMER_DEF =
   'Active customers are customers currently managed in your account. Archive any customer at any time to free up a slot — their complete history, invoices, and job records are always retained.';
 
-const PLANS = [
-  {
-    name: 'Core',
-    monthlyPrice: 99,
-    annualPrice: 990,
-    subtitle: 'Up to 500 active customers',
-    activeCustomers: '500',
-    cta: 'Start Free Trial',
-    ctaHref: '/signup',
-    ctaExternal: false,
-    popular: false,
-    included: [
-      'Unlimited routes',
-      'Unlimited team members',
-      'Job scheduling & tracking',
-      'Recurring jobs',
-      'Invoicing & payments',
-      'Online payment processing (card/ACH)',
-      'Transaction & bank register',
-      'Materials catalog & inventory',
-      'Analytics & reporting dashboard',
-      'Automated customer notifications',
-      'Review requests',
-      'Vehicle & equipment tracking',
-      'Attendance & time off',
-      'Time tracking & timecards',
-      'Mileage tracking',
-      'Mobile team view',
-      'Data export',
-      'Route management',
-      'Credits & refunds',
-      'Performance reviews',
-      'Incident tracking',
-      'Holiday Management',
-      'Billing Cycles',
-      'GPS field tracking (phone-based, no hardware)',
-      'Daily truck inspection and checklists',
-      'Employee ID and PIN login',
-      'Parts on order',
-      'Purchase orders',
-      'Custom branding',
-      'Light mode and dark mode',
-      'Personalized shortcuts bar',
-    ],
-    excluded: [],
-  },
-  {
-    name: 'Field',
-    monthlyPrice: 149,
-    annualPrice: 1490,
-    subtitle: 'Up to 1,000 active customers',
-    activeCustomers: '1,000',
-    cta: 'Start Free Trial',
-    ctaHref: '/signup',
-    ctaExternal: false,
-    popular: false,
-    included: [
-      'Everything in Core',
-      'Leads & quote management',
-      'Estimates & quotes',
-      'Customer portal',
-      'Subcontractor management',
-      'Maintenance scheduling',
-      'Partial payments and payment plans',
-      'Embeddable lead capture form',
-      'Employee termination workflow',
-      'Route Intelligence',
-      'Employee asset checkout',
-      'Multiple service locations (+$59/mo per location)',
-    ],
-    excluded: [],
-  },
-  {
-    name: 'Command',
-    monthlyPrice: 199,
-    annualPrice: 1990,
-    subtitle: 'Up to 2,500 active customers',
-    activeCustomers: '2,500',
-    badge: 'Most Popular',
-    popular: true,
-    cta: 'Start Free Trial',
-    ctaHref: '/signup',
-    ctaExternal: false,
-    included: [
-      'Everything in Field',
-      'Automations & rules engine',
-      'In-app messaging',
-      'QuickBooks sync',
-      'AI support chatbot',
-      'Automated follow-up sequences',
-      'Priority support',
-      'Multiple service locations (+$79/mo per location)',
-    ],
-    excluded: [],
-  },
-  {
-    name: 'Enterprise',
-    monthlyPrice: null,
-    annualPrice: null,
-    subtitle: 'Unlimited active customers',
-    activeCustomers: 'Unlimited',
-    popular: false,
-    cta: 'Contact Us',
-    ctaHref: 'mailto:hello@zerbiq.com',
-    ctaExternal: true,
-    included: [
-      'Everything in Command',
-      'No active customer limit',
-      'White-glove onboarding',
-      'Direct support',
-      'Custom pricing',
-    ],
-    excluded: [],
-  },
-];
+// Feature lists for each plan (human-readable labels shown on pricing cards).
+// Plan gates (which plan first unlocks a feature) live in lib/planData.js.
+const PLAN_INCLUDED = {
+  Core: [
+    'Unlimited routes',
+    'Unlimited team members',
+    'Job scheduling & tracking',
+    'Recurring jobs',
+    'Invoicing & payments',
+    'Online payments (card & ACH)',
+    'Customer portal',
+    'Transaction & bank register',
+    'Materials catalog & inventory',
+    'Analytics & reporting dashboard',
+    'Automated customer notifications',
+    'Review requests',
+    'Vehicle & equipment tracking',
+    'Attendance & time off',
+    'Time tracking & timecards',
+    'Mileage tracking',
+    'Mobile team view',
+    'Data export',
+    'Route management',
+    'Credits & refunds',
+    'Performance reviews',
+    'Incident tracking',
+    'Holiday Management',
+    'Billing Cycles',
+    'GPS field tracking (phone-based, no hardware)',
+    'Daily truck inspection and checklists',
+    'Employee ID and PIN login',
+    'Parts on order',
+    'Purchase orders',
+    'Custom branding',
+    'Light mode and dark mode',
+    'Personalized shortcuts bar',
+  ],
+  Field: [
+    'Everything in Core',
+    'Leads & quote management',
+    'Estimates & quotes',
+    'Quote approval in customer portal',
+    'Subcontractor management',
+    'Maintenance scheduling',
+    'Partial payments and payment plans',
+    'Embeddable lead capture form',
+    'Employee termination workflow',
+    'Route Intelligence',
+    'Employee asset checkout',
+    'Multiple service locations (+$59/mo per location)',
+  ],
+  Command: [
+    'Everything in Field',
+    'Automations & rules engine',
+    'In-app messaging',
+    'Messaging in customer portal',
+    'QuickBooks sync',
+    'AI support chatbot',
+    'Automated follow-up sequences',
+    'Priority support',
+    'Multiple service locations (+$79/mo per location)',
+  ],
+  Enterprise: [
+    'Everything in Command',
+    'No active customer limit',
+    'White-glove onboarding',
+    'Direct support',
+    'Custom pricing',
+  ],
+};
+
+// Build the PLANS array from the canonical PLAN_METADATA + feature lists above.
+const PLANS = PLAN_METADATA.map((meta) => ({
+  ...meta,
+  included: PLAN_INCLUDED[meta.name] ?? [],
+  excluded: [],
+}));
 
 function CheckIcon({ included }) {
   return included ? (
@@ -234,7 +197,7 @@ export default function PricingCards() {
       <div
         style={{
           maxWidth: 680,
-          margin: '0 auto 40px',
+          margin: '0 auto 20px',
           background: 'var(--color-raised)',
           border: '1px solid var(--color-white-10)',
           borderRadius: 8,
@@ -254,6 +217,35 @@ export default function PricingCards() {
           }}
         >
           {ACTIVE_CUSTOMER_DEF}
+        </p>
+      </div>
+
+      {/* Portal & payments callout */}
+      <div
+        style={{
+          maxWidth: 680,
+          margin: '0 auto 40px',
+          background: 'rgba(61,92,255,0.08)',
+          border: '1px solid rgba(61,92,255,0.35)',
+          borderRadius: 8,
+          padding: '14px 18px',
+          display: 'flex',
+          gap: 10,
+          alignItems: 'flex-start',
+        }}
+      >
+        <span style={{ fontSize: 16 }}>🌐</span>
+        <p
+          style={{
+            margin: 0,
+            fontSize: 13,
+            color: 'rgba(255,255,255,0.8)',
+            lineHeight: 1.6,
+          }}
+        >
+          <strong style={{ color: '#fff' }}>Every plan includes a customer portal and online payments.</strong>{' '}
+          No add-ons, no upcharges. Customers sign in by secure link or one-time code — no password required.
+          Online invoice payment (card &amp; ACH) requires connecting a supported payment processor (Stripe, Square, or PayPal).
         </p>
       </div>
 

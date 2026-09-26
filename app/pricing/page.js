@@ -41,6 +41,14 @@ const FAQ = [
     a: 'Yes. Every plan includes DIY spreadsheet import — download our template, fill in your customers, routes, and team, and upload. Most owners are fully set up in under an hour. White-Glove Onboarding includes full data migration handled by our team.',
   },
   {
+    q: 'What does the customer portal include?',
+    a: 'Every plan — Core, Field, Command, and Enterprise — includes a customer portal. No add-ons, no upcharges. Your customers sign in with a one-time secure link or code (no password required) and can view their service history with visit photos, see upcoming jobs, view and pay invoices online, submit service requests, and update their contact and communication preferences. On Field plans and above, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging.',
+  },
+  {
+    q: 'Do I need a payment processor to use the customer portal?',
+    a: 'The portal itself is always on and costs nothing extra. Online invoice payment (card & ACH) inside the portal requires connecting a supported payment processor — Stripe, Square, or PayPal/Venmo. If you have not connected a processor, customers can still view their history, service requests, and invoices; they just pay through another method (cash, check, or onsite card). Cash, check, and onsite card payments are always available on every plan without a connected processor.',
+  },
+  {
     q: 'What payment processors do you support?',
     a: 'Zerbiq supports Stripe, Square, and PayPal/Venmo for online payments. You can also accept cash, check, and onsite card payments on any plan without connecting a processor.',
   },

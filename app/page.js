@@ -101,8 +101,8 @@ const ALL_FEATURES = [
   {
     icon: '🌐',
     title: 'Customer Portal',
-    desc: 'Every customer gets a private portal to view upcoming jobs, pay invoices, approve quotes, and leave notes — without calling you.',
-    badge: 'Included with Field, Command & Enterprise',
+    desc: 'Every customer gets a private portal — sign in by secure link or one-time code, view service history with visit photos, pay invoices online (card & ACH, requires a connected payment processor), submit service requests, and update contact preferences. No password required. No add-ons, no upcharges.',
+    badge: 'Included with all plans',
   },
   // ── Field, Command & Enterprise ────────────────────────────────────────────
   {
