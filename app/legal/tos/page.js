@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { TRIAL } from '@/lib/planData';
 
 export const metadata = {
   title: 'Terms of Service — Zerbiq',
@@ -94,7 +95,7 @@ export default function TermsPage() {
                 5. Free Trial
               </h2>
               <p style={{ margin: 0 }}>
-                Zerbiq offers a 7-day free trial. No payment information is required to start a
+                Zerbiq offers a {TRIAL.days}-day free trial. No payment information is required to start a
                 trial. At the end of the trial period, your account will pause until you subscribe.
                 Your data is retained for 30 days after trial expiration.
               </p>

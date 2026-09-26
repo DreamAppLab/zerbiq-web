@@ -2,11 +2,12 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import { brandify } from '@/components/ZerbiqBrand';
+import { TRIAL } from '@/lib/planData';
 
 const FAQ = [
   {
     q: 'Is there really no credit card required for the trial?',
-    a: "Correct. Start your 14-day free trial with just your email. No card until you decide to subscribe.",
+    a: `Correct. Start your ${TRIAL.days}-day free trial with just your email. No card until you decide to subscribe.`,
   },
   {
     q: 'What is an active customer?',

@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import Link from 'next/link';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE } from '@/lib/planData';
+import { BADGE, TRIAL } from '@/lib/planData';
 
 const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
@@ -429,7 +429,7 @@ export default function HomePage() {
           </div>
 
           <p style={{ color: 'var(--color-white-60)', fontSize: 13, margin: '0 0 56px' }}>
-            No credit card required · 14-day free trial · Cancel anytime
+            No credit card required · {TRIAL.days}-day free trial · Cancel anytime
           </p>
 
           {/* App screenshot */}
