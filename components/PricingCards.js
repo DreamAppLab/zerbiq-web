@@ -10,8 +10,35 @@ const ACTIVE_CUSTOMER_DEF =
 // Feature lists for each plan (human-readable labels shown on pricing cards).
 // Plan gates (which plan first unlocks a feature) live in lib/planData.js.
 const PLAN_INCLUDED = {
+  Solo: [
+    'Job scheduling & tracking',
+    'Recurring jobs',
+    'Route management',
+    'Invoicing & payments',
+    'Estimates & quotes',
+    'Quote approval in customer portal',
+    'Partial payments',
+    'Online payments (card & ACH)',
+    'Customer portal',
+    'Lead management (Kanban)',
+    'Embeddable lead capture form',
+    'Transaction & bank register',
+    'Credits & refunds',
+    'Automated customer notifications',
+    'Appointment reminders',
+    'Review requests',
+    'Customer CRM & custom fields',
+    'Route sheet & job photos',
+    'Mileage tracking',
+    'Materials catalog & inventory',
+    'Analytics & reporting dashboard',
+    'Data export',
+    'Custom branding',
+    'Light mode and dark mode',
+    'Personalized shortcuts bar',
+  ],
   Core: [
-    'Unlimited routes',
+    'Everything in Solo',
     'Unlimited team members',
     'Job scheduling & tracking',
     'Recurring jobs',
@@ -51,7 +78,8 @@ const PLAN_INCLUDED = {
     'Quote approval in customer portal',
     'Subcontractor management',
     'Maintenance scheduling',
-    'Partial payments and payment plans',
+    'Partial payments',
+    'Structured payment plans',
     'Embeddable lead capture form',
     'Employee termination workflow',
     'Route Intelligence',
@@ -253,7 +281,7 @@ export default function PricingCards() {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
           gap: 20,
           alignItems: 'start',
         }}
@@ -335,7 +363,7 @@ export default function PricingCards() {
               )}
             </div>
 
-            {/* Unlimited users callout */}
+            {/* Users / banner callout */}
             <div
               style={{
                 marginBottom: 14,
@@ -345,9 +373,20 @@ export default function PricingCards() {
                 padding: '12px 14px',
               }}
             >
-              <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.55 }}>
-                Unlimited users included — owners, office staff, and every tech in the field. One flat price. No per-seat fees. Ever.
-              </p>
+              {plan.usersLabel ? (
+                <>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', margin: '0 0 4px', lineHeight: 1.55 }}>
+                    {plan.usersLabel}
+                  </p>
+                  <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.5 }}>
+                    {plan.banner}
+                  </p>
+                </>
+              ) : (
+                <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.55 }}>
+                  {plan.banner}
+                </p>
+              )}
             </div>
 
             {/* Limits */}
@@ -360,6 +399,7 @@ export default function PricingCards() {
                 fontSize: 13,
               }}
             >
+              {/* Active customers row */}
               <div
                 style={{
                   display: 'flex',
@@ -367,11 +407,36 @@ export default function PricingCards() {
                   alignItems: 'center',
                   flexWrap: 'nowrap',
                   gap: 8,
-                  marginBottom: 6,
+                  marginBottom: 8,
                 }}
               >
                 <span style={{ color: 'var(--color-white-60)', whiteSpace: 'nowrap' }}>Active customers:</span>
                 <span style={{ fontWeight: 600, whiteSpace: 'nowrap' }}>{plan.activeCustomers}</span>
+              </div>
+
+              {/* Texts included row */}
+              <div
+                style={{
+                  paddingTop: 8,
+                  borderTop: '1px solid rgba(255,255,255,0.07)',
+                  color: 'var(--color-white-60)',
+                  fontSize: 12,
+                  lineHeight: 1.55,
+                }}
+              >
+                {plan.textsIncluded === 'Custom' ? (
+                  <span>Custom text volume.</span>
+                ) : (
+                  <span>
+                    <strong style={{ color: '#fff' }}>
+                      {typeof plan.textsIncluded === 'number'
+                        ? plan.textsIncluded.toLocaleString()
+                        : plan.textsIncluded}{' '}
+                      texts/month included.
+                    </strong>{' '}
+                    Occasional overages are on us. Regularly over? We&apos;ll reach out about a text package that fits — no surprise bills.
+                  </span>
+                )}
               </div>
             </div>
 

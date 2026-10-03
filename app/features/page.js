@@ -82,7 +82,7 @@ const FEATURE_GROUPS = [
           "Your techs don't need training manuals. They clock in, see their stops in order, tap to start a job, tap to complete it. Photos, notes, gate codes — everything they need is right there.",
           "No paper, no group texts, no confusion about who's doing what.",
         ],
-        badge: BADGE.all,
+        badge: BADGE.core,
       },
       {
         icon: '👥',
@@ -147,17 +147,17 @@ const FEATURE_GROUPS = [
           "Send a professional quote in minutes, right from the job site or your desk. Customers approve online with one tap.",
           "Once approved, the job is created automatically — no double entry, no lost emails, no \"did they ever get back to you?\"",
         ],
-        badge: BADGE.field,
+        badge: BADGE.all,
       },
       {
         icon: '💵',
         title: 'Partial Payments and Payment Plans',
         screenshot: '10-partial-payments.png',
         desc: [
-          "Some jobs are big. Some customers need flexibility. Zerbiq gives you both. Split any invoice into scheduled installments — you set the total, the number of payments, and the due dates. Zerbiq bills each installment automatically, sends payment reminders, and tracks the running balance in real time.",
-          "Whether it's a one-time split or a structured monthly plan for a commercial contract, the whole thing runs without you chasing anyone. More customers say yes when yes is easier to afford.",
+          "Some jobs are big. Some customers need flexibility. Zerbiq gives you both. Take a partial payment on any invoice right from the start. On Field and above, you can also split an invoice into scheduled installments — you set the total, the number of payments, and the due dates. Zerbiq bills each installment automatically, sends payment reminders, and tracks the running balance in real time.",
+          "Whether it's a one-time partial payment or a structured monthly plan for a commercial contract, the whole thing runs without you chasing anyone. More customers say yes when yes is easier to afford.",
         ],
-        badge: BADGE.field,
+        badge: BADGE.all,
       },
       {
         icon: '🔄',
@@ -213,7 +213,7 @@ const FEATURE_GROUPS = [
           "Track every potential customer from first contact to signed deal. See exactly where each lead is in your pipeline, when you last reached out, and what it will take to close them.",
           "Never lose a lead to a forgotten follow-up again.",
         ],
-        badge: BADGE.field,
+        badge: BADGE.all,
       },
       {
         icon: '📥',
@@ -222,7 +222,7 @@ const FEATURE_GROUPS = [
         desc: [
           "One line of code on your website. That's all it takes to start capturing leads directly into Zerbiq. The form matches your brand, asks the right questions, and drops new leads right into your pipeline — ready to quote.",
         ],
-        badge: BADGE.field,
+        badge: BADGE.all,
       },
       {
         icon: '⭐',
@@ -322,7 +322,7 @@ const FEATURE_GROUPS = [
           "Know what a job actually costs — not just what you charged. Zerbiq tracks clock-in and clock-out, assigns labor to each job, and shows you your real margin after labor and materials.",
           "When you know your numbers, you price better and profit more.",
         ],
-        badge: BADGE.all,
+        badge: BADGE.core,
       },
       {
         icon: '🗓️',
@@ -332,7 +332,7 @@ const FEATURE_GROUPS = [
           "Techs clock in from the app. You see who's on the clock, who's out, and who requested time off — all from one screen. Approve or deny requests with a tap.",
           "No paper timesheets, no payroll guessing.",
         ],
-        badge: BADGE.all,
+        badge: BADGE.core,
       },
       {
         icon: '🤝',
@@ -362,7 +362,7 @@ const FEATURE_GROUPS = [
           "See where your team is in real time — from any phone, no hardware required. Verify stops were made, spot techs who are running behind, and dispatch the nearest available person to an urgent job.",
           "Works with any smartphone your team already carries.",
         ],
-        badge: BADGE.all,
+        badge: BADGE.core,
       },
       {
         icon: '🏅',
@@ -372,7 +372,7 @@ const FEATURE_GROUPS = [
           "Give your team real feedback backed by real data. Customer ratings, completion rates, punctuality, job quality — Zerbiq has the numbers. Document reviews, set goals, and recognize your top performers.",
           "Build a team that wants to stay.",
         ],
-        badge: BADGE.all,
+        badge: BADGE.core,
       },
       {
         icon: '📦',
@@ -393,7 +393,7 @@ const FEATURE_GROUPS = [
           "Techs log into the mobile app with a simple employee ID and 4-digit PIN — no email, no forgotten passwords. Fast at 7 AM when hands are cold and coffee hasn't kicked in.",
           "You control who has access and what they can see.",
         ],
-        badge: BADGE.all,
+        badge: BADGE.core,
       },
       {
         icon: '🚨',
@@ -403,7 +403,7 @@ const FEATURE_GROUPS = [
           "Document workplace incidents the moment they happen. Safety issue, vehicle damage, customer complaint, equipment failure — log it with details, assign a follow-up, and track resolution.",
           "Creates the paper trail you need if anything escalates.",
         ],
-        badge: BADGE.all,
+        badge: BADGE.core,
       },
       {
         icon: '🚛',
@@ -413,7 +413,7 @@ const FEATURE_GROUPS = [
           "Before techs hit the road, they run through a digital inspection on their phone — tires, lights, fluid levels, equipment secured. Takes 90 seconds. Creates a timestamped record.",
           "Catches problems before they become breakdowns or liabilities.",
         ],
-        badge: BADGE.all,
+        badge: BADGE.core,
       },
     ],
   },
@@ -438,7 +438,7 @@ const FEATURE_GROUPS = [
           "Create and send POs to your suppliers, track delivery status, and match received items to what was ordered. No more verbal orders with no paper trail. No more receiving surprises.",
           "Clean purchasing records that feed directly into your job costs.",
         ],
-        badge: BADGE.all,
+        badge: BADGE.core,
       },
       {
         icon: '🔩',
@@ -458,7 +458,7 @@ const FEATURE_GROUPS = [
           "Your equipment is one of your biggest investments. Track every piece — mowers, blowers, trailers, pressure washers — with service history, current condition, and assignment.",
           "Know what's in use, what needs repair, and what's due for maintenance before something breaks.",
         ],
-        badge: BADGE.all,
+        badge: BADGE.core,
       },
       {
         icon: '🔧',

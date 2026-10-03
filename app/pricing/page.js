@@ -61,6 +61,14 @@ const FAQ = [
     q: 'What happens to my data if I cancel?',
     a: 'Your data is saved for 30 days after cancellation. You can export everything — customers, jobs, invoices, timecards, inventory — at any time before or after cancelling. Your data always belongs to you.',
   },
+  {
+    q: 'What if we send more texts than our plan includes?',
+    a: "Busy months happen — if you go over occasionally, there's no charge and your messages keep sending. If your business is regularly sending more than your plan includes, we'll reach out personally to set up a text package sized to how you actually work. Nothing is ever added to your bill without your OK.",
+  },
+  {
+    q: 'Is email included?',
+    a: 'Yes — email notifications are unlimited on every plan.',
+  },
 ];
 
 export const metadata = {

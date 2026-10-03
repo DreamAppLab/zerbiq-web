@@ -6,7 +6,7 @@ import { PLAN_METADATA, FEATURE_GATE, gateToValues } from '@/lib/planData';
 
 export const metadata = {
   title: 'Compare Plans — Zerbiq',
-  description: 'Every feature, every plan — side by side. Compare Core, Field, Command, and Enterprise.',
+  description: 'Every feature, every plan — side by side. Compare Solo, Core, Field, Command, and Enterprise.',
 };
 
 // Plan header data for the comparison table (derived from PLAN_METADATA).
@@ -17,6 +17,7 @@ const PLANS = PLAN_METADATA.map((p) => ({
   isContact: p.ctaExternal,
   popular: p.popular,
   subtitle: `${p.activeCustomers} active customers`,
+  cta: p.cta,
 }));
 
 // ── Comparison table feature groups ──────────────────────────────────────────
@@ -24,15 +25,16 @@ const PLANS = PLAN_METADATA.map((p) => ({
 // hard-code [true/false, …] arrays here. Update FEATURE_GATE in planData.js
 // and every table row, badge, and pricing card reflects the change automatically.
 //
-// Plan column order: [Core, Field, Command, Enterprise]
+// Plan column order: [Solo, Core, Field, Command, Enterprise]
 const FEATURE_GROUPS = [
   {
     group: 'Customer Limits',
     rows: [
-      { label: 'Users included',          values: ['Unlimited', 'Unlimited', 'Unlimited', 'Unlimited'] },
-      { label: 'Active customers',        values: ['500', '1,000', '2,500', 'Unlimited'] },
-      { label: 'Unlimited routes',        values: gateToValues(FEATURE_GATE.routeManagement) },
-      { label: 'Unlimited team members',  values: gateToValues(FEATURE_GATE.rolesPermissions) },
+      { label: 'Users included',           values: ['1 + 1', 'Unlimited', 'Unlimited', 'Unlimited', 'Unlimited'] },
+      { label: 'Active customers',          values: ['200', '500', '1,000', '2,500', 'Unlimited'] },
+      { label: 'Texts included / month',    values: ['300', '750', '1,500', '2,500', 'Custom'] },
+      { label: 'Unlimited routes',          values: gateToValues(FEATURE_GATE.routeManagement) },
+      { label: 'Unlimited team members',    values: gateToValues(FEATURE_GATE.rolesPermissions) },
     ],
   },
   {
@@ -56,8 +58,10 @@ const FEATURE_GROUPS = [
       { label: 'Invoicing',                                        values: gateToValues(FEATURE_GATE.invoicing) },
       { label: 'Transaction & bank register',                      values: gateToValues(FEATURE_GATE.transactionRegister) },
       { label: 'Credits & refunds',                                values: gateToValues(FEATURE_GATE.creditsRefunds) },
-      { label: 'Partial payments and payment plans',               values: gateToValues(FEATURE_GATE.partialPayments) },
+      { label: 'Partial payments',                                 values: gateToValues(FEATURE_GATE.partialPayments) },
+      { label: 'Structured payment plans',                         values: gateToValues(FEATURE_GATE.paymentPlans) },
       { label: 'Estimates & quotes',                               values: gateToValues(FEATURE_GATE.estimatesQuotes) },
+      { label: 'Quote approval in customer portal',                values: gateToValues(FEATURE_GATE.quoteApprovalInPortal) },
       { label: 'Online payment processing (card/ACH) ²',          values: gateToValues(FEATURE_GATE.onlinePayments) },
       { label: 'Purchase orders',                                  values: gateToValues(FEATURE_GATE.purchaseOrders) },
       { label: 'QuickBooks sync',                                  values: gateToValues(FEATURE_GATE.quickbooksSync) },
@@ -81,7 +85,7 @@ const FEATURE_GROUPS = [
       { label: 'Customer CRM',                            values: gateToValues(FEATURE_GATE.customerCrm) },
       { label: 'Custom fields',                           values: gateToValues(FEATURE_GATE.customFields) },
       { label: 'Complaints tracking',                     values: gateToValues(FEATURE_GATE.complaintsTracking) },
-      // Customer portal is on every plan. Portal also shows quote approval (Field+) and messaging (Command+).
+      // Customer portal is on every plan. Portal also shows quote approval (all plans now) and messaging (Command+).
       // Online invoice payment requires a connected payment processor. See footnote ².
       { label: 'Customer portal ²',                       values: gateToValues(FEATURE_GATE.customerPortal) },
       { label: 'Lead management (Kanban)',                 values: gateToValues(FEATURE_GATE.leadManagement) },
@@ -115,6 +119,7 @@ const FEATURE_GROUPS = [
       { label: 'Subcontractor management',          values: gateToValues(FEATURE_GATE.subcontractors) },
       { label: 'Employee ID and PIN Login',         values: gateToValues(FEATURE_GATE.employeeIdPin) },
       { label: 'Employee Asset Checkout',           values: gateToValues(FEATURE_GATE.assetCheckout) },
+      { label: 'Mobile team view',                  values: gateToValues(FEATURE_GATE.mobileTeamView) },
     ],
   },
   {
@@ -141,40 +146,51 @@ const FEATURE_GROUPS = [
   {
     group: 'Platform & Support',
     rows: [
-      { label: 'Mobile team view (iOS, Android & browser)',       values: gateToValues(FEATURE_GATE.mobileApp) },
-      { label: 'PWA (install from browser, no download required)',values: gateToValues(FEATURE_GATE.pwa) },
-      { label: 'Light Mode and Dark Mode',                        values: gateToValues(FEATURE_GATE.lightDarkMode) },
-      { label: 'Personalized Shortcuts Bar',                      values: gateToValues(FEATURE_GATE.shortcutsBar) },
-      { label: 'Custom Branding',                                 values: gateToValues(FEATURE_GATE.customBranding) },
-      { label: 'Automations & rules engine',                      values: gateToValues(FEATURE_GATE.automationsEngine) },
-      { label: 'AI support chatbot',                              values: gateToValues(FEATURE_GATE.aiChatbot) },
-      { label: 'Priority support',                                values: gateToValues(FEATURE_GATE.prioritySupport) },
-      { label: 'Dedicated onboarding',                            values: gateToValues(FEATURE_GATE.dedicatedOnboarding) },
-      { label: 'Custom integrations',                             values: gateToValues(FEATURE_GATE.customIntegrations) },
+      { label: 'Mobile app (iOS, Android & browser)',               values: gateToValues(FEATURE_GATE.mobileApp) },
+      { label: 'PWA (install from browser, no download required)',  values: gateToValues(FEATURE_GATE.pwa) },
+      { label: 'Light Mode and Dark Mode',                          values: gateToValues(FEATURE_GATE.lightDarkMode) },
+      { label: 'Personalized Shortcuts Bar',                        values: gateToValues(FEATURE_GATE.shortcutsBar) },
+      { label: 'Custom Branding',                                   values: gateToValues(FEATURE_GATE.customBranding) },
+      { label: 'Automations & rules engine',                        values: gateToValues(FEATURE_GATE.automationsEngine) },
+      { label: 'AI support chatbot',                                values: gateToValues(FEATURE_GATE.aiChatbot) },
+      { label: 'Priority support',                                  values: gateToValues(FEATURE_GATE.prioritySupport) },
+      { label: 'Dedicated onboarding',                              values: gateToValues(FEATURE_GATE.dedicatedOnboarding) },
+      { label: 'Custom integrations',                               values: gateToValues(FEATURE_GATE.customIntegrations) },
     ],
   },
 ];
 
 // ── Plan summary cards (shown above the comparison table) ─────────────────────
-// Core features that are not yet in Core are not listed here since Core says
-// "all plans include X" — they're in the table above.
 const PLAN_CARDS = [
   {
+    name: 'Solo',
+    label: '— for owner-operators',
+    color: '#22d3ee',
+    price: '$39/mo',
+    customers: '200 active customers',
+    features: [
+      'Job scheduling & tracking', 'Recurring jobs', 'Route management',
+      'Invoicing & payments', 'Estimates & quotes', 'Quote approval in portal',
+      'Partial payments', 'Online payments (card & ACH)', 'Customer portal',
+      'Lead management', 'Lead capture form', 'Customer CRM',
+      'SMS notifications', 'Appointment reminders', 'Review requests',
+      'Materials & inventory', 'Reports & analytics', 'Data export',
+      'Custom branding', 'Light & dark mode', 'Personalized shortcuts bar',
+    ],
+  },
+  {
     name: 'Core',
-    label: '— foundation',
+    label: '— everything in Solo, plus',
     color: '#f97316',
     price: '$99/mo',
     customers: '500 active customers',
     features: [
-      'Customer portal', 'Online payments (card & ACH)',
-      'Route management', 'Job scheduling', 'Invoicing & payments', 'Customer CRM',
-      'Team management', 'GPS field tracking', 'SMS notifications', 'Appointment reminders',
-      'Holiday management', 'Billing cycles', 'Truck inspection', 'PIN login',
-      'Custom branding', 'Reports & analytics', 'Data export', 'Mileage tracking',
-      'Time tracking', 'Attendance & time off', 'Purchase orders', 'Parts on order',
-      'Performance reviews', 'Incident tracking', 'Equipment tracking',
-      'Credits & refunds', 'Materials & inventory', 'Schedule & dispatch',
-      'Two-way SMS', 'Light & dark mode', 'Personalized shortcuts bar', 'Mobile team view',
+      'Unlimited team members', 'Mobile team view', 'GPS field tracking',
+      'Time tracking & timecards', 'Attendance & time off', 'Performance reviews',
+      'Incident tracking', 'Vehicle & equipment tracking', 'Purchase orders',
+      'Employee ID and PIN login', 'Tech performance reports',
+      'Route profitability reports', 'Truck inspection checklists',
+      'Roles & permissions', 'Schedule & dispatch board',
     ],
   },
   {
@@ -184,11 +200,10 @@ const PLAN_CARDS = [
     price: '$149/mo',
     customers: '1,000 active customers',
     features: [
-      'Estimates & quotes', 'Quote approval in portal', 'Route intelligence',
-      'Lead management', 'Payment plans', 'Employee asset checkout',
+      'Structured payment plans', 'Route intelligence',
       'Subcontractor management', 'Maintenance calendar',
-      'Multiple service locations (+$59/mo per location)', 'Lead capture form',
-      'Employee termination workflow',
+      'Employee asset checkout', 'Employee termination workflow',
+      'Multiple service locations (+$59/mo per location)',
     ],
   },
   {
@@ -272,7 +287,7 @@ export default function ComparePage() {
         }
         .plan-cards-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(5, 1fr);
           gap: 16px;
         }
         .compare-scroll-hint-outer {
@@ -288,7 +303,7 @@ export default function ComparePage() {
         }
         .hint-arrow-left  { display: inline-block; animation: hint-nudge-left  1.6s ease-in-out infinite; }
         .hint-arrow-right { display: inline-block; animation: hint-nudge-right 1.6s ease-in-out infinite; }
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
           .compare-scroll-hint-outer { display: flex; }
           .plan-cards-grid { grid-template-columns: 1fr; gap: 12px; }
           /* Banner mobile */
@@ -404,7 +419,7 @@ export default function ComparePage() {
               ))}
             </div>
             <div className="confirm-badge" style={{ display: 'inline-block', background: 'rgba(61,92,255,0.15)', border: '1px solid rgba(61,92,255,0.4)', borderRadius: 8, padding: '8px 16px', fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 20, position: 'relative', boxSizing: 'border-box' }}>
-              ✓ Unlimited owners, office staff, techs, and seasonal workers — one price
+              ✓ Unlimited owners, office staff, techs, and seasonal workers — one price (Core and above)
             </div>
             <p className="banner-bottom-text" style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, margin: 0, lineHeight: 1.7, position: 'relative' }}>
               Add your whole team on day one. No per-seat math. No surprise charges. No licenses to cancel when someone leaves.
@@ -431,13 +446,13 @@ export default function ComparePage() {
                   maxWidth: '100%',
                 }}
               >
-                <div className="plan-card-name" style={{ fontWeight: 900, fontSize: 20, color: plan.color, marginBottom: 2 }}>{plan.name}</div>
+                <div className="plan-card-name" style={{ fontWeight: 900, fontSize: 18, color: plan.color, marginBottom: 2 }}>{plan.name}</div>
                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginBottom: 14, lineHeight: 1.4 }}>{plan.label}</div>
-                <div className="plan-card-price" style={{ fontWeight: 900, fontSize: 26, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>{plan.price}</div>
+                <div className="plan-card-price" style={{ fontWeight: 900, fontSize: 24, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>{plan.price}</div>
                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', paddingBottom: 14, marginBottom: 14, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>{plan.customers}</div>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {plan.features.map((f) => (
-                    <li key={f} className="plan-feature-item" style={{ fontSize: 13, color: '#fff', display: 'flex', gap: 6, alignItems: 'flex-start', lineHeight: 1.45 }}>
+                    <li key={f} className="plan-feature-item" style={{ fontSize: 12, color: '#fff', display: 'flex', gap: 6, alignItems: 'flex-start', lineHeight: 1.45 }}>
                       <span style={{ color: plan.color, fontWeight: 700, flexShrink: 0 }}>+</span>
                       {f}
                     </li>
@@ -462,7 +477,7 @@ export default function ComparePage() {
             style={{
               width: '100%',
               borderCollapse: 'collapse',
-              minWidth: 640,
+              minWidth: 800,
             }}
           >
             {/* Sticky header */}
@@ -477,7 +492,7 @@ export default function ComparePage() {
                     background: 'var(--color-bg)',
                     zIndex: 10,
                     borderBottom: '2px solid rgba(255,255,255,0.1)',
-                    width: '35%',
+                    width: '28%',
                   }}
                 />
                 {PLANS.map((plan) => (
@@ -485,7 +500,7 @@ export default function ComparePage() {
                     key={plan.name}
                     style={{
                       textAlign: 'center',
-                      padding: '40px 16px 20px',
+                      padding: '40px 12px 20px',
                       position: 'sticky',
                       top: 64,
                       background: plan.popular ? 'rgba(61,92,255,0.08)' : 'var(--color-bg)',
@@ -494,7 +509,7 @@ export default function ComparePage() {
                       borderBottom: '2px solid rgba(255,255,255,0.1)',
                       borderLeft: plan.popular ? '1px solid rgba(61,92,255,0.4)' : 'none',
                       borderRight: plan.popular ? '1px solid rgba(61,92,255,0.4)' : 'none',
-                      width: '16.25%',
+                      width: '14.4%',
                     }}
                   >
                     {plan.popular && (
@@ -521,7 +536,7 @@ export default function ComparePage() {
                     <div
                       style={{
                         fontWeight: 900,
-                        fontSize: 18,
+                        fontSize: 16,
                         color: '#fff',
                         marginBottom: 4,
                       }}
@@ -531,18 +546,18 @@ export default function ComparePage() {
                     <div
                       style={{
                         color: 'var(--color-white-60)',
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: 500,
                         marginBottom: plan.subtitle ? 4 : 0,
                       }}
                     >
                       {plan.price}
                       {plan.price !== 'Custom' && (
-                        <span style={{ fontSize: 12 }}>/mo</span>
+                        <span style={{ fontSize: 11 }}>/mo</span>
                       )}
                     </div>
                     {plan.subtitle && (
-                      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.65)', fontWeight: 400 }}>
+                      <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.65)', fontWeight: 400 }}>
                         {plan.subtitle}
                       </div>
                     )}
@@ -557,7 +572,7 @@ export default function ComparePage() {
                   {/* Group header */}
                   <tr key={`group-${gi}`}>
                     <td
-                      colSpan={5}
+                      colSpan={6}
                       style={{
                         padding: '24px 16px 10px',
                         fontWeight: 800,
@@ -586,7 +601,7 @@ export default function ComparePage() {
                         <td
                           style={{
                             padding: '14px 16px',
-                            fontSize: 14,
+                            fontSize: 13,
                             color: '#fff',
                             borderBottom: '1px solid rgba(255,255,255,0.05)',
                           }}
@@ -600,7 +615,7 @@ export default function ComparePage() {
                               key={pi}
                               style={{
                                 textAlign: 'center',
-                                padding: '14px 16px',
+                                padding: '14px 12px',
                                 borderBottom: '1px solid rgba(255,255,255,0.05)',
                                 background: isCommand
                                   ? isAlt
@@ -633,7 +648,7 @@ export default function ComparePage() {
                     key={plan.name}
                     style={{
                       textAlign: 'center',
-                      padding: '32px 16px',
+                      padding: '32px 12px',
                       background: plan.popular ? 'rgba(61,92,255,0.08)' : 'transparent',
                       borderLeft: plan.popular ? '1px solid rgba(61,92,255,0.4)' : 'none',
                       borderRight: plan.popular ? '1px solid rgba(61,92,255,0.4)' : 'none',
@@ -650,19 +665,21 @@ export default function ComparePage() {
                             border: '1px solid rgba(255,255,255,0.3)',
                             color: '#fff',
                             borderRadius: 8,
-                            padding: '11px 20px',
+                            padding: '11px 16px',
                             fontWeight: 700,
-                            fontSize: 14,
+                            fontSize: 13,
                             textDecoration: 'none',
                             whiteSpace: 'nowrap',
                             transition: 'border-color 0.2s',
                           }}
                         >
-                          Contact Us
+                          {plan.cta}
                         </a>
-                        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', lineHeight: 1.55, margin: '12px 0 0', padding: '0 4px' }}>
-                          Managing 2,500+ customers? Ask about custom pricing.
-                        </p>
+                        {plan.name === 'Enterprise' && (
+                          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', lineHeight: 1.55, margin: '12px 0 0', padding: '0 4px' }}>
+                            Managing 2,500+ customers? Ask about custom pricing.
+                          </p>
+                        )}
                       </>
                     ) : (
                       <Link
@@ -671,9 +688,9 @@ export default function ComparePage() {
                         style={{
                           display: 'inline-block',
                           borderRadius: 8,
-                          padding: '11px 20px',
+                          padding: '11px 16px',
                           fontWeight: 700,
-                          fontSize: 14,
+                          fontSize: 13,
                           whiteSpace: 'nowrap',
                         }}
                       >
@@ -753,7 +770,7 @@ export default function ComparePage() {
               <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 16px' }}>
                 Jobber is a well-established platform and a legitimate choice for many field service businesses. Where we differ: Jobber charges per user seat — meaning your monthly cost goes up every time you add a
                 technician. For a team of 5–10 people, that adds up fast. We know because we lived it.{' '}
-                <ZerbiqBrand /> includes unlimited team members on every plan, always, with no per-seat fees.
+                <ZerbiqBrand /> includes unlimited team members on Core and above, always, with no per-seat fees.
               </p>
               <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 16px' }}>
                 Jobber does offer data export on certain plans, but we cannot independently verify exactly
