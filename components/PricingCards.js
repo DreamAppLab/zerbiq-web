@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { PLAN_METADATA } from '@/lib/planData';
+import { PLAN_METADATA, formatPlanPrice, formatAnnualMonthlyEquivalent } from '@/lib/planData';
 
 const ACTIVE_CUSTOMER_DEF =
   'Active customers are customers currently managed in your account. Archive any customer at any time to free up a slot — their complete history, invoices, and job records are always retained.';
@@ -10,6 +10,31 @@ const ACTIVE_CUSTOMER_DEF =
 // Feature lists for each plan (human-readable labels shown on pricing cards).
 // Plan gates (which plan first unlocks a feature) live in lib/planData.js.
 const PLAN_INCLUDED = {
+  Solo: [
+    '1 user (owner-operator)',
+    'Unlimited routes',
+    'Job scheduling & tracking',
+    'Recurring jobs',
+    'Invoicing & payments',
+    'Online payments (card & ACH)',
+    'Customer portal',
+    'Transaction & bank register',
+    'Materials catalog & inventory',
+    'Analytics & reporting dashboard',
+    'Automated customer notifications',
+    'Review requests',
+    'Mileage tracking',
+    'Mobile team view',
+    'Data export',
+    'Route management',
+    'Credits & refunds',
+    'Holiday Management',
+    'Billing Cycles',
+    'Parts on order',
+    'Custom branding',
+    'Light mode and dark mode',
+    'Personalized shortcuts bar',
+  ],
   Core: [
     'Unlimited routes',
     'Unlimited team members',
@@ -249,15 +274,22 @@ export default function PricingCards() {
         </p>
       </div>
 
-      {/* Cards grid */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-          gap: 20,
-          alignItems: 'start',
-        }}
-      >
+      {/* Cards grid — 5 across on desktop, stacked on mobile */}
+      <style>{`
+        .pricing-cards-grid {
+          display: grid;
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+          gap: 14px;
+          align-items: start;
+        }
+        @media (max-width: 1100px) {
+          .pricing-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 700px) {
+          .pricing-cards-grid { grid-template-columns: 1fr; }
+        }
+      `}</style>
+      <div className="pricing-cards-grid">
         {PLANS.map((plan) => (
           <div
             key={plan.name}
@@ -268,10 +300,11 @@ export default function PricingCards() {
                 ? '2px solid var(--color-primary)'
                 : '1px solid var(--color-white-10)',
               borderRadius: 12,
-              padding: 28,
+              padding: '22px 16px',
               position: 'relative',
               display: 'flex',
               flexDirection: 'column',
+              minWidth: 0,
             }}
           >
             {plan.badge && (
@@ -306,12 +339,25 @@ export default function PricingCards() {
               {plan.subtitle}
             </p>
 
+            {plan.banner && (
+              <p
+                style={{
+                  color: 'rgba(255,255,255,0.8)',
+                  fontSize: 12,
+                  margin: '-8px 0 16px',
+                  lineHeight: 1.5,
+                }}
+              >
+                {plan.banner}
+              </p>
+            )}
+
             {/* Price */}
             <div style={{ marginBottom: 20 }}>
-              {plan.monthlyPrice ? (
+              {plan.monthlyPrice != null ? (
                 <>
-                  <span style={{ fontSize: 40, fontWeight: 900, letterSpacing: '-0.03em' }}>
-                    ${annual ? plan.annualPrice.toLocaleString() : plan.monthlyPrice}
+                  <span style={{ fontSize: 'clamp(28px, 2vw, 36px)', fontWeight: 900, letterSpacing: '-0.03em' }}>
+                    ${annual ? formatPlanPrice(plan.annualPrice) : formatPlanPrice(plan.monthlyPrice)}
                   </span>
                   <span
                     style={{ color: 'var(--color-white-60)', fontSize: 14, marginLeft: 4 }}
@@ -326,16 +372,16 @@ export default function PricingCards() {
                         marginTop: 4,
                       }}
                     >
-                      ~${Math.round(plan.annualPrice / 12)}/mo billed annually
+                      ~${formatAnnualMonthlyEquivalent(plan.monthlyPrice, plan.annualPrice)}/mo billed annually
                     </div>
                   )}
                 </>
               ) : (
-                <span style={{ fontSize: 40, fontWeight: 900, letterSpacing: '-0.03em' }}>Custom</span>
+                <span style={{ fontSize: 'clamp(28px, 2vw, 36px)', fontWeight: 900, letterSpacing: '-0.03em' }}>Custom</span>
               )}
             </div>
 
-            {/* Unlimited users callout */}
+            {/* Users callout — Solo is a single user; every other plan is unlimited */}
             <div
               style={{
                 marginBottom: 14,
@@ -346,7 +392,9 @@ export default function PricingCards() {
               }}
             >
               <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.55 }}>
-                Unlimited users included — owners, office staff, and every tech in the field. One flat price. No per-seat fees. Ever.
+                {plan.users === 1
+                  ? '1 user included — built for the owner-operator. Team and fleet tools start on Core.'
+                  : 'Unlimited users included — owners, office staff, and every tech in the field. One flat price. No per-seat fees. Ever.'}
               </p>
             </div>
 
@@ -365,13 +413,13 @@ export default function PricingCards() {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  flexWrap: 'nowrap',
+                  flexWrap: 'wrap',
                   gap: 8,
                   marginBottom: 6,
                 }}
               >
-                <span style={{ color: 'var(--color-white-60)', whiteSpace: 'nowrap' }}>Active customers:</span>
-                <span style={{ fontWeight: 600, whiteSpace: 'nowrap' }}>{plan.activeCustomers}</span>
+                <span style={{ color: 'var(--color-white-60)' }}>Active customers:</span>
+                <span style={{ fontWeight: 600 }}>{plan.activeCustomers}</span>
               </div>
             </div>
 

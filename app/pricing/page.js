@@ -43,7 +43,7 @@ const FAQ = [
   },
   {
     q: 'What does the customer portal include?',
-    a: 'Every plan — Core, Field, Command, and Enterprise — includes a customer portal. No add-ons, no upcharges. Your customers sign in with a one-time secure link or code (no password required) and can view their service history with visit photos, see upcoming jobs, view and pay invoices online, submit service requests, and update their contact and communication preferences. On Field plans and above, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging.',
+    a: 'Every plan — Solo, Core, Field, Command, and Enterprise — includes a customer portal. No add-ons, no upcharges. Your customers sign in with a one-time secure link or code (no password required) and can view their service history with visit photos, see upcoming jobs, view and pay invoices online, submit service requests, and update their contact and communication preferences. On Field plans and above, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging.',
   },
   {
     q: 'Do I need a payment processor to use the customer portal?',
@@ -151,7 +151,7 @@ export default function PricingPage() {
               className="pricing-page-banner-subtitle"
               style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 auto 24px', maxWidth: 560, position: 'relative', textAlign: 'center' }}
             >
-              One flat price for your entire operation — no matter how many people you add.
+              Core and above: one flat price for your whole team, no matter how many people you add. Solo is one user.
             </p>
             <div className="pricing-page-strike-row" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative', justifyContent: 'center' }}>
               {[
