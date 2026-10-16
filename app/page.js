@@ -12,8 +12,8 @@ const ALL_FEATURES = [
   {
     icon: '👥',
     title: 'Unlimited users. One flat price.',
-    desc: 'Every plan includes your entire team — owners, office staff, field techs, seasonal workers. No per-seat fees. No surprise charges when you hire. No licenses to cancel when someone leaves.',
-    badge: BADGE.all,
+    desc: 'Core, Field, Command, and Enterprise include your entire team — owners, office staff, field techs, seasonal workers. No per-seat fees. No surprise charges when you hire. No licenses to cancel when someone leaves. Solo is one user.',
+    badge: BADGE.core,
   },
   {
     icon: '🗺️',
@@ -49,7 +49,7 @@ const ALL_FEATURES = [
     icon: '👥',
     title: 'Team Management',
     desc: 'Add every team member with a role and permission level. Field techs see only what they need. Admins and managers see everything. No shared logins.',
-    badge: BADGE.all,
+    badge: BADGE.core,
   },
   {
     icon: '📊',
@@ -85,7 +85,7 @@ const ALL_FEATURES = [
     icon: '🛠️',
     title: 'Equipment & Asset Tracking',
     desc: 'Log every piece of equipment with service history, assignment, condition reports, and maintenance logs.',
-    badge: BADGE.all,
+    badge: BADGE.core,
   },
   {
     icon: '📥',
@@ -109,7 +109,7 @@ const ALL_FEATURES = [
   {
     icon: '📈',
     title: 'Reports & Analytics',
-    desc: 'Revenue by route, tech, or service type. Overdue invoice aging. Customer retention rates. Job completion percentages. Tech performance rankings.',
+    desc: 'Revenue by route, tech, or service type. Overdue invoice aging. Customer retention rates. Job completion percentages.',
     badge: BADGE.all,
   },
   {
@@ -134,13 +134,13 @@ const ALL_FEATURES = [
     icon: '🛒',
     title: 'Purchase Orders',
     desc: 'Generate purchase orders by supplier with one click. Send directly to vendors by email or print on site.',
-    badge: BADGE.all,
+    badge: BADGE.core,
   },
   {
     icon: '⏱️',
     title: 'Time Tracking & Job Costing',
     desc: 'See exactly how long every job takes and what it costs in labor and materials. Compare estimated vs. actual in real time.',
-    badge: BADGE.all,
+    badge: BADGE.core,
   },
   {
     icon: '🤝',
@@ -208,19 +208,19 @@ const ALL_FEATURES = [
     icon: '📍',
     title: 'GPS Field Tracking',
     desc: 'See where your team is in real time from any phone — no hardware required. Verify stops were made, spot techs running behind, and dispatch the nearest available person to an urgent job.',
-    badge: BADGE.all,
+    badge: BADGE.core,
   },
   {
     icon: '🚛',
     title: 'Daily Truck Inspection and Checklists',
     desc: 'Before techs hit the road they complete a digital inspection on their phone — tires, lights, fluids, equipment secured. 90 seconds. Timestamped record. Catches problems before they become breakdowns or liabilities.',
-    badge: BADGE.all,
+    badge: BADGE.core,
   },
   {
     icon: '🔐',
     title: 'Employee ID and PIN Login',
     desc: 'Techs log in with a simple employee ID and 4-digit PIN — no email, no forgotten passwords. Fast at 7 AM when the day is already moving. You control who has access and what they can see.',
-    badge: BADGE.all,
+    badge: BADGE.core,
   },
   {
     icon: '🔩',
@@ -524,7 +524,7 @@ export default function HomePage() {
               </span>
             </h2>
             <p className="pricing-banner-subtitle" style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 auto 24px', maxWidth: 560, position: 'relative', textAlign: 'center' }}>
-              One flat price for your entire operation — no matter how many people you add.
+              Core and above: one flat price for your whole team, no matter how many people you add. Solo is one user.
             </p>
             <div className="strike-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative', justifyContent: 'center' }}>
               {[

@@ -2,19 +2,20 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import ZerbiqBrand from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, FEATURE_GATE, gateToValues } from '@/lib/planData';
+import { PLAN_METADATA, FEATURE_GATE, gateToValues, formatPlanPrice } from '@/lib/planData';
 
 export const metadata = {
   title: 'Compare Plans — Zerbiq',
-  description: 'Every feature, every plan — side by side. Compare Core, Field, Command, and Enterprise.',
+  description: 'Every feature, every plan — side by side. Compare Solo, Core, Field, Command, and Enterprise.',
 };
 
 // Plan header data for the comparison table (derived from PLAN_METADATA).
 const PLANS = PLAN_METADATA.map((p) => ({
   name: p.name,
-  price: p.monthlyPrice ? `$${p.monthlyPrice}` : 'Custom',
+  price: p.monthlyPrice != null ? `$${formatPlanPrice(p.monthlyPrice)}` : 'Custom',
   href: p.ctaHref,
-  isContact: p.ctaExternal,
+  cta: p.cta,
+  isExternal: p.ctaExternal,
   popular: p.popular,
   subtitle: `${p.activeCustomers} active customers`,
 }));
@@ -24,13 +25,13 @@ const PLANS = PLAN_METADATA.map((p) => ({
 // hard-code [true/false, …] arrays here. Update FEATURE_GATE in planData.js
 // and every table row, badge, and pricing card reflects the change automatically.
 //
-// Plan column order: [Core, Field, Command, Enterprise]
+// Plan column order: [Solo, Core, Field, Command, Enterprise]
 const FEATURE_GROUPS = [
   {
     group: 'Customer Limits',
     rows: [
-      { label: 'Users included',          values: ['Unlimited', 'Unlimited', 'Unlimited', 'Unlimited'] },
-      { label: 'Active customers',        values: ['500', '1,000', '2,500', 'Unlimited'] },
+      { label: 'Users included',          values: PLAN_METADATA.map((p) => (p.users != null ? String(p.users) : 'Unlimited')) },
+      { label: 'Active customers',        values: PLAN_METADATA.map((p) => p.activeCustomers) },
       { label: 'Unlimited routes',        values: gateToValues(FEATURE_GATE.routeManagement) },
       { label: 'Unlimited team members',  values: gateToValues(FEATURE_GATE.rolesPermissions) },
     ],
@@ -160,28 +161,39 @@ const FEATURE_GROUPS = [
 // "all plans include X" — they're in the table above.
 const PLAN_CARDS = [
   {
+    name: 'Solo',
+    label: '— owner-operator',
+    color: '#f59e0b',
+    price: '$39.99/mo',
+    customers: '200 active customers',
+    features: [
+      '1 user', 'Customer portal', 'Online payments (card & ACH)',
+      'Route management', 'Job scheduling', 'Invoicing & payments', 'Customer CRM',
+      'SMS notifications', 'Appointment reminders', 'Holiday management', 'Billing cycles',
+      'Custom branding', 'Reports & analytics', 'Data export', 'Mileage tracking',
+      'Parts on order', 'Credits & refunds', 'Materials & inventory', 'Schedule & dispatch',
+      'Two-way SMS', 'Light & dark mode', 'Personalized shortcuts bar', 'Mobile app',
+    ],
+  },
+  {
     name: 'Core',
-    label: '— foundation',
+    label: '— everything in Solo, plus',
     color: '#f97316',
-    price: '$99/mo',
+    price: '$119/mo',
     customers: '500 active customers',
     features: [
-      'Customer portal', 'Online payments (card & ACH)',
-      'Route management', 'Job scheduling', 'Invoicing & payments', 'Customer CRM',
-      'Team management', 'GPS field tracking', 'SMS notifications', 'Appointment reminders',
-      'Holiday management', 'Billing cycles', 'Truck inspection', 'PIN login',
-      'Custom branding', 'Reports & analytics', 'Data export', 'Mileage tracking',
-      'Time tracking', 'Attendance & time off', 'Purchase orders', 'Parts on order',
-      'Performance reviews', 'Incident tracking', 'Equipment tracking',
-      'Credits & refunds', 'Materials & inventory', 'Schedule & dispatch',
-      'Two-way SMS', 'Light & dark mode', 'Personalized shortcuts bar', 'Mobile team view',
+      'Unlimited users', 'Team management', 'Roles & permissions',
+      'GPS field tracking', 'Truck inspection', 'Employee ID & PIN login',
+      'Time tracking & timecards', 'Attendance & time off', 'Purchase orders',
+      'Performance reviews', 'Incident tracking', 'Vehicle & equipment tracking',
+      'Tech performance reports',
     ],
   },
   {
     name: 'Field',
     label: '— everything in Core, plus',
     color: '#3b82f6',
-    price: '$149/mo',
+    price: '$169/mo',
     customers: '1,000 active customers',
     features: [
       'Estimates & quotes', 'Quote approval in portal', 'Route intelligence',
@@ -195,7 +207,7 @@ const PLAN_CARDS = [
     name: 'Command',
     label: '— everything in Field, plus',
     color: '#10b981',
-    price: '$199/mo',
+    price: '$209/mo',
     customers: '2,500 active customers',
     features: [
       'AI support chatbot', 'Automations engine', 'QuickBooks sync',
@@ -272,7 +284,7 @@ export default function ComparePage() {
         }
         .plan-cards-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(5, minmax(0, 1fr));
           gap: 16px;
         }
         .compare-scroll-hint-outer {
@@ -288,6 +300,9 @@ export default function ComparePage() {
         }
         .hint-arrow-left  { display: inline-block; animation: hint-nudge-left  1.6s ease-in-out infinite; }
         .hint-arrow-right { display: inline-block; animation: hint-nudge-right 1.6s ease-in-out infinite; }
+        @media (max-width: 1100px) {
+          .plan-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
         @media (max-width: 768px) {
           .compare-scroll-hint-outer { display: flex; }
           .plan-cards-grid { grid-template-columns: 1fr; gap: 12px; }
@@ -389,7 +404,7 @@ export default function ComparePage() {
               </span>
             </h2>
             <p className="pricing-banner-subtitle" style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1.65, margin: '0 auto 24px', maxWidth: 560, position: 'relative', textAlign: 'center' }}>
-              One flat price for your entire operation — no matter how many people you add.
+              Core and above: one flat price for your whole team, no matter how many people you add. Solo is one user.
             </p>
             <div className="strike-badges-row" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, position: 'relative', justifyContent: 'center' }}>
               {[
@@ -462,7 +477,7 @@ export default function ComparePage() {
             style={{
               width: '100%',
               borderCollapse: 'collapse',
-              minWidth: 640,
+              minWidth: 960,
             }}
           >
             {/* Sticky header */}
@@ -477,7 +492,7 @@ export default function ComparePage() {
                     background: 'var(--color-bg)',
                     zIndex: 10,
                     borderBottom: '2px solid rgba(255,255,255,0.1)',
-                    width: '35%',
+                    width: '30%',
                   }}
                 />
                 {PLANS.map((plan) => (
@@ -494,7 +509,7 @@ export default function ComparePage() {
                       borderBottom: '2px solid rgba(255,255,255,0.1)',
                       borderLeft: plan.popular ? '1px solid rgba(61,92,255,0.4)' : 'none',
                       borderRight: plan.popular ? '1px solid rgba(61,92,255,0.4)' : 'none',
-                      width: '16.25%',
+                      width: '14%',
                     }}
                   >
                     {plan.popular && (
@@ -557,7 +572,7 @@ export default function ComparePage() {
                   {/* Group header */}
                   <tr key={`group-${gi}`}>
                     <td
-                      colSpan={5}
+                      colSpan={PLANS.length + 1}
                       style={{
                         padding: '24px 16px 10px',
                         fontWeight: 800,
@@ -640,7 +655,7 @@ export default function ComparePage() {
                       borderBottom: plan.popular ? '1px solid rgba(61,92,255,0.4)' : 'none',
                     }}
                   >
-                    {plan.isContact ? (
+                    {plan.isExternal ? (
                       <>
                         <a
                           href={plan.href}
@@ -650,19 +665,22 @@ export default function ComparePage() {
                             border: '1px solid rgba(255,255,255,0.3)',
                             color: '#fff',
                             borderRadius: 8,
-                            padding: '11px 20px',
+                            padding: '11px 12px',
                             fontWeight: 700,
-                            fontSize: 14,
+                            fontSize: 13,
                             textDecoration: 'none',
-                            whiteSpace: 'nowrap',
+                            whiteSpace: 'normal',
+                            lineHeight: 1.35,
                             transition: 'border-color 0.2s',
                           }}
                         >
-                          Contact Us
+                          {plan.cta}
                         </a>
-                        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', lineHeight: 1.55, margin: '12px 0 0', padding: '0 4px' }}>
-                          Managing 2,500+ customers? Ask about custom pricing.
-                        </p>
+                        {plan.name === 'Enterprise' && (
+                          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', lineHeight: 1.55, margin: '12px 0 0', padding: '0 4px' }}>
+                            Managing 2,500+ customers? Ask about custom pricing.
+                          </p>
+                        )}
                       </>
                     ) : (
                       <Link
@@ -671,10 +689,11 @@ export default function ComparePage() {
                         style={{
                           display: 'inline-block',
                           borderRadius: 8,
-                          padding: '11px 20px',
+                          padding: '11px 10px',
                           fontWeight: 700,
-                          fontSize: 14,
-                          whiteSpace: 'nowrap',
+                          fontSize: 13,
+                          whiteSpace: 'normal',
+                          lineHeight: 1.35,
                         }}
                       >
                         Start Free Trial
@@ -753,7 +772,7 @@ export default function ComparePage() {
               <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 16px' }}>
                 Jobber is a well-established platform and a legitimate choice for many field service businesses. Where we differ: Jobber charges per user seat — meaning your monthly cost goes up every time you add a
                 technician. For a team of 5–10 people, that adds up fast. We know because we lived it.{' '}
-                <ZerbiqBrand /> includes unlimited team members on every plan, always, with no per-seat fees.
+                <ZerbiqBrand /> includes unlimited team members on Core and above, with no per-seat fees. Solo is one user.
               </p>
               <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 16px' }}>
                 Jobber does offer data export on certain plans, but we cannot independently verify exactly
