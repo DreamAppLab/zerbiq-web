@@ -36,38 +36,18 @@ const PLAN_INCLUDED = {
     'Personalized shortcuts bar',
   ],
   Core: [
-    'Unlimited routes',
+    'Everything in Solo',
     'Unlimited team members',
-    'Job scheduling & tracking',
-    'Recurring jobs',
-    'Invoicing & payments',
-    'Online payments (card & ACH)',
-    'Customer portal',
-    'Transaction & bank register',
-    'Materials catalog & inventory',
-    'Analytics & reporting dashboard',
-    'Automated customer notifications',
-    'Review requests',
     'Vehicle & equipment tracking',
     'Attendance & time off',
     'Time tracking & timecards',
-    'Mileage tracking',
-    'Mobile team view',
-    'Data export',
-    'Route management',
-    'Credits & refunds',
     'Performance reviews',
     'Incident tracking',
-    'Holiday Management',
-    'Billing Cycles',
     'GPS field tracking (phone-based, no hardware)',
     'Daily truck inspection and checklists',
     'Employee ID and PIN login',
-    'Parts on order',
     'Purchase orders',
-    'Custom branding',
-    'Light mode and dark mode',
-    'Personalized shortcuts bar',
+    'Tech performance reports',
   ],
   Field: [
     'Everything in Core',
@@ -339,19 +319,6 @@ export default function PricingCards() {
               {plan.subtitle}
             </p>
 
-            {plan.banner && (
-              <p
-                style={{
-                  color: 'rgba(255,255,255,0.8)',
-                  fontSize: 12,
-                  margin: '-8px 0 16px',
-                  lineHeight: 1.5,
-                }}
-              >
-                {plan.banner}
-              </p>
-            )}
-
             {/* Price */}
             <div style={{ marginBottom: 20 }}>
               {plan.monthlyPrice != null ? (
@@ -393,7 +360,7 @@ export default function PricingCards() {
             >
               <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.55 }}>
                 {plan.users === 1
-                  ? '1 user included — built for the owner-operator. Team and fleet tools start on Core.'
+                  ? "1 user included — built for owner-operators. Everything you need to run, bill and grow — no team features you don't use."
                   : 'Unlimited users included — owners, office staff, and every tech in the field. One flat price. No per-seat fees. Ever.'}
               </p>
             </div>

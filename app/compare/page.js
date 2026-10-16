@@ -164,7 +164,7 @@ const PLAN_CARDS = [
     name: 'Solo',
     label: '— owner-operator',
     color: '#f59e0b',
-    price: '$39.99/mo',
+    price: '$39/mo',
     customers: '200 active customers',
     features: [
       '1 user', 'Customer portal', 'Online payments (card & ACH)',
