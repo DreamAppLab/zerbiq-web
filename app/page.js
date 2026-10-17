@@ -262,7 +262,7 @@ const ALL_FEATURES = [
   {
     icon: '📍',
     title: 'Multiple Service Locations',
-    desc: 'Running more than one location? Add additional service areas and manage them all from one login. Routes, teams, customers, and billing stay organized by location. Available on Field and above — $59/mo per additional location on Field, $79/mo on Command and Enterprise.',
+    desc: 'Running more than one location? Add additional service areas and manage them all from one login. Routes, teams, customers, and billing stay organized by location. Available on Field and above — $69/mo per additional location on Field, $89/mo on Command and Enterprise.',
     badge: BADGE.field,
   },
 ];

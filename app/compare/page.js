@@ -199,7 +199,7 @@ const PLAN_CARDS = [
       'Estimates & quotes', 'Quote approval in portal', 'Route intelligence',
       'Lead management', 'Payment plans', 'Employee asset checkout',
       'Subcontractor management', 'Maintenance calendar',
-      'Multiple service locations (+$59/mo per location)', 'Lead capture form',
+      'Multiple service locations (+$69/mo per location)', 'Lead capture form',
       'Employee termination workflow',
     ],
   },
@@ -713,8 +713,8 @@ export default function ComparePage() {
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '0 0 8px', lineHeight: 1.75 }}>
             ¹ Multiple service locations available on Field and above.
-            Field plans: +$59/mo per additional location.
-            Command plans: +$79/mo per additional location.
+            Field plans: +$69/mo per additional location.
+            Command plans: +$89/mo per additional location.
           </p>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
             ² Online payment processing (card &amp; ACH) and online invoice payment through the customer portal are included on every plan.

@@ -61,7 +61,7 @@ const PLAN_INCLUDED = {
     'Employee termination workflow',
     'Route Intelligence',
     'Employee asset checkout',
-    'Multiple service locations (+$59/mo per location)',
+    'Multiple service locations (+$69/mo per location)',
   ],
   Command: [
     'Everything in Field',
@@ -72,7 +72,7 @@ const PLAN_INCLUDED = {
     'AI support chatbot',
     'Automated follow-up sequences',
     'Priority support',
-    'Multiple service locations (+$79/mo per location)',
+    'Multiple service locations (+$89/mo per location)',
   ],
   Enterprise: [
     'Everything in Command',

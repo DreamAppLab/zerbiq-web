@@ -120,7 +120,7 @@ const FEATURE_GROUPS = [
         screenshot: '47-multi-location.png',
         desc: [
           "Running more than one location? Add additional service areas to your account and manage them all from one login. Routes, teams, customers, and billing stay organized by location.",
-          "Available on Field and above — each additional location is $59/mo on Field and $79/mo on Command and Enterprise.",
+          "Available on Field and above — each additional location is $69/mo on Field and $89/mo on Command and Enterprise.",
         ],
         badge: BADGE.field,
       },
