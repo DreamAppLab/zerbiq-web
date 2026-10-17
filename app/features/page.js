@@ -1,8 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import Link from 'next/link';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE } from '@/lib/planData';
+import { BADGE, EARLY_ACCESS_MAILTO } from '@/lib/planData';
 
 export const metadata = {
   title: 'Features — Zerbiq',
@@ -120,7 +119,7 @@ const FEATURE_GROUPS = [
         screenshot: '47-multi-location.png',
         desc: [
           "Running more than one location? Add additional service areas to your account and manage them all from one login. Routes, teams, customers, and billing stay organized by location.",
-          "Available on Field and above — each additional location is $59/mo on Field and $79/mo on Command and Enterprise.",
+          "Available on Field and above — each additional location is $69/mo on Field and $89/mo on Command and Enterprise.",
         ],
         badge: BADGE.field,
       },
@@ -786,8 +785,8 @@ export default function FeaturesPage() {
                     {brandify(p)}
                   </p>
                 ))}
-                <Link
-                  href="/signup"
+                <a
+                  href={EARLY_ACCESS_MAILTO}
                   className="btn-primary"
                   style={{
                     display: 'inline-block',
@@ -797,8 +796,8 @@ export default function FeaturesPage() {
                     fontSize: 14,
                   }}
                 >
-                  Try it free →
-                </Link>
+                  Request Early Access
+                </a>
                 <div
                   style={{
                     fontSize: 11,
@@ -868,8 +867,8 @@ export default function FeaturesPage() {
                         {brandify(p)}
                       </p>
                     ))}
-                    <Link
-                      href="/signup"
+                    <a
+                      href={EARLY_ACCESS_MAILTO}
                       className="btn-primary"
                       style={{
                         display: 'inline-block',
@@ -879,8 +878,8 @@ export default function FeaturesPage() {
                         fontSize: 14,
                       }}
                     >
-                      Try it free →
-                    </Link>
+                      Request Early Access
+                    </a>
                     <div
                       style={{
                         fontSize: 11,

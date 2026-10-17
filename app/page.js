@@ -1,9 +1,8 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
-import Link from 'next/link';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, TRIAL } from '@/lib/planData';
+import { BADGE, TRIAL, EARLY_ACCESS_MAILTO } from '@/lib/planData';
 
 const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
@@ -262,7 +261,7 @@ const ALL_FEATURES = [
   {
     icon: '📍',
     title: 'Multiple Service Locations',
-    desc: 'Running more than one location? Add additional service areas and manage them all from one login. Routes, teams, customers, and billing stay organized by location. Available on Field and above — $59/mo per additional location on Field, $79/mo on Command and Enterprise.',
+    desc: 'Running more than one location? Add additional service areas and manage them all from one login. Routes, teams, customers, and billing stay organized by location. Available on Field and above — $69/mo per additional location on Field, $89/mo on Command and Enterprise.',
     badge: BADGE.field,
   },
 ];
@@ -398,8 +397,8 @@ export default function HomePage() {
               marginBottom: 20,
             }}
           >
-            <Link
-              href="/signup"
+            <a
+              href={EARLY_ACCESS_MAILTO}
               className="btn-primary"
               style={{
                 borderRadius: 10,
@@ -409,8 +408,8 @@ export default function HomePage() {
                 display: 'inline-block',
               }}
             >
-              Start Free Trial — It&apos;s Free
-            </Link>
+              Request Early Access
+            </a>
             <a
               href={DEMO_URL}
               target="_blank"
@@ -631,8 +630,8 @@ export default function HomePage() {
                       {brandify(f.desc)}
                     </p>
                     <div>
-                      <Link
-                        href="/signup"
+                      <a
+                        href={EARLY_ACCESS_MAILTO}
                         className="btn-primary"
                         style={{
                           display: 'inline-block',
@@ -642,8 +641,8 @@ export default function HomePage() {
                           fontSize: 13,
                         }}
                       >
-                        Try it free →
-                      </Link>
+                        Request Early Access
+                      </a>
                       <div
                         style={{
                           fontSize: 11,
@@ -827,8 +826,8 @@ export default function HomePage() {
                 are fully set up in under an hour.
               </p>
               <div>
-                <Link
-                  href="/signup"
+                <a
+                  href={EARLY_ACCESS_MAILTO}
                   style={{
                     display: 'inline-block',
                     background: 'transparent',
@@ -842,8 +841,8 @@ export default function HomePage() {
                     transition: 'background 0.2s, color 0.2s',
                   }}
                 >
-                  Start Free Trial
-                </Link>
+                  Request Early Access
+                </a>
                 <div
                   style={{
                     fontSize: 12,
@@ -970,12 +969,12 @@ export default function HomePage() {
           </a>
           <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: 0 }}>
             Prefer to explore on your own?{' '}
-            <Link
-              href="/signup"
+            <a
+              href={EARLY_ACCESS_MAILTO}
               style={{ color: '#fff', fontWeight: 600, textDecoration: 'none' }}
             >
-              Start your free trial →
-            </Link>
+              Request early access →
+            </a>
           </p>
         </div>
       </section>

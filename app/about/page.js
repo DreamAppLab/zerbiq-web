@@ -3,6 +3,7 @@ import Footer from '@/components/Footer';
 import HeroBackground from '@/components/HeroBackground';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
 import Link from 'next/link';
+import { EARLY_ACCESS_MAILTO } from '@/lib/planData';
 
 export const metadata = {
   title: 'About — Zerbiq',
@@ -61,9 +62,9 @@ export default function AboutPage() {
 
           {/* CTA */}
           <div style={{ marginTop: 56, display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
-            <Link href="/signup" className="btn-primary" style={{ display: 'inline-block', borderRadius: 10, padding: '14px 32px', fontWeight: 700, fontSize: 16 }}>
-              Start Free Trial
-            </Link>
+            <a href={EARLY_ACCESS_MAILTO} className="btn-primary" style={{ display: 'inline-block', borderRadius: 10, padding: '14px 32px', fontWeight: 700, fontSize: 16 }}>
+              Request Early Access
+            </a>
             <Link href="/features" style={{ color: 'var(--color-white-60)', fontSize: 15, textDecoration: 'none', fontWeight: 500 }}>
               See all features →
             </Link>
