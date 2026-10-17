@@ -696,7 +696,7 @@ export default function ComparePage() {
                           lineHeight: 1.35,
                         }}
                       >
-                        Start Free Trial
+                        {plan.cta}
                       </Link>
                     )}
                   </td>

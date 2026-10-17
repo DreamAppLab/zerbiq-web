@@ -1,8 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import Link from 'next/link';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE } from '@/lib/planData';
+import { BADGE, EARLY_ACCESS_MAILTO } from '@/lib/planData';
 
 export const metadata = {
   title: 'Features — Zerbiq',
@@ -786,8 +785,8 @@ export default function FeaturesPage() {
                     {brandify(p)}
                   </p>
                 ))}
-                <Link
-                  href="/signup"
+                <a
+                  href={EARLY_ACCESS_MAILTO}
                   className="btn-primary"
                   style={{
                     display: 'inline-block',
@@ -797,8 +796,8 @@ export default function FeaturesPage() {
                     fontSize: 14,
                   }}
                 >
-                  Try it free →
-                </Link>
+                  Request Early Access
+                </a>
                 <div
                   style={{
                     fontSize: 11,
@@ -868,8 +867,8 @@ export default function FeaturesPage() {
                         {brandify(p)}
                       </p>
                     ))}
-                    <Link
-                      href="/signup"
+                    <a
+                      href={EARLY_ACCESS_MAILTO}
                       className="btn-primary"
                       style={{
                         display: 'inline-block',
@@ -879,8 +878,8 @@ export default function FeaturesPage() {
                         fontSize: 14,
                       }}
                     >
-                      Try it free →
-                    </Link>
+                      Request Early Access
+                    </a>
                     <div
                       style={{
                         fontSize: 11,

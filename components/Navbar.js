@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import ZerbiqBrand from '@/components/ZerbiqBrand';
 import Link from 'next/link';
+import { EARLY_ACCESS_MAILTO } from '@/lib/planData';
 import ZIcon from './ZIcon';
 
 const NAV_LINKS = [
@@ -156,9 +157,9 @@ export default function Navbar() {
             >
               Login
             </a>
-            <Link href="/signup" className="nav-cta">
-              Start Free Trial
-            </Link>
+            <a href={EARLY_ACCESS_MAILTO} className="nav-cta">
+              Request Early Access
+            </a>
           </div>
 
           {/* Mobile hamburger */}
@@ -223,14 +224,14 @@ export default function Navbar() {
             Login
           </a>
           <div style={{ marginTop: 32 }}>
-            <Link
-              href="/signup"
+            <a
+              href={EARLY_ACCESS_MAILTO}
               className="nav-cta"
               onClick={() => setMenuOpen(false)}
               style={{ display: 'inline-block', padding: '14px 28px', fontSize: 16 }}
             >
-              Start Free Trial
-            </Link>
+              Request Early Access
+            </a>
           </div>
         </div>
       )}
