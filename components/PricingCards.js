@@ -78,7 +78,6 @@ const PLAN_INCLUDED = {
     'Everything in Command',
     'No active customer limit',
     'White-glove onboarding',
-    'Direct support',
     'Custom pricing',
   ],
 };
@@ -254,13 +253,39 @@ export default function PricingCards() {
         </p>
       </div>
 
-      {/* Cards grid — 5 across on desktop, stacked on mobile */}
+      {/* Cards grid — 5 across on desktop, stacked on mobile.
+          Container queries use the card content box. Inter measures
+          "Active customers:" at 110.5px and "Unlimited" at 59.7px, so they
+          share one line until that box is about 188px. Narrower cards reserve
+          two lines (13px * 1.4 plus 12px padding) so the buttons still align. */}
       <style>{`
         .pricing-cards-grid {
           display: grid;
           grid-template-columns: repeat(5, minmax(0, 1fr));
           gap: 14px;
           align-items: start;
+        }
+        .pricing-card {
+          container-type: inline-size;
+        }
+        .pricing-card .btn-cta-filled,
+        .pricing-card .btn-cta-ghost {
+          border-width: 1px;
+          border-style: solid;
+        }
+        .pricing-card .btn-cta-filled {
+          border-color: var(--color-primary);
+        }
+        @container (max-width: 188px) {
+          .plan-limits {
+            min-height: calc(2 * 13px * 1.4 + 12px + 12px);
+          }
+          .pricing-card .btn-cta-filled,
+          .pricing-card .btn-cta-ghost {
+            font-size: 13px;
+            padding: 12px 8px;
+            white-space: nowrap;
+          }
         }
         @media (max-width: 1100px) {
           .pricing-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -273,12 +298,12 @@ export default function PricingCards() {
         {PLANS.map((plan) => (
           <div
             key={plan.name}
-            className={plan.popular ? 'card-popular' : ''}
+            className={`pricing-card${plan.popular ? ' card-popular' : ''}`}
             style={{
               background: 'var(--color-raised)',
               border: plan.popular
                 ? '2px solid var(--color-primary)'
-                : '1px solid var(--color-white-10)',
+                : '2px solid var(--color-white-10)',
               borderRadius: 12,
               padding: '22px 16px',
               position: 'relative',
@@ -314,6 +339,7 @@ export default function PricingCards() {
                 fontSize: 13,
                 margin: '0 0 20px',
                 lineHeight: 1.5,
+                minHeight: 'calc(2 * 13px * 1.5)',
               }}
             >
               {plan.subtitle}
@@ -331,24 +357,31 @@ export default function PricingCards() {
                   >
                     /{annual ? 'yr' : 'mo'}
                   </span>
-                  {annual && (
-                    <div
-                      style={{
-                        color: 'var(--color-white-60)',
-                        fontSize: 12,
-                        marginTop: 4,
-                      }}
-                    >
-                      ~${formatAnnualMonthlyEquivalent(plan.monthlyPrice, plan.annualPrice)}/mo billed annually
-                    </div>
-                  )}
                 </>
               ) : (
                 <span style={{ fontSize: 'clamp(28px, 2vw, 36px)', fontWeight: 900, letterSpacing: '-0.03em' }}>Custom</span>
               )}
+              {annual && (
+                <div
+                  style={{
+                    color: 'var(--color-white-60)',
+                    fontSize: 12,
+                    lineHeight: 1.4,
+                    marginTop: 4,
+                  }}
+                >
+                  {plan.monthlyPrice != null
+                    ? `~$${formatAnnualMonthlyEquivalent(plan.monthlyPrice, plan.annualPrice)}/mo billed annually`
+                    : '\u00A0'}
+                </div>
+              )}
             </div>
 
-            {/* Users callout — Solo is a single user; every other plan is unlimited */}
+            {/* Users callout — Solo is a single user; every other plan is unlimited.
+                Height is 6 lines of this 13px / 1.55 copy, plus the 12px vertical
+                padding and 1px border (border-box). That is the tallest wrap of
+                this copy in the five-column layout. Narrower columns that wrap
+                to 7 lines already match each other and are not clipped. */}
             <div
               style={{
                 marginBottom: 14,
@@ -356,6 +389,7 @@ export default function PricingCards() {
                 border: '1px solid rgba(61,92,255,0.4)',
                 borderRadius: 8,
                 padding: '12px 14px',
+                minHeight: 'calc(6 * 13px * 1.55 + 12px + 12px + 1px + 1px)',
               }}
             >
               <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.55 }}>
@@ -365,28 +399,30 @@ export default function PricingCards() {
               </p>
             </div>
 
-            {/* Limits */}
+            {/* Limits. Five-across, this row is two lines tall once "Unlimited"
+                wraps; the container rule above reserves that height on every card. */}
             <div
+              className="plan-limits"
               style={{
                 background: 'var(--color-surface)',
                 borderRadius: 8,
-                padding: '12px 14px',
+                padding: '12px 6px',
                 marginBottom: 24,
                 fontSize: 13,
+                lineHeight: 1.4,
               }}
             >
               <div
                 style={{
                   display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
                   flexWrap: 'wrap',
-                  gap: 8,
-                  marginBottom: 6,
+                  justifyContent: 'space-between',
+                  alignItems: 'baseline',
+                  columnGap: 6,
                 }}
               >
                 <span style={{ color: 'var(--color-white-60)' }}>Active customers:</span>
-                <span style={{ fontWeight: 600 }}>{plan.activeCustomers}</span>
+                <span style={{ fontWeight: 600, marginLeft: 'auto', whiteSpace: 'nowrap' }}>{plan.activeCustomers}</span>
               </div>
             </div>
 
