@@ -1,4 +1,4 @@
-/* Inter is self-hosted by next/font (app/layout.js), so no visitor request goes to Google. */
+/* Inter is self-hosted (@fontsource-variable/inter, imported in app/layout.js), so no visitor request goes to Google. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,7 +11,7 @@
   --color-white-60: rgba(255, 255, 255, 0.6);
   --color-white-30: rgba(255, 255, 255, 0.3);
   --color-white-10: rgba(255, 255, 255, 0.1);
-  --font-family: var(--font-inter, 'Inter'), sans-serif;
+  --font-family: 'Inter Variable', 'Inter', sans-serif;
 }
 
 * {
