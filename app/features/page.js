@@ -1,7 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, EARLY_ACCESS_MAILTO } from '@/lib/planData';
+import { BADGE, EARLY_ACCESS_MAILTO, MULTI_LOCATION_FEE } from '@/lib/planData';
 
 export const metadata = {
   title: 'Features — Zerbiq',
@@ -119,7 +119,7 @@ const FEATURE_GROUPS = [
         screenshot: '47-multi-location.png',
         desc: [
           "Running more than one location? Add additional service areas to your account and manage them all from one login. Routes, teams, customers, and billing stay organized by location.",
-          "Available on Field and above — each additional location is $69/mo on Field and $89/mo on Command and Enterprise.",
+          `Available on Field and above — each additional location is $${MULTI_LOCATION_FEE.Field}/mo on Field and $${MULTI_LOCATION_FEE.Command}/mo on Command.`,
         ],
         badge: BADGE.field,
       },
@@ -726,7 +726,7 @@ export default function FeaturesPage() {
               className="features-confirm-badge"
               style={{ display: 'inline-block', background: 'rgba(61,92,255,0.15)', border: '1px solid rgba(61,92,255,0.4)', borderRadius: 8, padding: '8px 16px', fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 20, position: 'relative', boxSizing: 'border-box' }}
             >
-              ✓ Unlimited owners, office staff, techs, and seasonal workers — one price
+              ✓ Core and above: unlimited owners, office staff, techs, and seasonal workers — one price
             </div>
             <p
               className="features-banner-bottom"
