@@ -423,7 +423,7 @@ export default function ComparePage() {
               ))}
             </div>
             <div className="confirm-badge" style={{ display: 'inline-block', background: 'rgba(61,92,255,0.15)', border: '1px solid rgba(61,92,255,0.4)', borderRadius: 8, padding: '8px 16px', fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 20, position: 'relative', boxSizing: 'border-box' }}>
-              ✓ Unlimited owners, office staff, techs, and seasonal workers — one price
+              ✓ Core and above: unlimited owners, office staff, techs, and seasonal workers — one price
             </div>
             <p className="banner-bottom-text" style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, margin: 0, lineHeight: 1.7, position: 'relative' }}>
               Add your whole team on day one. No per-seat math. No surprise charges. No licenses to cancel when someone leaves.

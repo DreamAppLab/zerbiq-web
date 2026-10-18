@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, TRIAL, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE } from '@/lib/planData';
+import { BADGE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE } from '@/lib/planData';
 
 const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
@@ -10,7 +10,7 @@ const ALL_FEATURES = [
     // ── All Plans ─────────────────────────────────────────────────────────────
   {
     icon: '👥',
-    title: 'Unlimited users. One flat price.',
+    title: 'Unlimited users on Core and above. One flat price.',
     desc: 'Core, Field, Command, and Enterprise include your entire team — owners, office staff, field techs, seasonal workers. No per-seat fees. No surprise charges when you hire. No licenses to cancel when someone leaves. Solo is one user.',
     badge: BADGE.core,
   },
@@ -428,7 +428,7 @@ export default function HomePage() {
           </div>
 
           <p style={{ color: 'var(--color-white-60)', fontSize: 13, margin: '0 0 56px' }}>
-            No credit card required · {TRIAL.days}-day free trial · Cancel anytime
+            Flat pricing · Unlimited users on Core and above · Cancel anytime
           </p>
 
           {/* App screenshot */}
@@ -538,7 +538,7 @@ export default function HomePage() {
               ))}
             </div>
             <div className="confirm-badge" style={{ display: 'inline-block', background: 'rgba(61,92,255,0.15)', border: '1px solid rgba(61,92,255,0.4)', borderRadius: 8, padding: '8px 16px', fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 20, position: 'relative', boxSizing: 'border-box' }}>
-              ✓ Unlimited owners, office staff, techs, and seasonal workers — one price
+              ✓ Core and above: unlimited owners, office staff, techs, and seasonal workers — one price
             </div>
             <p className="banner-bottom-text" style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, margin: 0, lineHeight: 1.7, position: 'relative' }}>
               Add your whole team on day one. No per-seat math. No surprise charges. No licenses to cancel when someone leaves.
@@ -741,7 +741,7 @@ export default function HomePage() {
               marginBottom: 48,
             }}
           >
-            Start free. Scale when you&apos;re ready. Cancel anytime.
+            Pick the plan that fits. Scale when you&apos;re ready. Cancel anytime.
           </p>
           <PricingCards />
         </div>
@@ -949,7 +949,7 @@ export default function HomePage() {
             }}
           >
             Book a 30-minute demo. We&apos;ll walk through the platform live, answer your
-            questions, and get you set up for your free trial.
+            questions, and help you pick the right plan.
           </p>
           <a
             href={DEMO_URL}
