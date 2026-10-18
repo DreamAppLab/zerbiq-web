@@ -25,7 +25,7 @@ export default function TermsPage() {
             Terms of Service
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 14, marginBottom: 48 }}>
-            Last updated: September 5, 2026
+            Last updated: October 18, 2026
           </p>
 
           <div
@@ -115,9 +115,25 @@ export default function TermsPage() {
               </p>
             </div>
 
+            {/* DRAFT for attorney review (Oct 2026): section 7 is new. */}
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                7. Prohibited Uses
+                7. QuickBooks Online Connection
+              </h2>
+              <p style={{ margin: 0 }}>
+                Connecting a QuickBooks Online account to Zerbiq is optional. By connecting it, you
+                authorize Zerbiq to exchange data with that QuickBooks account as described in our{' '}
+                <a href="/legal/privacy" style={{ color: 'var(--color-primary)' }}>
+                  Privacy Policy
+                </a>
+                . You can disconnect QuickBooks at any time. Intuit&apos;s own terms also apply to your
+                QuickBooks account.
+              </p>
+            </div>
+
+            <div>
+              <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
+                8. Prohibited Uses
               </h2>
               <p style={{ margin: 0 }}>
                 You agree not to use the Service to: (a) violate any applicable law; (b) transmit
@@ -129,7 +145,7 @@ export default function TermsPage() {
 
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                8. Limitation of Liability
+                9. Limitation of Liability
               </h2>
               <p style={{ margin: 0 }}>
                 To the maximum extent permitted by law, Zerbiq shall not be liable for any
@@ -141,7 +157,7 @@ export default function TermsPage() {
 
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                9. Termination
+                10. Termination
               </h2>
               <p style={{ margin: 0 }}>
                 Zerbiq may suspend or terminate your account at any time for violation of these
@@ -152,7 +168,7 @@ export default function TermsPage() {
 
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                10. Contact
+                11. Contact
               </h2>
               <p style={{ margin: 0 }}>
                 For questions about these Terms, contact us at{' '}

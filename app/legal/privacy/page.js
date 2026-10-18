@@ -24,7 +24,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 14, marginBottom: 48 }}>
-            Last updated: September 5, 2026
+            Last updated: October 18, 2026
           </p>
 
           <div
@@ -113,9 +113,56 @@ export default function PrivacyPage() {
               </p>
             </div>
 
+            {/* DRAFT for attorney review (Oct 2026): sections 7 and 8 are new. */}
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                7. Data Retention
+                7. QuickBooks Online
+              </h2>
+              <p style={{ margin: '0 0 12px' }}>
+                Connecting QuickBooks Online is optional. Only a company&apos;s owner or an
+                administrator can connect it, and they do so by signing in to Intuit and approving
+                the connection.
+              </p>
+              <p style={{ margin: '0 0 12px' }}>
+                Once connected, Zerbiq writes the company&apos;s customers, invoices, and payments into
+                that company&apos;s QuickBooks account. Zerbiq reads from QuickBooks only what it needs
+                to avoid creating duplicates, such as the list of products and services (items) and
+                the QuickBooks record IDs that match Zerbiq records, along with the name of the
+                connected QuickBooks company.
+              </p>
+              <p style={{ margin: '0 0 12px' }}>
+                The access tokens Intuit issues for the connection are stored encrypted and are never
+                shown to anyone, including the company&apos;s own users. Disconnecting QuickBooks,
+                which the company can do at any time, revokes Zerbiq&apos;s access at Intuit and deletes
+                the stored tokens.
+              </p>
+              <p style={{ margin: 0 }}>
+                Zerbiq never sells QuickBooks data and never shares it with third parties.
+              </p>
+            </div>
+
+            <div>
+              <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
+                8. Text Messages (SMS)
+              </h2>
+              <p style={{ margin: '0 0 12px' }}>
+                Zerbiq sends text messages on behalf of the businesses that use Zerbiq, for example
+                appointment reminders, &quot;on the way&quot; notices, and invoice links. Texts are sent
+                only to people who have given consent to receive them.
+              </p>
+              <p style={{ margin: '0 0 12px' }}>
+                Mobile phone numbers and SMS consent are never shared with or sold to third parties or
+                affiliates for marketing purposes.
+              </p>
+              <p style={{ margin: 0 }}>
+                Reply STOP to any message to opt out, or HELP for help. Message frequency varies.
+                Message and data rates may apply.
+              </p>
+            </div>
+
+            <div>
+              <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
+                9. Data Retention
               </h2>
               <p style={{ margin: 0 }}>
                 We retain your data for as long as your account is active. If you cancel your
@@ -127,7 +174,7 @@ export default function PrivacyPage() {
 
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                8. Children&apos;s Privacy
+                10. Children&apos;s Privacy
               </h2>
               <p style={{ margin: 0 }}>
                 Zerbiq is not directed at children under 13. We do not knowingly collect personal
@@ -142,7 +189,7 @@ export default function PrivacyPage() {
 
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                9. Changes to This Policy
+                11. Changes to This Policy
               </h2>
               <p style={{ margin: 0 }}>
                 We may update this Privacy Policy from time to time. We will notify you of material
@@ -153,7 +200,7 @@ export default function PrivacyPage() {
 
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                10. Contact
+                12. Contact
               </h2>
               <p style={{ margin: 0 }}>
                 For privacy questions or requests, contact us at{' '}
