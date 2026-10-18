@@ -1,6 +1,5 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { TRIAL } from '@/lib/planData';
 
 export const metadata = {
   title: 'Terms of Service — Zerbiq',
@@ -92,18 +91,7 @@ export default function TermsPage() {
 
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                5. Free Trial
-              </h2>
-              <p style={{ margin: 0 }}>
-                Zerbiq offers a {TRIAL.days}-day free trial. No payment information is required to start a
-                trial. At the end of the trial period, your account will pause until you subscribe.
-                Your data is retained for 30 days after trial expiration.
-              </p>
-            </div>
-
-            <div>
-              <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                6. Data and Privacy
+                5. Data and Privacy
               </h2>
               <p style={{ margin: 0 }}>
                 Your use of the Service is also governed by our{' '}
@@ -115,10 +103,10 @@ export default function TermsPage() {
               </p>
             </div>
 
-            {/* DRAFT for attorney review (Oct 2026): section 7 is new. */}
+            {/* New Oct 2026: section 6. Attorney review to follow. */}
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                7. QuickBooks Online Connection
+                6. QuickBooks Online Connection
               </h2>
               <p style={{ margin: 0 }}>
                 Connecting a QuickBooks Online account to Zerbiq is optional. By connecting it, you
@@ -133,7 +121,7 @@ export default function TermsPage() {
 
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                8. Prohibited Uses
+                7. Prohibited Uses
               </h2>
               <p style={{ margin: 0 }}>
                 You agree not to use the Service to: (a) violate any applicable law; (b) transmit
@@ -145,7 +133,7 @@ export default function TermsPage() {
 
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                9. Limitation of Liability
+                8. Limitation of Liability
               </h2>
               <p style={{ margin: 0 }}>
                 To the maximum extent permitted by law, Zerbiq shall not be liable for any
@@ -157,7 +145,7 @@ export default function TermsPage() {
 
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                10. Termination
+                9. Termination
               </h2>
               <p style={{ margin: 0 }}>
                 Zerbiq may suspend or terminate your account at any time for violation of these
@@ -168,7 +156,7 @@ export default function TermsPage() {
 
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                11. Contact
+                10. Contact
               </h2>
               <p style={{ margin: 0 }}>
                 For questions about these Terms, contact us at{' '}

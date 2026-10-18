@@ -166,7 +166,7 @@ export default function PrivacyPage() {
               </h2>
               <p style={{ margin: 0 }}>
                 We retain your data for as long as your account is active. If you cancel your
-                subscription or your trial expires, your data is retained for 30 days before
+                subscription, your data is retained for 30 days before
                 deletion. Archived customers and their records are retained indefinitely while your
                 account is active.
               </p>
