@@ -14,7 +14,7 @@ module.exports = {
         raised: '#1E1E2A',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ["var(--font-inter, 'Inter')", 'sans-serif'],
       },
     },
   },

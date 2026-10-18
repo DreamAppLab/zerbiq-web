@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
-
+/* Inter is self-hosted by next/font (app/layout.js), so no visitor request goes to Google. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,7 +11,7 @@
   --color-white-60: rgba(255, 255, 255, 0.6);
   --color-white-30: rgba(255, 255, 255, 0.3);
   --color-white-10: rgba(255, 255, 255, 0.1);
-  --font-family: 'Inter', sans-serif;
+  --font-family: var(--font-inter, 'Inter'), sans-serif;
 }
 
 * {
