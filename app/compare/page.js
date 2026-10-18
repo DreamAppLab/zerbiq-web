@@ -689,15 +689,19 @@ export default function ComparePage() {
                     ) : (
                       <Link
                         href={plan.href}
-                        className="btn-primary"
                         style={{
                           display: 'inline-block',
+                          background: 'transparent',
+                          border: '1px solid rgba(255,255,255,0.3)',
+                          color: '#fff',
                           borderRadius: 8,
-                          padding: '11px 10px',
+                          padding: '11px 12px',
                           fontWeight: 700,
                           fontSize: 13,
+                          textDecoration: 'none',
                           whiteSpace: 'normal',
                           lineHeight: 1.35,
+                          transition: 'border-color 0.2s',
                         }}
                       >
                         {plan.cta}

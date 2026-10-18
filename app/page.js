@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, TRIAL, EARLY_ACCESS_MAILTO, MULTI_LOCATION_FEE } from '@/lib/planData';
+import { BADGE, TRIAL, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE } from '@/lib/planData';
 
 const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
@@ -398,7 +398,7 @@ export default function HomePage() {
             }}
           >
             <a
-              href={EARLY_ACCESS_MAILTO}
+              href={EARLY_ACCESS_HREF}
               className="btn-primary"
               style={{
                 borderRadius: 10,
@@ -631,7 +631,7 @@ export default function HomePage() {
                     </p>
                     <div>
                       <a
-                        href={EARLY_ACCESS_MAILTO}
+                        href={EARLY_ACCESS_HREF}
                         className="btn-primary"
                         style={{
                           display: 'inline-block',
@@ -827,7 +827,7 @@ export default function HomePage() {
               </p>
               <div>
                 <a
-                  href={EARLY_ACCESS_MAILTO}
+                  href={EARLY_ACCESS_HREF}
                   style={{
                     display: 'inline-block',
                     background: 'transparent',
@@ -970,7 +970,7 @@ export default function HomePage() {
           <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: 0 }}>
             Prefer to explore on your own?{' '}
             <a
-              href={EARLY_ACCESS_MAILTO}
+              href={EARLY_ACCESS_HREF}
               style={{ color: '#fff', fontWeight: 600, textDecoration: 'none' }}
             >
               Request early access →
