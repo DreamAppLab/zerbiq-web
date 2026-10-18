@@ -113,7 +113,7 @@ export default function PrivacyPage() {
               </p>
             </div>
 
-            {/* DRAFT for attorney review (Oct 2026): sections 7 and 8 are new. */}
+            {/* New Oct 2026: sections 7 and 8. Attorney review to follow. */}
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
                 7. QuickBooks Online
