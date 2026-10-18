@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, TRIAL, EARLY_ACCESS_MAILTO } from '@/lib/planData';
+import { BADGE, TRIAL, EARLY_ACCESS_MAILTO, MULTI_LOCATION_FEE } from '@/lib/planData';
 
 const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
@@ -261,7 +261,7 @@ const ALL_FEATURES = [
   {
     icon: '📍',
     title: 'Multiple Service Locations',
-    desc: 'Running more than one location? Add additional service areas and manage them all from one login. Routes, teams, customers, and billing stay organized by location. Available on Field and above — $69/mo per additional location on Field, $89/mo on Command and Enterprise.',
+    desc: `Running more than one location? Add additional service areas and manage them all from one login. Routes, teams, customers, and billing stay organized by location. Available on Field and above — $${MULTI_LOCATION_FEE.Field}/mo per additional location on Field, $${MULTI_LOCATION_FEE.Command}/mo on Command.`,
     badge: BADGE.field,
   },
 ];

@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import ZerbiqBrand from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, FEATURE_GATE, gateToValues, formatPlanPrice } from '@/lib/planData';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, gateToValues, formatPlanPrice } from '@/lib/planData';
 
 export const metadata = {
   title: 'Compare Plans — Zerbiq',
@@ -157,6 +157,10 @@ const FEATURE_GROUPS = [
 ];
 
 // ── Plan summary cards (shown above the comparison table) ─────────────────────
+// Price and customer count come from PLAN_METADATA.
+const planPrice = (name) => PLANS.find((p) => p.name === name).price + (name === 'Enterprise' ? '' : '/mo');
+const planCustomers = (name) => PLANS.find((p) => p.name === name).subtitle;
+
 // Core features that are not yet in Core are not listed here since Core says
 // "all plans include X" — they're in the table above.
 const PLAN_CARDS = [
@@ -164,8 +168,8 @@ const PLAN_CARDS = [
     name: 'Solo',
     label: '— owner-operator',
     color: '#f59e0b',
-    price: '$39/mo',
-    customers: '200 active customers',
+    price: planPrice('Solo'),
+    customers: planCustomers('Solo'),
     features: [
       '1 user', 'Customer portal', 'Online payments (card & ACH)',
       'Route management', 'Job scheduling', 'Invoicing & payments', 'Customer CRM',
@@ -179,8 +183,8 @@ const PLAN_CARDS = [
     name: 'Core',
     label: '— everything in Solo, plus',
     color: '#f97316',
-    price: '$119/mo',
-    customers: '500 active customers',
+    price: planPrice('Core'),
+    customers: planCustomers('Core'),
     features: [
       'Unlimited users', 'Team management', 'Roles & permissions',
       'GPS field tracking', 'Truck inspection', 'Employee ID & PIN login',
@@ -193,13 +197,13 @@ const PLAN_CARDS = [
     name: 'Field',
     label: '— everything in Core, plus',
     color: '#3b82f6',
-    price: '$169/mo',
-    customers: '1,000 active customers',
+    price: planPrice('Field'),
+    customers: planCustomers('Field'),
     features: [
       'Estimates & quotes', 'Quote approval in portal', 'Route intelligence',
       'Lead management', 'Payment plans', 'Employee asset checkout',
       'Subcontractor management', 'Maintenance calendar',
-      'Multiple service locations (+$69/mo per location)', 'Lead capture form',
+      `Multiple service locations (+$${MULTI_LOCATION_FEE.Field}/mo per location)`, 'Lead capture form',
       'Employee termination workflow',
     ],
   },
@@ -207,8 +211,8 @@ const PLAN_CARDS = [
     name: 'Command',
     label: '— everything in Field, plus',
     color: '#10b981',
-    price: '$209/mo',
-    customers: '2,500 active customers',
+    price: planPrice('Command'),
+    customers: planCustomers('Command'),
     features: [
       'AI support chatbot', 'Automations engine', 'QuickBooks sync',
       'Follow-up sequences', 'In-app messaging', 'Messaging in portal',
@@ -219,8 +223,8 @@ const PLAN_CARDS = [
     name: 'Enterprise',
     label: '— everything in Command, plus',
     color: '#8b5cf6',
-    price: 'Custom',
-    customers: 'Unlimited active customers',
+    price: planPrice('Enterprise'),
+    customers: planCustomers('Enterprise'),
     features: ['Unlimited customers', 'Dedicated onboarding', 'Custom integrations', 'Direct support'],
   },
 ];
@@ -713,8 +717,8 @@ export default function ComparePage() {
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '0 0 8px', lineHeight: 1.75 }}>
             ¹ Multiple service locations available on Field and above.
-            Field plans: +$69/mo per additional location.
-            Command plans: +$89/mo per additional location.
+            Field plans: +${MULTI_LOCATION_FEE.Field}/mo per additional location.
+            Command plans: +${MULTI_LOCATION_FEE.Command}/mo per additional location.
           </p>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
             ² Online payment processing (card &amp; ACH) and online invoice payment through the customer portal are included on every plan.
