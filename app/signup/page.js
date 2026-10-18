@@ -1,12 +1,12 @@
 import ZIcon from '@/components/ZIcon';
 import Link from 'next/link';
-import { TRIAL } from '@/lib/planData';
+import { EARLY_ACCESS_MAILTO } from '@/lib/planData';
 
 const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
 export const metadata = {
-  title: 'Sign Up — Zerbiq',
-  description: `Start your ${TRIAL.days}-day free trial with Zerbiq. No credit card required.`,
+  title: 'Request Early Access — Zerbiq',
+  description: 'Zerbiq is not open for public signup yet. Request early access or book a live demo.',
 };
 
 export default function SignupPage() {
@@ -57,10 +57,10 @@ export default function SignupPage() {
           lineHeight: 1.05,
         }}
       >
-        Start Your Free Trial
+        Request Early Access
       </h1>
 
-      {/* Trial terms */}
+      {/* Early-access note */}
       <p
         style={{
           color: 'var(--color-white-60)',
@@ -69,12 +69,12 @@ export default function SignupPage() {
           margin: '0 auto 36px',
         }}
       >
-        {TRIAL.days}-day free trial. No credit card required.
+        Zerbiq isn&apos;t open for public signup yet. Request early access and we&apos;ll be in touch.
       </p>
 
       {/* Primary CTA */}
       <a
-        href={TRIAL.signupUrl}
+        href={EARLY_ACCESS_MAILTO}
         className="btn-primary"
         style={{
           display: 'inline-block',
@@ -86,7 +86,7 @@ export default function SignupPage() {
           marginBottom: 32,
         }}
       >
-        Start free trial
+        Request Early Access
       </a>
 
       {/* Divider */}

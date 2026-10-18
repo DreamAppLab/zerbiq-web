@@ -2,20 +2,15 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import { brandify } from '@/components/ZerbiqBrand';
-import { TRIAL } from '@/lib/planData';
 
 const FAQ = [
   {
-    q: 'Is there really no credit card required for the trial?',
-    a: `Correct. Start your ${TRIAL.days}-day free trial with just your email. No card until you decide to subscribe.`,
+    q: 'How many users are included?',
+    a: 'Solo includes 1 user. Core, Field, Command, and Enterprise include unlimited users — owners, office staff, and every tech in the field — at one flat price. No per-seat fees.',
   },
   {
     q: 'What is an active customer?',
     a: "An active customer is any customer currently managed in your account. Archive customers you're no longer serving to free up your slot count — all their history stays saved.",
-  },
-  {
-    q: 'What happens when my trial ends?',
-    a: "Your account pauses. Your data is saved for 30 days. Subscribe anytime to reactivate instantly.",
   },
   {
     q: 'Can I change plans later?',
@@ -65,7 +60,7 @@ const FAQ = [
 
 export const metadata = {
   title: 'Pricing — Zerbiq',
-  description: 'Simple pricing for field service operators. Start free. Scale when ready.',
+  description: 'Simple, flat pricing for field service operators. Unlimited users on Core and above — no per-seat fees.',
 };
 
 export default function PricingPage() {
@@ -87,7 +82,7 @@ export default function PricingPage() {
             Simple pricing for serious operators
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 17, lineHeight: 1.7, margin: 0 }}>
-            No hidden fees. No confusing tiers. Start free and scale when you&apos;re ready.
+            No hidden fees. No confusing tiers. Pick the plan that fits and scale when you&apos;re ready.
           </p>
         </div>
       </section>
@@ -173,7 +168,7 @@ export default function PricingPage() {
               className="pricing-page-confirm-badge"
               style={{ display: 'inline-block', background: 'rgba(61,92,255,0.15)', border: '1px solid rgba(61,92,255,0.4)', borderRadius: 8, padding: '8px 16px', fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 20, position: 'relative', boxSizing: 'border-box' }}
             >
-              ✓ Unlimited owners, office staff, techs, and seasonal workers — one price
+              ✓ Core and above: unlimited owners, office staff, techs, and seasonal workers — one price
             </div>
             <p
               className="pricing-page-banner-bottom"
