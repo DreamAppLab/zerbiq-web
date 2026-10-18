@@ -1,6 +1,6 @@
 import ZIcon from '@/components/ZIcon';
 import Link from 'next/link';
-import { EARLY_ACCESS_MAILTO } from '@/lib/planData';
+import { EARLY_ACCESS_HREF } from '@/lib/planData';
 
 const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
@@ -74,7 +74,7 @@ export default function SignupPage() {
 
       {/* Primary CTA */}
       <a
-        href={EARLY_ACCESS_MAILTO}
+        href={EARLY_ACCESS_HREF}
         className="btn-primary"
         style={{
           display: 'inline-block',
