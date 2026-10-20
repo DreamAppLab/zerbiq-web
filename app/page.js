@@ -1,3 +1,4 @@
+import { PRIMARY_CTA_LABEL } from '@/lib/siteConfig.mjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
@@ -408,7 +409,7 @@ export default function HomePage() {
                 display: 'inline-block',
               }}
             >
-              Request Early Access
+              {PRIMARY_CTA_LABEL}
             </a>
             <a
               href={DEMO_URL}
@@ -641,7 +642,7 @@ export default function HomePage() {
                           fontSize: 13,
                         }}
                       >
-                        Request Early Access
+                        {PRIMARY_CTA_LABEL}
                       </a>
                       <div
                         style={{
@@ -841,7 +842,7 @@ export default function HomePage() {
                     transition: 'background 0.2s, color 0.2s',
                   }}
                 >
-                  Request Early Access
+                  {PRIMARY_CTA_LABEL}
                 </a>
                 <div
                   style={{
@@ -973,7 +974,7 @@ export default function HomePage() {
               href={EARLY_ACCESS_HREF}
               style={{ color: '#fff', fontWeight: 600, textDecoration: 'none' }}
             >
-              Request early access →
+              {PRIMARY_CTA_LABEL} →
             </a>
           </p>
         </div>
