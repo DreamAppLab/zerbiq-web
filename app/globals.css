@@ -139,6 +139,14 @@ footer {
   color: #ffffff;
 }
 
+/* Keyboard focus */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 /* Primary button hover */
 .btn-primary {
   background: var(--color-primary);

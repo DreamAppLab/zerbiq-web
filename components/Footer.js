@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import ZIcon from './ZIcon';
 import ZerbiqBrand from '@/components/ZerbiqBrand';
+import { SIGN_IN_HREF, activeStoreLinks } from '@/lib/siteConfig.mjs';
 
 export default function Footer() {
+  const storeLinks = activeStoreLinks();
   return (
     <footer
       style={{
@@ -77,14 +79,34 @@ export default function Footer() {
               Blog
             </Link>
             <a
-              href="https://app.zerbiq.com/login"
-              target="_blank"
-              rel="noopener noreferrer"
+              href={SIGN_IN_HREF}
               className="link-muted"
               style={{ fontSize: 14, fontWeight: 500 }}
             >
-              Login
+              Sign in
             </a>
+            {/* Hidden until a store link is set in lib/siteConfig.mjs */}
+            {storeLinks.length > 0 && (
+              <span
+                style={{ display: 'inline-flex', flexWrap: 'wrap', gap: '12px 16px', alignItems: 'center' }}
+              >
+                <span style={{ color: 'var(--color-white-60)', fontSize: 14, fontWeight: 500 }}>
+                  Get the app:
+                </span>
+                {storeLinks.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-muted"
+                    style={{ fontSize: 14, fontWeight: 500 }}
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </span>
+            )}
             <a
               href="mailto:hello@zerbiq.com"
               className="link-muted"

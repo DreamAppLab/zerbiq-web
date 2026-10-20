@@ -1,3 +1,4 @@
+import { PRIMARY_CTA_LABEL } from '@/lib/siteConfig.mjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
@@ -796,7 +797,7 @@ export default function FeaturesPage() {
                     fontSize: 14,
                   }}
                 >
-                  Request Early Access
+                  {PRIMARY_CTA_LABEL}
                 </a>
                 <div
                   style={{
@@ -878,7 +879,7 @@ export default function FeaturesPage() {
                         fontSize: 14,
                       }}
                     >
-                      Request Early Access
+                      {PRIMARY_CTA_LABEL}
                     </a>
                     <div
                       style={{

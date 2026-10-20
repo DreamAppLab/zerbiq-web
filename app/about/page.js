@@ -1,3 +1,4 @@
+import { PRIMARY_CTA_LABEL } from '@/lib/siteConfig.mjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroBackground from '@/components/HeroBackground';
@@ -63,7 +64,7 @@ export default function AboutPage() {
           {/* CTA */}
           <div style={{ marginTop: 56, display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
             <a href={EARLY_ACCESS_HREF} className="btn-primary" style={{ display: 'inline-block', borderRadius: 10, padding: '14px 32px', fontWeight: 700, fontSize: 16 }}>
-              Request Early Access
+              {PRIMARY_CTA_LABEL}
             </a>
             <Link href="/features" style={{ color: 'var(--color-white-60)', fontSize: 15, textDecoration: 'none', fontWeight: 500 }}>
               See all features →
