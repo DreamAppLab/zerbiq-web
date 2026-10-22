@@ -5,6 +5,7 @@ import HeroBackground from '@/components/HeroBackground';
 import { brandify } from '@/components/ZerbiqBrand';
 import {
   TEXTING_EXPLAINER,
+  TEXTING_ELIGIBILITY,
   TEXTING_PRICING_HREF,
   textingPriceSummary,
 } from '@/lib/planData';
@@ -53,6 +54,20 @@ export default function TextingPage() {
 
       <section style={{ padding: '0 24px 100px', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 760, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div id={TEXTING_ELIGIBILITY.id} style={{ ...cardStyle, scrollMarginTop: 90 }}>
+            <h2 style={h2Style}>{TEXTING_ELIGIBILITY.heading}</h2>
+            <p style={bodyStyle}>{TEXTING_ELIGIBILITY.summary}</p>
+            <ul style={{ ...bodyStyle, paddingLeft: 20, margin: '0 0 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {TEXTING_ELIGIBILITY.items.map((i) => (
+                <li key={i} style={{ overflowWrap: 'anywhere' }}>{i}</li>
+              ))}
+            </ul>
+            <p style={{ ...bodyStyle, margin: 0 }}>
+              {TEXTING_ELIGIBILITY.noWebsite}{' '}
+              <a href={TEXTING_ELIGIBILITY.noWebsiteHref} style={linkStyle}>{TEXTING_ELIGIBILITY.noWebsiteLinkLabel}</a>
+            </p>
+          </div>
+
           <div style={cardStyle}>
             {intro.map((p) => (
               <p key={p} style={bodyStyle}>{brandify(p)}</p>

@@ -152,7 +152,7 @@ test('texting explainer keeps the approved line and the app prices', () => {
 });
 
 test('short texting FAQ entries link to a real explainer section', () => {
-  const ids = pd.TEXTING_EXPLAINER.sections.map((s) => s.id);
+  const ids = [pd.TEXTING_ELIGIBILITY.id, ...pd.TEXTING_EXPLAINER.sections.map((s) => s.id)];
   assert.deepEqual(pd.TEXTING_FAQ_SHORT.map((f) => f.q), ['Why toll-free?', 'Can texting prices change?', 'What do I need to get verified?']);
   for (const f of pd.TEXTING_FAQ_SHORT) {
     const [path, id] = f.href.split('#');
@@ -180,4 +180,29 @@ test('texting wording is identical in the pricing box source, FAQ and /texting',
   assert.ok(pd.TEXTING_EXPLAINER.sections.some((s) => s.heading === pd.TEXTING_OFF_ON_TITLE));
   assert.ok(page.includes(pd.TEXTING_EIN_NOTE) && short.includes(pd.TEXTING_EIN_NOTE));
   assert.ok(!/few days/.test(faq) && !/several business days/.test(page));
+});
+
+test('"Who can use texting" lists every qualification and links the FAQ and pricing box to it', () => {
+  const e = pd.TEXTING_ELIGIBILITY;
+  assert.equal(e.heading, 'Who can use texting');
+  assert.equal(e.id, 'who-can-use');
+  const all = e.items.join(' ');
+  for (const part of ['EIN', 'exactly as it appears on your IRS records', 'live website', 'under construction', 'contact details and address',
+    'Privacy Policy and Terms', 'linked in the footer', 'never sold or shared for marketing', 'ready-to-paste wording',
+    'business email on your website’s domain', 'Gmail-style', 'unchecked by default', 'separate from other agreements', 'opt-in form']) {
+    assert.ok(all.includes(part), `lists: ${part}`);
+  }
+  assert.equal(e.noWebsiteHref, 'https://dreamapplab.com/instant-quote.html');
+  assert.equal(e.noWebsiteLinkLabel, 'Get an instant quote →');
+  assert.equal(pd.TEXTING_FAQ_SHORT.find((f) => f.q === 'What do I need to get verified?').href, '/texting#who-can-use');
+  const page = readFileSync(new URL('../app/texting/page.js', import.meta.url), 'utf8');
+  assert.ok(page.indexOf('TEXTING_ELIGIBILITY.heading') < page.indexOf('intro.map'), 'eligibility renders first');
+  const box = readFileSync(new URL('../components/TextingAddon.js', import.meta.url), 'utf8');
+  assert.ok(box.includes('TEXTING_ELIGIBILITY.id'));
+});
+
+test('toll-free copy does not claim every text starts with the business name', () => {
+  const all = JSON.stringify([pd.TEXTING_EXPLAINER, pd.TEXTING_FAQ_SHORT]);
+  assert.ok(!all.includes('every text starts with it'));
+  assert.ok(all.includes('Zerbiq’s automatic texts always include it'));
 });

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_OFF_ON_TITLE, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL } from '@/lib/planData';
+import { TEXTING_ADDON, TEXTING_ELIGIBILITY, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_OFF_ON_TITLE, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL } from '@/lib/planData';
 
 // "Texting add-on" box shown under the plan cards on the pricing page.
 // All prices come from TEXTING_ADDON in lib/planData.js.
@@ -91,7 +91,13 @@ export default function TextingAddon() {
         ))}
       </div>
 
-      <p style={{ margin: '20px 0 0', fontSize: 15 }}>
+      <p style={{ color: 'var(--color-white-60)', fontSize: 13, lineHeight: 1.6, margin: '20px 0 0' }}>
+        <strong style={{ color: '#fff' }}>{TEXTING_ELIGIBILITY.heading}:</strong> {TEXTING_ELIGIBILITY.boxSummary}{' '}
+        <Link href={`${TEXTING_EXPLAINER_HREF}#${TEXTING_ELIGIBILITY.id}`} style={{ color: 'var(--color-primary)', fontWeight: 600 }}>
+          See every requirement
+        </Link>
+      </p>
+      <p style={{ margin: '12px 0 0', fontSize: 15 }}>
         <Link href={TEXTING_EXPLAINER_HREF} style={{ color: 'var(--color-primary)', fontWeight: 600 }}>
           {TEXTING_EXPLAINER_LINK_LABEL}
         </Link>
