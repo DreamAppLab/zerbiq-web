@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { TEXTING_ADDON, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL } from '@/lib/planData';
+import { TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_OFF_ON_TITLE, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL } from '@/lib/planData';
 
 // "Texting add-on" box shown under the plan cards on the pricing page.
 // All prices come from TEXTING_ADDON in lib/planData.js.
@@ -17,14 +17,14 @@ export default function TextingAddon() {
     },
     {
       title: 'Your own toll-free number',
-      body: 'Texts come from your business’s own toll-free number (8xx), verified under your business name. Carrier approval usually takes a few days and can take up to a couple of weeks. Until then, messages go by email.',
+      body: `Texts come from your business’s own ${TEXTING_NUMBER_PHRASE}, verified under your business name. ${TEXTING_REVIEW_TIME} Until then, messages go by email.`,
     },
     {
       title: 'When texts run out',
       body: 'Texting pauses and messages go by email until you buy more. Nothing is sent that you did not pay for.',
     },
     {
-      title: 'Turning it off, then on',
+      title: TEXTING_OFF_ON_TITLE,
       body: `Turning texting off releases your toll-free number, and it can’t be recovered. Turning it back on means the $${setupFee} setup again, a new toll-free number, and carrier approval again. Unused texts you bought stay on your account.`,
     },
     {
