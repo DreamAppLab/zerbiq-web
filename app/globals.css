@@ -56,7 +56,7 @@ body {
 
 /* ── Animation visibility strategy ───────────────────────────────────────────
    Sections default to transparent so the fixed canvas animation (z-index: -1)
-   shows through them — the dark body colour appears identical visually but the
+   shows through them — the dark body color appears identical visually but the
    canvas lines and Z-marks render above it.
    Sections that carry var(--color-surface) set their background via inline
    style and remain fully opaque, hiding the animation behind dense content.
