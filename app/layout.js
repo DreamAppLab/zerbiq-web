@@ -1,8 +1,8 @@
-import { Inter } from 'next/font/google';
+// Inter served from our own domain (no request to Google). A fixed family name, so
+// a cached server build can never point at a font class the CSS no longer has.
+import '@fontsource-variable/inter';
 import './globals.css';
 import HeroBackground from '@/components/HeroBackground';
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata = {
   title: 'Zerbiq — Built for the field. Loved by the office.',
@@ -27,7 +27,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en">
       <body>
         {/* Fixed full-viewport route animation — sits behind all page content */}
         <HeroBackground />
