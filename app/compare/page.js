@@ -67,7 +67,7 @@ const FEATURE_GROUPS = [
   {
     group: 'Email & Texting',
     rows: [
-      // Email is included on every plan. Texting is an optional add-on on every plan.
+      // Email is included on every plan. Texting is an optional add-on for every plan.
       { label: 'Technician on the way notice (by email)',  values: gateToValues('all') },
       { label: 'Technician on the way texts ³',            values: gateToValues(FEATURE_GATE.onTheWaySms) },
       { label: 'Job completion texts ³',                   values: gateToValues(FEATURE_GATE.jobCompletionSms) },
@@ -391,7 +391,7 @@ export default function ComparePage() {
             }}
           >
             <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: 14, margin: 0, lineHeight: 1.65 }}>
-              <strong style={{ color: '#fff' }}>Texting is an optional add-on on every plan.</strong>{' '}
+              <strong style={{ color: '#fff' }}>Texting is an optional add-on for every plan.</strong>{' '}
               No texts are included in any plan, because carriers charge for every text. Every plan sends reminders,
               on-the-way notices, invoices and review requests by email.{' '}
               <Link href="/pricing#texting-addon" style={{ color: '#fff', textDecoration: 'underline' }}>See texting prices</Link>
@@ -760,7 +760,7 @@ export default function ComparePage() {
             Requires connecting a supported payment processor (Stripe, Square, or PayPal). Cash, check, and onsite card payments are always available on every plan without a connected processor.
           </p>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
-            ³ Texting is an optional add-on on every plan, and no texts are included in any plan.
+            ³ Texting is an optional add-on for every plan, and no texts are included in any plan.
             ${TEXTING_ADDON.setupFee} one-time setup, then prepaid text blocks ({TEXTING_ADDON.blocks.map((b) => `${b.texts.toLocaleString('en-US')} for $${b.price}`).join(', ')}) that never expire.
             Texts come from your own toll-free number; carrier approval usually takes a few days and can take up to a couple of weeks, and until then messages go by email.
             When texts run out, messages go by email. Turning texting off releases the number for good. Turning it back on means the ${TEXTING_ADDON.setupFee} setup and carrier approval again.

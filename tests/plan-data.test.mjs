@@ -29,7 +29,7 @@ test('plan gates still return booleans in plan order', () => {
 });
 
 test('add-on badge does not say included', () => {
-  assert.equal(pd.gateToBadge('addon'), 'Optional add-on on every plan');
+  assert.equal(pd.gateToBadge('addon'), 'An optional add-on for every plan');
   assert.ok(!/included/i.test(pd.BADGE.addon));
 });
 
@@ -47,7 +47,7 @@ test('texting add-on prices', () => {
 test('texting FAQ states every required fact', () => {
   const a = pd.TEXTING_FAQ_ANSWER;
   for (const part of [
-    'optional add-on on every plan', 'No texts are included', '$49 one time', 'toll-free number',
+    'optional add-on for every plan', 'No texts are included', '$49 one time', 'toll-free number',
     'a few days', 'couple of weeks', 'by email', '500 for $10', '1,000 for $18', '2,500 for $40',
     'never expire', '2 or more texts', 'texting pauses', 'cannot be recovered', 'carrier approval again',
     'stay on your account', 'invoices and review requests by email',
@@ -66,7 +66,7 @@ test('compare label keeps "500 texts" and "From $10" together', () => {
 test('one shared add-on wording: summary, want-it-as-text line, plan-card line', () => {
   assert.equal(pd.TEXTING_WHY, 'No texts are included in any plan, because carriers charge for every text.');
   assert.ok(pd.TEXTING_ADDON_SUMMARY.includes(pd.TEXTING_WHY));
-  assert.ok(pd.TEXTING_ADDON_SUMMARY.startsWith('Texting is an optional add-on on every plan: $49 one-time setup'));
+  assert.ok(pd.TEXTING_ADDON_SUMMARY.startsWith('Texting is an optional add-on for every plan: $49 one-time setup'));
   assert.equal(pd.TEXTING_WANT_IT_AS_TEXT, `Want it as a text? ${pd.TEXTING_ADDON_SUMMARY}`);
   assert.equal(pd.TEXTING_PLAN_CARD_LINE, 'Texting add-on available');
   assert.equal(pd.TEXTING_PRICING_HREF, '/pricing#texting-addon');
@@ -128,4 +128,13 @@ test('groups follow plan order and an unknown badge still gets its own group', (
   const groups = pd.groupByBadge(odd);
   assert.equal(groups.flatMap((g) => g.features).length, odd.length);
   assert.equal(groups[groups.length - 1].label, 'Brand new badge');
+});
+
+// ── Page headings: /features has its own H1 and title ────────────────────────
+test('/features has its own H1 and page title, not the home page headline', () => {
+  const features = readFileSync(new URL('../app/features/page.js', import.meta.url), 'utf8');
+  const h1 = features.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)[1].trim();
+  assert.equal(h1, 'Every feature your field service business needs');
+  assert.ok(!features.includes('Built for the field'));
+  assert.ok(features.includes("title: 'Every feature your field service business needs — Zerbiq'"));
 });
