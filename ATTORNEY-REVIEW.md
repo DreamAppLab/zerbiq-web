@@ -26,6 +26,13 @@ Zerbiq sends text messages on behalf of the businesses that use Zerbiq, for exam
 
 Mobile phone numbers and SMS consent are never shared with or sold to third parties or affiliates for marketing purposes.
 
+Texting is an optional paid add-on on every plan (new). No texts are included in any plan, and the pricing page, compare page, features page and home page now say so. Please check this wording:
+- The business pays a $49 one-time setup fee, which registers the business with the phone carriers, and then buys prepaid text blocks (500 for $10, 1,000 for $18, 2,500 for $40). Block texts never expire. A long text or one with emoji can count as 2 or more texts. When texts run out, texting pauses and messages go by email until more are bought.
+- Each business sends from its own toll-free number (8xx), verified under the business's name. Carrier approval usually takes a few days and can take up to a couple of weeks; until then messages go by email. The site makes no promise about approval or timing.
+- Turning texting off releases the toll-free number, and it cannot be recovered. Turning it back on means paying the $49 setup again, getting a new toll-free number, and going through carrier approval again. Unused purchased texts stay on the account.
+- Without the add-on, every plan still sends reminders, on-the-way notices, invoices and review requests by email.
+- Questions for you: (1) is "never expire" for prepaid texts acceptable, or should the terms state a refund or expiry policy on cancellation; (2) is the number-release disclosure clear enough before a business turns texting off; (3) does the privacy page section 8 and the Terms need to name the add-on and the business's own toll-free number.
+
 Reply STOP to any message to opt out, or HELP for help. Message frequency varies. Message and data rates may apply.
 
 ### 9. Data Retention (changed: was section 7; removed "or your trial expires")

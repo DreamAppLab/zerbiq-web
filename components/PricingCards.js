@@ -21,8 +21,8 @@ const PLAN_INCLUDED = {
     'Transaction & bank register',
     'Materials catalog & inventory',
     'Analytics & reporting dashboard',
-    'Automated customer notifications',
-    'Review requests',
+    'Automated customer notifications (email; texting is an optional add-on)',
+    'Review requests (by email)',
     'Mileage tracking',
     'Mobile team view',
     'Data export',
@@ -250,7 +250,7 @@ export default function PricingCards() {
           }}
         >
           <strong style={{ color: '#fff' }}>Every plan includes a customer portal and online payments.</strong>{' '}
-          No add-ons, no upcharges. Customers sign in by secure link or one-time code — no password required.
+          The portal has no add-ons and no upcharges. Customers sign in by secure link or one-time code — no password required.
           Online invoice payment (card &amp; ACH) requires connecting a supported payment processor (Stripe, Square, or PayPal).
         </p>
       </div>
