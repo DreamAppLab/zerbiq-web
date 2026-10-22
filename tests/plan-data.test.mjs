@@ -206,3 +206,11 @@ test('toll-free copy does not claim every text starts with the business name', (
   assert.ok(!all.includes('every text starts with it'));
   assert.ok(all.includes('Zerbiq’s automatic texts always include it'));
 });
+
+test('/texting lists show bullet markers, and the external quote link is one line in a new tab', () => {
+  const page = readFileSync(new URL('../app/texting/page.js', import.meta.url), 'utf8');
+  assert.equal((page.match(/listStyle: 'disc'/g) || []).length, 2, 'both lists keep disc bullets');
+  assert.ok(!/listStyle: 'none'/.test(page));
+  const link = page.match(/<a href=\{TEXTING_ELIGIBILITY\.noWebsiteHref\}[^>]*>/)[0];
+  assert.ok(link.includes('target="_blank"') && link.includes('rel="noopener"') && link.includes("whiteSpace: 'nowrap'"));
+});

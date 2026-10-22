@@ -57,14 +57,14 @@ export default function TextingPage() {
           <div id={TEXTING_ELIGIBILITY.id} style={{ ...cardStyle, scrollMarginTop: 90 }}>
             <h2 style={h2Style}>{TEXTING_ELIGIBILITY.heading}</h2>
             <p style={bodyStyle}>{TEXTING_ELIGIBILITY.summary}</p>
-            <ul style={{ ...bodyStyle, paddingLeft: 20, margin: '0 0 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <ul style={{ ...bodyStyle, listStyle: 'disc', listStylePosition: 'outside', paddingLeft: 22, margin: '0 0 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
               {TEXTING_ELIGIBILITY.items.map((i) => (
                 <li key={i} style={{ overflowWrap: 'anywhere' }}>{i}</li>
               ))}
             </ul>
             <p style={{ ...bodyStyle, margin: 0 }}>
               {TEXTING_ELIGIBILITY.noWebsite}{' '}
-              <a href={TEXTING_ELIGIBILITY.noWebsiteHref} style={linkStyle}>{TEXTING_ELIGIBILITY.noWebsiteLinkLabel}</a>
+              <a href={TEXTING_ELIGIBILITY.noWebsiteHref} target="_blank" rel="noopener" style={{ ...linkStyle, whiteSpace: 'nowrap' }}>{TEXTING_ELIGIBILITY.noWebsiteLinkLabel}</a>
             </p>
           </div>
 
@@ -85,7 +85,7 @@ export default function TextingPage() {
                 <p key={p} style={bodyStyle}>{brandify(p)}</p>
               ))}
               {s.bullets && (
-                <ul style={{ ...bodyStyle, paddingLeft: 20, margin: '0 0 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <ul style={{ ...bodyStyle, listStyle: 'disc', listStylePosition: 'outside', paddingLeft: 22, margin: '0 0 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {s.bullets.map((b) => (
                     <li key={b} style={{ overflowWrap: 'anywhere' }}>{b}</li>
                   ))}
