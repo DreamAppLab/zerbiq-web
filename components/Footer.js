@@ -107,13 +107,12 @@ export default function Footer() {
                 ))}
               </span>
             )}
-            <a
-              href="mailto:hello@zerbiq.com"
-              className="link-muted"
-              style={{ fontSize: 14, fontWeight: 500 }}
-            >
+            <Link href="/support" className="link-muted" style={{ fontSize: 14, fontWeight: 500 }}>
+              Support
+            </Link>
+            <Link href="/contact" className="link-muted" style={{ fontSize: 14, fontWeight: 500 }}>
               Contact
-            </a>
+            </Link>
           </nav>
 
           {/* Contact email */}
