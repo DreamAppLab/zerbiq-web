@@ -95,3 +95,37 @@ test('email-by-default badge never claims texting is included', () => {
   assert.ok(pd.BADGE.allEmail.includes('texting is an add-on'));
   assert.ok(pd.BADGE.all.startsWith('Included'));
 });
+
+// ── Home page cards: every card renders exactly once ─────────────────────────
+const homeSrc = readFileSync(new URL('../lib/homeFeatures.js', import.meta.url), 'utf8')
+  .replace("from './planData'", "from './planData.mjs'");
+writeFileSync(join(dir, 'homeFeatures.mjs'), homeSrc);
+const { ALL_FEATURES } = await import(pathToFileURL(join(dir, 'homeFeatures.mjs')).href);
+
+test('every home card is in exactly one group (none dropped, none doubled)', () => {
+  const groups = pd.groupByBadge(ALL_FEATURES);
+  const grouped = groups.flatMap((g) => g.features);
+  assert.equal(grouped.length, ALL_FEATURES.length);
+  for (const card of ALL_FEATURES) {
+    assert.equal(grouped.filter((c) => c === card).length, 1, `rendered once: ${card.title}`);
+  }
+  const titles = ALL_FEATURES.map((c) => c.title);
+  assert.equal(new Set(titles).size, titles.length, 'card titles are unique');
+});
+
+test('the Core-badge "Unlimited users" card gets a group', () => {
+  const groups = pd.groupByBadge(ALL_FEATURES);
+  const core = groups.find((g) => g.key === 'core');
+  assert.ok(core, 'Core group exists');
+  assert.ok(core.features.some((c) => c.title.startsWith('Unlimited users')));
+});
+
+test('groups follow plan order and an unknown badge still gets its own group', () => {
+  const keys = pd.groupByBadge(ALL_FEATURES).map((g) => g.key);
+  const order = ['all', 'addon', 'core', 'field', 'cmd', 'ent'];
+  assert.deepEqual(keys, order.filter((k) => keys.includes(k)));
+  const odd = [{ title: 'X', badge: 'Brand new badge' }, ...ALL_FEATURES];
+  const groups = pd.groupByBadge(odd);
+  assert.equal(groups.flatMap((g) => g.features).length, odd.length);
+  assert.equal(groups[groups.length - 1].label, 'Brand new badge');
+});
