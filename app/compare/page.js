@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import ZerbiqBrand from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, gateToValues, formatPlanPrice } from '@/lib/planData';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, TEXTING_ADDON, gateToValues, formatPlanPrice, textBlockFromLabel } from '@/lib/planData';
 
 export const metadata = {
   title: 'Compare Plans — Zerbiq',
@@ -65,13 +65,17 @@ const FEATURE_GROUPS = [
     ],
   },
   {
-    group: 'SMS & Communications',
+    group: 'Email & Texting',
     rows: [
-      { label: 'Technician on the way SMS',      values: gateToValues(FEATURE_GATE.onTheWaySms) },
-      { label: 'Job completion SMS',             values: gateToValues(FEATURE_GATE.jobCompletionSms) },
-      { label: 'Appointment reminders',          values: gateToValues(FEATURE_GATE.appointmentReminders) },
-      { label: 'Automated invoice reminders',    values: gateToValues(FEATURE_GATE.invoiceReminders) },
-      { label: 'Review request automation',      values: gateToValues(FEATURE_GATE.reviewRequests) },
+      // Email is included on every plan. Texting is an optional add-on on every plan.
+      { label: 'Technician on the way notice (by email)',  values: gateToValues('all') },
+      { label: 'Technician on the way texts ³',            values: gateToValues(FEATURE_GATE.onTheWaySms) },
+      { label: 'Job completion texts ³',                   values: gateToValues(FEATURE_GATE.jobCompletionSms) },
+      { label: 'Texting setup (one time) ³',               values: PLAN_METADATA.map(() => `$${TEXTING_ADDON.setupFee}`) },
+      { label: 'Text blocks (prepaid, never expire) ³',    values: PLAN_METADATA.map(() => textBlockFromLabel()) },
+      { label: 'Appointment reminders (by email)',         values: gateToValues(FEATURE_GATE.appointmentReminders) },
+      { label: 'Automated invoice reminders (by email)',   values: gateToValues(FEATURE_GATE.invoiceReminders) },
+      { label: 'Review request automation (by email)',     values: gateToValues(FEATURE_GATE.reviewRequests) },
       { label: 'Automated follow-up sequences',  values: gateToValues(FEATURE_GATE.followUpSequences) },
       { label: 'In-app messaging',               values: gateToValues(FEATURE_GATE.inAppMessaging) },
     ],
@@ -173,10 +177,10 @@ const PLAN_CARDS = [
     features: [
       '1 user', 'Customer portal', 'Online payments (card & ACH)',
       'Route management', 'Job scheduling', 'Invoicing & payments', 'Customer CRM',
-      'SMS notifications', 'Appointment reminders', 'Holiday management', 'Billing cycles',
+      'Email notifications', 'Appointment reminders', 'Holiday management', 'Billing cycles',
       'Custom branding', 'Reports & analytics', 'Data export', 'Mileage tracking',
       'Parts on order', 'Credits & refunds', 'Materials & inventory', 'Schedule & dispatch',
-      'Two-way SMS', 'Light & dark mode', 'Personalized shortcuts bar', 'Mobile app',
+      'Texting add-on available', 'Light & dark mode', 'Personalized shortcuts bar', 'Mobile app',
     ],
   },
   {
@@ -248,7 +252,7 @@ function CellValue({ value }) {
       style={{
         fontSize: 13,
         fontWeight: 600,
-        color: '#fff',
+        color: value === 'Add-on' ? '#ffb020' : '#fff',
       }}
     >
       {value}
@@ -369,8 +373,28 @@ export default function ComparePage() {
           >
             <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: 14, margin: 0, lineHeight: 1.65 }}>
               <strong style={{ color: '#fff' }}>Every plan includes a customer portal and online payments.</strong>{' '}
-              No add-ons, no upcharges. Customers sign in by secure link or one-time code — no password required.
+              The portal has no add-ons and no upcharges. Customers sign in by secure link or one-time code — no password required.
               Online invoice payment (card &amp; ACH) requires connecting a supported payment processor.
+            </p>
+          </div>
+
+          {/* Texting add-on note */}
+          <div
+            style={{
+              background: 'rgba(61,92,255,0.1)',
+              border: '1px solid rgba(61,92,255,0.35)',
+              borderRadius: 8,
+              padding: '16px 20px',
+              textAlign: 'left',
+              maxWidth: 600,
+              margin: '0 auto 20px',
+            }}
+          >
+            <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: 14, margin: 0, lineHeight: 1.65 }}>
+              <strong style={{ color: '#fff' }}>Texting is an optional add-on on every plan.</strong>{' '}
+              No texts are included in any plan, because carriers charge for every text. Every plan sends reminders,
+              on-the-way notices, invoices and review requests by email.{' '}
+              <Link href="/pricing#texting-addon" style={{ color: '#fff', textDecoration: 'underline' }}>See texting prices</Link>
             </p>
           </div>
 
@@ -724,9 +748,17 @@ export default function ComparePage() {
             Field plans: +${MULTI_LOCATION_FEE.Field}/mo per additional location.
             Command plans: +${MULTI_LOCATION_FEE.Command}/mo per additional location.
           </p>
-          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '0 0 8px', lineHeight: 1.75 }}>
             ² Online payment processing (card &amp; ACH) and online invoice payment through the customer portal are included on every plan.
             Requires connecting a supported payment processor (Stripe, Square, or PayPal). Cash, check, and onsite card payments are always available on every plan without a connected processor.
+          </p>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
+            ³ Texting is an optional add-on on every plan, and no texts are included in any plan.
+            ${TEXTING_ADDON.setupFee} one-time setup, then prepaid text blocks ({TEXTING_ADDON.blocks.map((b) => `${b.texts.toLocaleString('en-US')} for $${b.price}`).join(', ')}) that never expire.
+            Texts come from your own toll-free number; carrier approval usually takes a few days and can take up to a couple of weeks, and until then messages go by email.
+            When texts run out, messages go by email. Turning texting off releases the number for good. Turning it back on means the ${TEXTING_ADDON.setupFee} setup and carrier approval again.
+            Every plan sends reminders, on-the-way notices, invoices and review requests by email.{' '}
+            <Link href="/pricing#texting-addon" style={{ color: '#fff', textDecoration: 'underline' }}>Full texting details</Link>
           </p>
         </div>
       </section>

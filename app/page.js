@@ -30,19 +30,19 @@ const ALL_FEATURES = [
   {
     icon: '💰',
     title: 'Invoicing & Payments',
-    desc: 'Generate invoices the moment a job is marked complete. Send via email or SMS with one click. Collect card payments, ACH, or cash — your choice.',
+    desc: 'Generate invoices the moment a job is marked complete. Send by email with one click (by text too, with the optional texting add-on). Collect card payments, ACH, or cash — your choice.',
     badge: BADGE.all,
   },
   {
     icon: '💬',
-    title: 'Two-Way SMS Messaging',
-    desc: 'Communicate with customers the way they prefer — text. Send appointment reminders, job updates, invoice links, and follow-ups directly from Zerbiq.',
-    badge: BADGE.all,
+    title: 'Texting (optional add-on)',
+    desc: 'Want to reach customers by text? Add texting to any plan: appointment reminders, job updates and invoice links from your own toll-free number. $49 one-time setup, then prepaid text blocks starting at $10 for 500. Without it, every plan sends the same messages by email.',
+    badge: BADGE.addon,
   },
   {
     icon: '🚗',
     title: 'Technician On The Way',
-    desc: "When a tech is headed to a job, one tap sends the customer an automatic SMS: their tech's name, estimated arrival time, and a confirmation of what's being done.",
+    desc: "When a tech is headed to a job, one tap sends the customer an automatic on-the-way notice by email: their tech's name, estimated arrival time, and a confirmation of what's being done. Want it as a text? Add the optional texting add-on.",
     badge: BADGE.all,
   },
   {
@@ -66,7 +66,7 @@ const ALL_FEATURES = [
   {
     icon: '💳',
     title: 'Estimates & Quotes',
-    desc: 'Create professional estimates in seconds. Send via email or SMS. Clients approve with one tap — no login required.',
+    desc: 'Create professional estimates in seconds. Send by email (or by text with the optional texting add-on). Clients approve with one tap — no login required.',
     badge: BADGE.field,
   },
   {
@@ -102,7 +102,7 @@ const ALL_FEATURES = [
   {
     icon: '🌐',
     title: 'Customer Portal',
-    desc: 'Every customer gets a private portal — sign in by secure link or one-time code, view service history with visit photos, pay invoices online (card & ACH, requires a connected payment processor), submit service requests, and update contact preferences. No password required. No add-ons, no upcharges.',
+    desc: 'Every customer gets a private portal — sign in by secure link or one-time code, view service history with visit photos, pay invoices online (card & ACH, requires a connected payment processor), submit service requests, and update contact preferences. No password required. The portal has no add-ons and no upcharges.',
     badge: BADGE.all,
   },
   // ── Field, Command & Enterprise ────────────────────────────────────────────
@@ -151,7 +151,7 @@ const ALL_FEATURES = [
   {
     icon: '🌟',
     title: 'Review Request Automation',
-    desc: 'After a job is completed, Zerbiq automatically sends a review request via SMS or email. More reviews, less asking.',
+    desc: 'After a job is completed, Zerbiq automatically sends a review request by email (or by text with the optional texting add-on). More reviews, less asking.',
     badge: BADGE.all,
   },
   {
@@ -164,7 +164,7 @@ const ALL_FEATURES = [
   {
     icon: '📅',
     title: 'Appointment Reminders',
-    desc: 'Zerbiq automatically sends customers a reminder before every scheduled job. Reduce no-shows and last-minute cancellations without lifting a finger.',
+    desc: 'Zerbiq automatically emails customers a reminder before every scheduled job (texts are available with the optional texting add-on). Reduce no-shows and last-minute cancellations without lifting a finger.',
     badge: BADGE.all,
   },
   {

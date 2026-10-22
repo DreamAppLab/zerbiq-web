@@ -7,7 +7,7 @@ import { BADGE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE } from '@/lib/planData';
 export const metadata = {
   title: 'Features — Zerbiq',
   description:
-    'Route management, job tracking, invoicing, SMS, team management, CRM, and 40+ features — all in one field service platform.',
+    'Route management, job tracking, invoicing, email and optional texting, team management, CRM, and 40+ features — all in one field service platform.',
 };
 
 // ---------------------------------------------------------------------------
@@ -200,7 +200,7 @@ const FEATURE_GROUPS = [
         screenshot: '14-customer-portal.png',
         desc: [
           "Every plan includes a customer portal — a secure, branded page where your customers sign in with a one-time link or code (no password required) and see everything about their account: service history with visit photos, upcoming jobs, invoices, service requests, and contact preferences.",
-          "Customers pay invoices online by card or bank (ACH) directly through the portal — once you connect a supported payment processor (Stripe, Square, or PayPal). No add-ons, no upcharges.",
+          "Customers pay invoices online by card or bank (ACH) directly through the portal — once you connect a supported payment processor (Stripe, Square, or PayPal). The portal has no add-ons and no upcharges.",
           "On Field plans and above, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging. Customers who can self-serve become customers who stay.",
         ],
         badge: BADGE.all,
@@ -244,7 +244,7 @@ const FEATURE_GROUPS = [
         title: 'Automated Customer Notifications',
         screenshot: '18-automated-notifications.png',
         desc: [
-          "Customers hate surprises. Zerbiq sends them the right message at the right time — job reminders, completion confirmations, invoice notices, overdue reminders — all automatic, all in your voice, all with your branding.",
+          "Customers hate surprises. Zerbiq sends them the right message at the right time — job reminders, completion confirmations, invoice notices, overdue reminders — sent by email on every plan, all automatic, all in your voice, all with your branding.",
           "Fewer calls to you. Happier customers.",
         ],
         badge: BADGE.all,
@@ -254,8 +254,9 @@ const FEATURE_GROUPS = [
         title: 'Appointment Reminders',
         screenshot: '19-appointment-reminders.png',
         desc: [
-          "A simple text the day before drops no-shows and complaints by a wide margin. Zerbiq sends it automatically, lets customers confirm or reschedule with a single reply, and logs the response.",
+          "A simple reminder the day before drops no-shows and complaints by a wide margin. Zerbiq sends it automatically by email on every plan, lets customers confirm or reschedule with a single reply, and logs the response.",
           "You don't lift a finger.",
+          "Want it as a text? Texting is an optional add-on on every plan: $49 one-time setup, then prepaid text blocks. No texts are included in any plan, because carriers charge for every text.",
         ],
         badge: BADGE.all,
       },
@@ -264,8 +265,9 @@ const FEATURE_GROUPS = [
         title: 'Technician On The Way',
         screenshot: '20-technician-on-the-way.png',
         desc: [
-          '"Is someone coming today?" Stop answering that question. When your tech starts driving to a customer, Zerbiq sends an automatic "on the way" text with the tech\'s name and ETA.',
+          '"Is someone coming today?" Stop answering that question. When your tech starts driving to a customer, Zerbiq sends an automatic "on the way" notice by email with the tech\'s name and ETA.',
           "Customers feel taken care of. Techs stay focused on the job.",
+          "Want it as a text? Texting is an optional add-on on every plan: $49 one-time setup, then prepaid text blocks. No texts are included in any plan.",
         ],
         badge: BADGE.all,
       },
@@ -274,8 +276,9 @@ const FEATURE_GROUPS = [
         title: 'Review Request Automation',
         screenshot: '21-review-request.png',
         desc: [
-          "Two hours after a job is marked complete, Zerbiq texts the customer asking for a review. Not a generic blast — a personal message tied to that specific visit.",
+          "Two hours after a job is marked complete, Zerbiq emails the customer asking for a review. Not a generic blast — a personal message tied to that specific visit.",
           "More reviews, better reviews, less effort from you.",
+          "Want it as a text? Texting is an optional add-on on every plan: $49 one-time setup, then prepaid text blocks. No texts are included in any plan.",
         ],
         badge: BADGE.all,
       },

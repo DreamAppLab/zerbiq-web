@@ -1,6 +1,8 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
+import TextingAddon from '@/components/TextingAddon';
+import { TEXTING_FAQ_ANSWER } from '@/lib/planData';
 import { brandify } from '@/components/ZerbiqBrand';
 
 const FAQ = [
@@ -25,6 +27,10 @@ const FAQ = [
     a: 'Our White-Glove Onboarding is a one-time add-on — $299 for Core, $499 for Field, $699 for Command. We Zoom with you for 60–90 minutes, import your customer list, build your routes, add your team, and configure everything — guaranteed live before the call ends.',
   },
   {
+    q: 'How does texting work?',
+    a: TEXTING_FAQ_ANSWER,
+  },
+  {
     q: 'Do you offer annual billing?',
     a: 'Yes — annual billing saves you two full months. Get 12 months for the price of 10.',
   },
@@ -38,7 +44,7 @@ const FAQ = [
   },
   {
     q: 'What does the customer portal include?',
-    a: 'Every plan — Solo, Core, Field, Command, and Enterprise — includes a customer portal. No add-ons, no upcharges. Your customers sign in with a one-time secure link or code (no password required) and can view their service history with visit photos, see upcoming jobs, view and pay invoices online, submit service requests, and update their contact and communication preferences. On Field plans and above, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging.',
+    a: 'Every plan — Solo, Core, Field, Command, and Enterprise — includes a customer portal. The portal has no add-ons and no upcharges. Your customers sign in with a one-time secure link or code (no password required) and can view their service history with visit photos, see upcoming jobs, view and pay invoices online, submit service requests, and update their contact and communication preferences. On Field plans and above, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging.',
   },
   {
     q: 'Do I need a payment processor to use the customer portal?',
@@ -82,7 +88,7 @@ export default function PricingPage() {
             Simple pricing for serious operators
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 17, lineHeight: 1.7, margin: 0 }}>
-            No hidden fees. No confusing tiers. Pick the plan that fits and scale when you&apos;re ready.
+            No hidden fees. No confusing tiers. Pick the plan that fits and scale when you&apos;re ready. Texting is the one optional add-on, and its prices are listed below.
           </p>
         </div>
       </section>
@@ -90,6 +96,7 @@ export default function PricingPage() {
       <section style={{ padding: '0 24px 80px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <PricingCards />
+          <TextingAddon />
         </div>
       </section>
 
