@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import ZerbiqBrand from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, TEXTING_ADDON, gateToValues, formatPlanPrice, textBlockFromLabel } from '@/lib/planData';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, TEXTING_ADDON, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel } from '@/lib/planData';
 
 export const metadata = {
   title: 'Compare Plans — Zerbiq',
@@ -180,7 +180,7 @@ const PLAN_CARDS = [
       'Email notifications', 'Appointment reminders', 'Holiday management', 'Billing cycles',
       'Custom branding', 'Reports & analytics', 'Data export', 'Mileage tracking',
       'Parts on order', 'Credits & refunds', 'Materials & inventory', 'Schedule & dispatch',
-      'Texting add-on available', 'Light & dark mode', 'Personalized shortcuts bar', 'Mobile app',
+      'Light & dark mode', 'Personalized shortcuts bar', 'Mobile app',
     ],
   },
   {
@@ -478,7 +478,7 @@ export default function ComparePage() {
                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginBottom: 14, lineHeight: 1.4 }}>{plan.label}</div>
                 <div className="plan-card-price" style={{ fontWeight: 900, fontSize: 26, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>{plan.price}</div>
                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', paddingBottom: 14, marginBottom: 14, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>{plan.customers}</div>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6, flex: 1 }}>
                   {plan.features.map((f) => (
                     <li key={f} className="plan-feature-item" style={{ fontSize: 13, color: '#fff', display: 'flex', gap: 6, alignItems: 'flex-start', lineHeight: 1.45 }}>
                       <span style={{ color: plan.color, fontWeight: 700, flexShrink: 0 }}>+</span>
@@ -486,6 +486,13 @@ export default function ComparePage() {
                     </li>
                   ))}
                 </ul>
+                {/* Same line on all five plans, pinned to the bottom so the cards line up */}
+                <div style={{ marginTop: 14, paddingTop: 12, borderTop: '1px solid rgba(255,255,255,0.1)', fontSize: 13, lineHeight: 1.45 }}>
+                  <Link href={TEXTING_PRICING_HREF} className="plan-texting-line" style={{ color: '#ffb020', fontWeight: 600, textDecoration: 'none', display: 'flex', gap: 6, alignItems: 'flex-start' }}>
+                    <span style={{ fontWeight: 700, flexShrink: 0 }}>+</span>
+                    {TEXTING_PLAN_CARD_LINE}
+                  </Link>
+                </div>
               </div>
             ))}
           </div>

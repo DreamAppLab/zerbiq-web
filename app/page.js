@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE } from '@/lib/planData';
+import { BADGE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, TEXTING_CARD, TEXTING_PRICING_HREF, TEXTING_WHY, textingPricingLine } from '@/lib/planData';
 
 const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
@@ -31,19 +31,22 @@ const ALL_FEATURES = [
     icon: '💰',
     title: 'Invoicing & Payments',
     desc: 'Generate invoices the moment a job is marked complete. Send by email with one click (by text too, with the optional texting add-on). Collect card payments, ACH, or cash — your choice.',
-    badge: BADGE.all,
+    badge: BADGE.allEmail,
   },
   {
-    icon: '💬',
-    title: 'Texting (optional add-on)',
-    desc: 'Want to reach customers by text? Add texting to any plan: appointment reminders, job updates and invoice links from your own toll-free number. $49 one-time setup, then prepaid text blocks starting at $10 for 500. Without it, every plan sends the same messages by email.',
+    icon: TEXTING_CARD.icon,
+    title: TEXTING_CARD.title,
+    desc: TEXTING_CARD.desc.join(' '),
     badge: BADGE.addon,
+    pill: TEXTING_CARD.badge,
+    link: { label: TEXTING_CARD.linkLabel, href: TEXTING_CARD.linkHref },
   },
+
   {
     icon: '🚗',
     title: 'Technician On The Way',
     desc: "When a tech is headed to a job, one tap sends the customer an automatic on-the-way notice by email: their tech's name, estimated arrival time, and a confirmation of what's being done. Want it as a text? Add the optional texting add-on.",
-    badge: BADGE.all,
+    badge: BADGE.allEmail,
   },
   {
     icon: '👥',
@@ -152,7 +155,7 @@ const ALL_FEATURES = [
     icon: '🌟',
     title: 'Review Request Automation',
     desc: 'After a job is completed, Zerbiq automatically sends a review request by email (or by text with the optional texting add-on). More reviews, less asking.',
-    badge: BADGE.all,
+    badge: BADGE.allEmail,
   },
   {
     icon: '📬',
@@ -165,7 +168,7 @@ const ALL_FEATURES = [
     icon: '📅',
     title: 'Appointment Reminders',
     desc: 'Zerbiq automatically emails customers a reminder before every scheduled job (texts are available with the optional texting add-on). Reduce no-shows and last-minute cancellations without lifting a finger.',
-    badge: BADGE.all,
+    badge: BADGE.allEmail,
   },
   {
     icon: '🔔',
@@ -271,7 +274,12 @@ const PLAN_GROUPS = [
   {
     key: 'all',
     label: 'All Plans',
-    features: ALL_FEATURES.filter((f) => f.badge === BADGE.all),
+    features: ALL_FEATURES.filter((f) => f.badge === BADGE.all || f.badge === BADGE.allEmail),
+  },
+  {
+    key: 'addon',
+    label: 'Optional add-on on every plan',
+    features: ALL_FEATURES.filter((f) => f.badge === BADGE.addon),
   },
   {
     key: 'field',
@@ -626,13 +634,34 @@ export default function HomePage() {
                     }}
                   >
                     <div style={{ fontSize: 28, marginBottom: 14 }}>{f.icon}</div>
-                    <h3 style={{ fontWeight: 700, fontSize: 17, margin: '0 0 10px' }}>{f.title}</h3>
+                    <h3 style={{ fontWeight: 700, fontSize: 17, margin: '0 0 10px' }}>
+                      {f.title}
+                      {f.pill && (
+                        <span
+                          style={{
+                            marginLeft: 10,
+                            verticalAlign: 'middle',
+                            display: 'inline-block',
+                            background: 'rgba(61,92,255,0.18)',
+                            border: '1px solid rgba(61,92,255,0.5)',
+                            borderRadius: 999,
+                            padding: '2px 10px',
+                            fontSize: 11,
+                            fontWeight: 700,
+                            letterSpacing: '0.04em',
+                            textTransform: 'uppercase',
+                          }}
+                        >
+                          {f.pill}
+                        </span>
+                      )}
+                    </h3>
                     <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: '0 0 20px', lineHeight: 1.65, flex: 1 }}>
                       {brandify(f.desc)}
                     </p>
                     <div>
                       <a
-                        href={EARLY_ACCESS_HREF}
+                        href={f.link ? f.link.href : EARLY_ACCESS_HREF}
                         className="btn-primary"
                         style={{
                           display: 'inline-block',
@@ -642,7 +671,7 @@ export default function HomePage() {
                           fontSize: 13,
                         }}
                       >
-                        {PRIMARY_CTA_LABEL}
+                        {f.link ? f.link.label : PRIMARY_CTA_LABEL}
                       </a>
                       <div
                         style={{
@@ -680,13 +709,13 @@ export default function HomePage() {
             <span style={{ display: 'block', color: 'var(--color-primary)' }}>Not just studied it.</span>
           </h2>
           <p style={{ fontSize: 16, color: 'var(--color-white-60)', lineHeight: 1.8, margin: '0 auto 20px', maxWidth: 620, textAlign: 'center' }}>
-            Zerbiq was built by a field service operator who managed teams, ran routes, chased invoices, dealt with no-shows,
+            <ZerbiqBrand /> was built by a field service operator who managed teams, ran routes, chased invoices, dealt with no-shows,
             and eventually sold the business to private equity. We spent years using software that was built by people who had
             never dispatched a tech, never explained an invoice to a frustrated customer, and never stayed up worrying about
             whether the routes were covered.
           </p>
           <p style={{ fontSize: 16, color: 'var(--color-white-60)', lineHeight: 1.8, margin: '0 auto 32px', maxWidth: 620, textAlign: 'center' }}>
-            So we built what we always needed. Every feature in Zerbiq exists because a real service business needed it —
+            So we built what we always needed. Every feature in <ZerbiqBrand /> exists because a real service business needed it —
             not because a product manager thought it sounded good.
           </p>
           <a
@@ -745,6 +774,12 @@ export default function HomePage() {
             Pick the plan that fits. Scale when you&apos;re ready. Cancel anytime.
           </p>
           <PricingCards />
+          <p style={{ color: 'rgba(255,255,255,0.8)', textAlign: 'center', fontSize: 15, lineHeight: 1.65, margin: '28px auto 0', maxWidth: 720 }}>
+            {textingPricingLine()}{' '}
+            <a href={TEXTING_PRICING_HREF} style={{ color: '#fff', fontWeight: 700, textDecoration: 'underline', whiteSpace: 'nowrap' }}>
+              See texting prices →
+            </a>
+          </p>
         </div>
       </section>
 

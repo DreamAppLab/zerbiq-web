@@ -7,8 +7,8 @@ export default function TextingAddon() {
 
   const facts = [
     {
-      title: 'Optional on every plan',
-      body: 'Solo, Core, Field, Command and Enterprise can all add texting. No texts are included in any plan, because phone carriers charge for every text.',
+      title: 'Why it’s an add-on',
+      body: 'Carriers charge for every text and every number. So texting is billed on its own, and no plan price includes it.',
     },
     {
       title: `$${setupFee} one-time setup`,

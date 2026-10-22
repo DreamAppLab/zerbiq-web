@@ -41,7 +41,7 @@ test('texting add-on prices', () => {
     { texts: 2500, price: 40 },
   ]);
   assert.deepEqual(pd.textBlockLabels(), ['500 for $10', '1,000 for $18', '2,500 for $40']);
-  assert.equal(pd.textBlockFromLabel(), 'From $10 / 500 texts');
+  assert.equal(pd.textBlockFromLabel(), 'From\u00a0$10 for 500\u00a0texts');
 });
 
 test('texting FAQ states every required fact', () => {
@@ -54,4 +54,44 @@ test('texting FAQ states every required fact', () => {
   ]) {
     assert.ok(a.includes(part), `FAQ mentions: ${part}`);
   }
+});
+
+test('compare label keeps "500 texts" and "From $10" together', () => {
+  const label = pd.textBlockFromLabel();
+  assert.ok(label.includes('500\u00a0texts'), 'no break between 500 and texts');
+  assert.ok(label.includes('From\u00a0$10'), 'no break between From and $10');
+  assert.ok(!/ texts$/.test(label), 'texts is never preceded by a plain space');
+});
+
+test('one shared add-on wording: summary, want-it-as-text line, plan-card line', () => {
+  assert.equal(pd.TEXTING_WHY, 'No texts are included in any plan, because carriers charge for every text.');
+  assert.ok(pd.TEXTING_ADDON_SUMMARY.includes(pd.TEXTING_WHY));
+  assert.ok(pd.TEXTING_ADDON_SUMMARY.startsWith('Texting is an optional add-on on every plan: $49 one-time setup'));
+  assert.equal(pd.TEXTING_WANT_IT_AS_TEXT, `Want it as a text? ${pd.TEXTING_ADDON_SUMMARY}`);
+  assert.equal(pd.TEXTING_PLAN_CARD_LINE, 'Texting add-on available');
+  assert.equal(pd.TEXTING_PRICING_HREF, '/pricing#texting-addon');
+});
+
+test('dedicated Texting card has the add-on badge, two plain lines and a pricing link', () => {
+  const c = pd.TEXTING_CARD;
+  assert.equal(c.title, 'Texting');
+  assert.equal(c.badge, 'Optional add-on');
+  assert.equal(c.desc.length, 2);
+  assert.ok(c.desc[1].includes(pd.TEXTING_WHY));
+  assert.ok(c.desc[1].includes('$49') && c.desc[1].includes('$10 for 500 texts'));
+  assert.equal(c.linkHref, '/pricing#texting-addon');
+  assert.ok(c.linkLabel.startsWith('See texting prices'));
+});
+
+test('home pricing line states setup and the cheapest block', () => {
+  assert.equal(
+    pd.textingPricingLine(),
+    'Texting is an optional add-on: $49 setup, then prepaid blocks from $10 for 500 texts.',
+  );
+});
+
+test('email-by-default badge never claims texting is included', () => {
+  assert.equal(pd.BADGE.allEmail, 'Included (by email) · texting is an add-on');
+  assert.ok(pd.BADGE.allEmail.includes('texting is an add-on'));
+  assert.ok(pd.BADGE.all.startsWith('Included'));
 });

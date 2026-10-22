@@ -2,7 +2,7 @@ import { PRIMARY_CTA_LABEL } from '@/lib/siteConfig.mjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE } from '@/lib/planData';
+import { BADGE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
 
 export const metadata = {
   title: 'Features — Zerbiq',
@@ -240,14 +240,24 @@ const FEATURE_GROUPS = [
     group: 'Communications and Automation',
     features: [
       {
+        icon: TEXTING_CARD.icon,
+        title: TEXTING_CARD.title,
+        addon: true,
+        pill: TEXTING_CARD.badge,
+        desc: TEXTING_CARD.desc,
+        link: { label: TEXTING_CARD.linkLabel, href: TEXTING_CARD.linkHref },
+        badge: BADGE.addon,
+      },
+      {
         icon: '💬',
         title: 'Automated Customer Notifications',
         screenshot: '18-automated-notifications.png',
         desc: [
           "Customers hate surprises. Zerbiq sends them the right message at the right time — job reminders, completion confirmations, invoice notices, overdue reminders — sent by email on every plan, all automatic, all in your voice, all with your branding.",
           "Fewer calls to you. Happier customers.",
+          TEXTING_WANT_IT_AS_TEXT,
         ],
-        badge: BADGE.all,
+        badge: BADGE.allEmail,
       },
       {
         icon: '🔔',
@@ -256,9 +266,9 @@ const FEATURE_GROUPS = [
         desc: [
           "A simple reminder the day before drops no-shows and complaints by a wide margin. Zerbiq sends it automatically by email on every plan, lets customers confirm or reschedule with a single reply, and logs the response.",
           "You don't lift a finger.",
-          "Want it as a text? Texting is an optional add-on on every plan: $49 one-time setup, then prepaid text blocks. No texts are included in any plan, because carriers charge for every text.",
+          TEXTING_WANT_IT_AS_TEXT,
         ],
-        badge: BADGE.all,
+        badge: BADGE.allEmail,
       },
       {
         icon: '🚗',
@@ -267,9 +277,9 @@ const FEATURE_GROUPS = [
         desc: [
           '"Is someone coming today?" Stop answering that question. When your tech starts driving to a customer, Zerbiq sends an automatic "on the way" notice by email with the tech\'s name and ETA.',
           "Customers feel taken care of. Techs stay focused on the job.",
-          "Want it as a text? Texting is an optional add-on on every plan: $49 one-time setup, then prepaid text blocks. No texts are included in any plan.",
+          TEXTING_WANT_IT_AS_TEXT,
         ],
-        badge: BADGE.all,
+        badge: BADGE.allEmail,
       },
       {
         icon: '🌟',
@@ -278,9 +288,9 @@ const FEATURE_GROUPS = [
         desc: [
           "Two hours after a job is marked complete, Zerbiq emails the customer asking for a review. Not a generic blast — a personal message tied to that specific visit.",
           "More reviews, better reviews, less effort from you.",
-          "Want it as a text? Texting is an optional add-on on every plan: $49 one-time setup, then prepaid text blocks. No texts are included in any plan.",
+          TEXTING_WANT_IT_AS_TEXT,
         ],
-        badge: BADGE.all,
+        badge: BADGE.allEmail,
       },
       {
         icon: '📧',
@@ -565,6 +575,38 @@ function FeatureImage({ screenshot, label }) {
         alt={label}
         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
       />
+    </div>
+  );
+}
+
+// Price panel shown beside the Texting card instead of a screenshot.
+function TextingPriceCard() {
+  const rows = [
+    ['One-time setup', `$${TEXTING_ADDON.setupFee}`],
+    ...TEXTING_ADDON.blocks.map((b) => [`${b.texts.toLocaleString('en-US')} texts`, `$${b.price}`]),
+  ];
+  return (
+    <div
+      style={{
+        borderRadius: 14,
+        border: '1px solid rgba(61,92,255,0.35)',
+        background: 'rgba(61,92,255,0.08)',
+        padding: '28px 24px',
+      }}
+    >
+      <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 14 }}>Texting add-on prices</div>
+      {rows.map(([label, price]) => (
+        <div
+          key={label}
+          style={{ display: 'flex', justifyContent: 'space-between', gap: 12, padding: '10px 0', borderTop: '1px solid var(--color-white-10)', fontSize: 15 }}
+        >
+          <span style={{ color: 'var(--color-white-60)' }}>{label}</span>
+          <span style={{ fontWeight: 700 }}>{price}</span>
+        </div>
+      ))}
+      <p style={{ color: 'var(--color-white-60)', fontSize: 13, lineHeight: 1.6, margin: '14px 0 0' }}>
+        Prepaid blocks never expire. A long text, or one with emoji, can count as 2 or more texts.
+      </p>
     </div>
   );
 }
@@ -857,6 +899,26 @@ export default function FeaturesPage() {
                       }}
                     >
                       {feature.title}
+                      {feature.pill && (
+                        <span
+                          style={{
+                            marginLeft: 12,
+                            verticalAlign: 'middle',
+                            display: 'inline-block',
+                            background: 'rgba(61,92,255,0.18)',
+                            border: '1px solid rgba(61,92,255,0.5)',
+                            borderRadius: 999,
+                            padding: '3px 12px',
+                            fontSize: 12,
+                            fontWeight: 700,
+                            letterSpacing: '0.04em',
+                            textTransform: 'uppercase',
+                            lineHeight: 1.4,
+                          }}
+                        >
+                          {feature.pill}
+                        </span>
+                      )}
                     </h2>
                     {feature.desc.map((p, j) => (
                       <p
@@ -872,7 +934,7 @@ export default function FeaturesPage() {
                       </p>
                     ))}
                     <a
-                      href={EARLY_ACCESS_HREF}
+                      href={feature.link ? feature.link.href : EARLY_ACCESS_HREF}
                       className="btn-primary"
                       style={{
                         display: 'inline-block',
@@ -882,7 +944,7 @@ export default function FeaturesPage() {
                         fontSize: 14,
                       }}
                     >
-                      {PRIMARY_CTA_LABEL}
+                      {feature.link ? feature.link.label : PRIMARY_CTA_LABEL}
                     </a>
                     <div
                       style={{
@@ -897,7 +959,11 @@ export default function FeaturesPage() {
 
                   {/* Screenshot side */}
                   <div className="feat-img" style={{ order: isEven ? 1 : 0 }}>
-                    <FeatureImage screenshot={feature.screenshot} label={feature.title} />
+                    {feature.addon ? (
+                      <TextingPriceCard />
+                    ) : (
+                      <FeatureImage screenshot={feature.screenshot} label={feature.title} />
+                    )}
                   </div>
                 </div>
               </section>
