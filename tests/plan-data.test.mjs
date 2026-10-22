@@ -48,7 +48,7 @@ test('texting FAQ states every required fact', () => {
   const a = pd.TEXTING_FAQ_ANSWER;
   for (const part of [
     'optional add-on for every plan', 'No texts are included', '$49 one time', 'toll-free number',
-    'a few days', 'couple of weeks', 'by email', '500 for $10', '1,000 for $18', '2,500 for $40',
+    'a few business days', 'couple of weeks', 'by email', '500 for $10', '1,000 for $18', '2,500 for $40',
     'never expire', '2 or more texts', 'texting pauses', 'cannot be recovered', 'carrier approval again',
     'stay on your account', 'invoices and review requests by email',
   ]) {
@@ -137,4 +137,47 @@ test('/features has its own H1 and page title, not the home page headline', () =
   assert.equal(h1, 'Every feature your field service business needs');
   assert.ok(!features.includes('Built for the field'));
   assert.ok(features.includes("title: 'Every feature your field service business needs — Zerbiq'"));
+});
+
+// ── Texting explainer (/texting) ─────────────────────────────────────────────
+test('texting explainer keeps the approved line and the app prices', () => {
+  const all = [
+    ...pd.TEXTING_EXPLAINER.intro,
+    ...pd.TEXTING_EXPLAINER.sections.flatMap((s) => [...s.paragraphs, ...(s.bullets || []), ...(s.after || [])]),
+  ].join(' ');
+  assert.ok(all.includes('Carriers charge for every text and every number'));
+  assert.ok(all.includes('$49 setup fee applies again'));
+  assert.equal(pd.textingPriceSummary(), '$49 one-time setup, then prepaid text blocks: 500 for $10, 1,000 for $18, 2,500 for $40. Block texts never expire.');
+  assert.equal(pd.TEXTING_EXPLAINER_HREF, '/texting');
+});
+
+test('short texting FAQ entries link to a real explainer section', () => {
+  const ids = pd.TEXTING_EXPLAINER.sections.map((s) => s.id);
+  assert.deepEqual(pd.TEXTING_FAQ_SHORT.map((f) => f.q), ['Why toll-free?', 'Can texting prices change?', 'What do I need to get verified?']);
+  for (const f of pd.TEXTING_FAQ_SHORT) {
+    const [path, id] = f.href.split('#');
+    assert.equal(path, '/texting');
+    assert.ok(ids.includes(id), `section exists: ${id}`);
+  }
+});
+
+test('texting explainer uses US spelling', () => {
+  const text = JSON.stringify([pd.TEXTING_EXPLAINER, pd.TEXTING_FAQ_SHORT]);
+  for (const bad of ['honour', 'recognise', 'organis', 'authoris', 'favour', 'licence']) {
+    assert.ok(!text.toLowerCase().includes(bad), bad);
+  }
+});
+
+test('texting wording is identical in the pricing box source, FAQ and /texting', () => {
+  const faq = pd.TEXTING_FAQ_ANSWER;
+  const page = JSON.stringify(pd.TEXTING_EXPLAINER);
+  const short = JSON.stringify(pd.TEXTING_FAQ_SHORT);
+  const box = readFileSync(new URL('../components/TextingAddon.js', import.meta.url), 'utf8');
+  assert.ok(faq.includes('toll-free number (it starts with 8xx)'));
+  assert.ok(page.includes(pd.TEXTING_REVIEW_TIME) && faq.includes(pd.TEXTING_REVIEW_TIME) && short.includes(pd.TEXTING_REVIEW_TIME));
+  assert.ok(box.includes('TEXTING_REVIEW_TIME') && box.includes('TEXTING_NUMBER_PHRASE') && box.includes('TEXTING_OFF_ON_TITLE'));
+  assert.equal(pd.TEXTING_OFF_ON_TITLE, 'Turning texting off and back on');
+  assert.ok(pd.TEXTING_EXPLAINER.sections.some((s) => s.heading === pd.TEXTING_OFF_ON_TITLE));
+  assert.ok(page.includes(pd.TEXTING_EIN_NOTE) && short.includes(pd.TEXTING_EIN_NOTE));
+  assert.ok(!/few days/.test(faq) && !/several business days/.test(page));
 });

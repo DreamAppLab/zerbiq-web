@@ -2,7 +2,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import TextingAddon from '@/components/TextingAddon';
-import { TEXTING_FAQ_ANSWER } from '@/lib/planData';
+import Link from 'next/link';
+import { TEXTING_FAQ_ANSWER, TEXTING_FAQ_SHORT, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL } from '@/lib/planData';
 import { brandify } from '@/components/ZerbiqBrand';
 
 const FAQ = [
@@ -29,7 +30,9 @@ const FAQ = [
   {
     q: 'How does texting work?',
     a: TEXTING_FAQ_ANSWER,
+    href: TEXTING_EXPLAINER_HREF,
   },
+  ...TEXTING_FAQ_SHORT,
   {
     q: 'Do you offer annual billing?',
     a: 'Yes — annual billing saves you two full months. Get 12 months for the price of 10.',
@@ -232,6 +235,13 @@ export default function PricingPage() {
                 >
                   {brandify(item.a)}
                 </p>
+                {item.href && (
+                  <p style={{ margin: '12px 0 0', fontSize: 15 }}>
+                    <Link href={item.href} style={{ color: 'var(--color-primary)', fontWeight: 600 }}>
+                      {TEXTING_EXPLAINER_LINK_LABEL}
+                    </Link>
+                  </p>
+                )}
               </div>
             ))}
           </div>

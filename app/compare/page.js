@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import ZerbiqBrand from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, TEXTING_ADDON, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel } from '@/lib/planData';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel } from '@/lib/planData';
 
 export const metadata = {
   title: 'Compare Plans — Zerbiq',
@@ -762,7 +762,7 @@ export default function ComparePage() {
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
             ³ Texting is an optional add-on for every plan, and no texts are included in any plan.
             ${TEXTING_ADDON.setupFee} one-time setup, then prepaid text blocks ({TEXTING_ADDON.blocks.map((b) => `${b.texts.toLocaleString('en-US')} for $${b.price}`).join(', ')}) that never expire.
-            Texts come from your own toll-free number; carrier approval usually takes a few days and can take up to a couple of weeks, and until then messages go by email.
+            Texts come from your own {TEXTING_NUMBER_PHRASE}. {TEXTING_REVIEW_TIME} Until then, messages go by email.
             When texts run out, messages go by email. Turning texting off releases the number for good. Turning it back on means the ${TEXTING_ADDON.setupFee} setup and carrier approval again.
             Every plan sends reminders, on-the-way notices, invoices and review requests by email.{' '}
             <Link href="/pricing#texting-addon" style={{ color: '#fff', textDecoration: 'underline' }}>Full texting details</Link>
