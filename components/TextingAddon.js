@@ -1,4 +1,5 @@
-import { TEXTING_ADDON } from '@/lib/planData';
+import Link from 'next/link';
+import { TEXTING_ADDON, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL } from '@/lib/planData';
 
 // "Texting add-on" box shown under the plan cards on the pricing page.
 // All prices come from TEXTING_ADDON in lib/planData.js.
@@ -89,6 +90,12 @@ export default function TextingAddon() {
           </div>
         ))}
       </div>
+
+      <p style={{ margin: '20px 0 0', fontSize: 15 }}>
+        <Link href={TEXTING_EXPLAINER_HREF} style={{ color: 'var(--color-primary)', fontWeight: 600 }}>
+          {TEXTING_EXPLAINER_LINK_LABEL}
+        </Link>
+      </p>
     </div>
   );
 }

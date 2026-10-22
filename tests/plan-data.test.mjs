@@ -138,3 +138,32 @@ test('/features has its own H1 and page title, not the home page headline', () =
   assert.ok(!features.includes('Built for the field'));
   assert.ok(features.includes("title: 'Every feature your field service business needs — Zerbiq'"));
 });
+
+// ── Texting explainer (/texting) ─────────────────────────────────────────────
+test('texting explainer keeps the approved line and the app prices', () => {
+  const all = [
+    ...pd.TEXTING_EXPLAINER.intro,
+    ...pd.TEXTING_EXPLAINER.sections.flatMap((s) => [...s.paragraphs, ...(s.bullets || []), ...(s.after || [])]),
+  ].join(' ');
+  assert.ok(all.includes('Carriers charge for every text and every number'));
+  assert.ok(all.includes('$49 setup fee applies again'));
+  assert.equal(pd.textingPriceSummary(), '$49 one-time setup, then prepaid text blocks: 500 for $10, 1,000 for $18, 2,500 for $40. Block texts never expire.');
+  assert.equal(pd.TEXTING_EXPLAINER_HREF, '/texting');
+});
+
+test('short texting FAQ entries link to a real explainer section', () => {
+  const ids = pd.TEXTING_EXPLAINER.sections.map((s) => s.id);
+  assert.deepEqual(pd.TEXTING_FAQ_SHORT.map((f) => f.q), ['Why toll-free?', 'Can texting prices change?', 'What do I need to get verified?']);
+  for (const f of pd.TEXTING_FAQ_SHORT) {
+    const [path, id] = f.href.split('#');
+    assert.equal(path, '/texting');
+    assert.ok(ids.includes(id), `section exists: ${id}`);
+  }
+});
+
+test('texting explainer uses US spelling', () => {
+  const text = JSON.stringify([pd.TEXTING_EXPLAINER, pd.TEXTING_FAQ_SHORT]);
+  for (const bad of ['honour', 'recognise', 'organis', 'authoris', 'favour', 'licence']) {
+    assert.ok(!text.toLowerCase().includes(bad), bad);
+  }
+});
