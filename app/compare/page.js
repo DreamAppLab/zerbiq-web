@@ -146,8 +146,8 @@ const FEATURE_GROUPS = [
   {
     group: 'Platform & Support',
     rows: [
-      { label: 'Mobile team view (iOS, Android & browser)',       values: gateToValues(FEATURE_GATE.mobileApp) },
-      { label: 'PWA (install from browser, no download required)',values: gateToValues(FEATURE_GATE.pwa) },
+      { label: 'Free mobile app (iPhone & Android) + browser',       values: gateToValues(FEATURE_GATE.mobileApp) },
+      { label: 'Add to home screen from the browser (no download needed)',values: gateToValues(FEATURE_GATE.pwa) },
       { label: 'Light Mode and Dark Mode',                        values: gateToValues(FEATURE_GATE.lightDarkMode) },
       { label: 'Personalized Shortcuts Bar',                      values: gateToValues(FEATURE_GATE.shortcutsBar) },
       { label: 'Custom Branding',                                 values: gateToValues(FEATURE_GATE.customBranding) },

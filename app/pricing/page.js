@@ -36,7 +36,7 @@ const FAQ = [
   },
   {
     q: 'Do I need to download an app?',
-    a: 'Zerbiq is available as a native app on iOS and Android — download it from the App Store or Google Play. It also runs in any browser and installs as a PWA directly from your phone without going through an app store. Your techs can be up and running in minutes on any device.',
+    a: 'Zerbiq is a free download for iPhone and Android — get it free from the App Store or Google Play. It also runs in any web browser, and you can add it to your phone\'s home screen straight from the browser without going through an app store. Your techs can be up and running in minutes on any device.',
   },
   {
     q: 'Can I import my existing customers?',
