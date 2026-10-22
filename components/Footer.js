@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import ZIcon from './ZIcon';
 import ZerbiqBrand from '@/components/ZerbiqBrand';
-import { SIGN_IN_HREF, activeStoreLinks } from '@/lib/siteConfig.mjs';
+import { SIGN_IN_HREF, SUPPORT_EMAIL, activeStoreLinks } from '@/lib/siteConfig.mjs';
 
 export default function Footer() {
   const storeLinks = activeStoreLinks();
@@ -107,22 +107,21 @@ export default function Footer() {
                 ))}
               </span>
             )}
-            <a
-              href="mailto:hello@zerbiq.com"
-              className="link-muted"
-              style={{ fontSize: 14, fontWeight: 500 }}
-            >
+            <Link href="/support" className="link-muted" style={{ fontSize: 14, fontWeight: 500 }}>
+              Support
+            </Link>
+            <Link href="/contact" className="link-muted" style={{ fontSize: 14, fontWeight: 500 }}>
               Contact
-            </a>
+            </Link>
           </nav>
 
           {/* Contact email */}
           <a
-            href="mailto:hello@zerbiq.com"
+            href={`mailto:${SUPPORT_EMAIL}`}
             className="link-muted"
             style={{ fontSize: 14 }}
           >
-            hello@<ZerbiqBrand />.com
+            {SUPPORT_EMAIL}
           </a>
         </div>
 
