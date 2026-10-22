@@ -5,7 +5,7 @@ import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
 import { BADGE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
 
 export const metadata = {
-  title: 'Features — Zerbiq',
+  title: 'Every feature your field service business needs — Zerbiq',
   description:
     'Route management, job tracking, invoicing, email and optional texting, team management, CRM, and 40+ features — all in one field service platform.',
 };
@@ -686,7 +686,7 @@ export default function FeaturesPage() {
               lineHeight: 1.05,
             }}
           >
-            Built for the field. Loved by the office.
+            Every feature your field service business needs
           </h1>
           <p
             style={{

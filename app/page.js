@@ -411,7 +411,7 @@ export default function HomePage() {
 
       {/* FOUNDER STORY STRIP */}
       <section style={{ padding: '80px 24px', background: 'rgba(255,255,255,0.025)', borderTop: '1px solid var(--color-white-10)', borderBottom: '1px solid var(--color-white-10)' }}>
-        <div style={{ maxWidth: 760, margin: '0 auto' }}>
+        <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'center' }}>
           <h2
             style={{
               fontWeight: 900,

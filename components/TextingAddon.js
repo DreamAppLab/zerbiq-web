@@ -57,7 +57,7 @@ export default function TextingAddon() {
       `}</style>
 
       <h2 style={{ fontWeight: 900, fontSize: 'clamp(22px, 3vw, 30px)', letterSpacing: '-0.03em', margin: '0 0 8px', lineHeight: 1.2 }}>
-        Texting add-on <span style={{ color: 'var(--color-white-60)', fontWeight: 600, fontSize: '0.6em', letterSpacing: 0 }}>optional on every plan</span>
+        Texting add-on <span style={{ color: 'var(--color-white-60)', fontWeight: 600, fontSize: '0.6em', letterSpacing: 0 }}>optional for every plan</span>
       </h2>
       <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 15, lineHeight: 1.65, margin: '0 0 20px' }}>
         Every plan sends reminders, on-the-way notices, invoices and review requests by email. Want them
