@@ -50,11 +50,12 @@ test('the sharing cross-reference points at sections that exist on these pages',
   assert.match(privacy, /6\. Third-Party Services/);
 });
 
-test('both legal pages show the October 26, 2026 date and only site contacts', () => {
+test('both legal pages show the October 26, 2026 date and only the support contact', () => {
   for (const text of [privacy, terms]) {
     assert.match(text, /Last updated: October 26, 2026/);
   }
   const src = readFileSync(new URL('../app/legal/privacy/page.js', import.meta.url), 'utf8');
   const mailto = new Set([...src.matchAll(/mailto:([^"]+)"/g)].map((m) => m[1]));
-  assert.deepEqual([...mailto].sort(), ['hello@zerbiq.com', 'support@zerbiq.com']);
+  assert.deepEqual([...mailto], ['support@zerbiq.com']);
+  assert.doesNotMatch(src, /hello@zerbiq\.com/);
 });

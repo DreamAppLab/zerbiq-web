@@ -182,8 +182,8 @@ export default function TermsPage() {
               </h2>
               <p style={{ margin: 0 }}>
                 For questions about these Terms, contact us at{' '}
-                <a href="mailto:hello@zerbiq.com" style={{ color: 'var(--color-primary)' }}>
-                  hello@zerbiq.com
+                <a href="mailto:support@zerbiq.com" style={{ color: 'var(--color-primary)' }}>
+                  support@zerbiq.com
                 </a>
                 .
               </p>

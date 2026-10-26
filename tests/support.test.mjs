@@ -20,6 +20,17 @@ test('support email is the one the legal pages already use', () => {
   }
 });
 
+test('no page, link or lead address still uses hello@zerbiq.com', () => {
+  for (const f of ['app/page.js', 'app/legal/privacy/page.js', 'app/legal/tos/page.js', 'lib/planData.js', 'lib/earlyAccess.mjs', 'lib/siteConfig.mjs', 'components/Footer.js']) {
+    assert.ok(!readFileSync(new URL(`../${f}`, import.meta.url), 'utf8').includes('hello@zerbiq.com'), f);
+  }
+});
+
+test('early-access leads go to the support address', async () => {
+  const { EARLY_ACCESS_EMAIL } = await import('../lib/earlyAccess.mjs');
+  assert.equal(EARLY_ACCESS_EMAIL, SUPPORT_EMAIL);
+});
+
 test('/contact permanently redirects to /support', async () => {
   const redirects = await nextConfig.redirects();
   assert.deepEqual(redirects.find((r) => r.source === '/contact'),

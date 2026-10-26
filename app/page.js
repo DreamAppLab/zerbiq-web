@@ -647,7 +647,7 @@ export default function HomePage() {
               </p>
               <div>
                 <a
-                  href="mailto:hello@zerbiq.com"
+                  href="mailto:support@zerbiq.com"
                   className="btn-primary"
                   style={{
                     display: 'inline-block',

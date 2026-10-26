@@ -191,8 +191,8 @@ export default function PrivacyPage() {
               </h3>
               <p style={{ margin: 0 }}>
                 For privacy questions about the QuickBooks connection, write to{' '}
-                <a href="mailto:hello@zerbiq.com" style={{ color: 'var(--color-primary)' }}>
-                  hello@zerbiq.com
+                <a href="mailto:support@zerbiq.com" style={{ color: 'var(--color-primary)' }}>
+                  support@zerbiq.com
                 </a>
                 . QuickBooks and Intuit are trademarks of Intuit Inc. Intuit&apos;s handling of your
                 QuickBooks data is covered by Intuit&apos;s own privacy statement.
@@ -238,8 +238,8 @@ export default function PrivacyPage() {
                 Zerbiq is not directed at children under 13. We do not knowingly collect personal
                 information from children. If you believe we have collected information from a child,
                 contact us immediately at{' '}
-                <a href="mailto:hello@zerbiq.com" style={{ color: 'var(--color-primary)' }}>
-                  hello@zerbiq.com
+                <a href="mailto:support@zerbiq.com" style={{ color: 'var(--color-primary)' }}>
+                  support@zerbiq.com
                 </a>
                 .
               </p>
@@ -262,8 +262,8 @@ export default function PrivacyPage() {
               </h2>
               <p style={{ margin: 0 }}>
                 For privacy questions or requests, contact us at{' '}
-                <a href="mailto:hello@zerbiq.com" style={{ color: 'var(--color-primary)' }}>
-                  hello@zerbiq.com
+                <a href="mailto:support@zerbiq.com" style={{ color: 'var(--color-primary)' }}>
+                  support@zerbiq.com
                 </a>
                 .
               </p>
