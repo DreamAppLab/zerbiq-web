@@ -24,7 +24,7 @@ export default function TermsPage() {
             Terms of Service
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 14, marginBottom: 48 }}>
-            Last updated: October 18, 2026
+            Last updated: October 26, 2026
           </p>
 
           <div
@@ -103,19 +103,29 @@ export default function TermsPage() {
               </p>
             </div>
 
-            {/* New Oct 2026: sections 6 and 7. Attorney review to follow. */}
+            {/* New Oct 2026: sections 6 and 7. Section 6 updated Oct 26, 2026 to match the Intuit production review. Attorney review to follow. */}
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                6. QuickBooks Online Connection
+                6. Third-Party Integrations (QuickBooks Online)
               </h2>
               <p style={{ margin: 0 }}>
-                Connecting a QuickBooks Online account to Zerbiq is optional. By connecting it, you
-                authorize Zerbiq to exchange data with that QuickBooks account as described in our{' '}
+                The QuickBooks Online connection is optional. If you connect it, you direct Zerbiq to
+                send your customers, invoices, payments, credit memos and refunds to your own
+                QuickBooks company, and to read the limited information it needs to send them
+                correctly. Sending your records to QuickBooks at your direction is not sharing your
+                data with a third party for the purposes of Section 5 of these Terms or
+                Sections 2 and 6 of our{' '}
                 <a href="/legal/privacy" style={{ color: 'var(--color-primary)' }}>
                   Privacy Policy
                 </a>
-                . You can disconnect QuickBooks at any time. Intuit&apos;s own terms also apply to your
-                QuickBooks account.
+                . Your Intuit account, your QuickBooks subscription, and Intuit&apos;s own terms and
+                privacy statement govern your use of QuickBooks, and we are not a party to them.
+                QuickBooks and Intuit are trademarks of Intuit Inc. Zerbiq is not affiliated with,
+                sponsored by, or endorsed by Intuit. Records are sent in the background and can be
+                delayed or refused by QuickBooks (for example, when a period is closed or a
+                subscription has ended). The sync log in Zerbiq shows why. You remain responsible for
+                your books and your tax filings, and you should review the synced records in
+                QuickBooks. You can disconnect at any time in Settings → Integrations → QuickBooks.
               </p>
             </div>
 
