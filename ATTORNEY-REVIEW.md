@@ -8,7 +8,7 @@ Now covers: the connection is optional and off until an owner or administrator c
 
 The old last sentence, "Zerbiq never sells QuickBooks data and never shares it with third parties", was replaced by "We do not sell it, and we do not use it for marketing." This resolves the first point under "Points to check" below (the "never shares" wording conflicting with Privacy 6).
 
-The section's privacy contact is hello@zerbiq.com, the contact this site's policy already names (Privacy 12). The app's policy names lab@dreamapplab.com. Please confirm one contact for both, since Intuit's review checks the URLs it is given.
+The section's privacy contact is support@zerbiq.com. Resolved October 26, 2026: the owner chose support@zerbiq.com as the single contact for privacy and support questions, on this site and in the app's Privacy Policy and Terms, so Intuit's review sees the same address at both URLs. The "Contact" sections (Privacy 12, Terms 11) and every other email link on both pages now use it too. No action needed from you.
 
 ## Terms of Service 6. Third-Party Integrations (QuickBooks Online) (replaced; was "QuickBooks Online Connection")
 
