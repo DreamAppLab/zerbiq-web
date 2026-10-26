@@ -1,4 +1,26 @@
-# Attorney review: Privacy Policy and Terms of Service (October 2026)
+# Attorney review: QuickBooks wording update (October 26, 2026)
+
+Both pages now say "Last updated: October 26, 2026". The QuickBooks sections below replace the shorter October 18 versions described further down, and match the Privacy Policy and Terms inside the app (app.zerbiq.com), which Intuit reviews for production approval.
+
+## Privacy Policy 7. QuickBooks Online (Intuit) (replaced)
+
+Now covers: the connection is optional and off until an owner or administrator connects it; the one permission asked (Accounting only, no QuickBooks Payments, no Intuit profile); exactly which fields Zerbiq sends (customers, invoices, payments, credit memos, refunds) and which it never sends (notes, costs, margins, technician pay); the few things it reads; token encryption (AES-256-GCM, key kept outside the database, tokens never sent to the browser); use only to run the connection, never sold or used for marketing; how to disconnect and what is kept afterward (the match list and sync log, deleted with the account).
+
+The old last sentence, "Zerbiq never sells QuickBooks data and never shares it with third parties", was replaced by "We do not sell it, and we do not use it for marketing." This resolves the first point under "Points to check" below (the "never shares" wording conflicting with Privacy 6).
+
+The section's privacy contact is hello@zerbiq.com, the contact this site's policy already names (Privacy 12). The app's policy names lab@dreamapplab.com. Please confirm one contact for both, since Intuit's review checks the URLs it is given.
+
+## Terms of Service 6. Third-Party Integrations (QuickBooks Online) (replaced; was "QuickBooks Online Connection")
+
+Same number as before, so no renumbering. Please review this sentence:
+
+> Sending your records to QuickBooks at your direction is not sharing your data with a third party for the purposes of Section 5 of these Terms or Sections 2 and 6 of our Privacy Policy.
+
+Why it is there: Terms 5 and Privacy 2 and 6 describe how we treat and share customer data. A customer who connects QuickBooks is telling Zerbiq to send their own records to their own QuickBooks company, and we want that to be clearly outside any promise about third-party sharing. Questions: (1) is it safe to say this in the Terms, or should it be handled in the Privacy Policy only; (2) are Terms 5 and Privacy 2 and 6 the right sections to point to (the app's Terms point to its sections 5 and 6, which are different sections than this site's); (3) the same section also says Zerbiq is not affiliated with or endorsed by Intuit, that records can be delayed or refused by QuickBooks, and that the customer stays responsible for their books and tax filings. Please check those too.
+
+---
+
+# Attorney review: Privacy Policy and Terms of Service (October 18, 2026)
 
 These changes went live on zerbiq.com before review. Both pages say
 "Last updated: October 18, 2026" (previously September 5, 2026).

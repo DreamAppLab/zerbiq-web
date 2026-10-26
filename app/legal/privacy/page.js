@@ -24,7 +24,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 14, marginBottom: 48 }}>
-            Last updated: October 18, 2026
+            Last updated: October 26, 2026
           </p>
 
           <div
@@ -113,31 +113,89 @@ export default function PrivacyPage() {
               </p>
             </div>
 
-            {/* New Oct 2026: sections 7 and 8. Attorney review to follow. */}
+            {/* New Oct 2026: sections 7 and 8. Section 7 updated Oct 26, 2026 to match the Intuit production review. Attorney review to follow. */}
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
-                7. QuickBooks Online
+                7. QuickBooks Online (Intuit)
               </h2>
-              <p style={{ margin: '0 0 12px' }}>
-                Connecting QuickBooks Online is optional. Only a company&apos;s owner or an
-                administrator can connect it, and they do so by signing in to Intuit and approving
-                the connection.
-              </p>
-              <p style={{ margin: '0 0 12px' }}>
-                Once connected, Zerbiq writes the company&apos;s customers, invoices, and payments into
-                that company&apos;s QuickBooks account. Zerbiq reads from QuickBooks only what it needs
-                to avoid creating duplicates, such as the list of products and services (items) and
-                the QuickBooks record IDs that match Zerbiq records, along with the name of the
-                connected QuickBooks company.
-              </p>
-              <p style={{ margin: '0 0 12px' }}>
-                The access tokens Intuit issues for the connection are stored encrypted and are never
-                shown to anyone, including the company&apos;s own users. Disconnecting QuickBooks,
-                which the company can do at any time, revokes Zerbiq&apos;s access at Intuit and deletes
-                the stored tokens.
-              </p>
               <p style={{ margin: 0 }}>
-                Zerbiq never sells QuickBooks data and never shares it with third parties.
+                Zerbiq can connect to your QuickBooks Online company so your invoices and payments
+                match your books. The connection is optional. It is off until a company owner or
+                administrator chooses to connect it, and if you never connect it, none of this
+                applies to you.
+              </p>
+              <h3 style={{ color: '#fff', fontWeight: 600, fontSize: 15, margin: '20px 0 8px' }}>
+                What we ask Intuit for
+              </h3>
+              <p style={{ margin: '0 0 12px' }}>
+                Zerbiq asks for one permission only: Accounting. It does not ask for access to
+                QuickBooks Payments, and it does not ask for your Intuit profile.
+              </p>
+              <h3 style={{ color: '#fff', fontWeight: 600, fontSize: 15, margin: '20px 0 8px' }}>
+                What Zerbiq sends to QuickBooks
+              </h3>
+              <p style={{ margin: '0 0 12px' }}>
+                Zerbiq sends your customers, invoices, payments, credit memos and refunds to your
+                QuickBooks company. For a customer, that is the name, company, email, phone numbers,
+                and billing and service addresses. For an invoice, it is the number, dates, line
+                items (description, quantity, price, amount and service date) and tax. Payments,
+                credit memos and refunds carry the amount, date and reference number. Zerbiq does
+                not send job or invoice notes, costs, margins or technician pay.
+              </p>
+              <h3 style={{ color: '#fff', fontWeight: 600, fontSize: 15, margin: '20px 0 8px' }}>
+                What Zerbiq reads from QuickBooks
+              </h3>
+              <p style={{ margin: '0 0 12px' }}>
+                Zerbiq reads very little. It reads your QuickBooks company name, your items (products
+                and services), tax codes, payment methods, the bank account a refund is paid from,
+                and a few preferences, such as automatic credit application and sales tax, so it can
+                send records correctly. It looks up an existing customer, invoice or payment only
+                when it needs to avoid creating a duplicate. Zerbiq does not import your QuickBooks
+                data into Zerbiq.
+              </p>
+              <h3 style={{ color: '#fff', fontWeight: 600, fontSize: 15, margin: '20px 0 8px' }}>
+                How we protect it
+              </h3>
+              <p style={{ margin: '0 0 12px' }}>
+                The sign-in tokens Intuit gives Zerbiq are encrypted with AES-256-GCM before they are
+                saved. The encryption key is kept outside the database, and the tokens are never
+                sent to your web browser. Records travel to Intuit over HTTPS. Only your
+                company&apos;s owners and administrators can see or change the connection.
+              </p>
+              <h3 style={{ color: '#fff', fontWeight: 600, fontSize: 15, margin: '20px 0 8px' }}>
+                How we use it
+              </h3>
+              <p style={{ margin: '0 0 12px' }}>
+                We use the information in your QuickBooks connection only to run that connection for
+                you. We do not sell it, and we do not use it for marketing.
+              </p>
+              <h3 style={{ color: '#fff', fontWeight: 600, fontSize: 15, margin: '20px 0 8px' }}>
+                Disconnecting
+              </h3>
+              <p style={{ margin: '0 0 12px' }}>
+                You can disconnect at any time. In Zerbiq, go to Settings → Integrations → QuickBooks
+                and click Disconnect. Zerbiq asks Intuit to revoke its access, deletes the stored
+                tokens (even if Intuit cannot be reached), and stops sending anything to QuickBooks.
+                You can also disconnect from QuickBooks, on its Apps page. Zerbiq then can no longer
+                use the connection, deletes the tokens the next time it tries, and shows
+                &ldquo;Reconnect needed.&rdquo;
+              </p>
+              <p style={{ margin: '12px 0 0' }}>
+                Records already in QuickBooks stay there, because they are part of your books. After
+                you disconnect, Zerbiq keeps the list that matches your Zerbiq records to their
+                QuickBooks records, and the sync log, so that reconnecting the same QuickBooks
+                company does not create duplicates. Deleting your Zerbiq account deletes all of it.
+              </p>
+              <h3 style={{ color: '#fff', fontWeight: 600, fontSize: 15, margin: '20px 0 8px' }}>
+                Questions
+              </h3>
+              <p style={{ margin: 0 }}>
+                For privacy questions about the QuickBooks connection, write to{' '}
+                <a href="mailto:hello@zerbiq.com" style={{ color: 'var(--color-primary)' }}>
+                  hello@zerbiq.com
+                </a>
+                . QuickBooks and Intuit are trademarks of Intuit Inc. Intuit&apos;s handling of your
+                QuickBooks data is covered by Intuit&apos;s own privacy statement.
               </p>
             </div>
 
