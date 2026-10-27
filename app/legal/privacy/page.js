@@ -1,9 +1,13 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { pageMetadata } from '@/lib/seo.mjs';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Privacy Policy — Zerbiq',
-};
+  description:
+    'How Zerbiq collects, uses and protects your information, including customer data, texting and the QuickBooks Online connection.',
+  path: '/legal/privacy',
+});
 
 // <!-- Replace with final Privacy Policy from legal review -->
 export default function PrivacyPage() {

@@ -3,8 +3,9 @@ import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import TextingAddon from '@/components/TextingAddon';
 import Link from 'next/link';
-import { TEXTING_FAQ_ANSWER, TEXTING_FAQ_SHORT, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL } from '@/lib/planData';
+import { ACTIVE_CUSTOMER_DEFINITION, MOBILE_TEAM_VIEW_NOTE, WHITE_GLOVE_DESCRIPTION, AI_ASSISTANT_NAME, TEXTING_FAQ_ANSWER, TEXTING_FAQ_SHORT, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL } from '@/lib/planData';
 import { brandify } from '@/components/ZerbiqBrand';
+import { pageMetadata } from '@/lib/seo.mjs';
 
 const FAQ = [
   {
@@ -13,7 +14,7 @@ const FAQ = [
   },
   {
     q: 'What is an active customer?',
-    a: "An active customer is any customer currently managed in your account. Archive customers you're no longer serving to free up your slot count — all their history stays saved.",
+    a: ACTIVE_CUSTOMER_DEFINITION,
   },
   {
     q: 'Can I change plans later?',
@@ -25,7 +26,7 @@ const FAQ = [
   },
   {
     q: 'What is White-Glove Onboarding?',
-    a: 'Our White-Glove Onboarding is a one-time add-on — $299 for Core, $499 for Field, $699 for Command. We Zoom with you for 60–90 minutes, import your customer list, build your routes, add your team, and configure everything — guaranteed live before the call ends.',
+    a: `Our White-Glove Onboarding is a one-time add-on: $299 for Core, $499 for Field, $699 for Command. ${WHITE_GLOVE_DESCRIPTION}`,
   },
   {
     q: 'How does texting work?',
@@ -39,7 +40,15 @@ const FAQ = [
   },
   {
     q: 'Do I need to download an app?',
-    a: 'Zerbiq is a free download for iPhone and Android — get it free from the App Store or Google Play. It also runs in any web browser, and you can add it to your phone\'s home screen straight from the browser without going through an app store. Your techs can be up and running in minutes on any device.',
+    a: `No download is needed. ${MOBILE_TEAM_VIEW_NOTE}`,
+  },
+  {
+    q: 'Is the AI assistant included?',
+    a: `Yes. The ${AI_ASSISTANT_NAME} is included on every plan. Ask about your business in plain English and get an answer.`,
+  },
+  {
+    q: 'Does it work with QuickBooks?',
+    a: `QuickBooks sync is coming soon for Command and Enterprise. It is not available yet.`,
   },
   {
     q: 'Can I import my existing customers?',
@@ -67,10 +76,11 @@ const FAQ = [
   },
 ];
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Pricing — Zerbiq',
   description: 'Simple, flat pricing for field service operators. Unlimited users on Core and above — no per-seat fees.',
-};
+  path: '/pricing',
+});
 
 export default function PricingPage() {
   return (

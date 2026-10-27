@@ -2,13 +2,15 @@ import { PRIMARY_CTA_LABEL } from '@/lib/siteConfig.mjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
+import { BADGE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, QUICKBOOKS_COMING_SOON, AI_ASSISTANT_NAME, ROUTE_INTELLIGENCE_DESCRIPTION, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
+import { pageMetadata } from '@/lib/seo.mjs';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Every feature your field service business needs — Zerbiq',
   description:
     'Route management, job tracking, invoicing, email and optional texting, team management, CRM, and 40+ features — all in one field service platform.',
-};
+  path: '/features',
+});
 
 // ---------------------------------------------------------------------------
 // Intro features — shown before the group sections, after the hero
@@ -171,10 +173,10 @@ const FEATURE_GROUPS = [
       },
       {
         icon: '📗',
-        title: 'QuickBooks Sync',
+        title: `QuickBooks Sync ${QUICKBOOKS_COMING_SOON}`,
         screenshot: '12-quickbooks-sync.png',
         desc: [
-          "Already using QuickBooks? Keep it. Zerbiq syncs invoices, payments, and expenses to QuickBooks Online automatically — so your books stay clean without anyone re-entering data.",
+          "Already using QuickBooks? Keep it. QuickBooks Sync is coming soon: Zerbiq will sync invoices, payments, and expenses to QuickBooks Online automatically, so your books stay clean without anyone re-entering data.",
           "Two systems, zero duplication.",
         ],
         badge: BADGE.cmd,
@@ -314,13 +316,13 @@ const FEATURE_GROUPS = [
       },
       {
         icon: '🤖',
-        title: 'AI Support Chatbot',
+        title: AI_ASSISTANT_NAME,
         screenshot: '24-ai-support-chatbot.png',
         desc: [
           'Ask Zerbiq anything about your business and get a real answer — not a report to dig through. "Which tech made us the most money last month?" "How many invoices are overdue?" "What\'s on the schedule tomorrow?"',
-          "Your AI assistant knows your data and answers in plain English.",
+          "Your AI assistant knows your data and answers in plain English. Included on every plan.",
         ],
-        badge: BADGE.cmd,
+        badge: BADGE.all,
       },
     ],
   },
@@ -342,7 +344,7 @@ const FEATURE_GROUPS = [
         title: 'Attendance and Time Off',
         screenshot: '26-attendance-time-off.png',
         desc: [
-          "Techs clock in from the app. You see who's on the clock, who's out, and who requested time off — all from one screen. Approve or deny requests with a tap.",
+          "Techs clock in from their phone. You see who's on the clock, who's out, and who requested time off — all from one screen. Approve or deny requests with a tap.",
           "No paper timesheets, no payroll guessing.",
         ],
         badge: BADGE.core,
@@ -403,7 +405,7 @@ const FEATURE_GROUPS = [
         title: 'Employee ID and PIN Login',
         screenshot: '32-employee-pin-login.png',
         desc: [
-          "Techs log into the mobile app with a simple employee ID and 4-digit PIN — no email, no forgotten passwords. Fast at 7 AM when hands are cold and coffee hasn't kicked in.",
+          "Techs log in on their phone with a simple employee ID and 4-digit PIN — no email, no forgotten passwords. Fast at 7 AM when hands are cold and coffee hasn't kicked in.",
           "You control who has access and what they can see.",
         ],
         badge: BADGE.core,
@@ -493,8 +495,8 @@ const FEATURE_GROUPS = [
         title: 'Route Intelligence',
         screenshot: '40-route-intelligence.png',
         desc: [
-          "Let the math do the driving. Zerbiq's optimization engine sequences your stops to minimize drive time and fuel — saving the average route 30–45 minutes per day.",
-          "When an urgent job comes in, it instantly finds the nearest available tech. Smarter routing, lower costs, more jobs per day.",
+          "Let the math do the driving. " + ROUTE_INTELLIGENCE_DESCRIPTION,
+          "Smarter routing, lower costs, more jobs per day.",
         ],
         badge: BADGE.field,
       },
@@ -816,7 +818,7 @@ export default function FeaturesPage() {
                     lineHeight: 1.15,
                   }}
                 >
-                  {feature.title}
+                  {brandify(feature.title)}
                 </h2>
                 {feature.desc.map((p, j) => (
                   <p
@@ -898,7 +900,7 @@ export default function FeaturesPage() {
                         lineHeight: 1.15,
                       }}
                     >
-                      {feature.title}
+                      {brandify(feature.title)}
                       {feature.pill && (
                         <span
                           style={{

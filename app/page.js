@@ -3,8 +3,16 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, TEXTING_PRICING_HREF, groupByBadge, textingPricingLine } from '@/lib/planData';
+import { EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, TEXTING_PRICING_HREF, WHITE_GLOVE_DESCRIPTION, groupByBadge, textingPricingLine } from '@/lib/planData';
+import { pageMetadata } from '@/lib/seo.mjs';
 import { ALL_FEATURES } from '@/lib/homeFeatures';
+
+export const metadata = pageMetadata({
+  title: 'Zerbiq — Built for the field. Loved by the office.',
+  description:
+    'Zerbiq is the field service operations platform for owner-operators. Schedule jobs, dispatch crews, invoice customers, and manage your whole operation from one screen.',
+  path: '/',
+});
 
 const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
@@ -353,7 +361,7 @@ export default function HomePage() {
                   >
                     <div style={{ fontSize: 28, marginBottom: 14 }}>{f.icon}</div>
                     <h3 style={{ fontWeight: 700, fontSize: 17, margin: '0 0 10px' }}>
-                      {f.title}
+                      {brandify(f.title)}
                       {f.pill && (
                         <span
                           style={{
@@ -640,10 +648,8 @@ export default function HomePage() {
                   flex: 1,
                 }}
               >
-                Our White-Glove Onboarding is a one-time add-on. We handle your entire setup — import
-                your customer list, build your routes, add your team, and configure everything,
-                guaranteed live before the call ends. Pricing: $299 for Core, $499 for Field, $699
-                for Command.
+                Our White-Glove Onboarding is a one-time add-on. {WHITE_GLOVE_DESCRIPTION} Pricing:
+                $299 for Core, $499 for Field, $699 for Command.
               </p>
               <div>
                 <a

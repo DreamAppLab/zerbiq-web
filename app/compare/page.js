@@ -1,13 +1,15 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import ZerbiqBrand from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel } from '@/lib/planData';
+import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, QUICKBOOKS_SYNC_LABEL, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel } from '@/lib/planData';
+import { pageMetadata } from '@/lib/seo.mjs';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Compare Plans — Zerbiq',
   description: 'Every feature, every plan — side by side. Compare Solo, Core, Field, Command, and Enterprise.',
-};
+  path: '/compare',
+});
 
 // Plan header data for the comparison table (derived from PLAN_METADATA).
 const PLANS = PLAN_METADATA.map((p) => ({
@@ -61,7 +63,7 @@ const FEATURE_GROUPS = [
       { label: 'Estimates & quotes',                               values: gateToValues(FEATURE_GATE.estimatesQuotes) },
       { label: 'Online payment processing (card/ACH) ²',          values: gateToValues(FEATURE_GATE.onlinePayments) },
       { label: 'Purchase orders',                                  values: gateToValues(FEATURE_GATE.purchaseOrders) },
-      { label: 'QuickBooks sync',                                  values: gateToValues(FEATURE_GATE.quickbooksSync) },
+      { label: QUICKBOOKS_SYNC_LABEL,                             values: gateToValues(FEATURE_GATE.quickbooksSync) },
     ],
   },
   {
@@ -146,13 +148,13 @@ const FEATURE_GROUPS = [
   {
     group: 'Platform & Support',
     rows: [
-      { label: 'Free mobile app (iPhone & Android) + browser',       values: gateToValues(FEATURE_GATE.mobileApp) },
-      { label: 'Add to home screen from the browser (no download needed)',values: gateToValues(FEATURE_GATE.pwa) },
+      { label: 'Team view in any smartphone browser',             values: gateToValues(FEATURE_GATE.mobileApp) },
+      { label: 'Native iOS & Android apps (coming with the public release)', values: PLAN_METADATA.map(() => 'Coming soon') },
       { label: 'Light Mode and Dark Mode',                        values: gateToValues(FEATURE_GATE.lightDarkMode) },
       { label: 'Personalized Shortcuts Bar',                      values: gateToValues(FEATURE_GATE.shortcutsBar) },
       { label: 'Custom Branding',                                 values: gateToValues(FEATURE_GATE.customBranding) },
       { label: 'Automations & rules engine',                      values: gateToValues(FEATURE_GATE.automationsEngine) },
-      { label: 'AI support chatbot',                              values: gateToValues(FEATURE_GATE.aiChatbot) },
+      { label: AI_ASSISTANT_NAME,                                 values: gateToValues(FEATURE_GATE.aiChatbot) },
       { label: 'Priority support',                                values: gateToValues(FEATURE_GATE.prioritySupport) },
       { label: 'Dedicated onboarding',                            values: gateToValues(FEATURE_GATE.dedicatedOnboarding) },
       { label: 'Custom integrations',                             values: gateToValues(FEATURE_GATE.customIntegrations) },
@@ -180,7 +182,8 @@ const PLAN_CARDS = [
       'Email notifications', 'Appointment reminders', 'Holiday management', 'Billing cycles',
       'Custom branding', 'Reports & analytics', 'Data export', 'Mileage tracking',
       'Parts on order', 'Credits & refunds', 'Materials & inventory', 'Schedule & dispatch',
-      'Light & dark mode', 'Personalized shortcuts bar', 'Mobile app',
+      'Light & dark mode', 'Personalized shortcuts bar', 'Mobile team view (smartphone browser)',
+      AI_ASSISTANT_NAME,
     ],
   },
   {
@@ -218,9 +221,10 @@ const PLAN_CARDS = [
     price: planPrice('Command'),
     customers: planCustomers('Command'),
     features: [
-      'AI support chatbot', 'Automations engine', 'QuickBooks sync',
+      'Automations engine', QUICKBOOKS_SYNC_LABEL,
       'Follow-up sequences', 'In-app messaging', 'Messaging in portal',
       'Automated late fees', 'Priority support',
+      `Multiple service locations (+$${MULTI_LOCATION_FEE.Command}/mo per location)`,
     ],
   },
   {
@@ -412,8 +416,7 @@ export default function ComparePage() {
           >
             <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 14, margin: 0, lineHeight: 1.65 }}>
               <strong style={{ color: '#fff' }}>What is an active customer?</strong>{' '}
-              An active customer is any customer currently managed in your account. Archive customers
-              you&apos;re no longer serving to free up your slot count — all their history stays saved.
+              {ACTIVE_CUSTOMER_DEFINITION}
             </p>
           </div>
         </div>
@@ -482,7 +485,7 @@ export default function ComparePage() {
                   {plan.features.map((f) => (
                     <li key={f} className="plan-feature-item" style={{ fontSize: 13, color: '#fff', display: 'flex', gap: 6, alignItems: 'flex-start', lineHeight: 1.45 }}>
                       <span style={{ color: plan.color, fontWeight: 700, flexShrink: 0 }}>+</span>
-                      {f}
+                      {brandify(f)}
                     </li>
                   ))}
                 </ul>
@@ -641,7 +644,7 @@ export default function ComparePage() {
                             borderBottom: '1px solid rgba(255,255,255,0.05)',
                           }}
                         >
-                          {row.label}
+                          {brandify(row.label)}
                         </td>
                         {row.values.map((val, pi) => {
                           const isCommand = PLANS[pi].popular;
