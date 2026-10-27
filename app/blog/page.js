@@ -4,14 +4,9 @@ import { db } from '@/lib/firebase';
 import { categoryStyle } from '@/lib/categories';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { pageMetadata } from '@/lib/seo.mjs';
 
 export const dynamic = 'force-dynamic';
-
-export const metadata = {
-  title: 'Blog — Zerbiq',
-  description:
-    'Field service insights for owner-operators. Operations, business tips, and invoicing guides.',
-};
 
 async function getPublishedPosts() {
   try {
@@ -26,6 +21,19 @@ async function getPublishedPosts() {
     console.error('Failed to load posts:', err);
     return [];
   }
+}
+
+// Keep the blog out of search results until the first post is published; the
+// noindex lifts by itself once a post exists.
+export async function generateMetadata() {
+  const posts = await getPublishedPosts();
+  return pageMetadata({
+    title: 'Blog — Zerbiq',
+    description:
+      'Field service insights for owner-operators. Operations, business tips, and invoicing guides.',
+    path: '/blog',
+    noindex: posts.length === 0,
+  });
 }
 
 function formatDate(ts) {

@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, formatPlanPrice, formatAnnualMonthlyEquivalent } from '@/lib/planData';
+import { brandify } from '@/components/ZerbiqBrand';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, QUICKBOOKS_SYNC_LABEL, formatPlanPrice, formatAnnualMonthlyEquivalent } from '@/lib/planData';
 
-const ACTIVE_CUSTOMER_DEF =
-  'Active customers are customers currently managed in your account. Archive any customer at any time to free up a slot — their complete history, invoices, and job records are always retained.';
+const ACTIVE_CUSTOMER_DEF = ACTIVE_CUSTOMER_DEFINITION;
 
 // Feature lists for each plan (human-readable labels shown on pricing cards).
 // Plan gates (which plan first unlocks a feature) live in lib/planData.js.
@@ -24,7 +24,8 @@ const PLAN_INCLUDED = {
     'Automated customer notifications (email; texting is an optional add-on)',
     'Review requests (by email)',
     'Mileage tracking',
-    'Mobile team view',
+    'Mobile team view (any smartphone browser)',
+    AI_ASSISTANT_NAME,
     'Data export',
     'Route management',
     'Credits & refunds',
@@ -68,8 +69,7 @@ const PLAN_INCLUDED = {
     'Automations & rules engine',
     'In-app messaging',
     'Messaging in customer portal',
-    'QuickBooks sync',
-    'AI support chatbot',
+    QUICKBOOKS_SYNC_LABEL,
     'Automated follow-up sequences',
     'Priority support',
     `Multiple service locations (+$${MULTI_LOCATION_FEE.Command}/mo per location)`,
@@ -431,7 +431,7 @@ export default function PricingCards() {
                   }}
                 >
                   <CheckIcon included={true} />
-                  {f}
+                  {brandify(f)}
                 </li>
               ))}
               {plan.excluded.map((f) => (

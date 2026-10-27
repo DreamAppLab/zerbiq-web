@@ -1,9 +1,13 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { pageMetadata } from '@/lib/seo.mjs';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Terms of Service — Zerbiq',
-};
+  description:
+    'The terms that apply when you use Zerbiq: accounts, billing, acceptable use, third-party integrations and labor and pay information.',
+  path: '/legal/tos',
+});
 
 // <!-- Replace with final TOS from legal review -->
 export default function TermsPage() {
