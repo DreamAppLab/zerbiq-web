@@ -24,7 +24,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 14, marginBottom: 48 }}>
-            Last updated: October 26, 2026
+            Last updated: October 28, 2026
           </p>
 
           <div
@@ -119,8 +119,9 @@ export default function PrivacyPage() {
                 7. QuickBooks Online (Intuit)
               </h2>
               <p style={{ margin: 0 }}>
-                Zerbiq can connect to your QuickBooks Online company so your invoices and payments
-                match your books. The connection is optional. It is off until a company owner or
+                Zerbiq can connect to your QuickBooks Online company so your customers and services
+                come over from QuickBooks and your invoices and payments match your books. The
+                connection is optional. It is off until a company owner or
                 administrator chooses to connect it, and if you never connect it, none of this
                 applies to you.
               </p>
@@ -143,15 +144,51 @@ export default function PrivacyPage() {
                 not send job or invoice notes, costs, margins or technician pay.
               </p>
               <h3 style={{ color: '#fff', fontWeight: 600, fontSize: 15, margin: '20px 0 8px' }}>
-                What Zerbiq reads from QuickBooks
+                What Zerbiq brings in from QuickBooks
               </h3>
               <p style={{ margin: '0 0 12px' }}>
-                Zerbiq reads very little. It reads your QuickBooks company name, your items (products
-                and services), tax codes, payment methods, the bank account a refund is paid from,
-                and a few preferences, such as automatic credit application and sales tax, so it can
-                send records correctly. It looks up an existing customer, invoice or payment only
-                when it needs to avoid creating a duplicate. Zerbiq does not import your QuickBooks
-                data into Zerbiq.
+                When you connect, and again whenever something changes in QuickBooks, Zerbiq copies
+                these records from your QuickBooks company into your Zerbiq account so you do not
+                have to type them twice:
+              </p>
+              <p style={{ margin: '0 0 12px' }}>
+                Customers: the name, company, email, up to two phone numbers, and the billing and
+                shipping addresses. A QuickBooks sub-customer (a job or location) becomes a service
+                address on its customer. Inactive customers are skipped.
+              </p>
+              <p style={{ margin: '0 0 12px' }}>
+                Items (products and services): the name, price, whether it is taxable, and its
+                category. They become your services in Zerbiq.
+              </p>
+              <p style={{ margin: '0 0 12px' }}>
+                Vendors: the company, contact name, email, phone number, billing address, account
+                number and payment terms. They become your suppliers in Zerbiq.
+              </p>
+              <p style={{ margin: '0 0 12px' }}>
+                Employees: the name, email, phone number and hire date only. Zerbiq does not bring in
+                pay rates, Social Security numbers or bank details. People brought in this way start
+                as inactive, with no sign-in and no permissions, until your company chooses a role
+                for each one and activates them under Team.
+              </p>
+              <p style={{ margin: '0 0 12px' }}>
+                Purchase orders: the number, dates, status, vendor, line items, amounts, tax and
+                memo. They are shown in Zerbiq for reference and cannot be edited there.
+              </p>
+              <p style={{ margin: '0 0 12px' }}>
+                Zerbiq checks what it brings in against what is already in your account (by email,
+                or by name and address) and asks you before it merges anything it is not sure about.
+                It does not overwrite a value you changed in Zerbiq, and it does not bring back a
+                record you deleted in Zerbiq.
+              </p>
+              <h3 style={{ color: '#fff', fontWeight: 600, fontSize: 15, margin: '20px 0 8px' }}>
+                What else Zerbiq reads from QuickBooks
+              </h3>
+              <p style={{ margin: '0 0 12px' }}>
+                Zerbiq also reads your QuickBooks company name, your items (products and services),
+                tax codes, payment methods, the bank account a refund is paid from, and a few
+                preferences, such as automatic credit application and sales tax, so it can send
+                records correctly. It looks up an existing customer, invoice or payment only when it
+                needs to avoid creating a duplicate.
               </p>
               <h3 style={{ color: '#fff', fontWeight: 600, fontSize: 15, margin: '20px 0 8px' }}>
                 How we protect it
@@ -181,7 +218,8 @@ export default function PrivacyPage() {
                 &ldquo;Reconnect needed.&rdquo;
               </p>
               <p style={{ margin: '12px 0 0' }}>
-                Records already in QuickBooks stay there, because they are part of your books. After
+                Records already in QuickBooks stay there, because they are part of your books, and
+                records already brought into Zerbiq stay in your Zerbiq account. After
                 you disconnect, Zerbiq keeps the list that matches your Zerbiq records to their
                 QuickBooks records, and the sync log, so that reconnecting the same QuickBooks
                 company does not create duplicates. Deleting your Zerbiq account deletes all of it.

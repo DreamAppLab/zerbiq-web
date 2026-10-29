@@ -1,3 +1,25 @@
+# Attorney review: QuickBooks import wording (October 28, 2026)
+
+Both pages now say "Last updated: October 28, 2026". This is a first draft for Allen to edit; the owner asked for it to go up now and be refined after review. It must be mirrored in the Privacy Policy and Terms inside the app (app.zerbiq.com), which Intuit reviews.
+
+Why: Zerbiq now also brings records IN from QuickBooks (before, it only sent records out and read a few settings). The old Privacy 7 sentence "Zerbiq does not import your QuickBooks data into Zerbiq" was no longer true and was removed.
+
+## Privacy Policy 7 (changed)
+- Intro: customers and services come over from QuickBooks as well as invoices and payments going out.
+- New "What Zerbiq brings in from QuickBooks": customers (name, company, email, up to two phones, billing and shipping addresses; sub-customers become service addresses; inactive skipped), items (name, price, taxable, category; become services), vendors (company, contact name, email, phone, billing address, account number, payment terms; become suppliers), employees (name, email, phone, hire date only; no pay rates, Social Security numbers or bank details; created inactive with no sign-in until the company chooses a role), purchase orders (number, dates, status, vendor, lines, amounts, tax, memo; read-only).
+- Matching and safety: checked against existing records by email or name and address, asks before merging when unsure, never overwrites a value edited in Zerbiq, never recreates a record deleted in Zerbiq.
+- "What else Zerbiq reads" keeps the settings and lookups list; "reads very little" was removed.
+- Disconnecting: records already brought into Zerbiq stay in the Zerbiq account.
+
+## Terms 6 (changed)
+Adds that the user directs Zerbiq to bring QuickBooks customers, items, vendors, employees and purchase orders in and keep them up to date; that imported records are only as accurate as in QuickBooks and should be reviewed; and that people brought in cannot sign in until given a role.
+
+## Points for you
+- Employees are personal data about the company's workers. Please check whether the Privacy Policy needs a line that the company (the customer) is responsible for having the right to import its employees' contact details.
+- Please confirm the "never sold, not used for marketing" sentence still covers the imported lists.
+
+---
+
 # Attorney review: QuickBooks wording update (October 26, 2026)
 
 Both pages now say "Last updated: October 26, 2026". The QuickBooks sections below replace the shorter October 18 versions described further down, and match the Privacy Policy and Terms inside the app (app.zerbiq.com), which Intuit reviews for production approval.

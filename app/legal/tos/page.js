@@ -24,7 +24,7 @@ export default function TermsPage() {
             Terms of Service
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 14, marginBottom: 48 }}>
-            Last updated: October 26, 2026
+            Last updated: October 28, 2026
           </p>
 
           <div
@@ -111,8 +111,12 @@ export default function TermsPage() {
               <p style={{ margin: 0 }}>
                 The QuickBooks Online connection is optional. If you connect it, you direct Zerbiq to
                 send your customers, invoices, payments, credit memos and refunds to your own
-                QuickBooks company, and to read the limited information it needs to send them
-                correctly. Sending your records to QuickBooks at your direction is not sharing your
+                QuickBooks company, to bring your QuickBooks customers, items (services), vendors,
+                employees and purchase orders into Zerbiq and keep them up to date, and to read the
+                limited information it needs to send records correctly. Records brought in from
+                QuickBooks are only as accurate as they are in QuickBooks, so you should review them
+                in Zerbiq. People brought in from QuickBooks cannot sign in until you give them a
+                role. Sending your records to QuickBooks at your direction is not sharing your
                 data with a third party for the purposes of Section 5 of these Terms or
                 Sections 2 and 6 of our{' '}
                 <a href="/legal/privacy" style={{ color: 'var(--color-primary)' }}>
