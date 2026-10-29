@@ -175,7 +175,7 @@ const PLAN_CARDS = [
     price: planPrice('Solo'),
     customers: planCustomers('Solo'),
     features: [
-      '1 user', 'Customer portal', 'Online payments (card & ACH)',
+      '1 user', 'Customer portal', 'Online payments (card & ACH)', 'QuickBooks Online sync',
       'Route management', 'Job scheduling', 'Invoicing & payments', 'Customer CRM',
       'Email notifications', 'Appointment reminders', 'Holiday management', 'Billing cycles',
       'Custom branding', 'Reports & analytics', 'Data export', 'Mileage tracking',
@@ -218,7 +218,7 @@ const PLAN_CARDS = [
     price: planPrice('Command'),
     customers: planCustomers('Command'),
     features: [
-      'AI support chatbot', 'Automations engine', 'QuickBooks sync',
+      'AI support chatbot', 'Automations engine',
       'Follow-up sequences', 'In-app messaging', 'Messaging in portal',
       'Automated late fees', 'Priority support',
     ],
