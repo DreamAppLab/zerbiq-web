@@ -644,7 +644,7 @@ export default function ComparePage() {
                           {row.label}
                         </td>
                         {row.values.map((val, pi) => {
-                          const isCommand = PLANS[pi].popular;
+                          const isPopular = PLANS[pi].popular;
                           return (
                             <td
                               key={pi}
@@ -652,15 +652,15 @@ export default function ComparePage() {
                                 textAlign: 'center',
                                 padding: '14px 16px',
                                 borderBottom: '1px solid rgba(255,255,255,0.05)',
-                                background: isCommand
+                                background: isPopular
                                   ? isAlt
                                     ? 'rgba(61,92,255,0.07)'
                                     : 'rgba(61,92,255,0.04)'
                                   : 'transparent',
-                                borderLeft: isCommand
+                                borderLeft: isPopular
                                   ? '1px solid rgba(61,92,255,0.4)'
                                   : 'none',
-                                borderRight: isCommand
+                                borderRight: isPopular
                                   ? '1px solid rgba(61,92,255,0.4)'
                                   : 'none',
                               }}
