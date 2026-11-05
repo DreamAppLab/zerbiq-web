@@ -757,7 +757,7 @@ export default function ComparePage() {
           </p>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '0 0 8px', lineHeight: 1.75 }}>
             ² Online payment processing (card &amp; ACH) and online invoice payment through the customer portal are included on every plan.
-            Requires connecting a supported payment processor (Stripe, Square, or PayPal). Cash, check, and onsite card payments are always available on every plan without a connected processor.
+            Requires connecting a supported payment processor (Stripe, Square, PayPal, or Authorize.net).
           </p>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
             ³ Texting is an optional add-on for every plan, and no texts are included in any plan.
