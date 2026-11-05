@@ -251,7 +251,7 @@ export default function PricingCards() {
         >
           <strong style={{ color: '#fff' }}>Every plan includes a customer portal and online payments.</strong>{' '}
           The portal has no add-ons and no upcharges. Customers sign in by secure link or one-time code — no password required.
-          Online invoice payment (card &amp; ACH) requires connecting a supported payment processor (Stripe, Square, or PayPal).
+          Online invoice payment (card &amp; ACH) requires connecting a supported payment processor (Stripe, Square, PayPal, or Authorize.net).
         </p>
       </div>
 

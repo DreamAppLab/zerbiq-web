@@ -200,7 +200,7 @@ const FEATURE_GROUPS = [
         screenshot: '14-customer-portal.png',
         desc: [
           "Every plan includes a customer portal — a secure, branded page where your customers sign in with a one-time link or code (no password required) and see everything about their account: service history with visit photos, upcoming jobs, invoices, service requests, and contact preferences.",
-          "Customers pay invoices online by card or bank (ACH) directly through the portal — once you connect a supported payment processor (Stripe, Square, or PayPal). The portal has no add-ons and no upcharges.",
+          "Customers pay invoices online by card or bank (ACH) directly through the portal — once you connect a supported payment processor (Stripe, Square, PayPal, or Authorize.net). The portal has no add-ons and no upcharges.",
           "On Field plans and above, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging. Customers who can self-serve become customers who stay.",
         ],
         badge: BADGE.all,
