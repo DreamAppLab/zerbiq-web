@@ -42,3 +42,8 @@ test('footer links to Support and Contact', () => {
   assert.match(footer, /href="\/support"/);
   assert.match(footer, /href="\/contact"/);
 });
+
+test('footer copyright attributes to Zerbiq LLC', () => {
+  const footer = readFileSync(new URL('../components/Footer.js', import.meta.url), 'utf8');
+  assert.match(footer, /© 2026 <ZerbiqBrand \/> LLC\. All rights reserved\./);
+});
