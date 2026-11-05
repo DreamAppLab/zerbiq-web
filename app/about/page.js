@@ -9,7 +9,7 @@ import { EARLY_ACCESS_HREF } from '@/lib/planData';
 export const metadata = {
   title: 'About — Zerbiq',
   description:
-    'Zerbiq was built by a field service operator who ran crews, built routes, managed subcontractors, and eventually sold the business to private equity.',
+    'Zerbiq was built by a field service operator who ran crews, built routes, managed subcontractors, and more.',
 };
 
 export default function AboutPage() {
@@ -36,7 +36,7 @@ export default function AboutPage() {
           {[
             'Field service software has a problem. Most of it was built by engineers and product managers who have never run a service business. They\'ve studied it, interviewed operators, sat in on demos — but they\'ve never dispatched a crew at 6am when two techs called out. They\'ve never had to explain a confusing invoice to a customer who\'s threatening to cancel. They\'ve never looked at a route sheet on a Monday morning and wondered how they were going to cover everything.',
             'We have.',
-            'Zerbiq was founded by a field service operator. We ran crews. We built routes. We managed subcontractors, tracked equipment, handled no-shows, chased payments, and grew the business until it was worth selling to private equity. We used every major platform on the market and found the same problem everywhere: the software was built for the software company, not for us.',
+            'Zerbiq was founded by a field service operator. We ran crews. We built routes. We managed subcontractors, tracked equipment, handled no-shows, chased payments, and grew the business into something real. We used every major platform on the market and found the same problem everywhere: the software was built for the software company, not for us.',
             'Too complicated for the office staff. Too clunky for the techs in the field. Too expensive once your team grew past a handful of people. And never quite right — always missing the one thing you actually needed, always requiring a workaround.',
             'So we built Zerbiq from the inside out. Every screen, every workflow, every feature started with one question: what does a service business operator actually need on a Tuesday afternoon when everything is on fire?',
             'We don\'t claim to be perfect. We\'re still building. But we do claim this: we understand your business because we lived it. And that makes all the difference.',
