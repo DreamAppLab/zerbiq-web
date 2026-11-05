@@ -99,7 +99,20 @@ export default function TermsPage() {
                   Privacy Policy
                 </a>
                 . You retain ownership of all data you upload to Zerbiq. By using the Service, you
-                grant Zerbiq the right to process your data to provide and improve the Service.
+                grant Zerbiq the right to process your data to provide the Service.
+              </p>
+              <p style={{ margin: '12px 0 0' }}>
+                Our{' '}
+                <a href="/legal/dpa" style={{ color: 'var(--color-primary)' }}>
+                  Data Processing Addendum
+                </a>{' '}
+                is part of these Terms. It covers the personal information about your customers,
+                leads, and team members that you keep in Zerbiq: Zerbiq acts only on your
+                instructions, uses that information only to provide the Service, never sells it or
+                uses it for its own purposes, keeps it confidential and secure, uses only the
+                subprocessors listed there, helps you with your customers&apos; privacy requests,
+                tells you without undue delay about a security incident, and deletes or returns the
+                information when your account ends.
               </p>
             </div>
 
