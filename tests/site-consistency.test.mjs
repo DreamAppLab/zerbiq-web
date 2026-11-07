@@ -197,6 +197,10 @@ test('white-glove prices include Solo $149 and match plans.cjs whiteGloveFee', (
 test('QuickBooks sync is on every plan, as plans.cjs says (still labelled coming soon)', () => {
   assert.equal(pd.FEATURE_GATE.quickbooksSync, 'all');
   assert.ok(!/coming soon for Command/i.test(read('app/pricing/page.js')));
+  // /features card must not gate QuickBooks to Command and up
+  const feat = read('app/features/page.js');
+  const card = feat.slice(feat.indexOf('QuickBooks Sync'));
+  assert.ok(card.slice(0, card.indexOf('badge:') + 20).includes('BADGE.all'), '/features QuickBooks badge is BADGE.all');
 });
 
 test('payments-stay-yours callout is on /pricing and /compare and states the real behavior', () => {

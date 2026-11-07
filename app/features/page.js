@@ -179,7 +179,7 @@ const FEATURE_GROUPS = [
           "Already using QuickBooks? Keep it. QuickBooks Sync is coming soon: Zerbiq will sync invoices, payments, and expenses to QuickBooks Online automatically, so your books stay clean without anyone re-entering data.",
           "Two systems, zero duplication.",
         ],
-        badge: BADGE.cmd,
+        badge: BADGE.all,
       },
     ],
   },
