@@ -2,8 +2,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import TextingAddon from '@/components/TextingAddon';
+import StorageAddon from '@/components/StorageAddon';
+import PaymentsStayYours from '@/components/PaymentsStayYours';
 import Link from 'next/link';
-import { ACTIVE_CUSTOMER_DEFINITION, MOBILE_TEAM_VIEW_NOTE, WHITE_GLOVE_DESCRIPTION, AI_ASSISTANT_NAME, TEXTING_FAQ_ANSWER, TEXTING_FAQ_SHORT, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL } from '@/lib/planData';
+import { ACTIVE_CUSTOMER_DEFINITION, MOBILE_TEAM_VIEW_NOTE, WHITE_GLOVE_DESCRIPTION, AI_ASSISTANT_NAME, TEXTING_FAQ_ANSWER, TEXTING_FAQ_SHORT, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL, WHITE_GLOVE_PRICES_SENTENCE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENTS_STAY_YOURS_TEXT, PAYMENT_PROCESSORS_NOTE, NAME_FAQ_ANSWER, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
 import { brandify } from '@/components/ZerbiqBrand';
 import { pageMetadata } from '@/lib/seo.mjs';
 
@@ -26,7 +28,7 @@ const FAQ = [
   },
   {
     q: 'What is White-Glove Onboarding?',
-    a: `Our White-Glove Onboarding is a one-time add-on: $299 for Core, $499 for Field, $699 for Command. ${WHITE_GLOVE_DESCRIPTION}`,
+    a: `Our White-Glove Onboarding is a one-time add-on: ${WHITE_GLOVE_PRICES_SENTENCE}. Enterprise setup is arranged with us. ${WHITE_GLOVE_DESCRIPTION}`,
   },
   {
     q: 'How does texting work?',
@@ -44,11 +46,11 @@ const FAQ = [
   },
   {
     q: 'Is the AI assistant included?',
-    a: `Yes. The ${AI_ASSISTANT_NAME} is included on every plan. Ask about your business in plain English and get an answer.`,
+    a: `Yes. The ${AI_ASSISTANT_NAME} is included on every plan. Ask about your business in plain English and get an answer. Each plan has a monthly question allowance: Solo ${assistantQuestionsLabel('Solo')}, Core ${assistantQuestionsLabel('Core')}, Field ${assistantQuestionsLabel('Field')}, Command and Enterprise unlimited (fair use applies).`,
   },
   {
     q: 'Does it work with QuickBooks?',
-    a: `QuickBooks sync is coming soon for Command and Enterprise. It is not available yet.`,
+    a: `QuickBooks sync is coming soon, and it will be included on every plan. It is not available yet.`,
   },
   {
     q: 'Can I import my existing customers?',
@@ -60,11 +62,19 @@ const FAQ = [
   },
   {
     q: 'Do I need a payment processor to use the customer portal?',
-    a: 'The portal itself is always on and costs nothing extra. Online invoice payment (card & ACH) inside the portal requires connecting a supported payment processor — Stripe, Square, or PayPal/Venmo. If you have not connected a processor, customers can still view their history, service requests, and invoices; they just pay through another method (cash, check, or onsite card). Cash, check, and onsite card payments are always available on every plan without a connected processor.',
+    a: `The portal itself is always on and costs nothing extra. Online invoice payment (card & ACH) inside the portal requires connecting a payment processor account of your own (${PAYMENT_PROCESSORS_NOTE}). If you have not connected a processor, customers can still view their history, service requests, and invoices; they just pay through another method (cash, check, or onsite card). Cash, check, and onsite card payments are always available on every plan without a connected processor.`,
   },
   {
     q: 'What payment processors do you support?',
-    a: 'Zerbiq supports Stripe, Square, and PayPal/Venmo for online payments. You can also accept cash, check, and onsite card payments on any plan without connecting a processor.',
+    a: `Online payments go through ${PAYMENT_PROCESSORS_NOTE}. ${PAYMENTS_STAY_YOURS_TEXT} You can also accept cash, check, and onsite card payments on any plan without connecting a processor.`,
+  },
+  {
+    q: 'How much storage is included?',
+    a: `Job photos and videos are stored with your account. Included storage: Solo ${storageIncludedLabel('Solo')}, Core ${storageIncludedLabel('Core')}, Field ${storageIncludedLabel('Field')}, Command ${storageIncludedLabel('Command')}, Enterprise unlimited. ${STORAGE_PACKS_SENTENCE} ${STORAGE_ASSUMPTION_NOTE}`,
+  },
+  {
+    q: 'Why is the app called Zerbiq?',
+    a: NAME_FAQ_ANSWER,
   },
   {
     q: 'Is my data secure?',
@@ -110,6 +120,10 @@ export default function PricingPage() {
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <PricingCards />
           <TextingAddon />
+          <StorageAddon />
+          <div style={{ marginTop: 32 }}>
+            <PaymentsStayYours />
+          </div>
         </div>
       </section>
 

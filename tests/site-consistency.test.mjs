@@ -150,3 +150,84 @@ test('/blog is noindex while it has no published posts', () => {
   const blog = read('app/blog/page.js');
   assert.ok(blog.includes('noindex: posts.length === 0'));
 });
+
+// ── Item 17: AI questions, storage, packs, white-glove, payments, FAQ ─────────
+// The expected values below are copied from src/lib/plans.cjs in the zerbiq app
+// repo (the source of truth). If plans.cjs changes, change lib/planData.js and these.
+
+test('ZerbIQ questions per month match plans.cjs ASSISTANT_QUESTIONS', () => {
+  // plans.cjs ASSISTANT_QUESTIONS: solo 300, core 500, field 1000, command/enterprise Infinity (fair use)
+  assert.deepEqual(pd.ASSISTANT_QUESTIONS_PER_MONTH, { Solo: 300, Core: 500, Field: 1000, Command: null, Enterprise: null });
+  assert.deepEqual(['Solo', 'Core', 'Field', 'Command', 'Enterprise'].map(pd.assistantQuestionsLabel), ['300', '500', '1,000', 'Unlimited', 'Unlimited']);
+});
+
+test('included storage matches plans.cjs storageIncludedGb', () => {
+  // plans.cjs PLANS[*].storageIncludedGb: solo 10, core 25, field 50, command 200, enterprise Infinity
+  assert.deepEqual(pd.STORAGE_INCLUDED_GB, { Solo: 10, Core: 25, Field: 50, Command: 200, Enterprise: null });
+  assert.deepEqual(['Solo', 'Core', 'Field', 'Command', 'Enterprise'].map(pd.storageIncludedLabel), ['10 GB', '25 GB', '50 GB', '200 GB', 'Unlimited']);
+});
+
+test('storage packs and capacity assumptions match plans.cjs', () => {
+  // plans.cjs STORAGE_PACKS: +25 GB $5, +100 GB $15, +500 GB $50 per month
+  assert.deepEqual(pd.STORAGE_PACKS.map((p) => [p.label, p.gb, p.monthlyPrice]), [['+25 GB', 25, 5], ['+100 GB', 100, 15], ['+500 GB', 500, 50]]);
+  // plans.cjs STORAGE_AVERAGES: { photoMb: 0.3, videoMb: 4.6, videoSeconds: 30 }
+  assert.deepEqual(pd.STORAGE_AVERAGES, { photoMb: 0.3, videoMb: 4.6, videoSeconds: 30 });
+  // plans.cjs storageCapacity(): rounded down to two significant figures
+  const expected = {
+    10: [34000, 2200], 25: [85000, 5500], 50: [170000, 11000], 200: [680000, 44000],
+    100: [340000, 22000], 500: [1700000, 110000],
+  };
+  for (const [gb, [photos, videos]] of Object.entries(expected)) {
+    assert.deepEqual(pd.storageCapacity(Number(gb)), { photos, videos }, `${gb} GB capacity`);
+  }
+  assert.equal(pd.storageCapacityLabel(25), 'About 85,000 photos or about 5,500 videos');
+  assert.ok(/Approximate/.test(pd.STORAGE_ASSUMPTION_NOTE) && pd.STORAGE_ASSUMPTION_NOTE.includes('0.3 MB per photo') && pd.STORAGE_ASSUMPTION_NOTE.includes('4.6 MB'));
+});
+
+test('white-glove prices include Solo $149 and match plans.cjs whiteGloveFee', () => {
+  // plans.cjs PLANS[*].whiteGloveFee: solo 149, core 299, field 499, command 699 (enterprise: arranged)
+  assert.deepEqual(pd.WHITE_GLOVE_FEE, { Solo: 149, Core: 299, Field: 499, Command: 699 });
+  assert.equal(pd.WHITE_GLOVE_PRICES_SENTENCE, '$149 for Solo, $299 for Core, $499 for Field, $699 for Command');
+  for (const [f, text] of siteText.filter(([f]) => f !== 'lib/planData.js')) {
+    assert.ok(!/\$299 for Core, \$499/.test(text), `${f}: white-glove prices typed by hand without Solo`);
+    assert.ok(!/\$299 Core \/ \$499/.test(text), `${f}: white-glove prices typed by hand without Solo`);
+  }
+});
+
+test('QuickBooks sync is on every plan, as plans.cjs says (still labelled coming soon)', () => {
+  assert.equal(pd.FEATURE_GATE.quickbooksSync, 'all');
+  assert.ok(!/coming soon for Command/i.test(read('app/pricing/page.js')));
+});
+
+test('payments-stay-yours callout is on /pricing and /compare and states the real behavior', () => {
+  for (const f of ['app/pricing/page.js', 'app/compare/page.js']) {
+    assert.ok(read(f).includes('<PaymentsStayYours'), `${f} shows the callout`);
+  }
+  assert.equal(pd.PAYMENTS_STAY_YOURS_TITLE, 'Your payments stay yours');
+  assert.ok(pd.PAYMENTS_STAY_YOURS_TEXT.includes('no transaction fee'));
+  assert.ok(pd.PAYMENTS_STAY_YOURS_TEXT.includes('never holds your money'));
+  // Stripe is the only processor live in the app (docs/architecture/payments.md); no PayPal anywhere
+  for (const [f, text] of siteText) assert.ok(!/paypal|venmo/i.test(text), `${f}: PayPal/Venmo`);
+});
+
+test('pricing page has the storage box and the name FAQ; compare has the new rows', () => {
+  const pricing = read('app/pricing/page.js');
+  assert.ok(pricing.includes('<StorageAddon'));
+  assert.ok(pricing.includes("q: 'Why is the app called Zerbiq?'"));
+  assert.ok(pricing.includes('NAME_FAQ_ANSWER') && pd.NAME_FAQ_ANSWER.length > 40);
+  const compare = read('app/compare/page.js');
+  for (const label of ['ZerbIQ questions per month', 'Photo & video storage included', 'White-Glove Onboarding (one time)']) {
+    assert.ok(compare.includes(label), `compare row: ${label}`);
+  }
+  const cards = read('components/PricingCards.js');
+  for (const fn of ['assistantQuestionsLabel(plan.name)', 'storageIncludedLabel(plan.name)', 'WHITE_GLOVE_FEE[plan.name]']) {
+    assert.ok(cards.includes(fn), `plan cards use ${fn}`);
+  }
+});
+
+test('with no store links, the footer says coming soon instead of showing store badges', () => {
+  const footer = read('components/Footer.js');
+  assert.ok(footer.includes('STORE_COMING_SOON_LABEL'));
+  assert.equal(pd.STORE_COMING_SOON_LABEL, 'iOS and Android apps: coming soon');
+  assert.ok(!/apps\.apple\.com|play\.google\.com/.test(SITE.map((f) => read(f)).join('\n').replace(/e\.g\. 'https:[^']*'/g, '')));
+});
