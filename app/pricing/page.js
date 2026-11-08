@@ -50,7 +50,7 @@ const FAQ = [
   },
   {
     q: 'Does it work with QuickBooks?',
-    a: `QuickBooks sync is coming soon, and it will be included on every plan. It is not available yet.`,
+    a: 'Yes. Connect QuickBooks Online and your customers and services come over, then invoices and payments sync back automatically. QuickBooks sync is included on every plan.',
   },
   {
     q: 'Can I import my existing customers?',
@@ -62,11 +62,11 @@ const FAQ = [
   },
   {
     q: 'Do I need a payment processor to use the customer portal?',
-    a: `The portal itself is always on and costs nothing extra. Online invoice payment (card & ACH) inside the portal requires connecting a payment processor account of your own (${PAYMENT_PROCESSORS_NOTE}). If you have not connected a processor, customers can still view their history, service requests, and invoices; they just pay through another method (cash, check, or onsite card). Cash, check, and onsite card payments are always available on every plan without a connected processor.`,
+    a: `The portal itself is always on and costs nothing extra. Online invoice payment (card & ACH) inside the portal requires connecting a payment processor account of your own (${PAYMENT_PROCESSORS_NOTE}). If you have not connected a processor, customers can still view their history, service requests, and invoices; they just pay through another method (cash, check, or onsite card).`,
   },
   {
     q: 'What payment processors do you support?',
-    a: `Online payments go through ${PAYMENT_PROCESSORS_NOTE}. ${PAYMENTS_STAY_YOURS_TEXT} You can also accept cash, check, and onsite card payments on any plan without connecting a processor.`,
+    a: `Zerbiq supports ${PAYMENT_PROCESSORS_NOTE} for online payments. ${PAYMENTS_STAY_YOURS_TEXT}`,
   },
   {
     q: 'How much storage is included?',

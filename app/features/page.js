@@ -2,7 +2,7 @@ import { PRIMARY_CTA_LABEL } from '@/lib/siteConfig.mjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, PAYMENT_PROCESSORS_NOTE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, QUICKBOOKS_COMING_SOON, AI_ASSISTANT_NAME, ROUTE_INTELLIGENCE_DESCRIPTION, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
+import { BADGE, PAYMENT_PROCESSORS_NOTE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, AI_ASSISTANT_NAME, ROUTE_INTELLIGENCE_DESCRIPTION, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
 import { pageMetadata } from '@/lib/seo.mjs';
 
 export const metadata = pageMetadata({
@@ -173,11 +173,11 @@ const FEATURE_GROUPS = [
       },
       {
         icon: '📗',
-        title: `QuickBooks Sync ${QUICKBOOKS_COMING_SOON}`,
+        title: 'QuickBooks Sync',
         screenshot: '12-quickbooks-sync.png',
         desc: [
-          "Already using QuickBooks? Keep it. QuickBooks Sync is coming soon: Zerbiq will sync invoices, payments, and expenses to QuickBooks Online automatically, so your books stay clean without anyone re-entering data.",
-          "Two systems, zero duplication.",
+          "Already using QuickBooks? Keep it. Connect QuickBooks Online and your customers and services come over, then Zerbiq syncs invoices and payments back automatically — so your books stay clean without anyone re-entering data.",
+          "Two systems, zero duplication. Included on every plan.",
         ],
         badge: BADGE.all,
       },

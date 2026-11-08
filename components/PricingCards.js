@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { brandify } from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, QUICKBOOKS_SYNC_LABEL, formatPlanPrice, formatAnnualMonthlyEquivalent, PAYMENT_PROCESSORS_NOTE, WHITE_GLOVE_FEE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, formatPlanPrice, formatAnnualMonthlyEquivalent, PAYMENT_PROCESSORS_NOTE, WHITE_GLOVE_FEE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
 
 const ACTIVE_CUSTOMER_DEF = ACTIVE_CUSTOMER_DEFINITION;
 
@@ -17,6 +17,7 @@ const PLAN_INCLUDED = {
     'Recurring jobs',
     'Invoicing & payments',
     'Online payments (card & ACH)',
+    'QuickBooks Online sync',
     'Customer portal',
     'Transaction & bank register',
     'Materials catalog & inventory',
@@ -26,7 +27,7 @@ const PLAN_INCLUDED = {
     'Mileage tracking',
     'Mobile team view (any smartphone browser)',
     AI_ASSISTANT_NAME,
-    QUICKBOOKS_SYNC_LABEL,
+   
     'Data export',
     'Route management',
     'Credits & refunds',

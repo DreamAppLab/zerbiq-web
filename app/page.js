@@ -436,9 +436,7 @@ export default function HomePage() {
           </h2>
           <p style={{ fontSize: 16, color: 'var(--color-white-60)', lineHeight: 1.8, margin: '0 auto 20px', maxWidth: 620, textAlign: 'center' }}>
             <ZerbiqBrand /> was built by a field service operator who managed teams, ran routes, chased invoices, dealt with no-shows,
-            and eventually sold the business to private equity. We spent years using software that was built by people who had
-            never dispatched a tech, never explained an invoice to a frustrated customer, and never stayed up worrying about
-            whether the routes were covered.
+            and more...
           </p>
           <p style={{ fontSize: 16, color: 'var(--color-white-60)', lineHeight: 1.8, margin: '0 auto 32px', maxWidth: 620, textAlign: 'center' }}>
             So we built what we always needed. Every feature in <ZerbiqBrand /> exists because a real service business needed it —
