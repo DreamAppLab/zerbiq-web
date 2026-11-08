@@ -217,11 +217,10 @@ test('payments-stay-yours callout is on /pricing and /compare and states the rea
   assert.ok(!/coming/i.test(pd.PAYMENT_PROCESSORS_NOTE + pd.PAYMENTS_STAY_YOURS_TEXT));
 });
 
-test('pricing page has the storage box and the name FAQ; compare has the new rows', () => {
+test('pricing page has the storage box and no name FAQ; compare has the new rows', () => {
   const pricing = read('app/pricing/page.js');
   assert.ok(pricing.includes('<StorageAddon'));
-  assert.ok(pricing.includes("q: 'Why is the app called Zerbiq?'"));
-  assert.ok(pricing.includes('NAME_FAQ_ANSWER') && pd.NAME_FAQ_ANSWER.length > 40);
+  assert.ok(!pricing.includes('Why is the app called Zerbiq') && pd.NAME_FAQ_ANSWER === undefined, 'no name FAQ (owner: not needed)');
   const compare = read('app/compare/page.js');
   for (const label of ['ZerbIQ questions per month', 'Photo & video storage included', 'White-Glove Onboarding (one time)']) {
     assert.ok(compare.includes(label), `compare row: ${label}`);

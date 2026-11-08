@@ -5,7 +5,7 @@ import TextingAddon from '@/components/TextingAddon';
 import StorageAddon from '@/components/StorageAddon';
 import PaymentsStayYours from '@/components/PaymentsStayYours';
 import Link from 'next/link';
-import { ACTIVE_CUSTOMER_DEFINITION, MOBILE_TEAM_VIEW_NOTE, WHITE_GLOVE_DESCRIPTION, AI_ASSISTANT_NAME, TEXTING_FAQ_ANSWER, TEXTING_FAQ_SHORT, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL, WHITE_GLOVE_PRICES_SENTENCE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENTS_STAY_YOURS_TEXT, PAYMENT_PROCESSORS_NOTE, NAME_FAQ_ANSWER, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
+import { ACTIVE_CUSTOMER_DEFINITION, MOBILE_TEAM_VIEW_NOTE, WHITE_GLOVE_DESCRIPTION, AI_ASSISTANT_NAME, TEXTING_FAQ_ANSWER, TEXTING_FAQ_SHORT, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL, WHITE_GLOVE_PRICES_SENTENCE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENTS_STAY_YOURS_TEXT, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
 import { brandify } from '@/components/ZerbiqBrand';
 import { pageMetadata } from '@/lib/seo.mjs';
 
@@ -71,10 +71,6 @@ const FAQ = [
   {
     q: 'How much storage is included?',
     a: `Job photos and videos are stored with your account. Included storage: Solo ${storageIncludedLabel('Solo')}, Core ${storageIncludedLabel('Core')}, Field ${storageIncludedLabel('Field')}, Command ${storageIncludedLabel('Command')}, Enterprise unlimited. ${STORAGE_PACKS_SENTENCE} ${STORAGE_ASSUMPTION_NOTE}`,
-  },
-  {
-    q: 'Why is the app called Zerbiq?',
-    a: NAME_FAQ_ANSWER,
   },
   {
     q: 'Is my data secure?',
