@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, TEXTING_PRICING_HREF, WHITE_GLOVE_DESCRIPTION, groupByBadge, textingPricingLine } from '@/lib/planData';
+import { EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, TEXTING_PRICING_HREF, WHITE_GLOVE_DESCRIPTION, WHITE_GLOVE_PRICES_SENTENCE, WHITE_GLOVE_PRICES_SHORT, groupByBadge, textingPricingLine } from '@/lib/planData';
 import { pageMetadata } from '@/lib/seo.mjs';
 import { ALL_FEATURES } from '@/lib/homeFeatures';
 
@@ -647,7 +647,7 @@ export default function HomePage() {
                 }}
               >
                 Our White-Glove Onboarding is a one-time add-on. {WHITE_GLOVE_DESCRIPTION} Pricing:
-                $299 for Core, $499 for Field, $699 for Command.
+                {WHITE_GLOVE_PRICES_SENTENCE}.
               </p>
               <div>
                 <a
@@ -671,7 +671,7 @@ export default function HomePage() {
                     marginTop: 8,
                   }}
                 >
-                  One-time add-on · $299 Core / $499 Field / $699 Command
+                  One-time add-on · {WHITE_GLOVE_PRICES_SHORT}
                 </div>
               </div>
             </div>

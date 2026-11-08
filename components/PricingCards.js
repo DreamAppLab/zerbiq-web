@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { brandify } from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, formatPlanPrice, formatAnnualMonthlyEquivalent } from '@/lib/planData';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, formatPlanPrice, formatAnnualMonthlyEquivalent, PAYMENT_PROCESSORS_NOTE, WHITE_GLOVE_FEE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
 
 const ACTIVE_CUSTOMER_DEF = ACTIVE_CUSTOMER_DEFINITION;
 
@@ -27,6 +27,7 @@ const PLAN_INCLUDED = {
     'Mileage tracking',
     'Mobile team view (any smartphone browser)',
     AI_ASSISTANT_NAME,
+   
     'Data export',
     'Route management',
     'Credits & refunds',
@@ -251,7 +252,7 @@ export default function PricingCards() {
         >
           <strong style={{ color: '#fff' }}>Every plan includes a customer portal and online payments.</strong>{' '}
           The portal has no add-ons and no upcharges. Customers sign in by secure link or one-time code — no password required.
-          Online invoice payment (card &amp; ACH) requires connecting a supported payment processor (Stripe, Square, PayPal, or Authorize.net).
+          Online invoice payment (card &amp; ACH) requires connecting a payment processor account of your own ({PAYMENT_PROCESSORS_NOTE}).
         </p>
       </div>
 
@@ -388,6 +389,26 @@ export default function PricingCards() {
               >
                 <span style={{ color: 'var(--color-white-60)' }}>Active customers:</span>
                 <span style={{ fontWeight: 600 }}>{plan.activeCustomers}</span>
+              </div>
+              <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 6 }}
+              >
+                <span style={{ color: 'var(--color-white-60)' }}>ZerbIQ questions / month:</span>
+                <span style={{ fontWeight: 600 }}>{assistantQuestionsLabel(plan.name)}</span>
+              </div>
+              <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 6 }}
+              >
+                <span style={{ color: 'var(--color-white-60)' }}>Photo &amp; video storage:</span>
+                <span style={{ fontWeight: 600 }}>{storageIncludedLabel(plan.name)}</span>
+              </div>
+              <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}
+              >
+                <span style={{ color: 'var(--color-white-60)' }}>White-glove setup:</span>
+                <span style={{ fontWeight: 600 }}>
+                  {WHITE_GLOVE_FEE[plan.name] != null ? `$${WHITE_GLOVE_FEE[plan.name]} one time` : 'Arranged with us'}
+                </span>
               </div>
             </div>
 

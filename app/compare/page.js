@@ -2,7 +2,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel } from '@/lib/planData';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel, WHITE_GLOVE_FEE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
+import PaymentsStayYours from '@/components/PaymentsStayYours';
 import { pageMetadata } from '@/lib/seo.mjs';
 
 export const metadata = pageMetadata({
@@ -34,6 +35,9 @@ const FEATURE_GROUPS = [
     rows: [
       { label: 'Users included',          values: PLAN_METADATA.map((p) => (p.users != null ? String(p.users) : 'Unlimited')) },
       { label: 'Active customers',        values: PLAN_METADATA.map((p) => p.activeCustomers) },
+      { label: 'ZerbIQ questions per month', values: PLAN_METADATA.map((p) => assistantQuestionsLabel(p.name)) },
+      { label: 'Photo & video storage included ⁴', values: PLAN_METADATA.map((p) => storageIncludedLabel(p.name)) },
+      { label: 'White-Glove Onboarding (one time)', values: PLAN_METADATA.map((p) => (WHITE_GLOVE_FEE[p.name] != null ? `$${WHITE_GLOVE_FEE[p.name]}` : 'Arranged with us')) },
       { label: 'Unlimited routes',        values: gateToValues(FEATURE_GATE.routeManagement) },
       { label: 'Unlimited team members',  values: gateToValues(FEATURE_GATE.rolesPermissions) },
     ],
@@ -760,9 +764,9 @@ export default function ComparePage() {
           </p>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '0 0 8px', lineHeight: 1.75 }}>
             ² Online payment processing (card &amp; ACH) and online invoice payment through the customer portal are included on every plan.
-            Requires connecting a supported payment processor (Stripe, Square, PayPal, or Authorize.net).
+            Requires connecting a payment processor account of your own ({PAYMENT_PROCESSORS_NOTE}).
           </p>
-          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '0 0 8px', lineHeight: 1.75 }}>
             ³ Texting is an optional add-on for every plan, and no texts are included in any plan.
             ${TEXTING_ADDON.setupFee} one-time setup, then prepaid text blocks ({TEXTING_ADDON.blocks.map((b) => `${b.texts.toLocaleString('en-US')} for $${b.price}`).join(', ')}) that never expire.
             Texts come from your own {TEXTING_NUMBER_PHRASE}. {TEXTING_REVIEW_TIME} Until then, messages go by email.
@@ -770,6 +774,12 @@ export default function ComparePage() {
             Every plan sends reminders, on-the-way notices, invoices and review requests by email.{' '}
             <Link href="/pricing#texting-addon" style={{ color: '#fff', textDecoration: 'underline' }}>Full texting details</Link>
           </p>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
+            ⁴ Enterprise storage is unlimited. {STORAGE_PACKS_SENTENCE} {STORAGE_ASSUMPTION_NOTE}
+          </p>
+          <div style={{ marginTop: 32 }}>
+            <PaymentsStayYours maxWidth={1100} />
+          </div>
         </div>
       </section>
 
