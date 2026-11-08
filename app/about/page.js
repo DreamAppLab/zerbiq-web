@@ -5,12 +5,14 @@ import HeroBackground from '@/components/HeroBackground';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
 import Link from 'next/link';
 import { EARLY_ACCESS_HREF } from '@/lib/planData';
+import { pageMetadata } from '@/lib/seo.mjs';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'About — Zerbiq',
   description:
     'Zerbiq was built by a field service operator who ran crews, built routes, managed subcontractors, and more.',
-};
+  path: '/about',
+});
 
 export default function AboutPage() {
   return (

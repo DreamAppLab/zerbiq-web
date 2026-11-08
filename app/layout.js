@@ -2,12 +2,14 @@ import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import HeroBackground from '@/components/HeroBackground';
+import { SITE_URL } from '@/lib/seo.mjs';
 
 const CRISP_WEBSITE_ID = 'a728346f-c12b-436e-a52b-5d163679c612';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata = {
+  metadataBase: new URL(SITE_URL),
   title: 'Zerbiq — Built for the field. Loved by the office.',
   description:
     'Zerbiq is the field service operations platform for owner-operators. Schedule jobs, dispatch crews, invoice customers, and manage your whole operation from one screen.',

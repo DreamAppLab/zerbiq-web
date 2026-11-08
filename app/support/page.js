@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroBackground from '@/components/HeroBackground';
 import { brandify } from '@/components/ZerbiqBrand';
-import { EARLY_ACCESS_HREF } from '@/lib/planData';
+import { EARLY_ACCESS_HREF, MOBILE_TEAM_VIEW_NOTE } from '@/lib/planData';
 import {
   SUPPORT_EMAIL,
   SUPPORT_PHONE,
@@ -12,12 +12,14 @@ import {
   SUPPORT_RESPONSE_TIME,
   DELETE_ACCOUNT_HREF,
 } from '@/lib/siteConfig.mjs';
+import { pageMetadata } from '@/lib/seo.mjs';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Support — Zerbiq',
   description:
     'Get help with Zerbiq. Email or call our support team, find answers to common questions about signing in, PINs, text messages and billing, and reach us by mail.',
-};
+  path: '/support',
+});
 
 const linkStyle = { color: 'var(--color-primary)' };
 
@@ -170,7 +172,7 @@ export default function SupportPage() {
           {/* App + legal + early access */}
           <div style={{ color: 'var(--color-white-60)', fontSize: 15, lineHeight: 1.8 }}>
             <p style={{ margin: '0 0 12px' }}>
-              The {brandify('Zerbiq')} mobile app is a free download for iPhone and Android.
+              {MOBILE_TEAM_VIEW_NOTE}
             </p>
             <p style={{ margin: '0 0 12px' }}>
               Read our{' '}

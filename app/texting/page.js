@@ -8,12 +8,14 @@ import {
   TEXTING_PRICING_HREF,
   textingPriceSummary,
 } from '@/lib/planData';
+import { pageMetadata } from '@/lib/seo.mjs';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'How texting works — Zerbiq',
   description:
     'Why texting is billed on its own, what carrier verification needs, and why every business gets its own toll-free number.',
-};
+  path: '/texting',
+});
 
 const linkStyle = { color: 'var(--color-primary)', fontWeight: 600 };
 const bodyStyle = { color: 'var(--color-white-60)', fontSize: 15, lineHeight: 1.7, margin: '0 0 14px' };

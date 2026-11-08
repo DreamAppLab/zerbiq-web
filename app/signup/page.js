@@ -1,13 +1,15 @@
 import ZIcon from '@/components/ZIcon';
 import Link from 'next/link';
 import { EARLY_ACCESS_HREF } from '@/lib/planData';
+import { pageMetadata } from '@/lib/seo.mjs';
 
 const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
-export const metadata = {
-  title: 'Request Early Access — Zerbiq',
+export const metadata = pageMetadata({
+  title: 'Sign up — Zerbiq',
   description: 'Zerbiq is not open for public signup yet. Request early access or book a live demo.',
-};
+  path: '/signup',
+});
 
 export default function SignupPage() {
   return (
