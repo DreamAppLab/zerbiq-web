@@ -48,7 +48,7 @@ const FAQ = [
   },
   {
     q: 'Does it work with QuickBooks?',
-    a: `QuickBooks sync is coming soon for Command and Enterprise. It is not available yet.`,
+    a: 'Yes. Connect QuickBooks Online and your customers and services come over, then invoices and payments sync back automatically. QuickBooks sync is included on every plan.',
   },
   {
     q: 'Can I import my existing customers?',
@@ -60,11 +60,11 @@ const FAQ = [
   },
   {
     q: 'Do I need a payment processor to use the customer portal?',
-    a: 'The portal itself is always on and costs nothing extra. Online invoice payment (card & ACH) inside the portal requires connecting a supported payment processor — Stripe, Square, or PayPal/Venmo. If you have not connected a processor, customers can still view their history, service requests, and invoices; they just pay through another method (cash, check, or onsite card). Cash, check, and onsite card payments are always available on every plan without a connected processor.',
+    a: 'The portal itself is always on and costs nothing extra. Online invoice payment (card & ACH) inside the portal requires connecting a supported payment processor — Stripe, Square, PayPal/Venmo, or Authorize.net. If you have not connected a processor, customers can still view their history, service requests, and invoices; they just pay through another method (cash, check, or onsite card).',
   },
   {
     q: 'What payment processors do you support?',
-    a: 'Zerbiq supports Stripe, Square, and PayPal/Venmo for online payments. You can also accept cash, check, and onsite card payments on any plan without connecting a processor.',
+    a: 'Zerbiq supports Stripe, Square, PayPal/Venmo, and Authorize.net for online payments. You can also accept cash, check, and onsite card payments on any plan without connecting a processor.',
   },
   {
     q: 'Is my data secure?',

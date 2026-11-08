@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { brandify } from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, QUICKBOOKS_SYNC_LABEL, formatPlanPrice, formatAnnualMonthlyEquivalent } from '@/lib/planData';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, formatPlanPrice, formatAnnualMonthlyEquivalent } from '@/lib/planData';
 
 const ACTIVE_CUSTOMER_DEF = ACTIVE_CUSTOMER_DEFINITION;
 
@@ -17,6 +17,7 @@ const PLAN_INCLUDED = {
     'Recurring jobs',
     'Invoicing & payments',
     'Online payments (card & ACH)',
+    'QuickBooks Online sync',
     'Customer portal',
     'Transaction & bank register',
     'Materials catalog & inventory',
@@ -69,7 +70,6 @@ const PLAN_INCLUDED = {
     'Automations & rules engine',
     'In-app messaging',
     'Messaging in customer portal',
-    QUICKBOOKS_SYNC_LABEL,
     'Automated follow-up sequences',
     'Priority support',
     `Multiple service locations (+$${MULTI_LOCATION_FEE.Command}/mo per location)`,
@@ -251,7 +251,7 @@ export default function PricingCards() {
         >
           <strong style={{ color: '#fff' }}>Every plan includes a customer portal and online payments.</strong>{' '}
           The portal has no add-ons and no upcharges. Customers sign in by secure link or one-time code — no password required.
-          Online invoice payment (card &amp; ACH) requires connecting a supported payment processor (Stripe, Square, or PayPal).
+          Online invoice payment (card &amp; ACH) requires connecting a supported payment processor (Stripe, Square, PayPal, or Authorize.net).
         </p>
       </div>
 

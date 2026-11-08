@@ -28,6 +28,21 @@ test('plan gates still return booleans in plan order', () => {
   assert.deepEqual(pd.gateToValues('ent'), [false, false, false, false, true]);
 });
 
+test('QuickBooks sync is on every plan (matches the app plans matrix)', () => {
+  assert.equal(pd.FEATURE_GATE.quickbooksSync, 'all');
+  assert.deepEqual(pd.gateToValues(pd.FEATURE_GATE.quickbooksSync), [true, true, true, true, true]);
+});
+
+test('QuickBooks is listed under Solo, and not as a Command-only extra, on the pricing cards and compare page', () => {
+  const cards = readFileSync(new URL('../components/PricingCards.js', import.meta.url), 'utf8');
+  const compare = readFileSync(new URL('../app/compare/page.js', import.meta.url), 'utf8');
+  const block = (text, from, to) => text.slice(text.indexOf(from), text.indexOf(to));
+  assert.match(block(cards, 'Solo: [', 'Core: ['), /QuickBooks Online sync/);
+  assert.doesNotMatch(block(cards, 'Command: [', 'Enterprise: ['), /QuickBooks/);
+  assert.match(block(compare, "name: 'Solo'", "name: 'Core'"), /QuickBooks Online sync/);
+  assert.doesNotMatch(block(compare, "name: 'Command'", "name: 'Enterprise'"), /QuickBooks/);
+});
+
 test('add-on badge does not say included', () => {
   assert.equal(pd.gateToBadge('addon'), 'An optional add-on for every plan');
   assert.ok(!/included/i.test(pd.BADGE.addon));

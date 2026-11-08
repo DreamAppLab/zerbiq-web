@@ -2,7 +2,7 @@ import { PRIMARY_CTA_LABEL } from '@/lib/siteConfig.mjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, QUICKBOOKS_COMING_SOON, AI_ASSISTANT_NAME, ROUTE_INTELLIGENCE_DESCRIPTION, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
+import { BADGE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, AI_ASSISTANT_NAME, ROUTE_INTELLIGENCE_DESCRIPTION, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
 import { pageMetadata } from '@/lib/seo.mjs';
 
 export const metadata = pageMetadata({
@@ -173,13 +173,13 @@ const FEATURE_GROUPS = [
       },
       {
         icon: '📗',
-        title: `QuickBooks Sync ${QUICKBOOKS_COMING_SOON}`,
+        title: 'QuickBooks Sync',
         screenshot: '12-quickbooks-sync.png',
         desc: [
-          "Already using QuickBooks? Keep it. QuickBooks Sync is coming soon: Zerbiq will sync invoices, payments, and expenses to QuickBooks Online automatically, so your books stay clean without anyone re-entering data.",
-          "Two systems, zero duplication.",
+          "Already using QuickBooks? Keep it. Connect QuickBooks Online and your customers and services come over, then Zerbiq syncs invoices and payments back automatically — so your books stay clean without anyone re-entering data.",
+          "Two systems, zero duplication. Included on every plan.",
         ],
-        badge: BADGE.cmd,
+        badge: BADGE.all,
       },
     ],
   },
@@ -202,7 +202,7 @@ const FEATURE_GROUPS = [
         screenshot: '14-customer-portal.png',
         desc: [
           "Every plan includes a customer portal — a secure, branded page where your customers sign in with a one-time link or code (no password required) and see everything about their account: service history with visit photos, upcoming jobs, invoices, service requests, and contact preferences.",
-          "Customers pay invoices online by card or bank (ACH) directly through the portal — once you connect a supported payment processor (Stripe, Square, or PayPal). The portal has no add-ons and no upcharges.",
+          "Customers pay invoices online by card or bank (ACH) directly through the portal — once you connect a supported payment processor (Stripe, Square, PayPal, or Authorize.net). The portal has no add-ons and no upcharges.",
           "On Field plans and above, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging. Customers who can self-serve become customers who stay.",
         ],
         badge: BADGE.all,

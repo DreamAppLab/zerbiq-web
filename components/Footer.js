@@ -138,7 +138,7 @@ export default function Footer() {
           }}
         >
           <p style={{ color: 'var(--color-white-60)', fontSize: 13, margin: 0 }}>
-            © 2026 <ZerbiqBrand />. All rights reserved.
+            © 2026 <ZerbiqBrand /> LLC. All rights reserved.
           </p>
           <div style={{ display: 'flex', gap: 20 }}>
             <Link

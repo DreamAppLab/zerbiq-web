@@ -41,15 +41,13 @@ test('plan facts: prices, limits and annual = 10 months', () => {
   assert.deepEqual(pd.MULTI_LOCATION_FEE, { Field: 69, Command: 89 });
 });
 
-test('ZerbIQ is on every plan; QuickBooks sync is labelled coming soon', () => {
+test('ZerbIQ and QuickBooks sync are on every plan', () => {
   assert.equal(pd.FEATURE_GATE.aiChatbot, 'all');
   assert.deepEqual(pd.gateToValues(pd.FEATURE_GATE.aiChatbot), [true, true, true, true, true]);
-  assert.equal(pd.QUICKBOOKS_SYNC_LABEL, 'QuickBooks sync (coming soon)');
-  for (const f of ['lib/homeFeatures.js', 'app/features/page.js']) {
-    assert.ok(read(f).includes('QUICKBOOKS_COMING_SOON'), `${f} labels QuickBooks`);
-  }
-  for (const f of ['app/compare/page.js', 'components/PricingCards.js']) {
-    assert.ok(read(f).includes('QUICKBOOKS_SYNC_LABEL'), `${f} labels QuickBooks`);
+  assert.equal(pd.FEATURE_GATE.quickbooksSync, 'all');
+  assert.deepEqual(pd.gateToValues(pd.FEATURE_GATE.quickbooksSync), [true, true, true, true, true]);
+  for (const f of ['lib/homeFeatures.js', 'app/features/page.js', 'app/compare/page.js', 'app/pricing/page.js']) {
+    assert.ok(!/coming soon/i.test(read(f).split('\n').filter((l) => /quickbooks/i.test(l)).join('\n')), `${f} does not call QuickBooks coming soon`);
   }
 });
 

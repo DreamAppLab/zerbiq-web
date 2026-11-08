@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, QUICKBOOKS_SYNC_LABEL, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel } from '@/lib/planData';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel } from '@/lib/planData';
 import { pageMetadata } from '@/lib/seo.mjs';
 
 export const metadata = pageMetadata({
@@ -63,7 +63,7 @@ const FEATURE_GROUPS = [
       { label: 'Estimates & quotes',                               values: gateToValues(FEATURE_GATE.estimatesQuotes) },
       { label: 'Online payment processing (card/ACH) ²',          values: gateToValues(FEATURE_GATE.onlinePayments) },
       { label: 'Purchase orders',                                  values: gateToValues(FEATURE_GATE.purchaseOrders) },
-      { label: QUICKBOOKS_SYNC_LABEL,                             values: gateToValues(FEATURE_GATE.quickbooksSync) },
+      { label: 'QuickBooks Online sync',                            values: gateToValues(FEATURE_GATE.quickbooksSync) },
     ],
   },
   {
@@ -177,7 +177,7 @@ const PLAN_CARDS = [
     price: planPrice('Solo'),
     customers: planCustomers('Solo'),
     features: [
-      '1 user', 'Customer portal', 'Online payments (card & ACH)',
+      '1 user', 'Customer portal', 'Online payments (card & ACH)', 'QuickBooks Online sync',
       'Route management', 'Job scheduling', 'Invoicing & payments', 'Customer CRM',
       'Email notifications', 'Appointment reminders', 'Holiday management', 'Billing cycles',
       'Custom branding', 'Reports & analytics', 'Data export', 'Mileage tracking',
@@ -221,7 +221,7 @@ const PLAN_CARDS = [
     price: planPrice('Command'),
     customers: planCustomers('Command'),
     features: [
-      'Automations engine', QUICKBOOKS_SYNC_LABEL,
+      'Automations engine',
       'Follow-up sequences', 'In-app messaging', 'Messaging in portal',
       'Automated late fees', 'Priority support',
       `Multiple service locations (+$${MULTI_LOCATION_FEE.Command}/mo per location)`,
@@ -647,7 +647,7 @@ export default function ComparePage() {
                           {brandify(row.label)}
                         </td>
                         {row.values.map((val, pi) => {
-                          const isCommand = PLANS[pi].popular;
+                          const isPopular = PLANS[pi].popular;
                           return (
                             <td
                               key={pi}
@@ -655,15 +655,15 @@ export default function ComparePage() {
                                 textAlign: 'center',
                                 padding: '14px 16px',
                                 borderBottom: '1px solid rgba(255,255,255,0.05)',
-                                background: isCommand
+                                background: isPopular
                                   ? isAlt
                                     ? 'rgba(61,92,255,0.07)'
                                     : 'rgba(61,92,255,0.04)'
                                   : 'transparent',
-                                borderLeft: isCommand
+                                borderLeft: isPopular
                                   ? '1px solid rgba(61,92,255,0.4)'
                                   : 'none',
-                                borderRight: isCommand
+                                borderRight: isPopular
                                   ? '1px solid rgba(61,92,255,0.4)'
                                   : 'none',
                               }}
@@ -760,7 +760,7 @@ export default function ComparePage() {
           </p>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '0 0 8px', lineHeight: 1.75 }}>
             ² Online payment processing (card &amp; ACH) and online invoice payment through the customer portal are included on every plan.
-            Requires connecting a supported payment processor (Stripe, Square, or PayPal). Cash, check, and onsite card payments are always available on every plan without a connected processor.
+            Requires connecting a supported payment processor (Stripe, Square, PayPal, or Authorize.net).
           </p>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
             ³ Texting is an optional add-on for every plan, and no texts are included in any plan.

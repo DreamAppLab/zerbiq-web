@@ -1,7 +1,10 @@
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import HeroBackground from '@/components/HeroBackground';
 import { SITE_URL } from '@/lib/seo.mjs';
+
+const CRISP_WEBSITE_ID = 'a728346f-c12b-436e-a52b-5d163679c612';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -34,6 +37,18 @@ export default function RootLayout({ children }) {
         {/* Fixed full-viewport route animation — sits behind all page content */}
         <HeroBackground />
         {children}
+        {/* Crisp live chat — visitor tracking + chat widget, zerbiq.com's own Crisp website */}
+        <Script id="crisp-chat" strategy="afterInteractive">
+          {`window.$crisp = [];
+          window.CRISP_WEBSITE_ID = "${CRISP_WEBSITE_ID}";
+          (function () {
+            var d = document;
+            var s = d.createElement("script");
+            s.src = "https://client.crisp.chat/l.js";
+            s.async = 1;
+            d.getElementsByTagName("head")[0].appendChild(s);
+          })();`}
+        </Script>
       </body>
     </html>
   );
