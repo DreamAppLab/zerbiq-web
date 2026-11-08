@@ -208,8 +208,12 @@ test('payments-stay-yours callout is on /pricing and /compare and states the rea
   assert.equal(pd.PAYMENTS_STAY_YOURS_TITLE, 'Your payments stay yours');
   assert.ok(pd.PAYMENTS_STAY_YOURS_TEXT.includes('no transaction fee'));
   assert.ok(pd.PAYMENTS_STAY_YOURS_TEXT.includes('never holds your money'));
-  // Supported processors match the app and the rest of the site: Stripe, Square, PayPal, Authorize.net; no cash/check line
-  assert.ok(pd.PAYMENT_PROCESSORS_NOTE.includes('Authorize.net'));
+  // Supported processors match the app (api/payments/connections.js: Stripe, Square and Authorize.net are live;
+  // PayPal still answers "coming soon"), so the site never claims PayPal or Venmo.
+  for (const name of ['Stripe', 'Square', 'Authorize.net']) assert.ok(pd.PAYMENT_PROCESSORS_NOTE.includes(name), name);
+  for (const f of ['lib/planData.js', 'app/pricing/page.js', 'app/compare/page.js', 'app/features/page.js', 'components/PricingCards.js']) {
+    assert.ok(!/paypal|venmo/i.test(read(f)), `${f} does not claim PayPal / Venmo`);
+  }
   assert.ok(!/coming/i.test(pd.PAYMENT_PROCESSORS_NOTE + pd.PAYMENTS_STAY_YOURS_TEXT));
 });
 
