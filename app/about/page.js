@@ -38,7 +38,7 @@ export default function AboutPage() {
           {[
             'Field service software has a problem. Most of it was built by engineers and product managers who have never run a service business. They\'ve studied it, interviewed operators, sat in on demos — but they\'ve never dispatched a crew at 6am when two techs called out. They\'ve never had to explain a confusing invoice to a customer who\'s threatening to cancel. They\'ve never looked at a route sheet on a Monday morning and wondered how they were going to cover everything.',
             'We have.',
-            'Zerbiq was founded by a field service operator. We ran crews. We built routes. We managed subcontractors, tracked equipment, handled no-shows, chased payments, and grew the business until it was time for us to move on to our next adventure... Zerbiq! We used every major platform on the market and found the same problem everywhere: the software was built for the software company, not for us.',
+            'Zerbiq was founded by field service operators. We ran crews. We built routes. We managed subcontractors, tracked equipment, handled no-shows, chased payments, and grew the business until it was time for us to move on to our next adventure... Zerbiq! We used every major platform on the market and found the same problem everywhere: the software was built for the software company, not for us.',
             'Too complicated for the office staff. Too clunky for the techs in the field. Too expensive once your team grew past a handful of people. And never quite right — always missing the one thing you actually needed, always requiring a workaround.',
             'So we built Zerbiq from the inside out. Every screen, every workflow, every feature started with one question: what does a service business operator actually need on a Tuesday afternoon when everything is on fire?',
             'We don\'t claim to be perfect. We\'re still building. But we do claim this: we understand your business because we lived it. And that makes all the difference.',
@@ -57,6 +57,21 @@ export default function AboutPage() {
               {i === 1 ? para : brandify(para)}
             </p>
           ))}
+
+          {/* Founder */}
+          <figure style={{ margin: '48px 0 0', display: 'flex', alignItems: 'center', gap: 20 }}>
+            <img
+              src="/eddie-skehan.jpg"
+              alt="Eddie Skehan, Founder of Zerbiq"
+              width={344}
+              height={431}
+              style={{ width: 120, height: 150, objectFit: 'cover', objectPosition: 'center top', borderRadius: 14, display: 'block', boxShadow: '0 8px 32px rgba(0,0,0,0.45)' }}
+            />
+            <figcaption>
+              <div style={{ fontSize: 20, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em' }}>Eddie Skehan</div>
+              <div style={{ fontSize: 15, fontWeight: 500, color: 'var(--color-white-60)', marginTop: 2 }}>Founder</div>
+            </figcaption>
+          </figure>
 
           {/* Sign-off */}
           <p style={{ fontSize: 20, fontWeight: 800, color: '#fff', margin: '48px 0 0', letterSpacing: '-0.02em' }}>
