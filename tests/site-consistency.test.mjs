@@ -226,7 +226,7 @@ test('pricing page has the storage box and no name FAQ; compare has the new rows
     assert.ok(compare.includes(label), `compare row: ${label}`);
   }
   const cards = read('components/PricingCards.js');
-  for (const fn of ['assistantQuestionsLabel(plan.name)', 'storageIncludedLabel(plan.name)', 'WHITE_GLOVE_FEE[plan.name]']) {
+  for (const fn of ['assistantQuestionsLabel(plan.name)', 'storageIncludedLabel(plan.name)']) {
     assert.ok(cards.includes(fn), `plan cards use ${fn}`);
   }
 });
@@ -236,4 +236,18 @@ test('with no store links, the footer says coming soon instead of showing store 
   assert.ok(footer.includes('STORE_COMING_SOON_LABEL'));
   assert.equal(pd.STORE_COMING_SOON_LABEL, 'iOS and Android apps: coming soon');
   assert.ok(!/apps\.apple\.com|play\.google\.com/.test(SITE.map((f) => read(f)).join('\n').replace(/e\.g\. 'https:[^']*'/g, '')));
+});
+
+test('white-glove is an optional add-on below the plan cards, not inside them', () => {
+  const cards = read('components/PricingCards.js');
+  assert.ok(!/white[- ]glove/i.test(cards), 'plan cards have no white-glove text');
+  assert.ok(!cards.includes('WHITE_GLOVE'), 'plan cards do not use white-glove data');
+  const pricing = read('app/pricing/page.js');
+  assert.ok(pricing.includes('<WhiteGloveAddon'), 'pricing page renders the add-on section');
+  const addon = read('components/WhiteGloveAddon.js');
+  for (const t of ['WHITE_GLOVE_FEE', 'WHITE_GLOVE_DESCRIPTION', 'optional', 'one-time', 'DIY spreadsheet import is included free on every plan']) {
+    assert.ok(addon.includes(t), `add-on mentions ${t}`);
+  }
+  assert.ok(!/guarantee|before the call ends|within \d+ (hours|days)/i.test(addon), 'add-on makes no guarantee or time promise');
+  assert.ok(!/\$\d/.test(addon), 'add-on prices come from planData, not typed by hand');
 });
