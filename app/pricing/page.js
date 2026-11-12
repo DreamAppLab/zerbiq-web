@@ -3,6 +3,7 @@ import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import TextingAddon from '@/components/TextingAddon';
 import StorageAddon from '@/components/StorageAddon';
+import WhiteGloveAddon from '@/components/WhiteGloveAddon';
 import PaymentsStayYours from '@/components/PaymentsStayYours';
 import Link from 'next/link';
 import { ACTIVE_CUSTOMER_DEFINITION, MOBILE_TEAM_VIEW_NOTE, WHITE_GLOVE_DESCRIPTION, AI_ASSISTANT_NAME, TEXTING_FAQ_ANSWER, TEXTING_FAQ_SHORT, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL, WHITE_GLOVE_PRICES_SENTENCE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENTS_STAY_YOURS_TEXT, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
@@ -54,7 +55,7 @@ const FAQ = [
   },
   {
     q: 'Can I import my existing customers?',
-    a: 'Yes. Every plan includes DIY spreadsheet import — download our template, fill in your customers, routes, and team, and upload. Most owners are fully set up in under an hour. White-Glove Onboarding includes full data migration handled by our team.',
+    a: 'Yes. Every plan includes DIY spreadsheet import — download our template, fill in your customers, routes, and team, and upload. Most owners are fully set up in under an hour. The optional White-Glove Onboarding add-on has our team handle the data migration for you.',
   },
   {
     q: 'What does the customer portal include?',
@@ -117,6 +118,7 @@ export default function PricingPage() {
           <PricingCards />
           <TextingAddon />
           <StorageAddon />
+          <WhiteGloveAddon />
           <div style={{ marginTop: 32 }}>
             <PaymentsStayYours />
           </div>

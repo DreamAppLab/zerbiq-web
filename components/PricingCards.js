@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { brandify } from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, formatPlanPrice, formatAnnualMonthlyEquivalent, PAYMENT_PROCESSORS_NOTE, WHITE_GLOVE_FEE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, formatPlanPrice, formatAnnualMonthlyEquivalent, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
 
 const ACTIVE_CUSTOMER_DEF = ACTIVE_CUSTOMER_DEFINITION;
 
@@ -79,7 +79,6 @@ const PLAN_INCLUDED = {
     'Everything in Command',
     'No active customer limit',
     'Open to smaller teams that want its extra features',
-    'White-glove onboarding',
     'Direct support',
     'Custom pricing',
   ],
@@ -397,18 +396,10 @@ export default function PricingCards() {
                 <span style={{ fontWeight: 600 }}>{assistantQuestionsLabel(plan.name)}</span>
               </div>
               <div
-                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 6 }}
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}
               >
                 <span style={{ color: 'var(--color-white-60)' }}>Photo &amp; video storage:</span>
                 <span style={{ fontWeight: 600 }}>{storageIncludedLabel(plan.name)}</span>
-              </div>
-              <div
-                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}
-              >
-                <span style={{ color: 'var(--color-white-60)' }}>White-glove setup:</span>
-                <span style={{ fontWeight: 600 }}>
-                  {WHITE_GLOVE_FEE[plan.name] != null ? `$${WHITE_GLOVE_FEE[plan.name]} one time` : 'Arranged with us'}
-                </span>
               </div>
             </div>
 
