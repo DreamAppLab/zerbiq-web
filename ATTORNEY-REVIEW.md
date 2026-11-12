@@ -1,3 +1,9 @@
+# Attorney review: customer limit wording (November 12, 2026)
+
+One word changed in the Privacy Policy, Section 9 (Data Retention): "Archived customers and their records are retained indefinitely while your account is active" now says "Inactive customers and ...". The site no longer uses "archive" for customers. The "Last updated" date was not changed. The Terms do not define "active customer", so they are unchanged. The plan limit itself (pricing page, compare page, plan cards) now counts only customers with service in the last 6 months, on a recurring route, or with an upcoming job; please check whether the Terms need a line about it.
+
+---
+
 # Attorney review: QuickBooks import wording (October 28, 2026)
 
 Both pages now say "Last updated: October 28, 2026". This is a first draft for Allen to edit; the owner asked for it to go up now and be refined after review. It must be mirrored in the Privacy Policy and Terms inside the app (app.zerbiq.com), which Intuit reviews.

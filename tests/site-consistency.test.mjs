@@ -51,12 +51,40 @@ test('ZerbIQ and QuickBooks sync are on every plan', () => {
   }
 });
 
-test('active customer definition includes recurring customers and has no separate limit', () => {
-  assert.ok(pd.ACTIVE_CUSTOMER_DEFINITION.includes('including recurring customers'));
-  assert.ok(pd.ACTIVE_CUSTOMER_DEFINITION.includes('no separate recurring-customer limit'));
-  for (const f of ['app/compare/page.js', 'app/pricing/page.js', 'components/PricingCards.js']) {
+test('customer limit: one shared definition (served in last 6 months, recurring, or upcoming job)', () => {
+  const d = pd.ACTIVE_CUSTOMER_DEFINITION;
+  assert.ok(d.includes('last 6 months') && d.includes('recurring route') && d.includes('upcoming scheduled job'));
+  assert.ok(d.includes('counts once') || d.includes('counts once, no matter how many visits'));
+  assert.ok(d.includes('never deleted'));
+  assert.ok(!/archiv/i.test(d) && !/any customer currently managed/i.test(d), 'no stale definition');
+  for (const f of ['app/compare/page.js', 'components/PricingCards.js']) {
     assert.ok(read(f).includes('ACTIVE_CUSTOMER_DEFINITION'), `${f} uses the shared definition`);
   }
+  assert.ok(read('app/pricing/page.js').includes('CUSTOMER_LIMIT_FAQ'), '/pricing FAQ uses the shared customer-limit FAQ');
+  assert.deepEqual(pd.CUSTOMER_LIMIT_FAQ.map((f) => f.q), [
+    'What counts toward my customer limit?', 'What if I import a big list?', 'What happens if I reach my limit?',
+  ]);
+  assert.ok(pd.CUSTOMER_LIMIT_FAQ[1].a.includes('not active yet'));
+  assert.ok(pd.CUSTOMER_LIMIT_FAQ[2].a.includes('Inactive') && pd.CUSTOMER_LIMIT_FAQ[2].a.includes('oldest service first'));
+  assert.deepEqual(pd.PLAN_METADATA.map((p) => p.activeCustomers), ['200', '500', '1,000', '2,500', '2,500+']);
+  for (const p of pd.PLAN_METADATA) assert.ok(p.subtitle.includes('counted customers'), `${p.name} subtitle`);
+});
+
+test('the word "archive" is never used for customers anywhere on the site', () => {
+  const files = [];
+  const walk = (dir) => {
+    for (const e of readdirSync(new URL(`../${dir}`, import.meta.url), { withFileTypes: true })) {
+      const rel = `${dir}/${e.name}`;
+      if (e.isDirectory()) walk(rel);
+      else if (/\.(js|mjs|jsx)$/.test(e.name)) files.push(rel);
+    }
+  };
+  ['app', 'components', 'lib'].forEach(walk);
+  for (const f of files) {
+    const hits = read(f).split('\n').filter((l) => /archiv/i.test(l));
+    assert.deepEqual(hits, [], `${f} must not use "archive" (say "Inactive")`);
+  }
+  assert.ok(!/active customer/i.test(read('app/compare/page.js') + read('components/PricingCards.js') + read('app/pricing/page.js')), 'no "active customer" wording on cards, compare or pricing');
 });
 
 test('/compare has no recurring-customer row and no included-texts row', () => {

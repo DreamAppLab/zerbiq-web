@@ -6,7 +6,7 @@ import StorageAddon from '@/components/StorageAddon';
 import WhiteGloveAddon from '@/components/WhiteGloveAddon';
 import PaymentsStayYours from '@/components/PaymentsStayYours';
 import Link from 'next/link';
-import { ACTIVE_CUSTOMER_DEFINITION, MOBILE_TEAM_VIEW_NOTE, WHITE_GLOVE_DESCRIPTION, AI_ASSISTANT_NAME, TEXTING_FAQ_ANSWER, TEXTING_FAQ_SHORT, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL, WHITE_GLOVE_PRICES_SENTENCE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENTS_STAY_YOURS_TEXT, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
+import { CUSTOMER_LIMIT_FAQ, MOBILE_TEAM_VIEW_NOTE, WHITE_GLOVE_DESCRIPTION, AI_ASSISTANT_NAME, TEXTING_FAQ_ANSWER, TEXTING_FAQ_SHORT, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL, WHITE_GLOVE_PRICES_SENTENCE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENTS_STAY_YOURS_TEXT, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
 import { brandify } from '@/components/ZerbiqBrand';
 import { pageMetadata } from '@/lib/seo.mjs';
 
@@ -15,10 +15,7 @@ const FAQ = [
     q: 'How many users are included?',
     a: 'Solo includes 1 user. Core, Field, Command, and Enterprise include unlimited users — owners, office staff, and every tech in the field — at one flat price. No per-seat fees.',
   },
-  {
-    q: 'What is an active customer?',
-    a: ACTIVE_CUSTOMER_DEFINITION,
-  },
+  ...CUSTOMER_LIMIT_FAQ,
   {
     q: 'Can I change plans later?',
     a: 'Yes — upgrade or downgrade anytime. Changes take effect immediately and are prorated automatically.',
