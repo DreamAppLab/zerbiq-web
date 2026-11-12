@@ -77,7 +77,7 @@ const PLAN_INCLUDED = {
   ],
   Enterprise: [
     'Everything in Command',
-    'No active customer limit',
+    'No customer limit',
     'Open to smaller teams that want its extra features',
     'Direct support',
     'Custom pricing',
@@ -199,7 +199,7 @@ export default function PricingCards() {
         )}
       </div>
 
-      {/* Active customer info box */}
+      {/* Customer limit info box */}
       <div
         style={{
           maxWidth: 680,
@@ -386,7 +386,7 @@ export default function PricingCards() {
                   marginBottom: 6,
                 }}
               >
-                <span style={{ color: 'var(--color-white-60)' }}>Active customers:</span>
+                <span style={{ color: 'var(--color-white-60)' }}>Counted customers:</span>
                 <span style={{ fontWeight: 600 }}>{plan.activeCustomers}</span>
               </div>
               <div

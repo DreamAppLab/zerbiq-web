@@ -20,7 +20,7 @@ const PLANS = PLAN_METADATA.map((p) => ({
   cta: p.cta,
   isExternal: p.ctaExternal,
   popular: p.popular,
-  subtitle: `${p.activeCustomers} active customers`,
+  subtitle: `${p.activeCustomers} counted customers`,
 }));
 
 // ── Comparison table feature groups ──────────────────────────────────────────
@@ -34,7 +34,7 @@ const FEATURE_GROUPS = [
     group: 'Customer Limits',
     rows: [
       { label: 'Users included',          values: PLAN_METADATA.map((p) => (p.users != null ? String(p.users) : 'Unlimited')) },
-      { label: 'Active customers',        values: PLAN_METADATA.map((p) => p.activeCustomers) },
+      { label: 'Counted customers',       values: PLAN_METADATA.map((p) => p.activeCustomers) },
       { label: 'ZerbIQ questions per month', values: PLAN_METADATA.map((p) => assistantQuestionsLabel(p.name)) },
       { label: 'Photo & video storage included ⁴', values: PLAN_METADATA.map((p) => storageIncludedLabel(p.name)) },
       { label: 'White-Glove Onboarding (one time)', values: PLAN_METADATA.map((p) => (WHITE_GLOVE_FEE[p.name] != null ? `$${WHITE_GLOVE_FEE[p.name]}` : 'Arranged with us')) },
@@ -406,7 +406,7 @@ export default function ComparePage() {
             </p>
           </div>
 
-          {/* Active customer info box */}
+          {/* Customer limit info box */}
           <div
             style={{
               background: 'rgba(61,92,255,0.1)',
@@ -419,7 +419,7 @@ export default function ComparePage() {
             }}
           >
             <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 14, margin: 0, lineHeight: 1.65 }}>
-              <strong style={{ color: '#fff' }}>What is an active customer?</strong>{' '}
+              <strong style={{ color: '#fff' }}>What counts toward my customer limit?</strong>{' '}
               {ACTIVE_CUSTOMER_DEFINITION}
             </p>
           </div>
