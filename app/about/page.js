@@ -10,7 +10,7 @@ import { pageMetadata } from '@/lib/seo.mjs';
 export const metadata = pageMetadata({
   title: 'About — Zerbiq',
   description:
-    'Zerbiq was built by a field service operator who ran crews, built routes, managed subcontractors, and more.',
+    'Zerbiq was built by field service operators who ran crews, built routes, managed subcontractors, and more.',
   path: '/about',
 });
 

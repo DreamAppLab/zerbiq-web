@@ -431,11 +431,11 @@ export default function HomePage() {
               textAlign: 'center',
             }}
           >
-            <span style={{ display: 'block' }}>Built by someone who ran the business.</span>
+            <span style={{ display: 'block' }}>Built by people who owned and ran service businesses.</span>
             <span style={{ display: 'block', color: 'var(--color-primary)' }}>Not just studied it.</span>
           </h2>
           <p style={{ fontSize: 16, color: 'var(--color-white-60)', lineHeight: 1.8, margin: '0 auto 20px', maxWidth: 620, textAlign: 'center' }}>
-            <ZerbiqBrand /> was built by a field service operator who managed teams, ran routes, chased invoices, dealt with no-shows,
+            <ZerbiqBrand /> was built by field service operators who managed teams, ran routes, chased invoices, dealt with no-shows,
             and more...
           </p>
           <p style={{ fontSize: 16, color: 'var(--color-white-60)', lineHeight: 1.8, margin: '0 auto 32px', maxWidth: 620, textAlign: 'center' }}>
