@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { Fragment } from 'react';
 import Link from 'next/link';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
 import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, WEEKLY_VISITS_EXPLAINER, WEEKLY_VISITS_AVERAGE_WEEKS, weeklyVisitsNumberLabel, enterprisePriceLabel, planCapacityShortLabel, assistantQuestionsFeatureLabel, TOP_SELF_SERVE_WEEKLY_VISITS, AI_ASSISTANT_NAME, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel, WHITE_GLOVE_FEE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
@@ -40,7 +41,7 @@ const FEATURE_GROUPS = [
       { label: 'ZerbIQ questions per month', values: PLAN_METADATA.map((p) => assistantQuestionsLabel(p.name)) },
       { label: 'White-Glove Onboarding (one time)', values: PLAN_METADATA.map((p) => (WHITE_GLOVE_FEE[p.name] != null ? `$${WHITE_GLOVE_FEE[p.name]}` : 'Arranged with us')) },
       { label: 'Unlimited routes',        values: gateToValues(FEATURE_GATE.routeManagement) },
-      { label: 'Unlimited team members',  values: gateToValues(FEATURE_GATE.rolesPermissions) },
+      { label: 'Unlimited team members',  values: gateToValues(FEATURE_GATE.unlimitedUsers) },
     ],
   },
   {
@@ -64,6 +65,7 @@ const FEATURE_GROUPS = [
       { label: 'Invoicing',                                        values: gateToValues(FEATURE_GATE.invoicing) },
       { label: 'Transaction & bank register',                      values: gateToValues(FEATURE_GATE.transactionRegister) },
       { label: 'Credits & refunds',                                values: gateToValues(FEATURE_GATE.creditsRefunds) },
+      { label: 'Automated late fees',                              values: gateToValues(FEATURE_GATE.lateFees) },
       { label: 'Partial payments and payment plans',               values: gateToValues(FEATURE_GATE.partialPayments) },
       { label: 'Quotes & estimates (create, send, approve)',      values: gateToValues(FEATURE_GATE.estimatesQuotes) },
       { label: 'Online payment processing (card/ACH) ²',          values: gateToValues(FEATURE_GATE.onlinePayments) },
@@ -93,7 +95,7 @@ const FEATURE_GROUPS = [
       { label: 'Customer CRM',                            values: gateToValues(FEATURE_GATE.customerCrm) },
       { label: 'Custom fields',                           values: gateToValues(FEATURE_GATE.customFields) },
       { label: 'Complaints tracking',                     values: gateToValues(FEATURE_GATE.complaintsTracking) },
-      // Customer portal is on every plan. Portal also shows quote approval (Field+) and messaging (Command+).
+      // Customer portal is on every plan. Portal also shows quote approval (every plan) and messaging (Command+).
       // Online invoice payment requires a connected payment processor. See footnote ².
       { label: 'Customer portal ²',                       values: gateToValues(FEATURE_GATE.customerPortal) },
       { label: 'Lead management (Kanban)',                 values: gateToValues(FEATURE_GATE.leadManagement) },
@@ -190,7 +192,9 @@ const PLAN_CARDS = [
       'Route management', 'Job scheduling', 'Invoicing & payments', 'Customer CRM',
       'Email notifications', 'Appointment reminders', 'Holiday management', 'Billing cycles',
       'Custom branding', 'Reports & analytics', 'Data export',
-      'Parts on order', 'Credits & refunds', 'Materials & inventory', 'Schedule & dispatch',
+      'Parts on order', 'Credits & refunds', 'Payment plans', 'Automated late fees', 'Purchase orders',
+      'Roles & permissions', 'Time tracking & timecards', 'Attendance & time off', 'GPS field tracking',
+      'Employee ID & PIN login', 'Employee termination workflow', 'Materials & inventory', 'Schedule & dispatch',
       'Light & dark mode', 'Personalized shortcuts bar', 'Mobile team view (smartphone browser)',
       assistantQuestionsFeatureLabel('Solo'),
     ],
@@ -202,9 +206,7 @@ const PLAN_CARDS = [
     price: planPrice('Core'),
     visits: planVisits('Core'),
     features: [
-      'Unlimited users', 'Team management', 'Roles & permissions', 'Team messaging',
-      'GPS field tracking', 'Employee ID & PIN login',
-      'Time tracking & timecards', 'Attendance & time off', 'Purchase orders',
+      'Unlimited users', 'Team management', 'Team messaging',
       assistantQuestionsFeatureLabel('Core'),
     ],
   },
@@ -217,10 +219,9 @@ const PLAN_CARDS = [
     features: [
       'Route optimization & Rebalance all routes', 'Vehicles, trailers, equipment, tools & mileage',
       'Daily truck inspections', 'Commissions & per-job team pay',
-      'Leads inbox & pipeline', 'Payment plans', 'Employee asset checkout',
+      'Leads inbox & pipeline', 'Employee asset checkout',
       'Subcontractor management', 'Maintenance calendar',
       `Multiple service locations (+$${MULTI_LOCATION_FEE.Field}/mo per location)`, 'Lead capture form',
-      'Employee termination workflow',
       assistantQuestionsFeatureLabel('Field'),
     ],
   },
@@ -234,7 +235,7 @@ const PLAN_CARDS = [
       'Performance reviews', 'Incident tracking', 'Tech performance reports', 'Advanced reports & job costing',
       'Automations engine',
       'Follow-up sequences', 'In-app messaging', 'Messaging in portal',
-      'Automated late fees', 'Priority support',
+      'Priority support',
       `Multiple service locations (+$${MULTI_LOCATION_FEE.Command}/mo per location)`,
       assistantQuestionsFeatureLabel('Command'),
     ],
@@ -255,15 +256,19 @@ const PLAN_CARDS = [
 function CellValue({ value }) {
   if (typeof value === 'boolean') {
     return (
-      <span
-        style={{
-          fontSize: 18,
-          fontWeight: 700,
-          color: value ? '#3D5CFF' : '#fff',
-        }}
-      >
-        {value ? '✓' : '✗'}
-      </span>
+      <>
+        <span
+          aria-hidden="true"
+          style={{
+            fontSize: 18,
+            fontWeight: 700,
+            color: value ? '#3D5CFF' : '#fff',
+          }}
+        >
+          {value ? '✓' : '✗'}
+        </span>
+        <span className="sr-only">{value ? 'Included' : 'Not included'}</span>
+      </>
     );
   }
   return (
@@ -533,10 +538,14 @@ export default function ComparePage() {
               minWidth: 960,
             }}
           >
+            <caption className="sr-only">
+              Plan comparison: every feature and limit for Solo, Core, Field, Command and Enterprise
+            </caption>
             {/* Sticky header */}
             <thead>
               <tr>
                 <th
+                  scope="col"
                   style={{
                     textAlign: 'left',
                     padding: '40px 16px 20px',
@@ -547,10 +556,13 @@ export default function ComparePage() {
                     borderBottom: '2px solid rgba(255,255,255,0.1)',
                     width: '30%',
                   }}
-                />
+                >
+                  <span className="sr-only">Feature</span>
+                </th>
                 {PLANS.map((plan) => (
                   <th
                     key={plan.name}
+                    scope="col"
                     style={{
                       textAlign: 'center',
                       padding: '40px 16px 20px',
@@ -621,12 +633,14 @@ export default function ComparePage() {
 
             <tbody>
               {FEATURE_GROUPS.map((group, gi) => (
-                <>
+                <Fragment key={`group-${gi}`}>
                   {/* Group header */}
-                  <tr key={`group-${gi}`}>
-                    <td
+                  <tr>
+                    <th
+                      scope="rowgroup"
                       colSpan={PLANS.length + 1}
                       style={{
+                        textAlign: 'left',
                         padding: '24px 16px 10px',
                         fontWeight: 800,
                         fontSize: 12,
@@ -636,7 +650,7 @@ export default function ComparePage() {
                       }}
                     >
                       {group.group}
-                    </td>
+                    </th>
                   </tr>
 
                   {/* Feature rows */}
@@ -651,16 +665,19 @@ export default function ComparePage() {
                             : 'transparent',
                         }}
                       >
-                        <td
+                        <th
+                          scope="row"
                           style={{
                             padding: '14px 16px',
                             fontSize: 14,
+                            fontWeight: 400,
+                            textAlign: 'left',
                             color: '#fff',
                             borderBottom: '1px solid rgba(255,255,255,0.05)',
                           }}
                         >
                           {brandify(row.label)}
-                        </td>
+                        </th>
                         {row.values.map((val, pi) => {
                           const isPopular = PLANS[pi].popular;
                           return (
@@ -690,7 +707,7 @@ export default function ComparePage() {
                       </tr>
                     );
                   })}
-                </>
+                </Fragment>
               ))}
 
               {/* CTA row */}
@@ -709,7 +726,7 @@ export default function ComparePage() {
                     }}
                   >
                     {plan.isExternal ? (
-                      <>
+                      <Fragment>
                         <a
                           href={plan.href}
                           style={{
@@ -734,7 +751,7 @@ export default function ComparePage() {
                             Above {TOP_SELF_SERVE_WEEKLY_VISITS.toLocaleString('en-US')} completed visits a week? Ask about Enterprise pricing.
                           </p>
                         )}
-                      </>
+                      </Fragment>
                     ) : (
                       <Link
                         href={plan.href}

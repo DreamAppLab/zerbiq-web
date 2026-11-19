@@ -94,7 +94,7 @@ const FEATURE_GROUPS = [
           "Know who's working, what they're assigned to, and how they're doing — without asking. Every team member has a profile, a route, a truck, and a skill set.",
           "Add someone new in minutes. See their whole day at a glance.",
         ],
-        badge: BADGE.core,
+        badge: gateToBadge(FEATURE_GATE.rolesPermissions),
       },
       {
         icon: '📅',
@@ -124,7 +124,7 @@ const FEATURE_GROUPS = [
           "Running more than one location? Add additional service areas to your account and manage them all from one login. Routes, teams, customers, and billing stay organized by location.",
           `Available on Field and above — each additional location is $${MULTI_LOCATION_FEE.Field}/mo on Field and $${MULTI_LOCATION_FEE.Command}/mo on Command.`,
         ],
-        badge: BADGE.field,
+        badge: gateToBadge(FEATURE_GATE.multipleLocations),
       },
     ],
   },
@@ -159,7 +159,7 @@ const FEATURE_GROUPS = [
           "Some jobs are big. Some customers need flexibility. Zerbiq gives you both. Split any invoice into scheduled installments — you set the total, the number of payments, and the due dates. Zerbiq bills each installment automatically, sends payment reminders, and tracks the running balance in real time.",
           "Whether it's a one-time split or a structured monthly plan for a commercial contract, the whole thing runs without you chasing anyone. More customers say yes when yes is easier to afford.",
         ],
-        badge: BADGE.field,
+        badge: gateToBadge(FEATURE_GATE.partialPayments),
       },
       {
         icon: '🔄',
@@ -215,7 +215,7 @@ const FEATURE_GROUPS = [
           "Track every potential customer from first contact to signed deal. See exactly where each lead is in your pipeline, when you last reached out, and what it will take to close them.",
           "Never lose a lead to a forgotten follow-up again.",
         ],
-        badge: BADGE.field,
+        badge: gateToBadge(FEATURE_GATE.leadManagement),
       },
       {
         icon: '📥',
@@ -224,7 +224,7 @@ const FEATURE_GROUPS = [
         desc: [
           "One line of code on your website. That's all it takes to start capturing leads directly into Zerbiq. The form matches your brand, asks the right questions, and drops new leads right into your pipeline — ready to quote.",
         ],
-        badge: BADGE.field,
+        badge: gateToBadge(FEATURE_GATE.leadCaptureForm),
       },
       {
         icon: '⭐',
@@ -302,7 +302,7 @@ const FEATURE_GROUPS = [
           "A lost lead isn't always a dead lead. Zerbiq can automatically follow up with prospects who didn't respond to a quote, customers who haven't booked in 60 days, or anyone who fell out of your pipeline.",
           "Set the sequence once — it runs forever.",
         ],
-        badge: BADGE.cmd,
+        badge: gateToBadge(FEATURE_GATE.followUpSequences),
       },
       {
         icon: '🔔',
@@ -337,7 +337,7 @@ const FEATURE_GROUPS = [
           "Know how long every job really takes. Zerbiq tracks clock-in and clock-out and assigns labor to each job, so timecards and payroll exports are ready when you are.",
           "When you know your hours, you price better and profit more.",
         ],
-        badge: BADGE.core,
+        badge: gateToBadge(FEATURE_GATE.timecards),
       },
       {
         icon: '💰',
@@ -356,7 +356,7 @@ const FEATURE_GROUPS = [
           "Techs clock in from their phone. You see who's on the clock, who's out, and who requested time off — all from one screen. Approve or deny requests with a tap.",
           "No paper timesheets, no payroll guessing.",
         ],
-        badge: BADGE.core,
+        badge: gateToBadge(FEATURE_GATE.attendanceTracking),
       },
       {
         icon: '🤝',
@@ -366,7 +366,7 @@ const FEATURE_GROUPS = [
           "Use subs for the work you don't do in-house. Zerbiq tracks what jobs they completed, how many hours they logged, and what you owe them — separately from your W-2 team.",
           "Clean records for tax time, clear expectations year-round.",
         ],
-        badge: BADGE.field,
+        badge: gateToBadge(FEATURE_GATE.subcontractors),
       },
       {
         icon: '🗺️',
@@ -386,7 +386,7 @@ const FEATURE_GROUPS = [
           "See where your team is in real time — from any phone, no hardware required. Verify stops were made, spot techs who are running behind, and dispatch the nearest available person to an urgent job.",
           "Works with any smartphone your team already carries.",
         ],
-        badge: BADGE.core,
+        badge: gateToBadge(FEATURE_GATE.gpsFieldTracking),
       },
       {
         icon: '🏅',
@@ -407,7 +407,7 @@ const FEATURE_GROUPS = [
           "Know who has the iPad, the gas card, the backpack sprayer. Log asset checkout and return in seconds.",
           "If something goes missing, you'll know exactly who had it last — and so will they.",
         ],
-        badge: BADGE.field,
+        badge: gateToBadge(FEATURE_GATE.assetCheckout),
       },
       {
         icon: '🔐',
@@ -417,7 +417,7 @@ const FEATURE_GROUPS = [
           "Techs log in on their phone with a simple employee ID and 4-digit PIN — no email, no forgotten passwords. Fast at 7 AM when hands are cold and coffee hasn't kicked in.",
           "You control who has access and what they can see.",
         ],
-        badge: BADGE.core,
+        badge: gateToBadge(FEATURE_GATE.employeeIdPin),
       },
       {
         icon: '🚨',
@@ -462,7 +462,7 @@ const FEATURE_GROUPS = [
           "Create and send POs to your suppliers, track delivery status, and match received items to what was ordered. No more verbal orders with no paper trail. No more receiving surprises.",
           "Clean purchasing records that feed directly into your job costs.",
         ],
-        badge: BADGE.core,
+        badge: gateToBadge(FEATURE_GATE.purchaseOrders),
       },
       {
         icon: '🔩',
@@ -492,7 +492,7 @@ const FEATURE_GROUPS = [
           "Oil changes, blade sharpenings, DOT inspections, annual tune-ups — scheduled automatically based on mileage or time intervals. Zerbiq tells you what's coming up, what's overdue, and what's been done.",
           "Your fleet stays road-ready. Your costs stay predictable.",
         ],
-        badge: BADGE.field,
+        badge: gateToBadge(FEATURE_GATE.maintenanceScheduling),
       },
     ],
   },

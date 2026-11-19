@@ -9,7 +9,7 @@ import { PLAN_METADATA, MULTI_LOCATION_FEE, WEEKLY_VISITS_EXPLAINER, ANNUAL_SAVI
 // Plan gates (which plan first unlocks a feature) live in lib/planData.js.
 const PLAN_INCLUDED = {
   Solo: [
-    'Unlimited routes',
+    'Unlimited routes (route management)',
     'Job scheduling & tracking',
     'Recurring jobs',
     'Estimates & quotes',
@@ -25,8 +25,16 @@ const PLAN_INCLUDED = {
     'Review requests (by email)',
     'Mobile team view (any smartphone browser)',
     'Data export',
-    'Route management',
     'Credits & refunds',
+    'Partial payments and payment plans',
+    'Automated late fees',
+    'Purchase orders',
+    'Roles & permissions',
+    'Time tracking & timecards',
+    'Attendance & time off',
+    'GPS field tracking (phone-based, no hardware)',
+    'Employee ID and PIN login',
+    'Employee termination workflow',
     'Holiday Management',
     'Billing Cycles',
     'Parts on order',
@@ -38,13 +46,7 @@ const PLAN_INCLUDED = {
   Core: [
     'Everything in Solo',
     'Unlimited team members',
-    'Roles & permissions',
     'Team messaging (staff-to-staff)',
-    'Attendance & time off',
-    'Time tracking & timecards',
-    'GPS field tracking (phone-based, no hardware)',
-    'Employee ID and PIN login',
-    'Purchase orders',
     assistantQuestionsFeatureLabel('Core'),
   ],
   Field: [
@@ -56,9 +58,7 @@ const PLAN_INCLUDED = {
     'Leads inbox & pipeline',
     'Subcontractor management',
     'Maintenance scheduling',
-    'Partial payments and payment plans',
     'Embeddable lead capture form',
-    'Employee termination workflow',
     'Employee asset checkout',
     `Multiple service locations (+$${MULTI_LOCATION_FEE.Field}/mo per location)`,
     assistantQuestionsFeatureLabel('Field'),
@@ -96,6 +96,8 @@ const PLANS = PLAN_METADATA.map((meta) => ({
 function CheckIcon({ included }) {
   return included ? (
     <svg
+      aria-hidden="true"
+      focusable="false"
       width="16"
       height="16"
       viewBox="0 0 16 16"
@@ -113,6 +115,8 @@ function CheckIcon({ included }) {
     </svg>
   ) : (
     <svg
+      aria-hidden="true"
+      focusable="false"
       width="16"
       height="16"
       viewBox="0 0 16 16"
@@ -147,6 +151,8 @@ export default function PricingCards() {
         }}
       >
         <button
+          type="button"
+          aria-pressed={!annual}
           onClick={() => setAnnual(false)}
           style={{
             background: !annual ? 'var(--color-primary)' : 'var(--color-raised)',
@@ -163,6 +169,8 @@ export default function PricingCards() {
           Monthly
         </button>
         <button
+          type="button"
+          aria-pressed={annual}
           onClick={() => setAnnual(true)}
           style={{
             background: annual ? 'var(--color-primary)' : 'var(--color-raised)',
@@ -180,7 +188,7 @@ export default function PricingCards() {
           }}
         >
           Annual
-          {annual && (
+          {(
             <span
               style={{
                 background: 'rgba(255,255,255,0.2)',
@@ -194,11 +202,9 @@ export default function PricingCards() {
             </span>
           )}
         </button>
-        {!annual && (
-          <span style={{ color: 'var(--color-white-60)', fontSize: 13 }}>
-            → Switch to Annual &amp; get {ANNUAL_SAVINGS_LABEL}
-          </span>
-        )}
+        <span style={{ color: 'var(--color-white-60)', fontSize: 13 }}>
+          {annual ? `Annual billing: ${ANNUAL_SAVINGS_LABEL}` : `Switch to Annual and get ${ANNUAL_SAVINGS_LABEL}`}
+        </span>
       </div>
 
       {/* Weekly visits info box */}
@@ -215,7 +221,7 @@ export default function PricingCards() {
           alignItems: 'flex-start',
         }}
       >
-        <span style={{ fontSize: 16 }}>💡</span>
+        <span aria-hidden="true" style={{ fontSize: 16 }}>💡</span>
         <p
           style={{
             margin: 0,
@@ -243,7 +249,7 @@ export default function PricingCards() {
           alignItems: 'flex-start',
         }}
       >
-        <span style={{ fontSize: 16 }}>🌐</span>
+        <span aria-hidden="true" style={{ fontSize: 16 }}>🌐</span>
         <p
           style={{
             margin: 0,

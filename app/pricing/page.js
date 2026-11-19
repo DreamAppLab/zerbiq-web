@@ -22,7 +22,7 @@ const FAQ = [
   },
   {
     q: 'Can I change plans later?',
-    a: 'Yes — upgrade or downgrade anytime. Changes take effect immediately and are prorated automatically.',
+    a: 'Upgrade anytime. You can move down when your users, locations and stored files fit the smaller plan; the change is prorated.',
   },
   {
     q: 'What is the DIY setup option?',

@@ -45,6 +45,18 @@ function planBlock(body, name) {
 }
 const siteText = SITE.map((f) => [f, read(f)]);
 
+// Text files outside app/components/lib that can reach readers: README.md and anything text in public/.
+function publicTextFiles(root) {
+  const out = [];
+  for (const name of readdirSync(new URL(`../${root}`, import.meta.url))) {
+    const rel = `${root}/${name}`;
+    if (statSync(new URL(`../${rel}`, import.meta.url)).isDirectory()) out.push(...publicTextFiles(rel));
+    else if (/\.(txt|xml|json|md|html|csv|webmanifest)$/i.test(name)) out.push(rel);
+  }
+  return out;
+}
+const OTHER_TEXT = ['README.md', ...publicTextFiles('public')].map((f) => [f, read(f)]);
+
 test('plan facts: prices, weekly visits and annual = 10 months (plans.cjs launch pricing)', () => {
   // plans.cjs PLANS[*]: monthlyFee 39 / 129 / 209 / 349, annualFee 390 / 1290 / 2090 / 3490,
   // weeklyVisits 125 / 350 / 1000 / 2000; Enterprise from $599 a month, quoted.
@@ -78,9 +90,11 @@ test('weekly completed-visits allowance replaces every customer limit', () => {
   // plans.cjs WEEKLY_VISITS_EXPLAINER, word for word
   assert.equal(pd.WEEKLY_VISITS_EXPLAINER, 'Every completed visit counts; skipped and canceled visits don’t. The allowance is judged on your 8-week average, never blocks work and has no per-visit overage fee.');
   const o = pd.WEEKLY_VISITS_OVERAGE_ANSWER;
-  for (const part of ['never blocked', 'no per-visit fee', 'notice', '8 more weeks', 'moves up one plan', 'next billing date', '30 days’ notice', 'above 150%', '12 weeks', 'move back down']) {
+  for (const part of ['We count completed visits per week', 'never blocked', 'no per-visit fee', 'sustained period', 'we will contact you', '30 days’ notice', 'next plan', '12 weeks', 'move back down']) {
     assert.ok(o.includes(part), `overage answer says: ${part}`);
   }
+  // The app has no automatic move-up yet: the move is something we do, never an automatic system behavior
+  assert.ok(!/automatic|owner gets a notice|150%|8 more weeks|billing date/i.test(o), 'no automatic move-up promise');
   assert.deepEqual(pd.WEEKLY_VISITS_FAQ.map((f) => f.q), [
     'Is there a limit on how many customers I can have?', 'What counts toward my weekly visits?', 'What happens if I go above my weekly visits?',
   ]);
@@ -110,7 +124,7 @@ test('no page or component still shows an old price, an old limit or customer-li
     [/ZerbIQ[^.\n]{0,40}unlimited/, 'unlimited ZerbIQ wording'],
     [/\bsixteen? months?\b|last 6 months|recurring route[^.\n]*counts toward/i, 'old counted-customer rule'],
   ];
-  for (const [f, text] of siteText) {
+  for (const [f, text] of [...siteText, ...OTHER_TEXT]) {
     if (f.startsWith('app/admin/')) continue;
     for (const [re, what] of OLD) {
       const hits = text.split('\n').filter((l) => re.test(l));
@@ -404,9 +418,14 @@ test('feature gates match the app: quotes on all plans; fleet, routes and pay on
   for (const k of ['routeIntelligence', 'vehicleTracking', 'equipmentTracking', 'mileageTracking', 'truckInspection', 'commissions']) assert.equal(g[k], 'field', k);
   // Command: performance reviews, incidents, tech performance reports, advanced reports / job costing, priority support
   for (const k of ['performanceReviews', 'incidentTracking', 'techPerformance', 'advancedReports', 'prioritySupport']) assert.equal(g[k], 'cmd', k);
-  // Leads inbox stays Field and up, team messaging Core and up
+  // Leads inbox stays Field and up, team messaging and "unlimited team members" Core and up
   assert.equal(g.leadManagement, 'field');
   assert.equal(g.teamMessaging, 'core');
+  assert.equal(g.unlimitedUsers, 'core');
+  // plans.cjs: team, timecards, attendance are 'solo'; purchaseOrders -> inventory, paymentPlans and lateFees -> invoicing are 'solo'
+  for (const k of ['rolesPermissions', 'timecards', 'attendanceTracking', 'timeOff', 'employeeIdPin', 'gpsFieldTracking', 'employeeTermination', 'purchaseOrders', 'partialPayments', 'lateFees']) assert.equal(g[k], 'all', k);
+  // still Field
+  for (const k of ['assetCheckout', 'subcontractors', 'maintenanceScheduling', 'leadCaptureForm', 'multipleLocations']) assert.equal(g[k], 'field', k);
 });
 
 test('every plan card lists each feature on the plan its gate says, and on no lower plan', () => {
@@ -421,6 +440,8 @@ test('every plan card lists each feature on the plan its gate says, and on no lo
       'Team messaging': 'teamMessaging', 'Time tracking & timecards': 'timecards', 'Purchase orders': 'purchaseOrders',
       'Employee asset checkout': 'assetCheckout', 'Partial payments': 'partialPayments', 'Embeddable lead capture form': 'leadCaptureForm',
       'GPS field tracking': 'gpsFieldTracking', 'QuickBooks Online sync': 'quickbooksSync',
+      'Roles & permissions': 'rolesPermissions', 'Attendance & time off': 'attendanceTracking', 'Employee ID and PIN login': 'employeeIdPin',
+      'Employee termination workflow': 'employeeTermination', 'Automated late fees': 'lateFees', 'Unlimited team members': 'unlimitedUsers',
     }],
     'app/compare/page.js': ['const PLAN_CARDS = [', {
       'Quotes & estimates': 'estimatesQuotes', 'Quote approval in portal': 'estimatesQuotes',
@@ -429,6 +450,9 @@ test('every plan card lists each feature on the plan its gate says, and on no lo
       'Performance reviews': 'performanceReviews', 'Incident tracking': 'incidentTracking', 'Tech performance reports': 'techPerformance',
       'Advanced reports & job costing': 'advancedReports', 'Team messaging': 'teamMessaging', 'Priority support': 'prioritySupport',
       'Subcontractor management': 'subcontractors', 'Maintenance calendar': 'maintenanceScheduling', 'In-app messaging': 'inAppMessaging',
+      'Payment plans': 'partialPayments', 'Automated late fees': 'lateFees', 'Purchase orders': 'purchaseOrders', 'Roles & permissions': 'rolesPermissions',
+      'Time tracking & timecards': 'timecards', 'Attendance & time off': 'attendanceTracking', 'GPS field tracking': 'gpsFieldTracking',
+      'Employee ID & PIN login': 'employeeIdPin', 'Employee termination workflow': 'employeeTermination', 'Unlimited users': 'unlimitedUsers',
     }],
   };
   for (const [file, [start, expectations]] of Object.entries(checks)) {
@@ -463,7 +487,7 @@ test('/compare rows and /features badges follow the gates for every moved featur
 });
 
 // When the site has been built (npm run build), scan the real rendered pages too.
-test('built pages (when present) show the new prices and no old price or customer limit', { skip: !existsSync(new URL('../.next/server/app/pricing.html', import.meta.url)) }, () => {
+test('built pages (when present) show the new prices and no old price or customer limit', { skip: !process.env.CI && !existsSync(new URL('../.next/server/app/pricing.html', import.meta.url)) }, () => {
   const strip = (h) => h.replace(/<!--[\s\S]*?-->/g, '').replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&#x27;|&#39;/g, "'").replace(/\$ /g, '$').replace(/\s+/g, ' ');
   const page = (n) => strip(readFileSync(new URL(`../.next/server/app/${n}.html`, import.meta.url), 'utf8'));
   const pricing = page('pricing');
@@ -475,4 +499,29 @@ test('built pages (when present) show the new prices and no old price or custome
     const text = page(n);
     for (const bad of ['39.99', '$119', '$169', 'counted customers', 'customer limit?', '2,500+']) assert.ok(!text.includes(bad), `/${n} does not show: ${bad}`);
   }
+});
+
+test('no gated card hardcodes a plan badge: badges come from gateToBadge(FEATURE_GATE.x)', () => {
+  for (const f of ['app/features/page.js', 'lib/homeFeatures.js']) {
+    const hits = read(f).split('\n').filter((l) => /badge:\s*BADGE\.(core|field|cmd|ent)\b/.test(l));
+    assert.deepEqual(hits, [], `${f}: use gateToBadge(FEATURE_GATE.<key>) for plan-gated cards`);
+  }
+});
+
+test('compare table is accessible: captions, row and group headers, hidden Included / Not included text', () => {
+  const c = read('app/compare/page.js');
+  for (const t of ['<caption', 'scope="row"', 'scope="rowgroup"', 'scope="col"', 'Not included', "Fragment key={`group-${gi}`}", 'aria-hidden="true"']) assert.ok(c.includes(t), `compare has ${t}`);
+  const cards = read('components/PricingCards.js');
+  assert.ok(cards.includes('aria-pressed={annual}') && cards.includes('aria-pressed={!annual}'), 'toggle buttons use aria-pressed');
+  assert.ok((cards.match(/aria-hidden="true"/g) || []).length >= 4, 'decorative icons are hidden from screen readers');
+});
+
+test('the "change plans" answer matches what the app allows', () => {
+  assert.ok(read('app/pricing/page.js').includes('Upgrade anytime. You can move down when your users, locations and stored files fit the smaller plan; the change is prorated.'));
+});
+
+test('Solo card does not list routes twice', () => {
+  const body = read('components/PricingCards.js');
+  const solo = planBlock(body.slice(body.indexOf('const PLAN_INCLUDED = {')), 'Solo');
+  assert.equal(solo.split('\n').filter((l) => /route/i.test(l)).length, 1, 'one routes line on Solo');
 });
