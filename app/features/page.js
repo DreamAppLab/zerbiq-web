@@ -91,7 +91,7 @@ const FEATURE_GROUPS = [
         title: 'Team Management',
         screenshot: '05-team-management.png',
         desc: [
-          "Know who's working, what they're assigned to, and how they're doing — without asking. Every team member has a profile, a route, a truck, and a skill set.",
+          "Know who's working, what they're assigned to, and how they're doing — without asking. Every team member has a profile, a route, and a skill set.",
           "Add someone new in minutes. See their whole day at a glance.",
         ],
         badge: gateToBadge(FEATURE_GATE.rolesPermissions),
@@ -309,7 +309,7 @@ const FEATURE_GROUPS = [
         title: 'Automated Reminders and Notifications',
         screenshot: '23-automated-reminders.png',
         desc: [
-          "Beyond customer messages — Zerbiq keeps your whole operation on track with internal alerts. Low inventory? You'll know. A vehicle service is due? Flagged. A job wasn't completed by end of day? Your manager gets notified.",
+          "Beyond customer messages — Zerbiq keeps your whole operation on track with internal alerts. Low inventory? You'll know. A job wasn't completed by end of day? Your manager gets notified.",
           "The system watches so you don't have to.",
         ],
         badge: BADGE.all,
@@ -460,7 +460,7 @@ const FEATURE_GROUPS = [
         screenshot: '36-purchase-orders.png',
         desc: [
           "Create and send POs to your suppliers, track delivery status, and match received items to what was ordered. No more verbal orders with no paper trail. No more receiving surprises.",
-          "Clean purchasing records that feed directly into your job costs.",
+          "Clean purchasing records that stay organized by supplier and order.",
         ],
         badge: gateToBadge(FEATURE_GATE.purchaseOrders),
       },

@@ -525,3 +525,25 @@ test('Solo card does not list routes twice', () => {
   const solo = planBlock(body.slice(body.indexOf('const PLAN_INCLUDED = {')), 'Solo');
   assert.equal(solo.split('\n').filter((l) => /route/i.test(l)).length, 1, 'one routes line on Solo');
 });
+
+test('every FEATURE_GATE key a page reads exists, and every gate key is used by a page', () => {
+  const used = new Set();
+  for (const f of ['app/compare/page.js', 'app/features/page.js', 'lib/homeFeatures.js']) {
+    for (const [, k] of read(f).matchAll(/FEATURE_GATE\.(\w+)/g)) {
+      assert.ok(k in pd.FEATURE_GATE, `${f} reads FEATURE_GATE.${k}, which does not exist`);
+      used.add(k);
+    }
+  }
+  const unused = Object.keys(pd.FEATURE_GATE).filter((k) => !used.has(k));
+  assert.deepEqual(unused, [], 'gate keys no page uses (delete them, or the app has no such feature)');
+  assert.equal(pd.FEATURE_GATE.routeProfitability, undefined, 'the app has no route profitability report');
+});
+
+test('card copy does not promise features from a higher plan', () => {
+  const all = read('lib/homeFeatures.js') + read('app/features/page.js');
+  for (const bad of ['Build optimized routes', 'A vehicle service is due? Flagged', 'a route, a truck', 'feed directly into your job costs', 'vehicle costs per job']) {
+    assert.ok(!all.includes(bad), `no: ${bad}`);
+  }
+  const core = read('app/compare/page.js');
+  assert.ok(!/name: 'Core'[\s\S]*?features: \[[^\]]*Team management/.test(core), 'Team management is not a Core add');
+});
