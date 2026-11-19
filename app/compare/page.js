@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, ACTIVE_CUSTOMER_DEFINITION, AI_ASSISTANT_NAME, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel, WHITE_GLOVE_FEE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, WEEKLY_VISITS_EXPLAINER, WEEKLY_VISITS_AVERAGE_WEEKS, weeklyVisitsNumberLabel, enterprisePriceLabel, planCapacityShortLabel, assistantQuestionsFeatureLabel, TOP_SELF_SERVE_WEEKLY_VISITS, AI_ASSISTANT_NAME, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel, WHITE_GLOVE_FEE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
 import PaymentsStayYours from '@/components/PaymentsStayYours';
 import { pageMetadata } from '@/lib/seo.mjs';
 
@@ -15,12 +15,12 @@ export const metadata = pageMetadata({
 // Plan header data for the comparison table (derived from PLAN_METADATA).
 const PLANS = PLAN_METADATA.map((p) => ({
   name: p.name,
-  price: p.monthlyPrice != null ? `$${formatPlanPrice(p.monthlyPrice)}` : 'Custom',
+  price: p.monthlyPrice != null ? `$${formatPlanPrice(p.monthlyPrice)}` : enterprisePriceLabel(),
   href: p.ctaHref,
   cta: p.cta,
   isExternal: p.ctaExternal,
   popular: p.popular,
-  subtitle: `${p.activeCustomers} counted customers`,
+  subtitle: p.subtitle,
 }));
 
 // ── Comparison table feature groups ──────────────────────────────────────────
@@ -31,12 +31,13 @@ const PLANS = PLAN_METADATA.map((p) => ({
 // Plan column order: [Solo, Core, Field, Command, Enterprise]
 const FEATURE_GROUPS = [
   {
-    group: 'Customer Limits',
+    group: 'Plan Limits',
     rows: [
+      { label: `Completed visits a week (${WEEKLY_VISITS_AVERAGE_WEEKS}-week average) ⁵`, values: PLAN_METADATA.map((p) => weeklyVisitsNumberLabel(p.name)) },
       { label: 'Users included',          values: PLAN_METADATA.map((p) => (p.users != null ? String(p.users) : 'Unlimited')) },
-      { label: 'Counted customers',       values: PLAN_METADATA.map((p) => p.activeCustomers) },
-      { label: 'ZerbIQ questions per month', values: PLAN_METADATA.map((p) => assistantQuestionsLabel(p.name)) },
       { label: 'Photo & video storage included ⁴', values: PLAN_METADATA.map((p) => storageIncludedLabel(p.name)) },
+      { label: 'About how many photos or videos (approximate) ⁴', values: PLAN_METADATA.map((p) => planCapacityShortLabel(p.name).replace(/ \(approximate\)$/, '') || 'No storage limit') },
+      { label: 'ZerbIQ questions per month', values: PLAN_METADATA.map((p) => assistantQuestionsLabel(p.name)) },
       { label: 'White-Glove Onboarding (one time)', values: PLAN_METADATA.map((p) => (WHITE_GLOVE_FEE[p.name] != null ? `$${WHITE_GLOVE_FEE[p.name]}` : 'Arranged with us')) },
       { label: 'Unlimited routes',        values: gateToValues(FEATURE_GATE.routeManagement) },
       { label: 'Unlimited team members',  values: gateToValues(FEATURE_GATE.rolesPermissions) },
@@ -54,7 +55,7 @@ const FEATURE_GROUPS = [
       { label: 'Missed stop tracking',                       values: gateToValues(FEATURE_GATE.missedStopTracking) },
       { label: 'Holiday Management',                         values: gateToValues(FEATURE_GATE.holidayManagement) },
       { label: 'Billing Cycles',                             values: gateToValues(FEATURE_GATE.billingCycles) },
-      { label: 'Daily Truck Inspection and Checklists',      values: gateToValues(FEATURE_GATE.truckInspection) },
+      { label: 'Daily truck inspections and checklists',      values: gateToValues(FEATURE_GATE.truckInspection) },
     ],
   },
   {
@@ -64,7 +65,7 @@ const FEATURE_GROUPS = [
       { label: 'Transaction & bank register',                      values: gateToValues(FEATURE_GATE.transactionRegister) },
       { label: 'Credits & refunds',                                values: gateToValues(FEATURE_GATE.creditsRefunds) },
       { label: 'Partial payments and payment plans',               values: gateToValues(FEATURE_GATE.partialPayments) },
-      { label: 'Estimates & quotes',                               values: gateToValues(FEATURE_GATE.estimatesQuotes) },
+      { label: 'Quotes & estimates (create, send, approve)',      values: gateToValues(FEATURE_GATE.estimatesQuotes) },
       { label: 'Online payment processing (card/ACH) ²',          values: gateToValues(FEATURE_GATE.onlinePayments) },
       { label: 'Purchase orders',                                  values: gateToValues(FEATURE_GATE.purchaseOrders) },
       { label: 'QuickBooks Online sync',                            values: gateToValues(FEATURE_GATE.quickbooksSync) },
@@ -108,7 +109,7 @@ const FEATURE_GROUPS = [
       { label: 'Job photos & digital signatures',                values: gateToValues(FEATURE_GATE.jobPhotos) },
       { label: 'Chemical & material logs',                       values: gateToValues(FEATURE_GATE.chemicalLogs) },
       { label: 'GPS Field Tracking (phone-based, no hardware)',  values: gateToValues(FEATURE_GATE.gpsFieldTracking) },
-      { label: 'Route Intelligence (AI stop optimization)',      values: gateToValues(FEATURE_GATE.routeIntelligence) },
+      { label: 'Route optimization & Rebalance all routes (Route Intelligence)', values: gateToValues(FEATURE_GATE.routeIntelligence) },
       { label: 'Parts on Order',                                 values: gateToValues(FEATURE_GATE.partsOnOrder) },
     ],
   },
@@ -119,9 +120,11 @@ const FEATURE_GROUPS = [
       { label: 'Timecards & time tracking',         values: gateToValues(FEATURE_GATE.timecards) },
       { label: 'Attendance tracking',               values: gateToValues(FEATURE_GATE.attendanceTracking) },
       { label: 'Time off & PTO tracking',           values: gateToValues(FEATURE_GATE.timeOff) },
+      { label: 'Team messaging (staff-to-staff)',   values: gateToValues(FEATURE_GATE.teamMessaging) },
+      { label: 'Commissions & per-job team pay',    values: gateToValues(FEATURE_GATE.commissions) },
       { label: 'Performance reviews',               values: gateToValues(FEATURE_GATE.performanceReviews) },
       { label: 'Incident tracking',                 values: gateToValues(FEATURE_GATE.incidentTracking) },
-      { label: 'Vehicle & equipment tracking',      values: gateToValues(FEATURE_GATE.vehicleTracking) },
+      { label: 'Vehicles, trailers, equipment & tools', values: gateToValues(FEATURE_GATE.vehicleTracking) },
       { label: 'Employee termination workflow',     values: gateToValues(FEATURE_GATE.employeeTermination) },
       { label: 'Subcontractor management',          values: gateToValues(FEATURE_GATE.subcontractors) },
       { label: 'Employee ID and PIN Login',         values: gateToValues(FEATURE_GATE.employeeIdPin) },
@@ -143,6 +146,7 @@ const FEATURE_GROUPS = [
       { label: 'Revenue reports',                values: gateToValues(FEATURE_GATE.revenueReports) },
       { label: 'Job completion reports',         values: gateToValues(FEATURE_GATE.jobCompletionReports) },
       { label: 'Tech performance reports',       values: gateToValues(FEATURE_GATE.techPerformance) },
+      { label: 'Advanced reports & job costing', values: gateToValues(FEATURE_GATE.advancedReports) },
       { label: 'Route profitability reports',    values: gateToValues(FEATURE_GATE.routeProfitability) },
       { label: 'Customer retention reports',     values: gateToValues(FEATURE_GATE.customerRetention) },
       { label: 'Overdue invoice aging',          values: gateToValues(FEATURE_GATE.overdueInvoiceAging) },
@@ -167,9 +171,9 @@ const FEATURE_GROUPS = [
 ];
 
 // ── Plan summary cards (shown above the comparison table) ─────────────────────
-// Price and customer count come from PLAN_METADATA.
+// Price and weekly visits come from PLAN_METADATA. The ZerbIQ line is always the LAST feature of a card.
 const planPrice = (name) => PLANS.find((p) => p.name === name).price + (name === 'Enterprise' ? '' : '/mo');
-const planCustomers = (name) => PLANS.find((p) => p.name === name).subtitle;
+const planVisits = (name) => PLANS.find((p) => p.name === name).subtitle;
 
 // Core features that are not yet in Core are not listed here since Core says
 // "all plans include X" — they're in the table above.
@@ -179,15 +183,16 @@ const PLAN_CARDS = [
     label: '— owner-operator',
     color: '#f59e0b',
     price: planPrice('Solo'),
-    customers: planCustomers('Solo'),
+    visits: planVisits('Solo'),
     features: [
       '1 user', 'Customer portal', 'Online payments (card & ACH)', 'QuickBooks Online sync',
+      'Quotes & estimates', 'Quote approval in portal',
       'Route management', 'Job scheduling', 'Invoicing & payments', 'Customer CRM',
       'Email notifications', 'Appointment reminders', 'Holiday management', 'Billing cycles',
-      'Custom branding', 'Reports & analytics', 'Data export', 'Mileage tracking',
+      'Custom branding', 'Reports & analytics', 'Data export',
       'Parts on order', 'Credits & refunds', 'Materials & inventory', 'Schedule & dispatch',
       'Light & dark mode', 'Personalized shortcuts bar', 'Mobile team view (smartphone browser)',
-      AI_ASSISTANT_NAME,
+      assistantQuestionsFeatureLabel('Solo'),
     ],
   },
   {
@@ -195,13 +200,12 @@ const PLAN_CARDS = [
     label: '— everything in Solo, plus',
     color: '#f97316',
     price: planPrice('Core'),
-    customers: planCustomers('Core'),
+    visits: planVisits('Core'),
     features: [
-      'Unlimited users', 'Team management', 'Roles & permissions',
-      'GPS field tracking', 'Truck inspection', 'Employee ID & PIN login',
+      'Unlimited users', 'Team management', 'Roles & permissions', 'Team messaging',
+      'GPS field tracking', 'Employee ID & PIN login',
       'Time tracking & timecards', 'Attendance & time off', 'Purchase orders',
-      'Performance reviews', 'Incident tracking', 'Vehicle & equipment tracking',
-      'Tech performance reports',
+      assistantQuestionsFeatureLabel('Core'),
     ],
   },
   {
@@ -209,13 +213,15 @@ const PLAN_CARDS = [
     label: '— everything in Core, plus',
     color: '#3b82f6',
     price: planPrice('Field'),
-    customers: planCustomers('Field'),
+    visits: planVisits('Field'),
     features: [
-      'Estimates & quotes', 'Quote approval in portal', 'Route intelligence',
-      'Lead management', 'Payment plans', 'Employee asset checkout',
+      'Route optimization & Rebalance all routes', 'Vehicles, trailers, equipment, tools & mileage',
+      'Daily truck inspections', 'Commissions & per-job team pay',
+      'Leads inbox & pipeline', 'Payment plans', 'Employee asset checkout',
       'Subcontractor management', 'Maintenance calendar',
       `Multiple service locations (+$${MULTI_LOCATION_FEE.Field}/mo per location)`, 'Lead capture form',
       'Employee termination workflow',
+      assistantQuestionsFeatureLabel('Field'),
     ],
   },
   {
@@ -223,12 +229,14 @@ const PLAN_CARDS = [
     label: '— everything in Field, plus',
     color: '#10b981',
     price: planPrice('Command'),
-    customers: planCustomers('Command'),
+    visits: planVisits('Command'),
     features: [
+      'Performance reviews', 'Incident tracking', 'Tech performance reports', 'Advanced reports & job costing',
       'Automations engine',
       'Follow-up sequences', 'In-app messaging', 'Messaging in portal',
       'Automated late fees', 'Priority support',
       `Multiple service locations (+$${MULTI_LOCATION_FEE.Command}/mo per location)`,
+      assistantQuestionsFeatureLabel('Command'),
     ],
   },
   {
@@ -236,8 +244,11 @@ const PLAN_CARDS = [
     label: '— everything in Command, plus',
     color: '#8b5cf6',
     price: planPrice('Enterprise'),
-    customers: planCustomers('Enterprise'),
-    features: ['Unlimited customers', 'Dedicated onboarding', 'Custom integrations', 'Direct support'],
+    visits: planVisits('Enterprise'),
+    features: [
+      'Dedicated onboarding', 'Custom integrations', 'Direct support',
+      assistantQuestionsFeatureLabel('Enterprise'),
+    ],
   },
 ];
 
@@ -406,7 +417,7 @@ export default function ComparePage() {
             </p>
           </div>
 
-          {/* Customer limit info box */}
+          {/* Weekly visits info box */}
           <div
             style={{
               background: 'rgba(61,92,255,0.1)',
@@ -419,8 +430,8 @@ export default function ComparePage() {
             }}
           >
             <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 14, margin: 0, lineHeight: 1.65 }}>
-              <strong style={{ color: '#fff' }}>What counts toward my customer limit?</strong>{' '}
-              {ACTIVE_CUSTOMER_DEFINITION}
+              <strong style={{ color: '#fff' }}>No customer limit on any plan.</strong>{' '}
+              Your plan is sized by the completed visits you do each week. {WEEKLY_VISITS_EXPLAINER}
             </p>
           </div>
         </div>
@@ -484,7 +495,7 @@ export default function ComparePage() {
                 <div className="plan-card-name" style={{ fontWeight: 900, fontSize: 20, color: plan.color, marginBottom: 2 }}>{plan.name}</div>
                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginBottom: 14, lineHeight: 1.4 }}>{plan.label}</div>
                 <div className="plan-card-price" style={{ fontWeight: 900, fontSize: 26, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>{plan.price}</div>
-                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', paddingBottom: 14, marginBottom: 14, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>{plan.customers}</div>
+                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', paddingBottom: 14, marginBottom: 14, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>{plan.visits}</div>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6, flex: 1 }}>
                   {plan.features.map((f) => (
                     <li key={f} className="plan-feature-item" style={{ fontSize: 13, color: '#fff', display: 'flex', gap: 6, alignItems: 'flex-start', lineHeight: 1.45 }}>
@@ -594,7 +605,7 @@ export default function ComparePage() {
                       }}
                     >
                       {plan.price}
-                      {plan.price !== 'Custom' && (
+                      {plan.name !== 'Enterprise' && (
                         <span style={{ fontSize: 12 }}>/mo</span>
                       )}
                     </div>
@@ -720,7 +731,7 @@ export default function ComparePage() {
                         </a>
                         {plan.name === 'Enterprise' && (
                           <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', lineHeight: 1.55, margin: '12px 0 0', padding: '0 4px' }}>
-                            Managing 2,500+ customers? Ask about custom pricing.
+                            Above {TOP_SELF_SERVE_WEEKLY_VISITS.toLocaleString('en-US')} completed visits a week? Ask about Enterprise pricing.
                           </p>
                         )}
                       </>
@@ -776,6 +787,9 @@ export default function ComparePage() {
           </p>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
             ⁴ Enterprise storage is unlimited. {STORAGE_PACKS_SENTENCE} {STORAGE_ASSUMPTION_NOTE}
+          </p>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '8px 0 0', lineHeight: 1.75 }}>
+            ⁵ {WEEKLY_VISITS_EXPLAINER} Above Command&apos;s allowance, Enterprise is quoted.
           </p>
           <div style={{ marginTop: 32 }}>
             <PaymentsStayYours maxWidth={1100} />

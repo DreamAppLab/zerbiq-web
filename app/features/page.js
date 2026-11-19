@@ -2,7 +2,7 @@ import { PRIMARY_CTA_LABEL } from '@/lib/siteConfig.mjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, PAYMENT_PROCESSORS_NOTE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, AI_ASSISTANT_NAME, ROUTE_INTELLIGENCE_DESCRIPTION, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
+import { BADGE, FEATURE_GATE, gateToBadge, PAYMENT_PROCESSORS_NOTE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, AI_ASSISTANT_NAME, ROUTE_INTELLIGENCE_DESCRIPTION, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
 import { pageMetadata } from '@/lib/seo.mjs';
 
 export const metadata = pageMetadata({
@@ -149,7 +149,7 @@ const FEATURE_GROUPS = [
           "Send a professional quote in minutes, right from the job site or your desk. Customers approve online with one tap.",
           "Once approved, the job is created automatically — no double entry, no lost emails, no \"did they ever get back to you?\"",
         ],
-        badge: BADGE.field,
+        badge: gateToBadge(FEATURE_GATE.estimatesQuotes),
       },
       {
         icon: '💵',
@@ -203,7 +203,7 @@ const FEATURE_GROUPS = [
         desc: [
           "Every plan includes a customer portal — a secure, branded page where your customers sign in with a one-time link or code (no password required) and see everything about their account: service history with visit photos, upcoming jobs, invoices, service requests, and contact preferences.",
           `Customers pay invoices online by card or bank (ACH) directly through the portal — once you connect a payment processor account of your own (${PAYMENT_PROCESSORS_NOTE}). The portal has no add-ons and no upcharges.`,
-          "On Field plans and above, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging. Customers who can self-serve become customers who stay.",
+          "On every plan, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging. Customers who can self-serve become customers who stay.",
         ],
         badge: BADGE.all,
       },
@@ -331,13 +331,22 @@ const FEATURE_GROUPS = [
     features: [
       {
         icon: '⏱️',
-        title: 'Time Tracking and Job Costing',
+        title: 'Time Tracking and Timecards',
         screenshot: '25-time-tracking.png',
         desc: [
-          "Know what a job actually costs — not just what you charged. Zerbiq tracks clock-in and clock-out, assigns labor to each job, and shows you your real margin after labor and materials.",
-          "When you know your numbers, you price better and profit more.",
+          "Know how long every job really takes. Zerbiq tracks clock-in and clock-out and assigns labor to each job, so timecards and payroll exports are ready when you are.",
+          "When you know your hours, you price better and profit more.",
         ],
         badge: BADGE.core,
+      },
+      {
+        icon: '💰',
+        title: 'Commissions and Per-Job Team Pay',
+        desc: [
+          "Pay your team by commission or by the job. Set the rate once and Zerbiq tracks what each person earned on every completed job.",
+          "It records pay for your own payroll. It is not a payroll service.",
+        ],
+        badge: gateToBadge(FEATURE_GATE.commissions),
       },
       {
         icon: '🗓️',
@@ -367,7 +376,7 @@ const FEATURE_GROUPS = [
           "Every route has miles. Every mile has value. Zerbiq logs odometer readings at clock-in and clock-out, calculates reimbursable mileage at the IRS rate, and gives you a clean monthly report.",
           "No apps to install, no logs to maintain.",
         ],
-        badge: BADGE.all,
+        badge: gateToBadge(FEATURE_GATE.mileageTracking),
       },
       {
         icon: '📍',
@@ -387,7 +396,7 @@ const FEATURE_GROUPS = [
           "Give your team real feedback backed by real data. Customer ratings, completion rates, punctuality, job quality — Zerbiq has the numbers. Document reviews, set goals, and recognize your top performers.",
           "Build a team that wants to stay.",
         ],
-        badge: BADGE.core,
+        badge: gateToBadge(FEATURE_GATE.performanceReviews),
       },
       {
         icon: '📦',
@@ -418,7 +427,7 @@ const FEATURE_GROUPS = [
           "Document workplace incidents the moment they happen. Safety issue, vehicle damage, customer complaint, equipment failure — log it with details, assign a follow-up, and track resolution.",
           "Creates the paper trail you need if anything escalates.",
         ],
-        badge: BADGE.core,
+        badge: gateToBadge(FEATURE_GATE.incidentTracking),
       },
       {
         icon: '🚛',
@@ -428,7 +437,7 @@ const FEATURE_GROUPS = [
           "Before techs hit the road, they run through a digital inspection on their phone — tires, lights, fluid levels, equipment secured. Takes 90 seconds. Creates a timestamped record.",
           "Catches problems before they become breakdowns or liabilities.",
         ],
-        badge: BADGE.core,
+        badge: gateToBadge(FEATURE_GATE.truckInspection),
       },
     ],
   },
@@ -473,7 +482,7 @@ const FEATURE_GROUPS = [
           "Your equipment is one of your biggest investments. Track every piece — mowers, blowers, trailers, pressure washers — with service history, current condition, and assignment.",
           "Know what's in use, what needs repair, and what's due for maintenance before something breaks.",
         ],
-        badge: BADGE.core,
+        badge: gateToBadge(FEATURE_GATE.equipmentTracking),
       },
       {
         icon: '🔧',
@@ -498,17 +507,26 @@ const FEATURE_GROUPS = [
           "Let the math do the driving. " + ROUTE_INTELLIGENCE_DESCRIPTION,
           "Smarter routing, lower costs, more jobs per day.",
         ],
-        badge: BADGE.field,
+        badge: gateToBadge(FEATURE_GATE.routeIntelligence),
       },
       {
         icon: '📈',
         title: 'Reports and Analytics',
         screenshot: '41-reports-analytics.png',
         desc: [
-          "Ten reporting tabs that actually tell you something useful. Revenue by service, job costing by tech, receivables aging, mileage by route, review conversion rates — the numbers that run your business, organized and ready.",
+          "A dashboard and reporting tabs that actually tell you something useful. Revenue by service, receivables aging, review conversion rates — the numbers that run your business, organized and ready.",
           "Export any report to CSV or PDF in one click.",
         ],
         badge: BADGE.all,
+      },
+      {
+        icon: '🧮',
+        title: 'Advanced Reports and Job Costing',
+        desc: [
+          "Know what a job actually costs, not just what you charged. See your real margin after labor and materials, tech performance reports, and custom reports.",
+          "When you know your numbers, you price better and profit more.",
+        ],
+        badge: gateToBadge(FEATURE_GATE.advancedReports),
       },
       {
         icon: '📤',
