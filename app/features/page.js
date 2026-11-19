@@ -52,7 +52,7 @@ const FEATURE_GROUPS = [
         title: 'Route Management',
         screenshot: '01-route-management.png',
         desc: [
-          "Stop rebuilding your route from scratch every week. Zerbiq organizes your stops into named, recurring routes — assigned to a tech, a truck, and a schedule. Add a new customer and they drop right into the right route.",
+          "Stop rebuilding your route from scratch every week. Zerbiq organizes your stops into named, recurring routes — assigned to a tech and a schedule. Add a new customer and they drop right into the right route.",
           "Drag to reorder. Skip a stop, bump it, or mark it done from anywhere. Your whole operation runs on the same list, in real time.",
         ],
         badge: BADGE.all,

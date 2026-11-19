@@ -541,7 +541,7 @@ test('every FEATURE_GATE key a page reads exists, and every gate key is used by 
 
 test('card copy does not promise features from a higher plan', () => {
   const all = read('lib/homeFeatures.js') + read('app/features/page.js');
-  for (const bad of ['Build optimized routes', 'A vehicle service is due? Flagged', 'a route, a truck', 'feed directly into your job costs', 'vehicle costs per job']) {
+  for (const bad of ['Build optimized routes', 'A vehicle service is due? Flagged', 'a route, a truck', 'a tech, a truck', 'feed directly into your job costs', 'vehicle costs per job']) {
     assert.ok(!all.includes(bad), `no: ${bad}`);
   }
   const core = read('app/compare/page.js');
