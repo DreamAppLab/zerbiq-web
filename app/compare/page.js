@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import { Fragment } from 'react';
 import Link from 'next/link';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, WEEKLY_VISITS_EXPLAINER, WEEKLY_VISITS_AVERAGE_WEEKS, weeklyVisitsNumberLabel, enterprisePriceLabel, planCapacityShortLabel, assistantQuestionsFeatureLabel, TOP_SELF_SERVE_WEEKLY_VISITS, AI_ASSISTANT_NAME, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel, WHITE_GLOVE_FEE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
+import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, WEEKLY_VISITS_EXPLAINER, weeklyVisitsNumberLabel, enterprisePriceLabel, planCapacityShortLabel, assistantQuestionsFeatureLabel, TOP_SELF_SERVE_WEEKLY_VISITS, AI_ASSISTANT_NAME, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel, WHITE_GLOVE_FEE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
 import PaymentsStayYours from '@/components/PaymentsStayYours';
 import { pageMetadata } from '@/lib/seo.mjs';
 
@@ -34,7 +34,7 @@ const FEATURE_GROUPS = [
   {
     group: 'Plan Limits',
     rows: [
-      { label: `Completed visits a week (${WEEKLY_VISITS_AVERAGE_WEEKS}-week average) ⁵`, values: PLAN_METADATA.map((p) => weeklyVisitsNumberLabel(p.name)) },
+      { label: 'Completed visits a week ⁵', values: PLAN_METADATA.map((p) => weeklyVisitsNumberLabel(p.name)) },
       { label: 'Users included',          values: PLAN_METADATA.map((p) => (p.users != null ? String(p.users) : 'Unlimited')) },
       { label: 'Photo & video storage included ⁴', values: PLAN_METADATA.map((p) => storageIncludedLabel(p.name)) },
       { label: 'About how many photos or videos (approximate) ⁴', values: PLAN_METADATA.map((p) => planCapacityShortLabel(p.name).replace(/ \(approximate\)$/, '') || 'No storage limit') },

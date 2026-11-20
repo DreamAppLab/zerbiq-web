@@ -57,6 +57,8 @@ function publicTextFiles(root) {
 }
 const OTHER_TEXT = ['README.md', ...publicTextFiles('public')].map((f) => [f, read(f)]);
 
+const RULE = 'If your company completes more than 150% of your plan’s weekly visits in each of 4 weeks in a row, we move your plan up to the next plan. We email the owner first, and the new plan starts 30 days after that notice. Your work is never blocked and there is no per-visit overage fee.';
+
 test('plan facts: prices, weekly visits and annual = 10 months (plans.cjs launch pricing)', () => {
   // plans.cjs PLANS[*]: monthlyFee 39 / 129 / 209 / 349, annualFee 390 / 1290 / 2090 / 3490,
   // weeklyVisits 125 / 350 / 1000 / 2000; Enterprise from $599 a month, quoted.
@@ -78,23 +80,21 @@ test('plan facts: prices, weekly visits and annual = 10 months (plans.cjs launch
 
 test('weekly completed-visits allowance replaces every customer limit', () => {
   assert.deepEqual(pd.WEEKLY_VISITS, { Solo: 125, Core: 350, Field: 1000, Command: 2000, Enterprise: null });
-  assert.equal(pd.WEEKLY_VISITS_AVERAGE_WEEKS, 8);
   assert.deepEqual(['Solo', 'Core', 'Field', 'Command', 'Enterprise'].map(pd.weeklyVisitsLabel), [
-    '125 completed visits a week (8-week average)',
-    '350 completed visits a week (8-week average)',
-    '1,000 completed visits a week (8-week average)',
-    '2,000 completed visits a week (8-week average)',
+    '125 completed visits a week',
+    '350 completed visits a week',
+    '1,000 completed visits a week',
+    '2,000 completed visits a week',
     'More than 2,000 completed visits a week (quoted)',
   ]);
   assert.deepEqual(pd.PLAN_METADATA.map((p) => p.subtitle), ['Solo', 'Core', 'Field', 'Command', 'Enterprise'].map(pd.weeklyVisitsLabel));
   // plans.cjs WEEKLY_VISITS_EXPLAINER, word for word
-  assert.equal(pd.WEEKLY_VISITS_EXPLAINER, 'Every completed visit counts; skipped and canceled visits don’t. The allowance is judged on your 8-week average, never blocks work and has no per-visit overage fee.');
+  assert.equal(pd.WEEKLY_VISITS_EXPLAINER, 'Every completed visit counts; skipped and canceled visits don’t. ' + RULE);
   const o = pd.WEEKLY_VISITS_OVERAGE_ANSWER;
-  for (const part of ['We count completed visits per week', 'never blocked', 'no per-visit fee', 'sustained period', 'we will contact you', '30 days’ notice', 'next plan', '12 weeks', 'move back down']) {
-    assert.ok(o.includes(part), `overage answer says: ${part}`);
-  }
-  // The app has no automatic move-up yet: the move is something we do, never an automatic system behavior
-  assert.ok(!/automatic|owner gets a notice|150%|8 more weeks|billing date/i.test(o), 'no automatic move-up promise');
+  assert.equal(pd.PLAN_ALLOWANCE_RULE, RULE);
+  assert.equal(o, RULE, 'the overage FAQ answer is the shared rule sentence');
+  assert.ok(pd.WEEKLY_VISITS_EXPLAINER.includes(RULE));
+  assert.ok(!/average|sustained|8 more weeks|12 weeks/i.test(o + pd.WEEKLY_VISITS_EXPLAINER), 'old average wording is gone');
   assert.deepEqual(pd.WEEKLY_VISITS_FAQ.map((f) => f.q), [
     'Is there a limit on how many customers I can have?', 'What counts toward my weekly visits?', 'What happens if I go above my weekly visits?',
   ]);
@@ -546,4 +546,26 @@ test('card copy does not promise features from a higher plan', () => {
   }
   const core = read('app/compare/page.js');
   assert.ok(!/name: 'Core'[\s\S]*?features: \[[^\]]*Team management/.test(core), 'Team management is not a Core add');
+});
+
+test('the old 8-week average wording appears nowhere on the site, and the new rule is on every page that states it', async () => {
+  const { readFileSync, readdirSync, statSync } = await import('node:fs');
+  const walk = (d) => readdirSync(d).flatMap((f) => {
+    const p = `${d}/${f}`;
+    return statSync(p).isDirectory() ? walk(p) : /\.(js|mjs)$/.test(f) ? [p] : [];
+  });
+  const root = new URL('..', import.meta.url).pathname;
+  for (const dir of ['app', 'components', 'lib']) {
+    for (const f of walk(`${root}${dir}`)) {
+      const text = readFileSync(f, 'utf8');
+      assert.ok(!/8[- ]week/i.test(text), `${f} still says 8-week`);
+      assert.ok(!/WEEKLY_VISITS_AVERAGE_WEEKS/.test(text), `${f} still uses the retired constant`);
+    }
+  }
+  const tos = readFileSync(`${root}app/legal/tos/page.js`, 'utf8');
+  assert.match(tos, /4A\. Plan allowances and automatic plan changes/);
+  assert.match(tos, /PLAN_ALLOWANCE_RULE/);
+  assert.match(tos, /Last updated: November 20, 2026/);
+  assert.match(tos, /support@zerbiq\.com/);
+  assert.match(tos, /pay the new plan/);
 });

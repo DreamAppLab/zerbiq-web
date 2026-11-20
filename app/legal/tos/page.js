@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { pageMetadata } from '@/lib/seo.mjs';
+import { PLAN_ALLOWANCE_RULE } from '@/lib/planData';
 
 export const metadata = pageMetadata({
   title: 'Terms of Service — Zerbiq',
@@ -28,7 +29,7 @@ export default function TermsPage() {
             Terms of Service
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 14, marginBottom: 48 }}>
-            Last updated: October 28, 2026
+            Last updated: November 20, 2026
           </p>
 
           <div
@@ -90,6 +91,29 @@ export default function TermsPage() {
                 automatically renews at the end of each billing period unless cancelled. You may
                 cancel at any time. No refunds are issued for partial billing periods. Zerbiq
                 reserves the right to change pricing with 30 days&apos; notice.
+              </p>
+            </div>
+
+            {/* Added Nov 20 2026 (owner decision). Numbered 4A so the other section numbers and cross-references stay put. Attorney review to follow. */}
+            <div>
+              <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 }}>
+                4A. Plan allowances and automatic plan changes
+              </h2>
+              <p style={{ margin: '0 0 12px' }}>
+                Each plan includes a weekly allowance of completed visits. Skipped and canceled
+                visits do not count. We never block your work for going over your allowance, and we
+                never charge a per-visit overage fee.
+              </p>
+              <p style={{ margin: '0 0 12px' }}>
+                {PLAN_ALLOWANCE_RULE} From the date the new plan starts, you pay the new plan&apos;s
+                price.
+              </p>
+              <p style={{ margin: 0 }}>
+                Questions about your allowance or a plan change? Contact us at{' '}
+                <a href="mailto:support@zerbiq.com" style={{ color: 'var(--color-primary)' }}>
+                  support@zerbiq.com
+                </a>
+                .
               </p>
             </div>
 
