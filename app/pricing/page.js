@@ -60,7 +60,7 @@ const FAQ = [
   },
   {
     q: 'What does the customer portal include?',
-    a: 'Every plan — Solo, Core, Field, Command, and Enterprise — includes a customer portal. The portal has no add-ons and no upcharges. Your customers sign in with a one-time secure link or code (no password required) and can view their service history with visit photos, see upcoming jobs, view and pay invoices online, submit service requests, and update their contact and communication preferences. The portal also shows quote approval on every plan, so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging.',
+    a: 'Every plan — Solo, Core, Field, Command, and Enterprise — includes a customer portal. The portal has no add-ons and no upcharges. Your customers sign in with a one-time secure link or code (no password required) and can view their service history with visit photos, see upcoming jobs, view and pay invoices online, submit service requests, and update their contact and communication preferences. The portal also shows quote approval on every plan, so customers can approve estimates with one tap.',
   },
   {
     q: 'Do I need a payment processor to use the customer portal?',

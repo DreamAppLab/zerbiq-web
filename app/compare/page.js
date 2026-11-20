@@ -86,7 +86,7 @@ const FEATURE_GROUPS = [
       { label: 'Automated invoice reminders (by email)',   values: gateToValues(FEATURE_GATE.invoiceReminders) },
       { label: 'Review request automation (by email)',     values: gateToValues(FEATURE_GATE.reviewRequests) },
       { label: 'Automated follow-up sequences',  values: gateToValues(FEATURE_GATE.followUpSequences) },
-      { label: 'In-app messaging',               values: gateToValues(FEATURE_GATE.inAppMessaging) },
+      { label: 'Two-way customer texting inbox (needs the texting add-on)',             values: gateToValues(FEATURE_GATE.inAppMessaging) },
     ],
   },
   {
@@ -95,7 +95,7 @@ const FEATURE_GROUPS = [
       { label: 'Customer CRM',                            values: gateToValues(FEATURE_GATE.customerCrm) },
       { label: 'Custom fields',                           values: gateToValues(FEATURE_GATE.customFields) },
       { label: 'Complaints tracking',                     values: gateToValues(FEATURE_GATE.complaintsTracking) },
-      // Customer portal is on every plan. Portal also shows quote approval (every plan) and messaging (Command+).
+      // Customer portal is on every plan. Portal also shows quote approval (every plan).
       // Online invoice payment requires a connected payment processor. See footnote ².
       { label: 'Customer portal ²',                       values: gateToValues(FEATURE_GATE.customerPortal) },
       { label: 'Lead management (Kanban)',                 values: gateToValues(FEATURE_GATE.leadManagement) },
@@ -233,7 +233,7 @@ const PLAN_CARDS = [
     features: [
       'Performance reviews', 'Incident tracking', 'Tech performance reports', 'Advanced reports & job costing',
       'Automations engine',
-      'Follow-up sequences', 'In-app messaging', 'Messaging in portal',
+      'Follow-up sequences', 'Two-way customer texting inbox (needs the texting add-on)',
       'Priority support',
       `Multiple service locations (+$${MULTI_LOCATION_FEE.Command}/mo per location)`,
       assistantQuestionsFeatureLabel('Command'),

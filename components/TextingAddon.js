@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { TEXTING_ADDON, TEXTING_ELIGIBILITY, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_OFF_ON_TITLE, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL } from '@/lib/planData';
+import { TEXTING_ADDON, TEXTING_ELIGIBILITY, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_OFF_ON_TITLE, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL, TEXTING_REPLIES_SENTENCE } from '@/lib/planData';
 
 // "Texting add-on" box shown under the plan cards on the pricing page.
 // All prices come from TEXTING_ADDON in lib/planData.js.
@@ -62,7 +62,7 @@ export default function TextingAddon() {
       </h2>
       <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 15, lineHeight: 1.65, margin: '0 0 20px' }}>
         Every plan sends reminders, on-the-way notices, invoices and review requests by email. Want them
-        by text too? Add texting. You pay a ${setupFee} one-time setup, then buy prepaid text blocks.
+        by text too? Add texting. You pay a ${setupFee} one-time setup, then buy prepaid text blocks. {TEXTING_REPLIES_SENTENCE}
       </p>
 
       <div className="texting-blocks">
