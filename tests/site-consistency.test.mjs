@@ -59,6 +59,8 @@ const OTHER_TEXT = ['README.md', ...publicTextFiles('public')].map((f) => [f, re
 
 const RULE = 'If your company completes more than 150% of your plan’s weekly visits in each of 4 weeks in a row, we move your plan up to the next plan. We email the owner first, and the new plan starts 30 days after that notice. Your work is never blocked and there is no per-visit overage fee.';
 
+const DOWN = 'If your company stays below the previous plan’s weekly visits for 12 weeks in a row, we move your plan back down.';
+
 test('plan facts: prices, weekly visits and annual = 10 months (plans.cjs launch pricing)', () => {
   // plans.cjs PLANS[*]: monthlyFee 39 / 129 / 209 / 349, annualFee 390 / 1290 / 2090 / 3490,
   // weeklyVisits 125 / 350 / 1000 / 2000; Enterprise from $599 a month, quoted.
@@ -92,9 +94,11 @@ test('weekly completed-visits allowance replaces every customer limit', () => {
   assert.equal(pd.WEEKLY_VISITS_EXPLAINER, 'Every completed visit counts; skipped and canceled visits don’t. ' + RULE);
   const o = pd.WEEKLY_VISITS_OVERAGE_ANSWER;
   assert.equal(pd.PLAN_ALLOWANCE_RULE, RULE);
-  assert.equal(o, RULE, 'the overage FAQ answer is the shared rule sentence');
+  assert.equal(pd.PLAN_MOVE_DOWN_RULE, DOWN);
+  assert.ok(!pd.PLAN_ALLOWANCE_RULE.includes('12 weeks'), 'move-down is a separate sentence');
+  assert.equal(o, `${RULE} ${DOWN}`, 'the overage FAQ answer is the move-up rule plus the move-down rule');
   assert.ok(pd.WEEKLY_VISITS_EXPLAINER.includes(RULE));
-  assert.ok(!/average|sustained|8 more weeks|12 weeks/i.test(o + pd.WEEKLY_VISITS_EXPLAINER), 'old average wording is gone');
+  assert.ok(!/average|sustained|8 more weeks/i.test(o + pd.WEEKLY_VISITS_EXPLAINER), 'old average wording is gone');
   assert.deepEqual(pd.WEEKLY_VISITS_FAQ.map((f) => f.q), [
     'Is there a limit on how many customers I can have?', 'What counts toward my weekly visits?', 'What happens if I go above my weekly visits?',
   ]);
@@ -568,4 +572,7 @@ test('the old 8-week average wording appears nowhere on the site, and the new ru
   assert.match(tos, /Last updated: November 20, 2026/);
   assert.match(tos, /support@zerbiq\.com/);
   assert.match(tos, /pay the new plan/);
+  assert.match(tos, /PLAN_MOVE_DOWN_RULE/);
+  assert.match(tos, /We email the owner and make the change ourselves/);
+  assert.doesNotMatch(tos, /automatic(ally)? (move|change)s? your/i);
 });

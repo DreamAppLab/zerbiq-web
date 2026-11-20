@@ -1,7 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { pageMetadata } from '@/lib/seo.mjs';
-import { PLAN_ALLOWANCE_RULE } from '@/lib/planData';
+import { PLAN_ALLOWANCE_RULE, PLAN_MOVE_DOWN_RULE } from '@/lib/planData';
 
 export const metadata = pageMetadata({
   title: 'Terms of Service — Zerbiq',
@@ -107,6 +107,9 @@ export default function TermsPage() {
               <p style={{ margin: '0 0 12px' }}>
                 {PLAN_ALLOWANCE_RULE} From the date the new plan starts, you pay the new plan&apos;s
                 price.
+              </p>
+              <p style={{ margin: '0 0 12px' }}>
+                {PLAN_MOVE_DOWN_RULE} We email the owner and make the change ourselves.
               </p>
               <p style={{ margin: 0 }}>
                 Questions about your allowance or a plan change? Contact us at{' '}
