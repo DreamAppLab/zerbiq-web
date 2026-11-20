@@ -71,7 +71,6 @@ const PLAN_INCLUDED = {
     'Advanced reports & job costing',
     'Automations & rules engine',
     'Two-way customer texting inbox (needs the texting add-on)',
-    'Messaging in customer portal',
     'Automated follow-up sequences',
     'Priority support',
     `Multiple service locations (+$${MULTI_LOCATION_FEE.Command}/mo per location)`,
