@@ -96,7 +96,7 @@ test('weekly completed-visits allowance replaces every customer limit', () => {
   assert.equal(pd.PLAN_ALLOWANCE_RULE, RULE);
   assert.equal(pd.PLAN_MOVE_DOWN_RULE, DOWN);
   assert.ok(!pd.PLAN_ALLOWANCE_RULE.includes('12 weeks'), 'move-down is a separate sentence');
-  assert.equal(o, `${RULE} ${DOWN}`, 'the overage FAQ answer is the move-up rule plus the move-down rule');
+  assert.equal(o, `${RULE} ${pd.PLAN_NEXT_PLAN_NOTE} ${DOWN}`, 'the overage FAQ answer is the move-up rule plus the move-down rule');
   assert.ok(pd.WEEKLY_VISITS_EXPLAINER.includes(RULE));
   assert.ok(!/average|sustained|8 more weeks/i.test(o + pd.WEEKLY_VISITS_EXPLAINER), 'old average wording is gone');
   assert.deepEqual(pd.WEEKLY_VISITS_FAQ.map((f) => f.q), [
@@ -567,12 +567,16 @@ test('the old 8-week average wording appears nowhere on the site, and the new ru
     }
   }
   const tos = readFileSync(`${root}app/legal/tos/page.js`, 'utf8');
-  assert.match(tos, /4A\. Plan allowances and automatic plan changes/);
+  assert.match(tos, /11\. Plan Changes Based on Weekly Visits/);
   assert.match(tos, /PLAN_ALLOWANCE_RULE/);
   assert.match(tos, /Last updated: November 20, 2026/);
   assert.match(tos, /support@zerbiq\.com/);
   assert.match(tos, /pay the new plan/);
   assert.match(tos, /PLAN_MOVE_DOWN_RULE/);
+  assert.match(tos, /PLAN_NEXT_PLAN_NOTE/);
+  assert.match(tos, /12\. Contact/);
+  assert.doesNotMatch(tos, /4A\.|automatic plan changes/);
+  assert.equal(pd.PLAN_NEXT_PLAN_NOTE, 'For Command, the next plan is Enterprise, at a price we quote you before the change.');
   assert.match(tos, /We email the owner and make the change ourselves/);
   assert.doesNotMatch(tos, /automatic(ally)? (move|change)s? your/i);
 });
