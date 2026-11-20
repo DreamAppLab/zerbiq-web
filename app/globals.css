@@ -288,3 +288,16 @@ button:focus-visible {
 .btn-cta-ghost:hover {
   border-color: rgba(61, 92, 255, 0.4);
 }
+
+/* Text for screen readers only (compare table "Included" / "Not included"). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

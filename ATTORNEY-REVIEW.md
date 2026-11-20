@@ -1,6 +1,17 @@
+# Attorney review: weekly visits allowance and plan moves (November 19, 2026)
+
+The pricing page, compare page, plan cards and FAQ now describe plan size by a weekly completed-visits allowance (Solo 125, Core 350, Field 1,000, Command 2,000, judged on an 8-week average) instead of a customer limit. There is no customer limit on any plan. The Terms page was not edited. Please tell us whether the Terms need wording for these points, and edit the site text below if needed:
+
+1. The weekly-visits allowance. Every completed visit counts; skipped and canceled visits do not. It never blocks work and there is no per-visit overage fee.
+2. Moving a customer up a plan. Site text: "If your average stays above your plan's allowance for a sustained period, we will contact you and, with 30 days' notice, move you to the next plan. You can move back down after 12 weeks below your allowance." Please check that 30 days' notice is enough, and whether the Terms' existing line ("Zerbiq reserves the right to change pricing with 30 days' notice", section 4) covers a plan change, or needs its own term. The move is made by Zerbiq contacting the customer; it is not an automatic system action yet.
+3. Plan changes by the customer. Site text: "Upgrade anytime. You can move down when your users, locations and stored files fit the smaller plan; the change is prorated."
+4. Enterprise is quoted, from $599 a month.
+
+---
+
 # Attorney review: customer limit wording (November 12, 2026)
 
-One word changed in the Privacy Policy, Section 9 (Data Retention): "Archived customers and their records are retained indefinitely while your account is active" now says "Inactive customers and ...". The site no longer uses "archive" for customers. The "Last updated" date was not changed. The Terms do not define "active customer", so they are unchanged. The plan limit itself (pricing page, compare page, plan cards) now counts only customers with service in the last 6 months, on a recurring route, or with an upcoming job; please check whether the Terms need a line about it.
+One word changed in the Privacy Policy, Section 9 (Data Retention): "Archived customers and their records are retained indefinitely while your account is active" now says "Inactive customers and ...". The site no longer uses "archive" for customers. The "Last updated" date was not changed. The Terms do not define "active customer", so they are unchanged. (Update, November 19, 2026: the counted-customer plan limit this paragraph described no longer exists. There is no customer limit on any plan; see the next entry.)
 
 ---
 
@@ -87,7 +98,7 @@ Reply STOP to any message to opt out, or HELP for help. Message frequency varies
 
 ### 9. Data Retention (changed: was section 7; removed "or your trial expires")
 
-We retain your data for as long as your account is active. If you cancel your subscription, your data is retained for 30 days before deletion. Archived customers and their records are retained indefinitely while your account is active.
+We retain your data for as long as your account is active. If you cancel your subscription, your data is retained for 30 days before deletion. Inactive customers and their records are retained indefinitely while your account is active.
 
 ### Renumbered, wording unchanged
 
