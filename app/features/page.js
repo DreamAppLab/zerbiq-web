@@ -203,7 +203,7 @@ const FEATURE_GROUPS = [
         desc: [
           "Every plan includes a customer portal — a secure, branded page where your customers sign in with a one-time link or code (no password required) and see everything about their account: service history with visit photos, upcoming jobs, invoices, service requests, and contact preferences.",
           `Customers pay invoices online by card or bank (ACH) directly through the portal — once you connect a payment processor account of your own (${PAYMENT_PROCESSORS_NOTE}). The portal has no add-ons and no upcharges.`,
-          "On every plan, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging. Customers who can self-serve become customers who stay.",
+          "On every plan, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, customers can also be reached through the two-way customer texting inbox (needs the texting add-on). Customers who can self-serve become customers who stay.",
         ],
         badge: BADGE.all,
       },

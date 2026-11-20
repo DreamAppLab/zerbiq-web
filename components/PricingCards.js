@@ -70,7 +70,7 @@ const PLAN_INCLUDED = {
     'Tech performance reports',
     'Advanced reports & job costing',
     'Automations & rules engine',
-    'In-app messaging',
+    'Two-way customer texting inbox (needs the texting add-on)',
     'Messaging in customer portal',
     'Automated follow-up sequences',
     'Priority support',
