@@ -1,6 +1,14 @@
+# Attorney review: plan allowance rule and Terms section 11 (November 20, 2026)
+
+Owner decision. The old "8-week average" and "sustained period" wording is retired everywhere. New rule: if a company completes more than 150% of its plan's weekly visits in each of 4 weeks in a row, its plan moves up to the next plan. Zerbiq emails the owner first and the new plan starts 30 days after that notice. Work is never blocked and there is no per-visit overage fee. The same sentence is on the pricing page, compare page, plan cards and FAQ.
+
+The Terms now have a short section "11. Plan Changes Based on Weekly Visits" (Contact is now 12; section 5 and its cross-references do not move; the app's Terms numbers it 13). It also says: "For Command, the next plan is Enterprise, at a price we quote you before the change.", and the Terms "Last updated" date is November 20, 2026 (the Privacy Policy date is unchanged). Eddie declined attorney review for this wording, so the points below are for reference only. (1) that 30 days' notice after the email is enough and how the email is delivered; (2) how section 11 interacts with section 4 ("change pricing with 30 days' notice"); (3) the move back down: if the company stays below the previous plan's weekly visits for 12 weeks in a row, we email the owner and move the plan back down (week by week, no average; also on the FAQ). The customer-side downgrade rule is still "when your users, locations and stored files fit the smaller plan". This entry replaces point 2 of the November 19 entry below.
+
+---
+
 # Attorney review: weekly visits allowance and plan moves (November 19, 2026)
 
-The pricing page, compare page, plan cards and FAQ now describe plan size by a weekly completed-visits allowance (Solo 125, Core 350, Field 1,000, Command 2,000, judged on an 8-week average) instead of a customer limit. There is no customer limit on any plan. The Terms page was not edited. Please tell us whether the Terms need wording for these points, and edit the site text below if needed:
+The pricing page, compare page, plan cards and FAQ now describe plan size by a weekly completed-visits allowance (Solo 125, Core 350, Field 1,000, Command 2,000, see the November 20 update below) instead of a customer limit. There is no customer limit on any plan. The Terms page was not edited. Please tell us whether the Terms need wording for these points, and edit the site text below if needed:
 
 1. The weekly-visits allowance. Every completed visit counts; skipped and canceled visits do not. It never blocks work and there is no per-visit overage fee.
 2. Moving a customer up a plan. Site text: "If your average stays above your plan's allowance for a sustained period, we will contact you and, with 30 days' notice, move you to the next plan. You can move back down after 12 weeks below your allowance." Please check that 30 days' notice is enough, and whether the Terms' existing line ("Zerbiq reserves the right to change pricing with 30 days' notice", section 4) covers a plan change, or needs its own term. The move is made by Zerbiq contacting the customer; it is not an automatic system action yet.

@@ -64,9 +64,8 @@ test('the sharing cross-reference points at sections that exist on these pages',
 });
 
 test('both legal pages show the October 28, 2026 date and only the support contact', () => {
-  for (const text of [privacy, terms]) {
-    assert.match(text, /Last updated: October 28, 2026/);
-  }
+  assert.match(privacy, /Last updated: October 28, 2026/);
+  assert.match(terms, /Last updated: November 20, 2026/);
   const src = readFileSync(new URL('../app/legal/privacy/page.js', import.meta.url), 'utf8');
   const mailto = new Set([...src.matchAll(/mailto:([^"]+)"/g)].map((m) => m[1]));
   assert.deepEqual([...mailto], ['support@zerbiq.com']);
