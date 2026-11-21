@@ -76,7 +76,6 @@ test('plan facts: prices, weekly visits and annual = 10 months (plans.cjs launch
   assert.equal(pd.ENTERPRISE_FROM_MONTHLY_PRICE, 599);
   assert.equal(pd.enterprisePriceLabel(), 'From $599/mo · quoted');
   assert.equal(byName.Solo.users, 1);
-  assert.deepEqual(pd.MULTI_LOCATION_FEE, { Field: 69, Command: 89 });
   assert.deepEqual(['Solo', 'Core', 'Field', 'Command'].map((n) => pd.formatPlanPrice(byName[n].monthlyPrice)), ['39', '129', '209', '349']);
 });
 
@@ -223,7 +222,6 @@ test('home cards show the same plan badge as the shared gates', () => {
       'GPS Field Tracking': 'gpsFieldTracking',
       'Subcontractor Management': 'subcontractors',
       'Lead Management': 'leadManagement',
-      'Multiple Service Locations': 'multipleLocations',
       'Zerbiq AI assistant': 'aiChatbot',
       'Mileage Tracking': 'mileageTracking',
       'Equipment & Asset Tracking': 'equipmentTracking',
@@ -429,7 +427,7 @@ test('feature gates match the app: quotes on all plans; fleet, routes and pay on
   // plans.cjs: team, timecards, attendance are 'solo'; purchaseOrders -> inventory, paymentPlans and lateFees -> invoicing are 'solo'
   for (const k of ['rolesPermissions', 'timecards', 'attendanceTracking', 'timeOff', 'employeeIdPin', 'gpsFieldTracking', 'employeeTermination', 'purchaseOrders', 'partialPayments', 'lateFees']) assert.equal(g[k], 'all', k);
   // still Field
-  for (const k of ['assetCheckout', 'subcontractors', 'maintenanceScheduling', 'leadCaptureForm', 'multipleLocations']) assert.equal(g[k], 'field', k);
+  for (const k of ['assetCheckout', 'subcontractors', 'maintenanceScheduling', 'leadCaptureForm']) assert.equal(g[k], 'field', k);
 });
 
 test('every plan card lists each feature on the plan its gate says, and on no lower plan', () => {

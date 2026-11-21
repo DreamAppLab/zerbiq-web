@@ -2,7 +2,7 @@ import { PRIMARY_CTA_LABEL } from '@/lib/siteConfig.mjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, FEATURE_GATE, gateToBadge, PAYMENT_PROCESSORS_NOTE, EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, AI_ASSISTANT_NAME, ROUTE_INTELLIGENCE_DESCRIPTION, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
+import { BADGE, FEATURE_GATE, gateToBadge, PAYMENT_PROCESSORS_NOTE, EARLY_ACCESS_HREF, AI_ASSISTANT_NAME, ROUTE_INTELLIGENCE_DESCRIPTION, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
 import { pageMetadata } from '@/lib/seo.mjs';
 
 export const metadata = pageMetadata({
@@ -115,16 +115,6 @@ const FEATURE_GROUPS = [
           "At the end of each cycle, Zerbiq generates one clean invoice per customer covering everything they received. No manual tallying, no missed charges.",
         ],
         badge: BADGE.all,
-      },
-      {
-        icon: '📍',
-        title: 'Multiple Service Locations',
-        screenshot: '47-multi-location.png',
-        desc: [
-          "Running more than one location? Add additional service areas to your account and manage them all from one login. Routes, teams, customers, and billing stay organized by location.",
-          `Available on Field and above — each additional location is $${MULTI_LOCATION_FEE.Field}/mo on Field and $${MULTI_LOCATION_FEE.Command}/mo on Command.`,
-        ],
-        badge: gateToBadge(FEATURE_GATE.multipleLocations),
       },
     ],
   },

@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, TEXTING_PRICING_HREF, WHITE_GLOVE_DESCRIPTION, WHITE_GLOVE_PRICES_SENTENCE, WHITE_GLOVE_PRICES_SHORT, groupByBadge, textingPricingLine } from '@/lib/planData';
+import { EARLY_ACCESS_HREF, TEXTING_PRICING_HREF, WHITE_GLOVE_DESCRIPTION, WHITE_GLOVE_PRICES_SENTENCE, WHITE_GLOVE_PRICES_SHORT, groupByBadge, textingPricingLine } from '@/lib/planData';
 import { pageMetadata } from '@/lib/seo.mjs';
 import { ALL_FEATURES } from '@/lib/homeFeatures';
 
