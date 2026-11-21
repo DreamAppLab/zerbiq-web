@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import { Fragment } from 'react';
 import Link from 'next/link';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, WEEKLY_VISITS_EXPLAINER, weeklyVisitsNumberLabel, enterprisePriceLabel, planCapacityShortLabel, assistantQuestionsFeatureLabel, TOP_SELF_SERVE_WEEKLY_VISITS, AI_ASSISTANT_NAME, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel, WHITE_GLOVE_FEE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
+import { PLAN_METADATA, FEATURE_GATE, WEEKLY_VISITS_EXPLAINER, weeklyVisitsNumberLabel, enterprisePriceLabel, planCapacityShortLabel, assistantQuestionsFeatureLabel, TOP_SELF_SERVE_WEEKLY_VISITS, AI_ASSISTANT_NAME, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel, WHITE_GLOVE_FEE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
 import PaymentsStayYours from '@/components/PaymentsStayYours';
 import { pageMetadata } from '@/lib/seo.mjs';
 
@@ -68,7 +68,7 @@ const FEATURE_GROUPS = [
       { label: 'Automated late fees',                              values: gateToValues(FEATURE_GATE.lateFees) },
       { label: 'Partial payments and payment plans',               values: gateToValues(FEATURE_GATE.partialPayments) },
       { label: 'Quotes & estimates (create, send, approve)',      values: gateToValues(FEATURE_GATE.estimatesQuotes) },
-      { label: 'Online payment processing (card/ACH) ²',          values: gateToValues(FEATURE_GATE.onlinePayments) },
+      { label: 'Online payment processing (card/ACH) ¹',          values: gateToValues(FEATURE_GATE.onlinePayments) },
       { label: 'Purchase orders',                                  values: gateToValues(FEATURE_GATE.purchaseOrders) },
       { label: 'QuickBooks Online sync',                            values: gateToValues(FEATURE_GATE.quickbooksSync) },
     ],
@@ -78,10 +78,10 @@ const FEATURE_GROUPS = [
     rows: [
       // Email is included on every plan. Texting is an optional add-on for every plan.
       { label: 'Technician on the way notice (by email)',  values: gateToValues('all') },
-      { label: 'Technician on the way texts ³',            values: gateToValues(FEATURE_GATE.onTheWaySms) },
-      { label: 'Job completion texts ³',                   values: gateToValues(FEATURE_GATE.jobCompletionSms) },
-      { label: 'Texting setup (one time) ³',               values: PLAN_METADATA.map(() => `$${TEXTING_ADDON.setupFee}`) },
-      { label: 'Text blocks (prepaid, never expire) ³',    values: PLAN_METADATA.map(() => textBlockFromLabel()) },
+      { label: 'Technician on the way texts ²',            values: gateToValues(FEATURE_GATE.onTheWaySms) },
+      { label: 'Job completion texts ²',                   values: gateToValues(FEATURE_GATE.jobCompletionSms) },
+      { label: 'Texting setup (one time) ²',               values: PLAN_METADATA.map(() => `$${TEXTING_ADDON.setupFee}`) },
+      { label: 'Text blocks (prepaid, never expire) ²',    values: PLAN_METADATA.map(() => textBlockFromLabel()) },
       { label: 'Appointment reminders (by email)',         values: gateToValues(FEATURE_GATE.appointmentReminders) },
       { label: 'Automated invoice reminders (by email)',   values: gateToValues(FEATURE_GATE.invoiceReminders) },
       { label: 'Review request automation (by email)',     values: gateToValues(FEATURE_GATE.reviewRequests) },
@@ -96,11 +96,10 @@ const FEATURE_GROUPS = [
       { label: 'Custom fields',                           values: gateToValues(FEATURE_GATE.customFields) },
       { label: 'Complaints tracking',                     values: gateToValues(FEATURE_GATE.complaintsTracking) },
       // Customer portal is on every plan. Portal also shows quote approval (every plan).
-      // Online invoice payment requires a connected payment processor. See footnote ².
-      { label: 'Customer portal ²',                       values: gateToValues(FEATURE_GATE.customerPortal) },
+      // Online invoice payment requires a connected payment processor. See footnote ¹.
+      { label: 'Customer portal ¹',                       values: gateToValues(FEATURE_GATE.customerPortal) },
       { label: 'Lead management (Kanban)',                 values: gateToValues(FEATURE_GATE.leadManagement) },
       { label: 'Embeddable lead capture form',            values: gateToValues(FEATURE_GATE.leadCaptureForm) },
-      { label: 'Multiple service locations ¹',            values: gateToValues(FEATURE_GATE.multipleLocations) },
     ],
   },
   {
@@ -220,7 +219,7 @@ const PLAN_CARDS = [
       'Daily truck inspections', 'Commissions & per-job team pay',
       'Leads inbox & pipeline', 'Employee asset checkout',
       'Subcontractor management', 'Maintenance calendar',
-      `Multiple service locations (+$${MULTI_LOCATION_FEE.Field}/mo per location)`, 'Lead capture form',
+      'Lead capture form',
       assistantQuestionsFeatureLabel('Field'),
     ],
   },
@@ -235,7 +234,6 @@ const PLAN_CARDS = [
       'Automations engine',
       'Follow-up sequences', 'Two-way customer texting inbox (needs the texting add-on)',
       'Priority support',
-      `Multiple service locations (+$${MULTI_LOCATION_FEE.Command}/mo per location)`,
       assistantQuestionsFeatureLabel('Command'),
     ],
   },
@@ -785,16 +783,11 @@ export default function ComparePage() {
       <section style={{ padding: '0 24px 56px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '0 0 8px', lineHeight: 1.75 }}>
-            ¹ Multiple service locations available on Field and above.
-            Field plans: +${MULTI_LOCATION_FEE.Field}/mo per additional location.
-            Command plans: +${MULTI_LOCATION_FEE.Command}/mo per additional location.
-          </p>
-          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '0 0 8px', lineHeight: 1.75 }}>
-            ² Online payment processing (card &amp; ACH) and online invoice payment through the customer portal are included on every plan.
+            ¹ Online payment processing (card &amp; ACH) and online invoice payment through the customer portal are included on every plan.
             Requires connecting a payment processor account of your own ({PAYMENT_PROCESSORS_NOTE}).
           </p>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '0 0 8px', lineHeight: 1.75 }}>
-            ³ Texting is an optional add-on for every plan, and no texts are included in any plan.
+            ² Texting is an optional add-on for every plan, and no texts are included in any plan.
             ${TEXTING_ADDON.setupFee} one-time setup, then prepaid text blocks ({TEXTING_ADDON.blocks.map((b) => `${b.texts.toLocaleString('en-US')} for $${b.price}`).join(', ')}) that never expire.
             Texts come from your own {TEXTING_NUMBER_PHRASE}. {TEXTING_REVIEW_TIME} Until then, messages go by email.
             When texts run out, messages go by email. Turning texting off releases the number for good. Turning it back on means the ${TEXTING_ADDON.setupFee} setup and carrier approval again.
