@@ -44,7 +44,7 @@ const FAQ = [
   },
   {
     q: 'Do I need to download an app?',
-    a: `No download is needed. ${MOBILE_TEAM_VIEW_NOTE}`,
+    a: `No download is required. ${MOBILE_TEAM_VIEW_NOTE}`,
   },
   {
     q: 'Is the AI assistant included?',

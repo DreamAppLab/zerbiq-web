@@ -14,6 +14,7 @@ for (const f of ['earlyAccess.mjs', 'siteConfig.mjs', 'seo.mjs']) {
   copyFileSync(new URL(`../lib/${f}`, import.meta.url), join(dir, f));
 }
 const pd = await import(pathToFileURL(join(dir, 'planData.mjs')).href);
+const SITE_CONFIG = await import(pathToFileURL(join(dir, 'siteConfig.mjs')).href);
 const seo = await import(pathToFileURL(join(dir, 'seo.mjs')).href);
 
 // Every source file that can put words on a public page.
@@ -181,16 +182,16 @@ test('/compare has no recurring-customer row and no included-texts row', () => {
   assert.ok(compare.includes('TEXTING_PRICING_HREF') && compare.includes('/pricing#texting-addon'));
 });
 
-test('no page says native apps are available, links an app store, or promises PWA install', () => {
+test('no page makes a false app claim or promises PWA install', () => {
   for (const [f, text] of siteText) {
-    if (f === 'lib/siteConfig.mjs') continue; // hidden "Get the app" links, empty until the apps ship
+    if (f === 'lib/siteConfig.mjs') continue; // the published store links live here
     assert.ok(!/free download for iPhone/i.test(text), `${f}: app download claim`);
     assert.ok(!/available as a native app/i.test(text), `${f}: native app claim`);
     assert.ok(!/without going through an app store|no app store/i.test(text), `${f}: app-store wording`);
     assert.ok(!/add (it )?to (your phone's )?home screen/i.test(text), `${f}: PWA wording`);
   }
-  assert.ok(pd.MOBILE_TEAM_VIEW_NOTE.includes('any smartphone browser today'));
-  assert.ok(pd.MOBILE_TEAM_VIEW_NOTE.includes('native iOS and Android apps are coming with the public release'));
+  assert.ok(pd.MOBILE_TEAM_VIEW_NOTE.includes('any smartphone browser'));
+  assert.ok(pd.MOBILE_TEAM_VIEW_NOTE.includes('native iOS and Android apps'));
 });
 
 test('unsupported claims are gone from every page and component', () => {
@@ -386,11 +387,23 @@ test('pricing page has the storage box and no name FAQ; compare has the new rows
   assert.ok(cards.indexOf('formatPlanPrice(plan.monthlyPrice)') < order[0], 'price comes first');
 });
 
-test('with no store links, the footer says coming soon instead of showing store badges', () => {
+test('both apps are published: store links are set and no page says the apps are coming soon', () => {
+  const links = SITE_CONFIG.activeStoreLinks();
+  assert.deepEqual(links, [
+    { label: 'App Store', href: 'https://apps.apple.com/app/id6825717480' },
+    { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.zerbiq.app' },
+  ]);
+  assert.equal(pd.STORE_COMING_SOON_LABEL, undefined);
+  for (const f of SITE) {
+    const text = read(f);
+    assert.ok(!/STORE_COMING_SOON/.test(text), `${f}: stale coming-soon label`);
+    assert.ok(!/coming with the public release|apps? (is|are) (coming|not (yet )?available)/i.test(text), `${f}: stale app wording`);
+    assert.ok(!/(iOS|Android|native|mobile) apps?[^\n]{0,40}coming soon|coming soon[^\n]{0,40}(iOS|Android)/i.test(text), `${f}: apps coming soon`);
+  }
   const footer = read('components/Footer.js');
-  assert.ok(footer.includes('STORE_COMING_SOON_LABEL'));
-  assert.equal(pd.STORE_COMING_SOON_LABEL, 'iOS and Android apps: coming soon');
-  assert.ok(!/apps\.apple\.com|play\.google\.com/.test(SITE.map((f) => read(f)).join('\n').replace(/e\.g\. 'https:[^']*'/g, '')));
+  assert.ok(footer.includes('activeStoreLinks()') && footer.includes('Get the app:'));
+  assert.ok(read('app/support/page.js').includes('activeStoreLinks()'), 'support page shows the store links');
+  assert.ok(!/Coming soon/.test(read('app/compare/page.js')), 'compare has no coming-soon cell');
 });
 
 test('white-glove is an optional add-on below the plan cards, not inside them', () => {
