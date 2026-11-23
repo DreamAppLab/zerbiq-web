@@ -11,6 +11,7 @@ import {
   SUPPORT_ADDRESS_LINES,
   SUPPORT_RESPONSE_TIME,
   DELETE_ACCOUNT_HREF,
+  activeStoreLinks,
 } from '@/lib/siteConfig.mjs';
 import { pageMetadata } from '@/lib/seo.mjs';
 
@@ -173,6 +174,17 @@ export default function SupportPage() {
           <div style={{ color: 'var(--color-white-60)', fontSize: 15, lineHeight: 1.8 }}>
             <p style={{ margin: '0 0 12px' }}>
               {MOBILE_TEAM_VIEW_NOTE}
+            </p>
+            <p style={{ margin: '0 0 12px' }}>
+              Get the app:{' '}
+              {activeStoreLinks().map((s, i) => (
+                <span key={s.label}>
+                  {i > 0 && ' | '}
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+                    {s.label}
+                  </a>
+                </span>
+              ))}
             </p>
             <p style={{ margin: '0 0 12px' }}>
               Read our{' '}

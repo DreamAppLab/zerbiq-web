@@ -157,7 +157,7 @@ const FEATURE_GROUPS = [
     group: 'Platform & Support',
     rows: [
       { label: 'Team view in any smartphone browser',             values: gateToValues(FEATURE_GATE.mobileApp) },
-      { label: 'Native iOS & Android apps (coming with the public release)', values: PLAN_METADATA.map(() => 'Coming soon') },
+      { label: 'Native iOS & Android apps',                           values: gateToValues('all') },
       { label: 'Light Mode and Dark Mode',                        values: gateToValues(FEATURE_GATE.lightDarkMode) },
       { label: 'Personalized Shortcuts Bar',                      values: gateToValues(FEATURE_GATE.shortcutsBar) },
       { label: 'Custom Branding',                                 values: gateToValues(FEATURE_GATE.customBranding) },
