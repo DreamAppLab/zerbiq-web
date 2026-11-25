@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { SUBPROCESSORS } from '../subprocessors-data';
 
 export const metadata = {
   title: 'Data Processing Addendum — Zerbiq',
@@ -8,69 +9,10 @@ export const metadata = {
 const h2Style = { color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 };
 const linkStyle = { color: 'var(--color-primary)' };
 
-// Built from the services the app (app.zerbiq.com) actually calls, October 2026.
-// Keep in step with the Privacy Policy's "Cookies and Similar Technologies" section.
-const SUBPROCESSORS = [
-  {
-    name: 'Vercel, Inc.',
-    purpose: 'Hosts the Zerbiq app and runs its servers.',
-    data: 'All Client Customer Data passes through it while the app is in use; standard server logs.',
-  },
-  {
-    name: 'Supabase, Inc.',
-    purpose: 'Main database, user sign-in, and file storage.',
-    data: 'All Client Customer Data, including photos, receipts, and documents you upload.',
-  },
-  {
-    name: 'Upstash, Inc.',
-    purpose: 'Short-term cache and abuse protection (rate limits).',
-    data: 'Temporary copies of records shown in the app, kept for up to 24 hours.',
-  },
-  {
-    name: 'Telnyx LLC',
-    purpose: 'Sends and receives text messages (SMS).',
-    data: 'Phone numbers and message text.',
-  },
-  {
-    name: 'Mailgun Technologies, Inc.',
-    purpose: 'Sends email, such as invoices, quotes, reminders, and sign-in codes.',
-    data: 'Email addresses, names, and message content.',
-  },
-  {
-    name: 'Stripe, Inc.',
-    purpose: 'Processes card and bank payments and pays out to the Client.',
-    data: 'Payment amounts, invoice details, customer email, and the payment details a payer enters on Stripe.',
-  },
-  {
-    name: 'Google LLC (Google Maps Platform)',
-    purpose: 'Address lookup, address suggestions, and map coordinates for routing.',
-    data: 'Service and mailing addresses, and address search text.',
-  },
-  {
-    name: 'Google LLC (Google Calendar)',
-    purpose: 'Adds jobs to a connected Google Calendar. Only if the Client connects Google Calendar.',
-    data: 'Job time, customer name, services, job notes, and assigned team member.',
-  },
-  {
-    name: 'Anthropic, PBC',
-    purpose: 'Reads uploaded bank statements to list their transactions. Only when the Client uses bank statement import.',
-    data: 'The bank statement the Client uploads.',
-  },
-  {
-    name: 'Intuit Inc. (QuickBooks Online)',
-    purpose: 'Keeps the Client’s QuickBooks Online company in step with Zerbiq. Only if the Client connects QuickBooks Online.',
-    data: 'Customer names and contact details, billing addresses, invoices, and payments.',
-  },
-  {
-    name: 'OpenWeather Ltd (OpenWeatherMap)',
-    purpose: 'Weather forecast shown in the app.',
-    data: 'The Client’s business ZIP code only. No customer information.',
-  },
-];
 
-function Section({ title, children }) {
+function Section({ id, title, children }) {
   return (
-    <div>
+    <div id={id}>
       <h2 style={h2Style}>{title}</h2>
       {children}
     </div>
@@ -81,7 +23,6 @@ function P({ last, children }) {
   return <p style={{ margin: last ? 0 : '0 0 12px' }}>{children}</p>;
 }
 
-// <!-- Draft for attorney review -->
 export default function DpaPage() {
   return (
     <>
@@ -100,7 +41,7 @@ export default function DpaPage() {
             Data Processing Addendum
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 14, marginBottom: 48 }}>
-            Last updated: October 18, 2026
+            Last updated: November 25, 2026
           </p>
 
           <div
@@ -119,7 +60,8 @@ export default function DpaPage() {
                 <a href="/legal/tos" style={linkStyle}>
                   Terms of Service
                 </a>
-                . It applies to every business that has a Zerbiq account (the &quot;Client&quot;).
+                . It is between Zerbiq LLC (&quot;Zerbiq&quot;) and every business that has a Zerbiq
+                account (the &quot;Client&quot;).
               </P>
               <P>
                 &quot;Client Customer Data&quot; means personal information about the Client&apos;s
@@ -182,10 +124,14 @@ export default function DpaPage() {
               </P>
             </Section>
 
-            <Section title="6. Subprocessors">
+            <Section id="subprocessors" title="6. Subprocessors">
               <P>
                 The Client authorizes Zerbiq to use the subprocessors listed below, and only them, to
-                provide the Service. Zerbiq has a written agreement with each one that protects
+                provide the Service. The list is also available at{' '}
+                <a href="/legal/subprocessors" style={linkStyle}>
+                  zerbiq.com/legal/subprocessors
+                </a>
+                . Zerbiq has a written agreement with each one that protects
                 Client Customer Data at least as well as this DPA, and Zerbiq remains responsible for
                 their work.
               </P>
@@ -260,8 +206,8 @@ export default function DpaPage() {
             <Section title="11. Contact">
               <P last>
                 For questions about this DPA, contact us at{' '}
-                <a href="mailto:hello@zerbiq.com" style={linkStyle}>
-                  hello@zerbiq.com
+                <a href="mailto:support@zerbiq.com" style={linkStyle}>
+                  support@zerbiq.com
                 </a>
                 .
               </P>

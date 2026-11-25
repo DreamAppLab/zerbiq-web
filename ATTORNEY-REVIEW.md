@@ -1,3 +1,22 @@
+# Update, November 25, 2026
+
+On November 25, 2026, Eddie finalized the Terms of Service and Privacy Policy using his own attorney-prepared drafts, and chose to publish the Data Processing Addendum and the subprocessor list without waiting for further attorney review. The content below is kept for history.
+
+Files changed:
+
+- app/legal/tos/page.js, app/legal/tos/content.js (final Terms of Service)
+- app/legal/privacy/page.js, app/legal/privacy/content.js (final Privacy Policy)
+- components/LegalDocument.js (shared layout for the two documents)
+- public/legal/Zerbiq-Terms-of-Service.pdf, public/legal/Zerbiq-Privacy-Policy.pdf
+- app/legal/dpa/page.js (Zerbiq LLC named as provider, support@zerbiq.com contact, link to the subprocessor page, draft marker removed, date updated)
+- app/legal/subprocessors-data.js (shared list; adds Sentry, Geocodio, Simple Routing; Telnyx purpose updated)
+- app/legal/subprocessors/page.js (new /legal/subprocessors page)
+- ATTORNEY-REVIEW.md
+
+Crisp is not listed as a subprocessor because no Crisp script or widget exists in this repository.
+
+---
+
 # Attorney review: Privacy Policy and Terms of Service (October 2026)
 
 These changes went live on zerbiq.com before review. Both pages say
