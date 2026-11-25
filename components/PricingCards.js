@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { brandify } from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, WEEKLY_VISITS_EXPLAINER, ANNUAL_SAVINGS_LABEL, enterprisePriceLabel, formatPlanPrice, formatAnnualMonthlyEquivalent, PAYMENT_PROCESSORS_NOTE, weeklyVisitsLabel, planStorageLabel, planCapacityShortLabel, assistantQuestionsFeatureLabel } from '@/lib/planData';
+import { PLAN_METADATA, WEEKLY_VISITS_EXPLAINER, ANNUAL_SAVINGS_LABEL, enterprisePriceLabel, formatPlanPrice, formatAnnualMonthlyEquivalent, PAYMENT_PROCESSORS_NOTE, weeklyVisitsLabel, planStorageLabel, planCapacityShortLabel, assistantQuestionsFeatureLabel } from '@/lib/planData';
 
 // Feature lists for each plan (human-readable labels shown on pricing cards).
 // Plan gates (which plan first unlocks a feature) live in lib/planData.js.
@@ -60,7 +60,6 @@ const PLAN_INCLUDED = {
     'Maintenance scheduling',
     'Embeddable lead capture form',
     'Employee asset checkout',
-    `Multiple service locations (+$${MULTI_LOCATION_FEE.Field}/mo per location)`,
     assistantQuestionsFeatureLabel('Field'),
   ],
   Command: [
@@ -70,11 +69,9 @@ const PLAN_INCLUDED = {
     'Tech performance reports',
     'Advanced reports & job costing',
     'Automations & rules engine',
-    'In-app messaging',
-    'Messaging in customer portal',
+    'Two-way customer texting inbox (needs the texting add-on)',
     'Automated follow-up sequences',
     'Priority support',
-    `Multiple service locations (+$${MULTI_LOCATION_FEE.Command}/mo per location)`,
     assistantQuestionsFeatureLabel('Command'),
   ],
   Enterprise: [

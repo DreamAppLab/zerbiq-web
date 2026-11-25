@@ -2,7 +2,7 @@ import { PRIMARY_CTA_LABEL, SIGNUP_HREF } from '@/lib/siteConfig.mjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, FEATURE_GATE, gateToBadge, PAYMENT_PROCESSORS_NOTE, MULTI_LOCATION_FEE, AI_ASSISTANT_NAME, ROUTE_INTELLIGENCE_DESCRIPTION, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
+import { BADGE, FEATURE_GATE, gateToBadge, PAYMENT_PROCESSORS_NOTE, AI_ASSISTANT_NAME, ROUTE_INTELLIGENCE_DESCRIPTION, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
 import { pageMetadata } from '@/lib/seo.mjs';
 
 export const metadata = pageMetadata({
@@ -116,16 +116,6 @@ const FEATURE_GROUPS = [
         ],
         badge: BADGE.all,
       },
-      {
-        icon: '📍',
-        title: 'Multiple Service Locations',
-        screenshot: '47-multi-location.png',
-        desc: [
-          "Running more than one location? Add additional service areas to your account and manage them all from one login. Routes, teams, customers, and billing stay organized by location.",
-          `Available on Field and above — each additional location is $${MULTI_LOCATION_FEE.Field}/mo on Field and $${MULTI_LOCATION_FEE.Command}/mo on Command.`,
-        ],
-        badge: gateToBadge(FEATURE_GATE.multipleLocations),
-      },
     ],
   },
   {
@@ -203,7 +193,7 @@ const FEATURE_GROUPS = [
         desc: [
           "Every plan includes a customer portal — a secure, branded page where your customers sign in with a one-time link or code (no password required) and see everything about their account: service history with visit photos, upcoming jobs, invoices, service requests, and contact preferences.",
           `Customers pay invoices online by card or bank (ACH) directly through the portal — once you connect a payment processor account of your own (${PAYMENT_PROCESSORS_NOTE}). The portal has no add-ons and no upcharges.`,
-          "On every plan, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging. Customers who can self-serve become customers who stay.",
+          "On every plan, the portal also shows quote approval so customers can approve estimates with one tap. Customers who can self-serve become customers who stay.",
         ],
         badge: BADGE.all,
       },

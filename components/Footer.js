@@ -2,7 +2,6 @@ import Link from 'next/link';
 import ZIcon from './ZIcon';
 import ZerbiqBrand from '@/components/ZerbiqBrand';
 import { SIGN_IN_HREF, SUPPORT_EMAIL, activeStoreLinks } from '@/lib/siteConfig.mjs';
-import { STORE_COMING_SOON_LABEL } from '@/lib/planData';
 
 export default function Footer() {
   const storeLinks = activeStoreLinks();
@@ -86,12 +85,6 @@ export default function Footer() {
             >
               Sign in
             </a>
-            {/* No store links yet: say "coming soon" instead of showing store badges */}
-            {storeLinks.length === 0 && (
-              <span style={{ color: 'var(--color-white-60)', fontSize: 14, fontWeight: 500 }}>
-                {STORE_COMING_SOON_LABEL}
-              </span>
-            )}
             {storeLinks.length > 0 && (
               <span
                 style={{ display: 'inline-flex', flexWrap: 'wrap', gap: '12px 16px', alignItems: 'center' }}
@@ -146,7 +139,7 @@ export default function Footer() {
           <p style={{ color: 'var(--color-white-60)', fontSize: 13, margin: 0 }}>
             © 2026 <ZerbiqBrand /> LLC. All rights reserved.
           </p>
-          <div style={{ display: 'flex', gap: 20 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 20px' }}>
             <Link
               href="/legal/tos"
               className="link-muted"
@@ -160,6 +153,13 @@ export default function Footer() {
               style={{ fontSize: 13 }}
             >
               Privacy Policy
+            </Link>
+            <Link
+              href="/legal/dpa"
+              className="link-muted"
+              style={{ fontSize: 13 }}
+            >
+              Data Processing Addendum
             </Link>
           </div>
         </div>

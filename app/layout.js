@@ -1,12 +1,12 @@
-import { Inter } from 'next/font/google';
+// Inter served from our own domain (no request to Google). A fixed family name, so
+// a cached server build can never point at a font class the CSS no longer has.
+import '@fontsource-variable/inter';
 import Script from 'next/script';
 import './globals.css';
 import HeroBackground from '@/components/HeroBackground';
 import { SITE_URL } from '@/lib/seo.mjs';
 
 const CRISP_WEBSITE_ID = 'a728346f-c12b-436e-a52b-5d163679c612';
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -32,7 +32,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en">
       <body>
         {/* Fixed full-viewport route animation — sits behind all page content */}
         <HeroBackground />

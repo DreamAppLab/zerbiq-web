@@ -14,6 +14,7 @@ for (const f of ['earlyAccess.mjs', 'siteConfig.mjs', 'seo.mjs']) {
   copyFileSync(new URL(`../lib/${f}`, import.meta.url), join(dir, f));
 }
 const pd = await import(pathToFileURL(join(dir, 'planData.mjs')).href);
+const SITE_CONFIG = await import(pathToFileURL(join(dir, 'siteConfig.mjs')).href);
 const seo = await import(pathToFileURL(join(dir, 'seo.mjs')).href);
 
 // Every source file that can put words on a public page.
@@ -57,6 +58,10 @@ function publicTextFiles(root) {
 }
 const OTHER_TEXT = ['README.md', ...publicTextFiles('public')].map((f) => [f, read(f)]);
 
+const RULE = 'If your company completes more than 150% of your plan’s weekly visits in each of 4 weeks in a row, we move your plan up to the next plan. We email the owner first, and the new plan starts 30 days after that notice. Your work is never blocked and there is no per-visit overage fee.';
+
+const DOWN = 'If your company stays below the previous plan’s weekly visits for 12 weeks in a row, we move your plan back down.';
+
 test('plan facts: prices, weekly visits and annual = 10 months (plans.cjs launch pricing)', () => {
   // plans.cjs PLANS[*]: monthlyFee 39 / 129 / 209 / 349, annualFee 390 / 1290 / 2090 / 3490,
   // weeklyVisits 125 / 350 / 1000 / 2000; Enterprise from $599 a month, quoted.
@@ -72,29 +77,28 @@ test('plan facts: prices, weekly visits and annual = 10 months (plans.cjs launch
   assert.equal(pd.ENTERPRISE_FROM_MONTHLY_PRICE, 599);
   assert.equal(pd.enterprisePriceLabel(), 'From $599/mo · quoted');
   assert.equal(byName.Solo.users, 1);
-  assert.deepEqual(pd.MULTI_LOCATION_FEE, { Field: 69, Command: 89 });
   assert.deepEqual(['Solo', 'Core', 'Field', 'Command'].map((n) => pd.formatPlanPrice(byName[n].monthlyPrice)), ['39', '129', '209', '349']);
 });
 
 test('weekly completed-visits allowance replaces every customer limit', () => {
   assert.deepEqual(pd.WEEKLY_VISITS, { Solo: 125, Core: 350, Field: 1000, Command: 2000, Enterprise: null });
-  assert.equal(pd.WEEKLY_VISITS_AVERAGE_WEEKS, 8);
   assert.deepEqual(['Solo', 'Core', 'Field', 'Command', 'Enterprise'].map(pd.weeklyVisitsLabel), [
-    '125 completed visits a week (8-week average)',
-    '350 completed visits a week (8-week average)',
-    '1,000 completed visits a week (8-week average)',
-    '2,000 completed visits a week (8-week average)',
+    '125 completed visits a week',
+    '350 completed visits a week',
+    '1,000 completed visits a week',
+    '2,000 completed visits a week',
     'More than 2,000 completed visits a week (quoted)',
   ]);
   assert.deepEqual(pd.PLAN_METADATA.map((p) => p.subtitle), ['Solo', 'Core', 'Field', 'Command', 'Enterprise'].map(pd.weeklyVisitsLabel));
   // plans.cjs WEEKLY_VISITS_EXPLAINER, word for word
-  assert.equal(pd.WEEKLY_VISITS_EXPLAINER, 'Every completed visit counts; skipped and canceled visits don’t. The allowance is judged on your 8-week average, never blocks work and has no per-visit overage fee.');
+  assert.equal(pd.WEEKLY_VISITS_EXPLAINER, 'Every completed visit counts; skipped and canceled visits don’t. ' + RULE);
   const o = pd.WEEKLY_VISITS_OVERAGE_ANSWER;
-  for (const part of ['We count completed visits per week', 'never blocked', 'no per-visit fee', 'sustained period', 'we will contact you', '30 days’ notice', 'next plan', '12 weeks', 'move back down']) {
-    assert.ok(o.includes(part), `overage answer says: ${part}`);
-  }
-  // The app has no automatic move-up yet: the move is something we do, never an automatic system behavior
-  assert.ok(!/automatic|owner gets a notice|150%|8 more weeks|billing date/i.test(o), 'no automatic move-up promise');
+  assert.equal(pd.PLAN_ALLOWANCE_RULE, RULE);
+  assert.equal(pd.PLAN_MOVE_DOWN_RULE, DOWN);
+  assert.ok(!pd.PLAN_ALLOWANCE_RULE.includes('12 weeks'), 'move-down is a separate sentence');
+  assert.equal(o, `${RULE} ${pd.PLAN_NEXT_PLAN_NOTE} ${DOWN}`, 'the overage FAQ answer is the move-up rule plus the move-down rule');
+  assert.ok(pd.WEEKLY_VISITS_EXPLAINER.includes(RULE));
+  assert.ok(!/average|sustained|8 more weeks/i.test(o + pd.WEEKLY_VISITS_EXPLAINER), 'old average wording is gone');
   assert.deepEqual(pd.WEEKLY_VISITS_FAQ.map((f) => f.q), [
     'Is there a limit on how many customers I can have?', 'What counts toward my weekly visits?', 'What happens if I go above my weekly visits?',
   ]);
@@ -163,7 +167,11 @@ test('the word "archive" is never used for customers anywhere on the site', () =
     }
   };
   ['app', 'components', 'lib'].forEach(walk);
+  // The two generated files below hold Eddie's final Terms and Privacy Policy verbatim. The Terms use
+  // "archival copies" for backups, not for customers, and the wording must not be edited here.
+  const VERBATIM_LEGAL = ['app/legal/tos/content.js', 'app/legal/privacy/content.js'];
   for (const f of files) {
+    if (VERBATIM_LEGAL.includes(f)) continue;
     const hits = read(f).split('\n').filter((l) => /archiv/i.test(l));
     assert.deepEqual(hits, [], `${f} must not use "archive" (say "Inactive")`);
   }
@@ -178,16 +186,16 @@ test('/compare has no recurring-customer row and no included-texts row', () => {
   assert.ok(compare.includes('TEXTING_PRICING_HREF') && compare.includes('/pricing#texting-addon'));
 });
 
-test('no page says native apps are available, links an app store, or promises PWA install', () => {
+test('no page makes a false app claim or promises PWA install', () => {
   for (const [f, text] of siteText) {
-    if (f === 'lib/siteConfig.mjs') continue; // hidden "Get the app" links, empty until the apps ship
+    if (f === 'lib/siteConfig.mjs') continue; // the published store links live here
     assert.ok(!/free download for iPhone/i.test(text), `${f}: app download claim`);
     assert.ok(!/available as a native app/i.test(text), `${f}: native app claim`);
     assert.ok(!/without going through an app store|no app store/i.test(text), `${f}: app-store wording`);
     assert.ok(!/add (it )?to (your phone's )?home screen/i.test(text), `${f}: PWA wording`);
   }
-  assert.ok(pd.MOBILE_TEAM_VIEW_NOTE.includes('any smartphone browser today'));
-  assert.ok(pd.MOBILE_TEAM_VIEW_NOTE.includes('native iOS and Android apps are coming with the public release'));
+  assert.ok(pd.MOBILE_TEAM_VIEW_NOTE.includes('any smartphone browser'));
+  assert.ok(pd.MOBILE_TEAM_VIEW_NOTE.includes('native iOS and Android apps'));
 });
 
 test('unsupported claims are gone from every page and component', () => {
@@ -219,7 +227,6 @@ test('home cards show the same plan badge as the shared gates', () => {
       'GPS Field Tracking': 'gpsFieldTracking',
       'Subcontractor Management': 'subcontractors',
       'Lead Management': 'leadManagement',
-      'Multiple Service Locations': 'multipleLocations',
       'Zerbiq AI assistant': 'aiChatbot',
       'Mileage Tracking': 'mileageTracking',
       'Equipment & Asset Tracking': 'equipmentTracking',
@@ -245,7 +252,7 @@ test('every page exports its own metadata with a canonical path matching its rou
     assert.ok(text.includes(`path: '${route}'`), `${f} canonical path is ${route}`);
     seen.add(route);
   }
-  for (const route of ['/', '/about', '/blog', '/compare', '/early-access', '/features', '/pricing', '/support', '/texting', '/legal/privacy', '/legal/tos']) {
+  for (const route of ['/', '/about', '/blog', '/compare', '/early-access', '/features', '/pricing', '/support', '/texting', '/legal/privacy', '/legal/tos', '/legal/dpa', '/legal/subprocessors']) {
     assert.ok(seen.has(route), `${route} covered`);
   }
   assert.ok(read('app/blog/[slug]/page.js').includes('path: `/blog/'));
@@ -384,11 +391,23 @@ test('pricing page has the storage box and no name FAQ; compare has the new rows
   assert.ok(cards.indexOf('formatPlanPrice(plan.monthlyPrice)') < order[0], 'price comes first');
 });
 
-test('with no store links, the footer says coming soon instead of showing store badges', () => {
+test('both apps are published: store links are set and no page says the apps are coming soon', () => {
+  const links = SITE_CONFIG.activeStoreLinks();
+  assert.deepEqual(links, [
+    { label: 'App Store', href: 'https://apps.apple.com/app/id6825717480' },
+    { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.zerbiq.app' },
+  ]);
+  assert.equal(pd.STORE_COMING_SOON_LABEL, undefined);
+  for (const f of SITE) {
+    const text = read(f);
+    assert.ok(!/STORE_COMING_SOON/.test(text), `${f}: stale coming-soon label`);
+    assert.ok(!/coming with the public release|apps? (is|are) (coming|not (yet )?available)/i.test(text), `${f}: stale app wording`);
+    assert.ok(!/(iOS|Android|native|mobile) apps?[^\n]{0,40}coming soon|coming soon[^\n]{0,40}(iOS|Android)/i.test(text), `${f}: apps coming soon`);
+  }
   const footer = read('components/Footer.js');
-  assert.ok(footer.includes('STORE_COMING_SOON_LABEL'));
-  assert.equal(pd.STORE_COMING_SOON_LABEL, 'iOS and Android apps: coming soon');
-  assert.ok(!/apps\.apple\.com|play\.google\.com/.test(SITE.map((f) => read(f)).join('\n').replace(/e\.g\. 'https:[^']*'/g, '')));
+  assert.ok(footer.includes('activeStoreLinks()') && footer.includes('Get the app:'));
+  assert.ok(read('app/support/page.js').includes('activeStoreLinks()'), 'support page shows the store links');
+  assert.ok(!/Coming soon/.test(read('app/compare/page.js')), 'compare has no coming-soon cell');
 });
 
 test('white-glove is an optional add-on below the plan cards, not inside them', () => {
@@ -425,7 +444,7 @@ test('feature gates match the app: quotes on all plans; fleet, routes and pay on
   // plans.cjs: team, timecards, attendance are 'solo'; purchaseOrders -> inventory, paymentPlans and lateFees -> invoicing are 'solo'
   for (const k of ['rolesPermissions', 'timecards', 'attendanceTracking', 'timeOff', 'employeeIdPin', 'gpsFieldTracking', 'employeeTermination', 'purchaseOrders', 'partialPayments', 'lateFees']) assert.equal(g[k], 'all', k);
   // still Field
-  for (const k of ['assetCheckout', 'subcontractors', 'maintenanceScheduling', 'leadCaptureForm', 'multipleLocations']) assert.equal(g[k], 'field', k);
+  for (const k of ['assetCheckout', 'subcontractors', 'maintenanceScheduling', 'leadCaptureForm']) assert.equal(g[k], 'field', k);
 });
 
 test('every plan card lists each feature on the plan its gate says, and on no lower plan', () => {
@@ -436,7 +455,7 @@ test('every plan card lists each feature on the plan its gate says, and on no lo
       'Daily truck inspections': 'truckInspection', 'Commissions & per-job team pay': 'commissions', 'Leads inbox': 'leadManagement',
       'Subcontractor management': 'subcontractors', 'Maintenance scheduling': 'maintenanceScheduling', 'Performance reviews': 'performanceReviews',
       'Incident tracking': 'incidentTracking', 'Tech performance reports': 'techPerformance', 'Advanced reports & job costing': 'advancedReports',
-      'Automations & rules engine': 'automationsEngine', 'In-app messaging': 'inAppMessaging', 'Priority support': 'prioritySupport',
+      'Automations & rules engine': 'automationsEngine', 'Two-way customer texting inbox (needs the texting add-on)': 'inAppMessaging', 'Priority support': 'prioritySupport',
       'Team messaging': 'teamMessaging', 'Time tracking & timecards': 'timecards', 'Purchase orders': 'purchaseOrders',
       'Employee asset checkout': 'assetCheckout', 'Partial payments': 'partialPayments', 'Embeddable lead capture form': 'leadCaptureForm',
       'GPS field tracking': 'gpsFieldTracking', 'QuickBooks Online sync': 'quickbooksSync',
@@ -449,7 +468,7 @@ test('every plan card lists each feature on the plan its gate says, and on no lo
       'Daily truck inspections': 'truckInspection', 'Commissions & per-job team pay': 'commissions', 'Leads inbox & pipeline': 'leadManagement',
       'Performance reviews': 'performanceReviews', 'Incident tracking': 'incidentTracking', 'Tech performance reports': 'techPerformance',
       'Advanced reports & job costing': 'advancedReports', 'Team messaging': 'teamMessaging', 'Priority support': 'prioritySupport',
-      'Subcontractor management': 'subcontractors', 'Maintenance calendar': 'maintenanceScheduling', 'In-app messaging': 'inAppMessaging',
+      'Subcontractor management': 'subcontractors', 'Maintenance calendar': 'maintenanceScheduling', 'Two-way customer texting inbox (needs the texting add-on)': 'inAppMessaging',
       'Payment plans': 'partialPayments', 'Automated late fees': 'lateFees', 'Purchase orders': 'purchaseOrders', 'Roles & permissions': 'rolesPermissions',
       'Time tracking & timecards': 'timecards', 'Attendance & time off': 'attendanceTracking', 'GPS field tracking': 'gpsFieldTracking',
       'Employee ID & PIN login': 'employeeIdPin', 'Employee termination workflow': 'employeeTermination', 'Unlimited users': 'unlimitedUsers',
@@ -546,4 +565,39 @@ test('card copy does not promise features from a higher plan', () => {
   }
   const core = read('app/compare/page.js');
   assert.ok(!/name: 'Core'[\s\S]*?features: \[[^\]]*Team management/.test(core), 'Team management is not a Core add');
+});
+
+test('the old 8-week average wording appears nowhere on the site, and the new rule is on every page that states it', async () => {
+  const { readFileSync, readdirSync, statSync } = await import('node:fs');
+  const walk = (d) => readdirSync(d).flatMap((f) => {
+    const p = `${d}/${f}`;
+    return statSync(p).isDirectory() ? walk(p) : /\.(js|mjs)$/.test(f) ? [p] : [];
+  });
+  const root = new URL('..', import.meta.url).pathname;
+  for (const dir of ['app', 'components', 'lib']) {
+    for (const f of walk(`${root}${dir}`)) {
+      const text = readFileSync(f, 'utf8');
+      assert.ok(!/8[- ]week/i.test(text), `${f} still says 8-week`);
+      assert.ok(!/WEEKLY_VISITS_AVERAGE_WEEKS/.test(text), `${f} still uses the retired constant`);
+    }
+  }
+  // The Terms are Eddie's final document (app/legal/tos/content.js, generated verbatim from Word). They state
+  // the plan-change rule in Article V in their own words; the site's PLAN_ALLOWANCE_RULE copy must say the same thing.
+  const { HTML } = await import(pathToFileURL(`${root}app/legal/tos/content.js`).href);
+  const tos = HTML.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+  assert.match(tos, /Article V Subscription Plans, Usage Allowances, and Plan Changes/);
+  assert.match(tos, /Section 5\.3 Upward Plan Adjustment\. If Customer completes more than 150% of its Subscription Plan’s weekly visit allowance during each of four consecutive weekly measurement periods/);
+  assert.match(tos, /Zerbiq will provide notice to the Account owner before the adjustment, and the new Subscription Plan and its Fees will take effect thirty days after that notice/);
+  assert.match(tos, /Section 5\.4 Command and Enterprise Plans\..*the next Subscription Plan will be Enterprise\. Zerbiq will quote the applicable Enterprise pricing before the adjustment takes effect/);
+  assert.match(tos, /Section 5\.5 Downward Plan Adjustment\..*for twelve consecutive weekly measurement periods/);
+  assert.match(tos, /overage charge/);
+  assert.match(tos, /Effective Date: November 24, 2026/);
+  assert.match(tos, /support@zerbiq\.com/);
+  assert.doesNotMatch(tos, /8[- ]week|eight[- ]week|average/i);
+  assert.doesNotMatch(tos, /automatic(ally)? (move|change)s? (your|Customer)/i);
+  // The site copy agrees with it
+  assert.match(pd.PLAN_ALLOWANCE_RULE, /150%/);
+  assert.match(pd.PLAN_ALLOWANCE_RULE, /4 weeks in a row/);
+  assert.match(pd.PLAN_MOVE_DOWN_RULE, /12 weeks in a row/);
+  assert.equal(pd.PLAN_NEXT_PLAN_NOTE, 'For Command, the next plan is Enterprise, at a price we quote you before the change.');
 });
