@@ -1,10 +1,14 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { pageMetadata } from '@/lib/seo.mjs';
 import { SUBPROCESSORS } from '../subprocessors-data';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Subprocessors — Zerbiq',
-};
+  description:
+    'The companies Zerbiq uses to provide the service, what each does and what data it receives.',
+  path: '/legal/subprocessors',
+});
 
 const linkStyle = { color: 'var(--color-primary)' };
 

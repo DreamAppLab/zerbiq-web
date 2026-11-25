@@ -1,10 +1,14 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { pageMetadata } from '@/lib/seo.mjs';
 import { SUBPROCESSORS } from '../subprocessors-data';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Data Processing Addendum — Zerbiq',
-};
+  description:
+    'How Zerbiq handles your customers’ personal information on your behalf: instructions, security, subprocessors and data deletion.',
+  path: '/legal/dpa',
+});
 
 const h2Style = { color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 12 };
 const linkStyle = { color: 'var(--color-primary)' };
