@@ -48,6 +48,11 @@ export const SUBPROCESSORS = [
     data: 'The payment amount, an order reference, and the customer’s email address (if on file). Card details are entered by the payer on Authorize.net.',
   },
   {
+    name: 'Crisp IM SAS (Crisp)',
+    purpose: 'Live chat and visitor support on the zerbiq.com website.',
+    data: 'Messages a visitor sends in the chat, any contact details they enter, and basic visit information such as pages viewed.',
+  },
+  {
     name: 'Google LLC (Google Maps Platform)',
     purpose: 'Address lookup, address suggestions, and map coordinates for routing.',
     data: 'Service and mailing addresses, and address search text.',

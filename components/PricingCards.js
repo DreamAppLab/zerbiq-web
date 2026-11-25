@@ -2,85 +2,84 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, formatPlanPrice, formatAnnualMonthlyEquivalent } from '@/lib/planData';
-
-const ACTIVE_CUSTOMER_DEF =
-  'Active customers are customers currently managed in your account. Archive any customer at any time to free up a slot — their complete history, invoices, and job records are always retained.';
+import { brandify } from '@/components/ZerbiqBrand';
+import { PLAN_METADATA, WEEKLY_VISITS_EXPLAINER, ANNUAL_SAVINGS_LABEL, enterprisePriceLabel, formatPlanPrice, formatAnnualMonthlyEquivalent, PAYMENT_PROCESSORS_NOTE, weeklyVisitsLabel, planStorageLabel, planCapacityShortLabel, assistantQuestionsFeatureLabel } from '@/lib/planData';
 
 // Feature lists for each plan (human-readable labels shown on pricing cards).
 // Plan gates (which plan first unlocks a feature) live in lib/planData.js.
 const PLAN_INCLUDED = {
   Solo: [
-    '1 user (owner-operator)',
-    'Unlimited routes',
+    'Unlimited routes (route management)',
     'Job scheduling & tracking',
     'Recurring jobs',
+    'Estimates & quotes',
+    'Quote approval in customer portal',
     'Invoicing & payments',
     'Online payments (card & ACH)',
+    'QuickBooks Online sync',
     'Customer portal',
     'Transaction & bank register',
     'Materials catalog & inventory',
     'Analytics & reporting dashboard',
-    'Automated customer notifications',
-    'Review requests',
-    'Mileage tracking',
-    'Mobile team view',
+    'Automated customer notifications (email; texting is an optional add-on)',
+    'Review requests (by email)',
+    'Mobile team view (any smartphone browser)',
     'Data export',
-    'Route management',
     'Credits & refunds',
+    'Partial payments and payment plans',
+    'Automated late fees',
+    'Purchase orders',
+    'Roles & permissions',
+    'Time tracking & timecards',
+    'Attendance & time off',
+    'GPS field tracking (phone-based, no hardware)',
+    'Employee ID and PIN login',
+    'Employee termination workflow',
     'Holiday Management',
     'Billing Cycles',
     'Parts on order',
     'Custom branding',
     'Light mode and dark mode',
     'Personalized shortcuts bar',
+    assistantQuestionsFeatureLabel('Solo'),
   ],
   Core: [
     'Everything in Solo',
     'Unlimited team members',
-    'Vehicle & equipment tracking',
-    'Attendance & time off',
-    'Time tracking & timecards',
-    'Performance reviews',
-    'Incident tracking',
-    'GPS field tracking (phone-based, no hardware)',
-    'Daily truck inspection and checklists',
-    'Employee ID and PIN login',
-    'Purchase orders',
-    'Tech performance reports',
+    'Team messaging (staff-to-staff)',
+    assistantQuestionsFeatureLabel('Core'),
   ],
   Field: [
     'Everything in Core',
-    'Leads & quote management',
-    'Estimates & quotes',
-    'Quote approval in customer portal',
+    'Route optimization & Rebalance all routes (Route Intelligence)',
+    'Vehicles, trailers, equipment, tools & mileage',
+    'Daily truck inspections and checklists',
+    'Commissions & per-job team pay',
+    'Leads inbox & pipeline',
     'Subcontractor management',
     'Maintenance scheduling',
-    'Partial payments and payment plans',
     'Embeddable lead capture form',
-    'Employee termination workflow',
-    'Route Intelligence',
     'Employee asset checkout',
-    `Multiple service locations (+$${MULTI_LOCATION_FEE.Field}/mo per location)`,
+    assistantQuestionsFeatureLabel('Field'),
   ],
   Command: [
     'Everything in Field',
+    'Performance reviews',
+    'Incident tracking',
+    'Tech performance reports',
+    'Advanced reports & job costing',
     'Automations & rules engine',
-    'In-app messaging',
-    'Messaging in customer portal',
-    'QuickBooks sync',
-    'AI support chatbot',
+    'Two-way customer texting inbox (needs the texting add-on)',
     'Automated follow-up sequences',
     'Priority support',
-    `Multiple service locations (+$${MULTI_LOCATION_FEE.Command}/mo per location)`,
+    assistantQuestionsFeatureLabel('Command'),
   ],
   Enterprise: [
     'Everything in Command',
-    'No active customer limit',
     'Open to smaller teams that want its extra features',
-    'White-glove onboarding',
     'Direct support',
-    'Custom pricing',
+    'Quoted pricing and allowances',
+    assistantQuestionsFeatureLabel('Enterprise'),
   ],
 };
 
@@ -94,6 +93,8 @@ const PLANS = PLAN_METADATA.map((meta) => ({
 function CheckIcon({ included }) {
   return included ? (
     <svg
+      aria-hidden="true"
+      focusable="false"
       width="16"
       height="16"
       viewBox="0 0 16 16"
@@ -111,6 +112,8 @@ function CheckIcon({ included }) {
     </svg>
   ) : (
     <svg
+      aria-hidden="true"
+      focusable="false"
       width="16"
       height="16"
       viewBox="0 0 16 16"
@@ -145,6 +148,8 @@ export default function PricingCards() {
         }}
       >
         <button
+          type="button"
+          aria-pressed={!annual}
           onClick={() => setAnnual(false)}
           style={{
             background: !annual ? 'var(--color-primary)' : 'var(--color-raised)',
@@ -161,6 +166,8 @@ export default function PricingCards() {
           Monthly
         </button>
         <button
+          type="button"
+          aria-pressed={annual}
           onClick={() => setAnnual(true)}
           style={{
             background: annual ? 'var(--color-primary)' : 'var(--color-raised)',
@@ -178,7 +185,7 @@ export default function PricingCards() {
           }}
         >
           Annual
-          {annual && (
+          {(
             <span
               style={{
                 background: 'rgba(255,255,255,0.2)',
@@ -188,18 +195,16 @@ export default function PricingCards() {
                 fontWeight: 700,
               }}
             >
-              2 months free
+              {ANNUAL_SAVINGS_LABEL}
             </span>
           )}
         </button>
-        {!annual && (
-          <span style={{ color: 'var(--color-white-60)', fontSize: 13 }}>
-            → Switch to Annual &amp; get 2 months free
-          </span>
-        )}
+        <span style={{ color: 'var(--color-white-60)', fontSize: 13 }}>
+          {annual ? `Annual billing: ${ANNUAL_SAVINGS_LABEL}` : `Switch to Annual and get ${ANNUAL_SAVINGS_LABEL}`}
+        </span>
       </div>
 
-      {/* Active customer info box */}
+      {/* Weekly visits info box */}
       <div
         style={{
           maxWidth: 680,
@@ -213,7 +218,7 @@ export default function PricingCards() {
           alignItems: 'flex-start',
         }}
       >
-        <span style={{ fontSize: 16 }}>💡</span>
+        <span aria-hidden="true" style={{ fontSize: 16 }}>💡</span>
         <p
           style={{
             margin: 0,
@@ -222,7 +227,8 @@ export default function PricingCards() {
             lineHeight: 1.6,
           }}
         >
-          {ACTIVE_CUSTOMER_DEF}
+          <strong style={{ color: '#fff' }}>No customer limit on any plan.</strong>{' '}
+          Your plan is sized by the completed visits you do each week. {WEEKLY_VISITS_EXPLAINER}
         </p>
       </div>
 
@@ -240,7 +246,7 @@ export default function PricingCards() {
           alignItems: 'flex-start',
         }}
       >
-        <span style={{ fontSize: 16 }}>🌐</span>
+        <span aria-hidden="true" style={{ fontSize: 16 }}>🌐</span>
         <p
           style={{
             margin: 0,
@@ -250,8 +256,8 @@ export default function PricingCards() {
           }}
         >
           <strong style={{ color: '#fff' }}>Every plan includes a customer portal and online payments.</strong>{' '}
-          No add-ons, no upcharges. Customers sign in by secure link or one-time code — no password required.
-          Online invoice payment (card &amp; ACH) requires connecting a supported payment processor (Stripe, Square, or PayPal).
+          The portal has no add-ons and no upcharges. Customers sign in by secure link or one-time code — no password required.
+          Online invoice payment (card &amp; ACH) requires connecting a payment processor account of your own ({PAYMENT_PROCESSORS_NOTE}).
         </p>
       </div>
 
@@ -345,28 +351,11 @@ export default function PricingCards() {
                   )}
                 </>
               ) : (
-                <span style={{ fontSize: 'clamp(28px, 2vw, 36px)', fontWeight: 900, letterSpacing: '-0.03em' }}>Custom</span>
+                <span style={{ fontSize: 'clamp(20px, 1.6vw, 26px)', fontWeight: 900, letterSpacing: '-0.03em' }}>{enterprisePriceLabel()}</span>
               )}
             </div>
 
-            {/* Users callout — Solo is a single user; every other plan is unlimited */}
-            <div
-              style={{
-                marginBottom: 14,
-                background: 'rgba(61,92,255,0.12)',
-                border: '1px solid rgba(61,92,255,0.4)',
-                borderRadius: 8,
-                padding: '12px 14px',
-              }}
-            >
-              <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.55 }}>
-                {plan.users === 1
-                  ? "1 user included — built for owner-operators. Everything you need to run, bill and grow — no team features you don't use."
-                  : 'Unlimited users included — owners, office staff, and every tech in the field. One flat price. No per-seat fees. Ever.'}
-              </p>
-            </div>
-
-            {/* Limits */}
+            {/* Limits, in this order: weekly visits, users, storage, approximate capacity */}
             <div
               style={{
                 background: 'var(--color-surface)',
@@ -374,20 +363,27 @@ export default function PricingCards() {
                 padding: '12px 14px',
                 marginBottom: 24,
                 fontSize: 13,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 10,
               }}
             >
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  flexWrap: 'wrap',
-                  gap: 8,
-                  marginBottom: 6,
-                }}
-              >
-                <span style={{ color: 'var(--color-white-60)' }}>Active customers:</span>
-                <span style={{ fontWeight: 600 }}>{plan.activeCustomers}</span>
+              <div>
+                <div style={{ color: 'var(--color-white-60)' }}>Completed visits:</div>
+                <div style={{ fontWeight: 600 }}>{weeklyVisitsLabel(plan.name)}</div>
+              </div>
+              <div>
+                <div style={{ color: 'var(--color-white-60)' }}>Users:</div>
+                <div style={{ fontWeight: 600 }}>
+                  {plan.users === 1 ? '1 user' : 'Unlimited users, no per-seat fees'}
+                </div>
+              </div>
+              <div>
+                <div style={{ color: 'var(--color-white-60)' }}>Storage:</div>
+                <div style={{ fontWeight: 600 }}>{planStorageLabel(plan.name)}</div>
+                {planCapacityShortLabel(plan.name) && (
+                  <div style={{ color: 'var(--color-white-60)', fontSize: 12, marginTop: 2 }}>{planCapacityShortLabel(plan.name)}</div>
+                )}
               </div>
             </div>
 
@@ -431,7 +427,7 @@ export default function PricingCards() {
                   }}
                 >
                   <CheckIcon included={true} />
-                  {f}
+                  {brandify(f)}
                 </li>
               ))}
               {plan.excluded.map((f) => (

@@ -1,23 +1,27 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { Fragment } from 'react';
 import Link from 'next/link';
-import ZerbiqBrand from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, MULTI_LOCATION_FEE, FEATURE_GATE, gateToValues, formatPlanPrice } from '@/lib/planData';
+import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
+import { PLAN_METADATA, FEATURE_GATE, WEEKLY_VISITS_EXPLAINER, weeklyVisitsNumberLabel, enterprisePriceLabel, planCapacityShortLabel, assistantQuestionsFeatureLabel, TOP_SELF_SERVE_WEEKLY_VISITS, AI_ASSISTANT_NAME, TEXTING_ADDON, TEXTING_NUMBER_PHRASE, TEXTING_REVIEW_TIME, TEXTING_PLAN_CARD_LINE, TEXTING_PRICING_HREF, gateToValues, formatPlanPrice, textBlockFromLabel, WHITE_GLOVE_FEE, STORAGE_PACKS_SENTENCE, STORAGE_ASSUMPTION_NOTE, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
+import PaymentsStayYours from '@/components/PaymentsStayYours';
+import { pageMetadata } from '@/lib/seo.mjs';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Compare Plans — Zerbiq',
   description: 'Every feature, every plan — side by side. Compare Solo, Core, Field, Command, and Enterprise.',
-};
+  path: '/compare',
+});
 
 // Plan header data for the comparison table (derived from PLAN_METADATA).
 const PLANS = PLAN_METADATA.map((p) => ({
   name: p.name,
-  price: p.monthlyPrice != null ? `$${formatPlanPrice(p.monthlyPrice)}` : 'Custom',
+  price: p.monthlyPrice != null ? `$${formatPlanPrice(p.monthlyPrice)}` : enterprisePriceLabel(),
   href: p.ctaHref,
   cta: p.cta,
   isExternal: p.ctaExternal,
   popular: p.popular,
-  subtitle: `${p.activeCustomers} active customers`,
+  subtitle: p.subtitle,
 }));
 
 // ── Comparison table feature groups ──────────────────────────────────────────
@@ -28,12 +32,16 @@ const PLANS = PLAN_METADATA.map((p) => ({
 // Plan column order: [Solo, Core, Field, Command, Enterprise]
 const FEATURE_GROUPS = [
   {
-    group: 'Customer Limits',
+    group: 'Plan Limits',
     rows: [
+      { label: 'Completed visits a week ⁵', values: PLAN_METADATA.map((p) => weeklyVisitsNumberLabel(p.name)) },
       { label: 'Users included',          values: PLAN_METADATA.map((p) => (p.users != null ? String(p.users) : 'Unlimited')) },
-      { label: 'Active customers',        values: PLAN_METADATA.map((p) => p.activeCustomers) },
+      { label: 'Photo & video storage included ⁴', values: PLAN_METADATA.map((p) => storageIncludedLabel(p.name)) },
+      { label: 'About how many photos or videos (approximate) ⁴', values: PLAN_METADATA.map((p) => planCapacityShortLabel(p.name).replace(/ \(approximate\)$/, '') || 'No storage limit') },
+      { label: 'ZerbIQ questions per month', values: PLAN_METADATA.map((p) => assistantQuestionsLabel(p.name)) },
+      { label: 'White-Glove Onboarding (one time)', values: PLAN_METADATA.map((p) => (WHITE_GLOVE_FEE[p.name] != null ? `$${WHITE_GLOVE_FEE[p.name]}` : 'Arranged with us')) },
       { label: 'Unlimited routes',        values: gateToValues(FEATURE_GATE.routeManagement) },
-      { label: 'Unlimited team members',  values: gateToValues(FEATURE_GATE.rolesPermissions) },
+      { label: 'Unlimited team members',  values: gateToValues(FEATURE_GATE.unlimitedUsers) },
     ],
   },
   {
@@ -48,7 +56,7 @@ const FEATURE_GROUPS = [
       { label: 'Missed stop tracking',                       values: gateToValues(FEATURE_GATE.missedStopTracking) },
       { label: 'Holiday Management',                         values: gateToValues(FEATURE_GATE.holidayManagement) },
       { label: 'Billing Cycles',                             values: gateToValues(FEATURE_GATE.billingCycles) },
-      { label: 'Daily Truck Inspection and Checklists',      values: gateToValues(FEATURE_GATE.truckInspection) },
+      { label: 'Daily truck inspections and checklists',      values: gateToValues(FEATURE_GATE.truckInspection) },
     ],
   },
   {
@@ -57,23 +65,28 @@ const FEATURE_GROUPS = [
       { label: 'Invoicing',                                        values: gateToValues(FEATURE_GATE.invoicing) },
       { label: 'Transaction & bank register',                      values: gateToValues(FEATURE_GATE.transactionRegister) },
       { label: 'Credits & refunds',                                values: gateToValues(FEATURE_GATE.creditsRefunds) },
+      { label: 'Automated late fees',                              values: gateToValues(FEATURE_GATE.lateFees) },
       { label: 'Partial payments and payment plans',               values: gateToValues(FEATURE_GATE.partialPayments) },
-      { label: 'Estimates & quotes',                               values: gateToValues(FEATURE_GATE.estimatesQuotes) },
-      { label: 'Online payment processing (card/ACH) ²',          values: gateToValues(FEATURE_GATE.onlinePayments) },
+      { label: 'Quotes & estimates (create, send, approve)',      values: gateToValues(FEATURE_GATE.estimatesQuotes) },
+      { label: 'Online payment processing (card/ACH) ¹',          values: gateToValues(FEATURE_GATE.onlinePayments) },
       { label: 'Purchase orders',                                  values: gateToValues(FEATURE_GATE.purchaseOrders) },
-      { label: 'QuickBooks sync',                                  values: gateToValues(FEATURE_GATE.quickbooksSync) },
+      { label: 'QuickBooks Online sync',                            values: gateToValues(FEATURE_GATE.quickbooksSync) },
     ],
   },
   {
-    group: 'SMS & Communications',
+    group: 'Email & Texting',
     rows: [
-      { label: 'Technician on the way SMS',      values: gateToValues(FEATURE_GATE.onTheWaySms) },
-      { label: 'Job completion SMS',             values: gateToValues(FEATURE_GATE.jobCompletionSms) },
-      { label: 'Appointment reminders',          values: gateToValues(FEATURE_GATE.appointmentReminders) },
-      { label: 'Automated invoice reminders',    values: gateToValues(FEATURE_GATE.invoiceReminders) },
-      { label: 'Review request automation',      values: gateToValues(FEATURE_GATE.reviewRequests) },
+      // Email is included on every plan. Texting is an optional add-on for every plan.
+      { label: 'Technician on the way notice (by email)',  values: gateToValues('all') },
+      { label: 'Technician on the way texts ²',            values: gateToValues(FEATURE_GATE.onTheWaySms) },
+      { label: 'Job completion texts ²',                   values: gateToValues(FEATURE_GATE.jobCompletionSms) },
+      { label: 'Texting setup (one time) ²',               values: PLAN_METADATA.map(() => `$${TEXTING_ADDON.setupFee}`) },
+      { label: 'Text blocks (prepaid, never expire) ²',    values: PLAN_METADATA.map(() => textBlockFromLabel()) },
+      { label: 'Appointment reminders (by email)',         values: gateToValues(FEATURE_GATE.appointmentReminders) },
+      { label: 'Automated invoice reminders (by email)',   values: gateToValues(FEATURE_GATE.invoiceReminders) },
+      { label: 'Review request automation (by email)',     values: gateToValues(FEATURE_GATE.reviewRequests) },
       { label: 'Automated follow-up sequences',  values: gateToValues(FEATURE_GATE.followUpSequences) },
-      { label: 'In-app messaging',               values: gateToValues(FEATURE_GATE.inAppMessaging) },
+      { label: 'Two-way customer texting inbox (needs the texting add-on)',             values: gateToValues(FEATURE_GATE.inAppMessaging) },
     ],
   },
   {
@@ -82,12 +95,11 @@ const FEATURE_GROUPS = [
       { label: 'Customer CRM',                            values: gateToValues(FEATURE_GATE.customerCrm) },
       { label: 'Custom fields',                           values: gateToValues(FEATURE_GATE.customFields) },
       { label: 'Complaints tracking',                     values: gateToValues(FEATURE_GATE.complaintsTracking) },
-      // Customer portal is on every plan. Portal also shows quote approval (Field+) and messaging (Command+).
-      // Online invoice payment requires a connected payment processor. See footnote ².
-      { label: 'Customer portal ²',                       values: gateToValues(FEATURE_GATE.customerPortal) },
+      // Customer portal is on every plan. Portal also shows quote approval (every plan).
+      // Online invoice payment requires a connected payment processor. See footnote ¹.
+      { label: 'Customer portal ¹',                       values: gateToValues(FEATURE_GATE.customerPortal) },
       { label: 'Lead management (Kanban)',                 values: gateToValues(FEATURE_GATE.leadManagement) },
       { label: 'Embeddable lead capture form',            values: gateToValues(FEATURE_GATE.leadCaptureForm) },
-      { label: 'Multiple service locations ¹',            values: gateToValues(FEATURE_GATE.multipleLocations) },
     ],
   },
   {
@@ -98,7 +110,7 @@ const FEATURE_GROUPS = [
       { label: 'Job photos & digital signatures',                values: gateToValues(FEATURE_GATE.jobPhotos) },
       { label: 'Chemical & material logs',                       values: gateToValues(FEATURE_GATE.chemicalLogs) },
       { label: 'GPS Field Tracking (phone-based, no hardware)',  values: gateToValues(FEATURE_GATE.gpsFieldTracking) },
-      { label: 'Route Intelligence (AI stop optimization)',      values: gateToValues(FEATURE_GATE.routeIntelligence) },
+      { label: 'Route optimization & Rebalance all routes (Route Intelligence)', values: gateToValues(FEATURE_GATE.routeIntelligence) },
       { label: 'Parts on Order',                                 values: gateToValues(FEATURE_GATE.partsOnOrder) },
     ],
   },
@@ -109,9 +121,11 @@ const FEATURE_GROUPS = [
       { label: 'Timecards & time tracking',         values: gateToValues(FEATURE_GATE.timecards) },
       { label: 'Attendance tracking',               values: gateToValues(FEATURE_GATE.attendanceTracking) },
       { label: 'Time off & PTO tracking',           values: gateToValues(FEATURE_GATE.timeOff) },
+      { label: 'Team messaging (staff-to-staff)',   values: gateToValues(FEATURE_GATE.teamMessaging) },
+      { label: 'Commissions & per-job team pay',    values: gateToValues(FEATURE_GATE.commissions) },
       { label: 'Performance reviews',               values: gateToValues(FEATURE_GATE.performanceReviews) },
       { label: 'Incident tracking',                 values: gateToValues(FEATURE_GATE.incidentTracking) },
-      { label: 'Vehicle & equipment tracking',      values: gateToValues(FEATURE_GATE.vehicleTracking) },
+      { label: 'Vehicles, trailers, equipment & tools', values: gateToValues(FEATURE_GATE.vehicleTracking) },
       { label: 'Employee termination workflow',     values: gateToValues(FEATURE_GATE.employeeTermination) },
       { label: 'Subcontractor management',          values: gateToValues(FEATURE_GATE.subcontractors) },
       { label: 'Employee ID and PIN Login',         values: gateToValues(FEATURE_GATE.employeeIdPin) },
@@ -133,7 +147,7 @@ const FEATURE_GROUPS = [
       { label: 'Revenue reports',                values: gateToValues(FEATURE_GATE.revenueReports) },
       { label: 'Job completion reports',         values: gateToValues(FEATURE_GATE.jobCompletionReports) },
       { label: 'Tech performance reports',       values: gateToValues(FEATURE_GATE.techPerformance) },
-      { label: 'Route profitability reports',    values: gateToValues(FEATURE_GATE.routeProfitability) },
+      { label: 'Advanced reports & job costing', values: gateToValues(FEATURE_GATE.advancedReports) },
       { label: 'Customer retention reports',     values: gateToValues(FEATURE_GATE.customerRetention) },
       { label: 'Overdue invoice aging',          values: gateToValues(FEATURE_GATE.overdueInvoiceAging) },
       { label: 'Data export (CSV/PDF/ZIP)',       values: gateToValues(FEATURE_GATE.dataExport) },
@@ -142,13 +156,13 @@ const FEATURE_GROUPS = [
   {
     group: 'Platform & Support',
     rows: [
-      { label: 'Mobile team view (iOS, Android & browser)',       values: gateToValues(FEATURE_GATE.mobileApp) },
-      { label: 'PWA (install from browser, no download required)',values: gateToValues(FEATURE_GATE.pwa) },
+      { label: 'Team view in any smartphone browser',             values: gateToValues(FEATURE_GATE.mobileApp) },
+      { label: 'Native iOS & Android apps',                           values: gateToValues('all') },
       { label: 'Light Mode and Dark Mode',                        values: gateToValues(FEATURE_GATE.lightDarkMode) },
       { label: 'Personalized Shortcuts Bar',                      values: gateToValues(FEATURE_GATE.shortcutsBar) },
       { label: 'Custom Branding',                                 values: gateToValues(FEATURE_GATE.customBranding) },
       { label: 'Automations & rules engine',                      values: gateToValues(FEATURE_GATE.automationsEngine) },
-      { label: 'AI support chatbot',                              values: gateToValues(FEATURE_GATE.aiChatbot) },
+      { label: AI_ASSISTANT_NAME,                                 values: gateToValues(FEATURE_GATE.aiChatbot) },
       { label: 'Priority support',                                values: gateToValues(FEATURE_GATE.prioritySupport) },
       { label: 'Dedicated onboarding',                            values: gateToValues(FEATURE_GATE.dedicatedOnboarding) },
       { label: 'Custom integrations',                             values: gateToValues(FEATURE_GATE.customIntegrations) },
@@ -157,9 +171,9 @@ const FEATURE_GROUPS = [
 ];
 
 // ── Plan summary cards (shown above the comparison table) ─────────────────────
-// Price and customer count come from PLAN_METADATA.
+// Price and weekly visits come from PLAN_METADATA. The ZerbIQ line is always the LAST feature of a card.
 const planPrice = (name) => PLANS.find((p) => p.name === name).price + (name === 'Enterprise' ? '' : '/mo');
-const planCustomers = (name) => PLANS.find((p) => p.name === name).subtitle;
+const planVisits = (name) => PLANS.find((p) => p.name === name).subtitle;
 
 // Core features that are not yet in Core are not listed here since Core says
 // "all plans include X" — they're in the table above.
@@ -169,14 +183,18 @@ const PLAN_CARDS = [
     label: '— owner-operator',
     color: '#f59e0b',
     price: planPrice('Solo'),
-    customers: planCustomers('Solo'),
+    visits: planVisits('Solo'),
     features: [
-      '1 user', 'Customer portal', 'Online payments (card & ACH)',
+      '1 user', 'Customer portal', 'Online payments (card & ACH)', 'QuickBooks Online sync',
+      'Quotes & estimates', 'Quote approval in portal',
       'Route management', 'Job scheduling', 'Invoicing & payments', 'Customer CRM',
-      'SMS notifications', 'Appointment reminders', 'Holiday management', 'Billing cycles',
-      'Custom branding', 'Reports & analytics', 'Data export', 'Mileage tracking',
-      'Parts on order', 'Credits & refunds', 'Materials & inventory', 'Schedule & dispatch',
-      'Two-way SMS', 'Light & dark mode', 'Personalized shortcuts bar', 'Mobile app',
+      'Email notifications', 'Appointment reminders', 'Holiday management', 'Billing cycles',
+      'Custom branding', 'Reports & analytics', 'Data export',
+      'Parts on order', 'Credits & refunds', 'Payment plans', 'Automated late fees', 'Purchase orders',
+      'Roles & permissions', 'Time tracking & timecards', 'Attendance & time off', 'GPS field tracking',
+      'Employee ID & PIN login', 'Employee termination workflow', 'Team management', 'Materials & inventory', 'Schedule & dispatch',
+      'Light & dark mode', 'Personalized shortcuts bar', 'Mobile team view (smartphone browser)',
+      assistantQuestionsFeatureLabel('Solo'),
     ],
   },
   {
@@ -184,13 +202,10 @@ const PLAN_CARDS = [
     label: '— everything in Solo, plus',
     color: '#f97316',
     price: planPrice('Core'),
-    customers: planCustomers('Core'),
+    visits: planVisits('Core'),
     features: [
-      'Unlimited users', 'Team management', 'Roles & permissions',
-      'GPS field tracking', 'Truck inspection', 'Employee ID & PIN login',
-      'Time tracking & timecards', 'Attendance & time off', 'Purchase orders',
-      'Performance reviews', 'Incident tracking', 'Vehicle & equipment tracking',
-      'Tech performance reports',
+      'Unlimited users', 'Team messaging',
+      assistantQuestionsFeatureLabel('Core'),
     ],
   },
   {
@@ -198,13 +213,14 @@ const PLAN_CARDS = [
     label: '— everything in Core, plus',
     color: '#3b82f6',
     price: planPrice('Field'),
-    customers: planCustomers('Field'),
+    visits: planVisits('Field'),
     features: [
-      'Estimates & quotes', 'Quote approval in portal', 'Route intelligence',
-      'Lead management', 'Payment plans', 'Employee asset checkout',
+      'Route optimization & Rebalance all routes', 'Vehicles, trailers, equipment, tools & mileage',
+      'Daily truck inspections', 'Commissions & per-job team pay',
+      'Leads inbox & pipeline', 'Employee asset checkout',
       'Subcontractor management', 'Maintenance calendar',
-      `Multiple service locations (+$${MULTI_LOCATION_FEE.Field}/mo per location)`, 'Lead capture form',
-      'Employee termination workflow',
+      'Lead capture form',
+      assistantQuestionsFeatureLabel('Field'),
     ],
   },
   {
@@ -212,11 +228,13 @@ const PLAN_CARDS = [
     label: '— everything in Field, plus',
     color: '#10b981',
     price: planPrice('Command'),
-    customers: planCustomers('Command'),
+    visits: planVisits('Command'),
     features: [
-      'AI support chatbot', 'Automations engine', 'QuickBooks sync',
-      'Follow-up sequences', 'In-app messaging', 'Messaging in portal',
-      'Automated late fees', 'Priority support',
+      'Performance reviews', 'Incident tracking', 'Tech performance reports', 'Advanced reports & job costing',
+      'Automations engine',
+      'Follow-up sequences', 'Two-way customer texting inbox (needs the texting add-on)',
+      'Priority support',
+      assistantQuestionsFeatureLabel('Command'),
     ],
   },
   {
@@ -224,23 +242,30 @@ const PLAN_CARDS = [
     label: '— everything in Command, plus',
     color: '#8b5cf6',
     price: planPrice('Enterprise'),
-    customers: planCustomers('Enterprise'),
-    features: ['Unlimited customers', 'Dedicated onboarding', 'Custom integrations', 'Direct support'],
+    visits: planVisits('Enterprise'),
+    features: [
+      'Dedicated onboarding', 'Custom integrations', 'Direct support',
+      assistantQuestionsFeatureLabel('Enterprise'),
+    ],
   },
 ];
 
 function CellValue({ value }) {
   if (typeof value === 'boolean') {
     return (
-      <span
-        style={{
-          fontSize: 18,
-          fontWeight: 700,
-          color: value ? '#3D5CFF' : '#fff',
-        }}
-      >
-        {value ? '✓' : '✗'}
-      </span>
+      <>
+        <span
+          aria-hidden="true"
+          style={{
+            fontSize: 18,
+            fontWeight: 700,
+            color: value ? '#3D5CFF' : '#fff',
+          }}
+        >
+          {value ? '✓' : '✗'}
+        </span>
+        <span className="sr-only">{value ? 'Included' : 'Not included'}</span>
+      </>
     );
   }
   return (
@@ -248,7 +273,7 @@ function CellValue({ value }) {
       style={{
         fontSize: 13,
         fontWeight: 600,
-        color: '#fff',
+        color: value === 'Add-on' ? '#ffb020' : '#fff',
       }}
     >
       {value}
@@ -369,12 +394,32 @@ export default function ComparePage() {
           >
             <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: 14, margin: 0, lineHeight: 1.65 }}>
               <strong style={{ color: '#fff' }}>Every plan includes a customer portal and online payments.</strong>{' '}
-              No add-ons, no upcharges. Customers sign in by secure link or one-time code — no password required.
+              The portal has no add-ons and no upcharges. Customers sign in by secure link or one-time code — no password required.
               Online invoice payment (card &amp; ACH) requires connecting a supported payment processor.
             </p>
           </div>
 
-          {/* Active customer info box */}
+          {/* Texting add-on note */}
+          <div
+            style={{
+              background: 'rgba(61,92,255,0.1)',
+              border: '1px solid rgba(61,92,255,0.35)',
+              borderRadius: 8,
+              padding: '16px 20px',
+              textAlign: 'left',
+              maxWidth: 600,
+              margin: '0 auto 20px',
+            }}
+          >
+            <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: 14, margin: 0, lineHeight: 1.65 }}>
+              <strong style={{ color: '#fff' }}>Texting is an optional add-on for every plan.</strong>{' '}
+              No texts are included in any plan, because carriers charge for every text. Every plan sends reminders,
+              on-the-way notices, invoices and review requests by email.{' '}
+              <Link href="/pricing#texting-addon" style={{ color: '#fff', textDecoration: 'underline' }}>See texting prices</Link>
+            </p>
+          </div>
+
+          {/* Weekly visits info box */}
           <div
             style={{
               background: 'rgba(61,92,255,0.1)',
@@ -387,9 +432,8 @@ export default function ComparePage() {
             }}
           >
             <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 14, margin: 0, lineHeight: 1.65 }}>
-              <strong style={{ color: '#fff' }}>What is an active customer?</strong>{' '}
-              An active customer is any customer currently managed in your account. Archive customers
-              you&apos;re no longer serving to free up your slot count — all their history stays saved.
+              <strong style={{ color: '#fff' }}>No customer limit on any plan.</strong>{' '}
+              Your plan is sized by the completed visits you do each week. {WEEKLY_VISITS_EXPLAINER}
             </p>
           </div>
         </div>
@@ -453,15 +497,22 @@ export default function ComparePage() {
                 <div className="plan-card-name" style={{ fontWeight: 900, fontSize: 20, color: plan.color, marginBottom: 2 }}>{plan.name}</div>
                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginBottom: 14, lineHeight: 1.4 }}>{plan.label}</div>
                 <div className="plan-card-price" style={{ fontWeight: 900, fontSize: 26, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>{plan.price}</div>
-                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', paddingBottom: 14, marginBottom: 14, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>{plan.customers}</div>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', paddingBottom: 14, marginBottom: 14, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>{plan.visits}</div>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6, flex: 1 }}>
                   {plan.features.map((f) => (
                     <li key={f} className="plan-feature-item" style={{ fontSize: 13, color: '#fff', display: 'flex', gap: 6, alignItems: 'flex-start', lineHeight: 1.45 }}>
                       <span style={{ color: plan.color, fontWeight: 700, flexShrink: 0 }}>+</span>
-                      {f}
+                      {brandify(f)}
                     </li>
                   ))}
                 </ul>
+                {/* Same line on all five plans, pinned to the bottom so the cards line up */}
+                <div style={{ marginTop: 14, paddingTop: 12, borderTop: '1px solid rgba(255,255,255,0.1)', fontSize: 13, lineHeight: 1.45 }}>
+                  <Link href={TEXTING_PRICING_HREF} className="plan-texting-line" style={{ color: '#ffb020', fontWeight: 600, textDecoration: 'none', display: 'flex', gap: 6, alignItems: 'flex-start' }}>
+                    <span style={{ fontWeight: 700, flexShrink: 0 }}>+</span>
+                    {TEXTING_PLAN_CARD_LINE}
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
@@ -484,10 +535,14 @@ export default function ComparePage() {
               minWidth: 960,
             }}
           >
+            <caption className="sr-only">
+              Plan comparison: every feature and limit for Solo, Core, Field, Command and Enterprise
+            </caption>
             {/* Sticky header */}
             <thead>
               <tr>
                 <th
+                  scope="col"
                   style={{
                     textAlign: 'left',
                     padding: '40px 16px 20px',
@@ -498,10 +553,13 @@ export default function ComparePage() {
                     borderBottom: '2px solid rgba(255,255,255,0.1)',
                     width: '30%',
                   }}
-                />
+                >
+                  <span className="sr-only">Feature</span>
+                </th>
                 {PLANS.map((plan) => (
                   <th
                     key={plan.name}
+                    scope="col"
                     style={{
                       textAlign: 'center',
                       padding: '40px 16px 20px',
@@ -556,7 +614,7 @@ export default function ComparePage() {
                       }}
                     >
                       {plan.price}
-                      {plan.price !== 'Custom' && (
+                      {plan.name !== 'Enterprise' && (
                         <span style={{ fontSize: 12 }}>/mo</span>
                       )}
                     </div>
@@ -572,12 +630,14 @@ export default function ComparePage() {
 
             <tbody>
               {FEATURE_GROUPS.map((group, gi) => (
-                <>
+                <Fragment key={`group-${gi}`}>
                   {/* Group header */}
-                  <tr key={`group-${gi}`}>
-                    <td
+                  <tr>
+                    <th
+                      scope="rowgroup"
                       colSpan={PLANS.length + 1}
                       style={{
+                        textAlign: 'left',
                         padding: '24px 16px 10px',
                         fontWeight: 800,
                         fontSize: 12,
@@ -587,7 +647,7 @@ export default function ComparePage() {
                       }}
                     >
                       {group.group}
-                    </td>
+                    </th>
                   </tr>
 
                   {/* Feature rows */}
@@ -602,18 +662,21 @@ export default function ComparePage() {
                             : 'transparent',
                         }}
                       >
-                        <td
+                        <th
+                          scope="row"
                           style={{
                             padding: '14px 16px',
                             fontSize: 14,
+                            fontWeight: 400,
+                            textAlign: 'left',
                             color: '#fff',
                             borderBottom: '1px solid rgba(255,255,255,0.05)',
                           }}
                         >
-                          {row.label}
-                        </td>
+                          {brandify(row.label)}
+                        </th>
                         {row.values.map((val, pi) => {
-                          const isCommand = PLANS[pi].popular;
+                          const isPopular = PLANS[pi].popular;
                           return (
                             <td
                               key={pi}
@@ -621,15 +684,15 @@ export default function ComparePage() {
                                 textAlign: 'center',
                                 padding: '14px 16px',
                                 borderBottom: '1px solid rgba(255,255,255,0.05)',
-                                background: isCommand
+                                background: isPopular
                                   ? isAlt
                                     ? 'rgba(61,92,255,0.07)'
                                     : 'rgba(61,92,255,0.04)'
                                   : 'transparent',
-                                borderLeft: isCommand
+                                borderLeft: isPopular
                                   ? '1px solid rgba(61,92,255,0.4)'
                                   : 'none',
-                                borderRight: isCommand
+                                borderRight: isPopular
                                   ? '1px solid rgba(61,92,255,0.4)'
                                   : 'none',
                               }}
@@ -641,7 +704,7 @@ export default function ComparePage() {
                       </tr>
                     );
                   })}
-                </>
+                </Fragment>
               ))}
 
               {/* CTA row */}
@@ -660,7 +723,7 @@ export default function ComparePage() {
                     }}
                   >
                     {plan.isExternal ? (
-                      <>
+                      <Fragment>
                         <a
                           href={plan.href}
                           style={{
@@ -682,10 +745,10 @@ export default function ComparePage() {
                         </a>
                         {plan.name === 'Enterprise' && (
                           <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', lineHeight: 1.55, margin: '12px 0 0', padding: '0 4px' }}>
-                            Managing 2,500+ customers? Ask about custom pricing.
+                            Above {TOP_SELF_SERVE_WEEKLY_VISITS.toLocaleString('en-US')} completed visits a week? Ask about Enterprise pricing.
                           </p>
                         )}
-                      </>
+                      </Fragment>
                     ) : (
                       <Link
                         href={plan.href}
@@ -720,14 +783,26 @@ export default function ComparePage() {
       <section style={{ padding: '0 24px 56px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '0 0 8px', lineHeight: 1.75 }}>
-            ¹ Multiple service locations available on Field and above.
-            Field plans: +${MULTI_LOCATION_FEE.Field}/mo per additional location.
-            Command plans: +${MULTI_LOCATION_FEE.Command}/mo per additional location.
+            ¹ Online payment processing (card &amp; ACH) and online invoice payment through the customer portal are included on every plan.
+            Requires connecting a payment processor account of your own ({PAYMENT_PROCESSORS_NOTE}).
+          </p>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '0 0 8px', lineHeight: 1.75 }}>
+            ² Texting is an optional add-on for every plan, and no texts are included in any plan.
+            ${TEXTING_ADDON.setupFee} one-time setup, then prepaid text blocks ({TEXTING_ADDON.blocks.map((b) => `${b.texts.toLocaleString('en-US')} for $${b.price}`).join(', ')}) that never expire.
+            Texts come from your own {TEXTING_NUMBER_PHRASE}. {TEXTING_REVIEW_TIME} Until then, messages go by email.
+            When texts run out, messages go by email. Turning texting off releases the number for good. Turning it back on means the ${TEXTING_ADDON.setupFee} setup and carrier approval again.
+            Every plan sends reminders, on-the-way notices, invoices and review requests by email.{' '}
+            <Link href="/pricing#texting-addon" style={{ color: '#fff', textDecoration: 'underline' }}>Full texting details</Link>
           </p>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
-            ² Online payment processing (card &amp; ACH) and online invoice payment through the customer portal are included on every plan.
-            Requires connecting a supported payment processor (Stripe, Square, or PayPal). Cash, check, and onsite card payments are always available on every plan without a connected processor.
+            ⁴ Enterprise storage is unlimited. {STORAGE_PACKS_SENTENCE} {STORAGE_ASSUMPTION_NOTE}
           </p>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', margin: '8px 0 0', lineHeight: 1.75 }}>
+            ⁵ {WEEKLY_VISITS_EXPLAINER} Above Command&apos;s allowance, Enterprise is quoted.
+          </p>
+          <div style={{ marginTop: 32 }}>
+            <PaymentsStayYours maxWidth={1100} />
+          </div>
         </div>
       </section>
 

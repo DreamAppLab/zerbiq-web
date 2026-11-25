@@ -1,20 +1,28 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
+import TextingAddon from '@/components/TextingAddon';
+import StorageAddon from '@/components/StorageAddon';
+import WhiteGloveAddon from '@/components/WhiteGloveAddon';
+import PaymentsStayYours from '@/components/PaymentsStayYours';
+import Link from 'next/link';
+import { WEEKLY_VISITS_FAQ, ANNUAL_SAVINGS_LABEL, ENTERPRISE_FROM_MONTHLY_PRICE, MOBILE_TEAM_VIEW_NOTE, WHITE_GLOVE_DESCRIPTION, AI_ASSISTANT_NAME, TEXTING_FAQ_ANSWER, TEXTING_FAQ_SHORT, TEXTING_EXPLAINER_HREF, TEXTING_EXPLAINER_LINK_LABEL, WHITE_GLOVE_PRICES_SENTENCE, STORAGE_PACKS_SENTENCE, STORAGE_CAPACITY_SENTENCE, TOP_SELF_SERVE_WEEKLY_VISITS, STORAGE_ASSUMPTION_NOTE, PAYMENTS_STAY_YOURS_TEXT, PAYMENT_PROCESSORS_NOTE, storageIncludedLabel, assistantQuestionsLabel } from '@/lib/planData';
 import { brandify } from '@/components/ZerbiqBrand';
+import { pageMetadata } from '@/lib/seo.mjs';
 
 const FAQ = [
   {
     q: 'How many users are included?',
     a: 'Solo includes 1 user. Core, Field, Command, and Enterprise include unlimited users — owners, office staff, and every tech in the field — at one flat price. No per-seat fees.',
   },
+  ...WEEKLY_VISITS_FAQ,
   {
-    q: 'What is an active customer?',
-    a: "An active customer is any customer currently managed in your account. Archive customers you're no longer serving to free up your slot count — all their history stays saved.",
+    q: 'How much is Enterprise?',
+    a: `Enterprise starts at $${ENTERPRISE_FROM_MONTHLY_PRICE} a month and is quoted for your business. It is for companies that complete more than ${TOP_SELF_SERVE_WEEKLY_VISITS.toLocaleString('en-US')} visits a week, and it is open to smaller teams that want its extra features. Contact us for a quote.`,
   },
   {
     q: 'Can I change plans later?',
-    a: 'Yes — upgrade or downgrade anytime. Changes take effect immediately and are prorated automatically.',
+    a: 'Upgrade anytime. You can move down when your users, locations and stored files fit the smaller plan; the change is prorated.',
   },
   {
     q: 'What is the DIY setup option?',
@@ -22,31 +30,49 @@ const FAQ = [
   },
   {
     q: 'What is White-Glove Onboarding?',
-    a: 'Our White-Glove Onboarding is a one-time add-on — $299 for Core, $499 for Field, $699 for Command. We Zoom with you for 60–90 minutes, import your customer list, build your routes, add your team, and configure everything — guaranteed live before the call ends.',
+    a: `Our White-Glove Onboarding is a one-time add-on: ${WHITE_GLOVE_PRICES_SENTENCE}. Enterprise setup is arranged with us. ${WHITE_GLOVE_DESCRIPTION}`,
   },
   {
+    q: 'How does texting work?',
+    a: TEXTING_FAQ_ANSWER,
+    href: TEXTING_EXPLAINER_HREF,
+  },
+  ...TEXTING_FAQ_SHORT,
+  {
     q: 'Do you offer annual billing?',
-    a: 'Yes — annual billing saves you two full months. Get 12 months for the price of 10.',
+    a: `Yes — annual billing gets you ${ANNUAL_SAVINGS_LABEL}. Pay for 10 months and get 12.`,
   },
   {
     q: 'Do I need to download an app?',
-    a: 'Zerbiq is available as a native app on iOS and Android — download it from the App Store or Google Play. It also runs in any browser and installs as a PWA directly from your phone without going through an app store. Your techs can be up and running in minutes on any device.',
+    a: `No download is required. ${MOBILE_TEAM_VIEW_NOTE}`,
+  },
+  {
+    q: 'Is the AI assistant included?',
+    a: `Yes. The ${AI_ASSISTANT_NAME} is included on every plan. Ask about your business in plain English and get an answer. Each plan has a monthly question allowance: Solo ${assistantQuestionsLabel('Solo')}, Core ${assistantQuestionsLabel('Core')}, Field ${assistantQuestionsLabel('Field')}, Command ${assistantQuestionsLabel('Command')}. Enterprise questions are quoted.`,
+  },
+  {
+    q: 'Does it work with QuickBooks?',
+    a: 'Yes. Connect QuickBooks Online and your customers and services come over, then invoices and payments sync back automatically. QuickBooks sync is included on every plan.',
   },
   {
     q: 'Can I import my existing customers?',
-    a: 'Yes. Every plan includes DIY spreadsheet import — download our template, fill in your customers, routes, and team, and upload. Most owners are fully set up in under an hour. White-Glove Onboarding includes full data migration handled by our team.',
+    a: 'Yes. Every plan includes DIY spreadsheet import — download our template, fill in your customers, routes, and team, and upload. Most owners are fully set up in under an hour. The optional White-Glove Onboarding add-on has our team handle the data migration for you.',
   },
   {
     q: 'What does the customer portal include?',
-    a: 'Every plan — Solo, Core, Field, Command, and Enterprise — includes a customer portal. No add-ons, no upcharges. Your customers sign in with a one-time secure link or code (no password required) and can view their service history with visit photos, see upcoming jobs, view and pay invoices online, submit service requests, and update their contact and communication preferences. On Field plans and above, the portal also shows quote approval so customers can approve estimates with one tap. On Command plans and above, it includes in-app messaging.',
+    a: 'Every plan — Solo, Core, Field, Command, and Enterprise — includes a customer portal. The portal has no add-ons and no upcharges. Your customers sign in with a one-time secure link or code (no password required) and can view their service history with visit photos, see upcoming jobs, view and pay invoices online, submit service requests, and update their contact and communication preferences. The portal also shows quote approval on every plan, so customers can approve estimates with one tap.',
   },
   {
     q: 'Do I need a payment processor to use the customer portal?',
-    a: 'The portal itself is always on and costs nothing extra. Online invoice payment (card & ACH) inside the portal requires connecting a supported payment processor — Stripe, Square, or PayPal/Venmo. If you have not connected a processor, customers can still view their history, service requests, and invoices; they just pay through another method (cash, check, or onsite card). Cash, check, and onsite card payments are always available on every plan without a connected processor.',
+    a: `The portal itself is always on and costs nothing extra. Online invoice payment (card & ACH) inside the portal requires connecting a payment processor account of your own (${PAYMENT_PROCESSORS_NOTE}). If you have not connected a processor, customers can still view their history, service requests, and invoices; they just pay through another method (cash, check, or onsite card).`,
   },
   {
     q: 'What payment processors do you support?',
-    a: 'Zerbiq supports Stripe, Square, and PayPal/Venmo for online payments. You can also accept cash, check, and onsite card payments on any plan without connecting a processor.',
+    a: `Zerbiq supports ${PAYMENT_PROCESSORS_NOTE} for online payments. ${PAYMENTS_STAY_YOURS_TEXT}`,
+  },
+  {
+    q: 'How much storage is included?',
+    a: `Job photos and videos are stored with your account. Included storage: Solo ${storageIncludedLabel('Solo')}, Core ${storageIncludedLabel('Core')}, Field ${storageIncludedLabel('Field')}, Command ${storageIncludedLabel('Command')}, Enterprise unlimited. ${STORAGE_CAPACITY_SENTENCE} ${STORAGE_PACKS_SENTENCE} ${STORAGE_ASSUMPTION_NOTE}`,
   },
   {
     q: 'Is my data secure?',
@@ -58,10 +84,11 @@ const FAQ = [
   },
 ];
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Pricing — Zerbiq',
-  description: 'Simple, flat pricing for field service operators. Unlimited users on Core and above — no per-seat fees.',
-};
+  description: 'Simple, flat pricing for field service operators, from $39 a month. No customer limit and unlimited users on Core and above — no per-seat fees.',
+  path: '/pricing',
+});
 
 export default function PricingPage() {
   return (
@@ -82,7 +109,7 @@ export default function PricingPage() {
             Simple pricing for serious operators
           </h1>
           <p style={{ color: 'var(--color-white-60)', fontSize: 17, lineHeight: 1.7, margin: 0 }}>
-            No hidden fees. No confusing tiers. Pick the plan that fits and scale when you&apos;re ready.
+            No hidden fees. No confusing tiers. Pick the plan that fits and scale when you&apos;re ready. Texting is the one optional add-on, and its prices are listed below.
           </p>
         </div>
       </section>
@@ -90,6 +117,12 @@ export default function PricingPage() {
       <section style={{ padding: '0 24px 80px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <PricingCards />
+          <TextingAddon />
+          <StorageAddon />
+          <WhiteGloveAddon />
+          <div style={{ marginTop: 32 }}>
+            <PaymentsStayYours />
+          </div>
         </div>
       </section>
 
@@ -225,6 +258,13 @@ export default function PricingPage() {
                 >
                   {brandify(item.a)}
                 </p>
+                {item.href && (
+                  <p style={{ margin: '12px 0 0', fontSize: 15 }}>
+                    <Link href={item.href} style={{ color: 'var(--color-primary)', fontWeight: 600 }}>
+                      {TEXTING_EXPLAINER_LINK_LABEL}
+                    </Link>
+                  </p>
+                )}
               </div>
             ))}
           </div>

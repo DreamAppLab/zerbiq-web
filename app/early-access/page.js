@@ -2,11 +2,13 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import EarlyAccessForm from '@/components/EarlyAccessForm';
 import { planFromQuery } from '@/lib/earlyAccess.mjs';
+import { pageMetadata } from '@/lib/seo.mjs';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Request Early Access — Zerbiq',
   description: 'Request early access to Zerbiq. Tell us about your business and we will be in touch within one business day.',
-};
+  path: '/early-access',
+});
 
 export default function EarlyAccessPage({ searchParams }) {
   const plan = planFromQuery(searchParams?.plan);

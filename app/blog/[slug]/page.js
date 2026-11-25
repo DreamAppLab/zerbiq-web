@@ -4,6 +4,7 @@ import { db } from '@/lib/firebase';
 import { categoryStyle } from '@/lib/categories';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { pageMetadata } from '@/lib/seo.mjs';
 
 export const dynamic = 'force-dynamic';
 
@@ -28,16 +29,12 @@ function formatDate(ts) {
 
 export async function generateMetadata({ params }) {
   const post = await getPostBySlug(params.slug);
-  if (!post) return { title: 'Post Not Found — Zerbiq' };
-  return {
-    title: post.metaTitle || `${post.title} — Zerbiq`,
-    description: post.metaDescription || post.excerpt || '',
-    openGraph: {
-      title: post.metaTitle || post.title,
-      description: post.metaDescription || post.excerpt || '',
-      images: post.featuredImage ? [{ url: post.featuredImage }] : [],
-    },
-  };
+  if (!post) return { title: 'Post Not Found — Zerbiq', robots: { index: false, follow: false } };
+  const title = post.metaTitle || `${post.title} — Zerbiq`;
+  const description = post.metaDescription || post.excerpt || '';
+  const meta = pageMetadata({ title, description, path: `/blog/${post.slug || params.slug}` });
+  if (post.featuredImage) meta.openGraph.images = [{ url: post.featuredImage }];
+  return meta;
 }
 
 export default async function BlogPostPage({ params }) {

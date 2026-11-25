@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import ZerbiqBrand from '@/components/ZerbiqBrand';
 import Link from 'next/link';
 import { EARLY_ACCESS_HREF } from '@/lib/planData';
+import { SIGN_IN_HREF, PRIMARY_CTA_LABEL } from '@/lib/siteConfig.mjs';
 import ZIcon from './ZIcon';
 
 const NAV_LINKS = [
@@ -60,6 +61,41 @@ export default function Navbar() {
         }
         .nav-cta:hover { opacity: 0.88; }
 
+        .nav-signin {
+          color: rgba(255,255,255,0.85);
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 600;
+          padding: 10px 14px;
+          border-radius: 8px;
+          border: 1px solid rgba(255,255,255,0.18);
+          white-space: nowrap;
+          transition: color 0.2s, background 0.2s, border-color 0.2s;
+        }
+        .nav-signin:hover {
+          color: #fff;
+          background: rgba(255,255,255,0.08);
+          border-color: rgba(255,255,255,0.3);
+        }
+
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .nav-actions-mobile { display: none; }
+
+        .nav-link:focus-visible,
+        .nav-cta:focus-visible,
+        .nav-signin:focus-visible,
+        .mobile-nav-link:focus-visible,
+        .hamburger-btn:focus-visible,
+        .nav-logo:focus-visible {
+          outline: 2px solid #fff;
+          outline-offset: 3px;
+          border-radius: 6px;
+        }
+
         .desktop-nav {
           display: flex;
           align-items: center;
@@ -88,6 +124,8 @@ export default function Navbar() {
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .hamburger-btn { display: flex !important; }
+          .nav-actions-mobile { display: flex; }
+          .nav-actions-mobile .nav-signin { padding: 8px 12px; font-size: 13px; }
         }
       `}</style>
 
@@ -106,6 +144,7 @@ export default function Navbar() {
         }}
       >
         <nav
+          aria-label="Main"
           style={{
             maxWidth: 1200,
             margin: '0 auto',
@@ -119,6 +158,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
+            className="nav-logo"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -149,24 +189,26 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href="https://app.zerbiq.com/login"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="nav-link"
-            >
-              Login
-            </a>
-            <a href={EARLY_ACCESS_HREF} className="nav-cta">
-              Request Early Access
-            </a>
+            <div className="nav-actions">
+              <a href={SIGN_IN_HREF} className="nav-signin">
+                Sign in
+              </a>
+              <a href={EARLY_ACCESS_HREF} className="nav-cta">
+                {PRIMARY_CTA_LABEL}
+              </a>
+            </div>
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile: Sign in stays visible beside the menu button */}
+          <div className="nav-actions nav-actions-mobile">
+            <a href={SIGN_IN_HREF} className="nav-signin">
+              Sign in
+            </a>
           <button
             className="hamburger-btn"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
           >
             {menuOpen ? (
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -188,6 +230,7 @@ export default function Navbar() {
               </svg>
             )}
           </button>
+          </div>
         </nav>
       </header>
 
@@ -215,13 +258,11 @@ export default function Navbar() {
             </Link>
           ))}
           <a
-            href="https://app.zerbiq.com/login"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={SIGN_IN_HREF}
             className="mobile-nav-link"
             onClick={() => setMenuOpen(false)}
           >
-            Login
+            Sign in
           </a>
           <div style={{ marginTop: 32 }}>
             <a
@@ -230,7 +271,7 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
               style={{ display: 'inline-block', padding: '14px 28px', fontSize: 16 }}
             >
-              Request Early Access
+              {PRIMARY_CTA_LABEL}
             </a>
           </div>
         </div>
