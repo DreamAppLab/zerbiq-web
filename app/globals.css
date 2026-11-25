@@ -254,7 +254,10 @@ button:focus-visible {
 
 /* CTA button filled (for pricing) */
 .btn-cta-filled {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   background: var(--color-primary);
   color: #fff;
@@ -271,7 +274,10 @@ button:focus-visible {
 }
 
 .btn-cta-ghost {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   background: transparent;
   color: #fff;
@@ -286,6 +292,16 @@ button:focus-visible {
 }
 .btn-cta-ghost:hover {
   border-color: rgba(61, 92, 255, 0.4);
+}
+
+/* Trial line inside a Sign Up button. */
+.btn-cta-note {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  opacity: 0.85;
 }
 
 /* Text for screen readers only (compare table "Included" / "Not included"). */

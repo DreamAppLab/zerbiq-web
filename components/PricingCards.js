@@ -409,6 +409,7 @@ export default function PricingCards() {
                 className={plan.popular ? 'btn-cta-filled' : 'btn-cta-ghost'}
               >
                 {plan.cta}
+                {plan.ctaNote && <span className="btn-cta-note">{plan.ctaNote}</span>}
               </a>
             ) : (
               <Link
@@ -416,6 +417,7 @@ export default function PricingCards() {
                 className={plan.popular ? 'btn-cta-filled' : 'btn-cta-ghost'}
               >
                 {plan.cta}
+                {plan.ctaNote && <span className="btn-cta-note">{plan.ctaNote}</span>}
               </Link>
             )}
 

@@ -229,3 +229,14 @@ test('/texting lists show bullet markers, and the external quote link is one lin
   const link = page.match(/<a href=\{TEXTING_ELIGIBILITY\.noWebsiteHref\}[^>]*>/)[0];
   assert.ok(link.includes('target="_blank"') && link.includes('rel="noopener"') && link.includes("whiteSpace: 'nowrap'"));
 });
+
+test('the four self-serve plan buttons carry the 14-day no-card trial line; Enterprise does not', async () => {
+  const cfg = await import(pathToFileURL(join(dir, 'siteConfig.mjs')).href);
+  const plans = pd.PLAN_METADATA;
+  assert.match(cfg.TRIAL_NOTE, /14-day free trial/);
+  assert.match(cfg.TRIAL_NOTE, /No credit card required/);
+  for (const p of plans) {
+    if (p.name === 'Enterprise') assert.equal(p.ctaNote, undefined);
+    else assert.equal(p.ctaNote, cfg.TRIAL_NOTE, p.name);
+  }
+});
