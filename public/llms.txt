@@ -1,0 +1,15 @@
+# Zerbiq
+
+> Zerbiq is field service management software for small and mid-size service companies: routes, recurring jobs, invoicing and payments, crews, and customers in one place.
+
+## Key pages
+
+- [Features](https://zerbiq.com/features): what the platform does
+- [Pricing](https://zerbiq.com/pricing): plans and what each includes
+- [Compare plans](https://zerbiq.com/compare): plan comparison table
+- [Support and contact](https://zerbiq.com/support)
+
+## Blog
+
+- [Blog index](https://zerbiq.com/blog): guides on routes, recurring jobs, invoicing, pricing, crews, and customer retention
+- [Blog feed](https://zerbiq.com/blog/feed.xml): Atom feed of every post
