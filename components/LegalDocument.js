@@ -25,6 +25,7 @@ export default function LegalDocument({ title, html, pdfHref }) {
     <>
       <Navbar />
 
+      <main>
       <section style={{ padding: '72px 24px 100px' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <h1
@@ -66,6 +67,7 @@ export default function LegalDocument({ title, html, pdfHref }) {
           </p>
         </div>
       </section>
+      </main>
 
       <Footer />
     </>

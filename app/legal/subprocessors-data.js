@@ -29,8 +29,23 @@ export const SUBPROCESSORS = [
   },
   {
     name: 'Stripe, Inc.',
-    purpose: 'Processes card and bank payments and pays out to the Client.',
-    data: 'Payment amounts, invoice details, customer email, and the payment details a payer enters on Stripe.',
+    purpose: 'Processes the Client’s own subscription payments to Zerbiq. It also processes card and bank payments from the Client’s customers, through the Client’s own Stripe account, and pays out to the Client. The Client’s own Stripe account is used only if the Client connects it.',
+    data: 'Payment amounts, invoice details, customer email, and the payment details a payer enters on Stripe. For the Client’s own subscription: the Client’s billing and contact details and plan.',
+  },
+  {
+    name: 'PayPal, Inc.',
+    purpose: 'Processes card and bank payments through the Client’s own PayPal account, only if the Client connects it. The payer enters their payment details on PayPal’s page, not in Zerbiq.',
+    data: 'The payment amount and the invoice number. Payment details are entered by the payer on PayPal.',
+  },
+  {
+    name: 'Block, Inc. (Square)',
+    purpose: 'Processes card and bank payments through the Client’s own Square account, only if the Client connects it. The payer enters their payment details on Square’s page, not in Zerbiq.',
+    data: 'The payment amount, the invoice number, and the customer’s email address. Payment details are entered by the payer on Square.',
+  },
+  {
+    name: 'Authorize.Net (Visa Inc.)',
+    purpose: 'Processes card payments through the Client’s own Authorize.net account, only if the Client connects it. The payer enters their card details on Authorize.net’s hosted form, not in Zerbiq.',
+    data: 'The payment amount, the invoice number, and the customer’s email address. Card details are entered by the payer on Authorize.net.',
   },
   {
     name: 'Google LLC (Google Maps Platform)',
@@ -44,8 +59,8 @@ export const SUBPROCESSORS = [
   },
   {
     name: 'Anthropic, PBC',
-    purpose: 'Reads uploaded bank statements to list their transactions. Only when the Client uses bank statement import.',
-    data: 'The bank statement the Client uploads.',
+    purpose: 'Two uses. (1) Reads uploaded bank statements to list their transactions, only when the Client uses bank statement import. (2) Powers the Zerbiq AI assistant, which answers questions about the Client’s own account. Neither is used unless a person on the Client’s team uses that feature: the assistant sends data only when someone asks it a question.',
+    data: 'Bank statement import: the bank statement the Client uploads. AI assistant: the questions the person types, with the earlier turns of that conversation, and the account records the assistant looks up to answer them (for example customers, jobs, routes, invoices, quotes, team names, and services). It sees only what that person’s role is allowed to see in Zerbiq, and it can only read, never change anything.',
   },
   {
     name: 'Intuit Inc. (QuickBooks Online)',

@@ -13,6 +13,7 @@ export default function SubprocessorsPage() {
     <>
       <Navbar />
 
+      <main>
       <section style={{ padding: '72px 24px 100px' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <h1
@@ -72,6 +73,7 @@ export default function SubprocessorsPage() {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </>
