@@ -1,4 +1,4 @@
-import { PRIMARY_CTA_LABEL, SIGNUP_HREF } from '@/lib/siteConfig.mjs';
+import { PRIMARY_CTA_LABEL, SIGNUP_HREF, TRIAL_NOTE } from '@/lib/siteConfig.mjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
@@ -144,6 +144,9 @@ export default function HomePage() {
               }}
             >
               {PRIMARY_CTA_LABEL}
+              <span style={{ display: 'block', fontSize: 12, fontWeight: 500, marginTop: 2, opacity: 0.85 }}>
+                {TRIAL_NOTE}
+              </span>
             </a>
             <a
               href={DEMO_URL}
@@ -155,7 +158,9 @@ export default function HomePage() {
                 padding: '16px 32px',
                 fontWeight: 700,
                 fontSize: 16,
-                display: 'inline-block',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               Book a Demo
