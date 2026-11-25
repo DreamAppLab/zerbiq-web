@@ -74,13 +74,22 @@ test('every Section cross-reference in the Terms and the Privacy Policy points a
   assert.match(terms, /Section 7\.4 Privacy Policy\..*https:\/\/zerbiq\.com\/legal\/privacy/);
 });
 
-test('both legal documents carry their November 24, 2026 date and only the support contact', () => {
+test('both legal documents carry their dates and only the support contact', () => {
   assert.match(terms, /Effective Date: November 24, 2026/);
-  assert.match(privacy, /Last Updated: November 24, 2026/);
+  assert.match(privacy, /Last Updated: November 25, 2026/);
   assert.match(privacy, /Effective Date: November 24, 2026/);
   for (const text of [terms, privacy]) {
     const emails = new Set((text.match(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g) || []).map((e) => e.replace(/\.$/, '')));
     assert.deepEqual([...emails], ['support@zerbiq.com']);
     assert.doesNotMatch(text, /hello@zerbiq\.com/);
   }
+});
+
+test('privacy Section 7 discloses the Crisp chat cookies and Terms 18.14 ends at the support contact', () => {
+  const sec7 = privacy.split(/7\. Cookies, Tracking Technologies, and Do Not Track/)[1].split(/8\. /)[0];
+  assert.match(sec7, /live chat on zerbiq\.com is provided by Crisp IM SAS/);
+  assert.match(sec7, /sets its own cookies or similar identifiers/);
+  assert.match(sec7, /zerbiq\.com\/legal\/subprocessors/);
+  assert.match(terms, /Section 18\.14 Contact\./);
+  assert.doesNotMatch(terms, /The current terms identify/);
 });
