@@ -40,12 +40,12 @@ export const SUBPROCESSORS = [
   {
     name: 'Block, Inc. (Square)',
     purpose: 'Processes card and bank payments through the Client’s own Square account, only if the Client connects it. The payer enters their payment details on Square’s page, not in Zerbiq.',
-    data: 'The payment amount, the invoice number, and the customer’s email address. Payment details are entered by the payer on Square.',
+    data: 'The payment amount, the invoice number, and the customer’s email address (if on file). Payment details are entered by the payer on Square.',
   },
   {
     name: 'Authorize.Net (Visa Inc.)',
     purpose: 'Processes card payments through the Client’s own Authorize.net account, only if the Client connects it. The payer enters their card details on Authorize.net’s hosted form, not in Zerbiq.',
-    data: 'The payment amount, the invoice number, and the customer’s email address. Card details are entered by the payer on Authorize.net.',
+    data: 'The payment amount, an order reference, and the customer’s email address (if on file). Card details are entered by the payer on Authorize.net.',
   },
   {
     name: 'Google LLC (Google Maps Platform)',
