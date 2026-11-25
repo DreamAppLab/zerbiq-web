@@ -16,13 +16,13 @@ test('support details match the published business details', () => {
 
 test('support email is the one the legal pages already use', () => {
   // The legal text lives in the generated content.js files (Eddie's final documents)
-  for (const f of ['app/legal/privacy/content.js', 'app/legal/tos/content.js']) {
+  for (const f of ['app/legal/privacy/content.js', 'app/legal/tos/content.js', 'app/legal/dpa/content.js']) {
     assert.ok(readFileSync(new URL(`../${f}`, import.meta.url), 'utf8').includes(SUPPORT_EMAIL), f);
   }
 });
 
 test('no page, link or lead address still uses hello@zerbiq.com', () => {
-  for (const f of ['app/page.js', 'app/legal/privacy/content.js', 'app/legal/tos/content.js', 'app/legal/dpa/page.js', 'app/legal/subprocessors/page.js', 'lib/planData.js', 'lib/earlyAccess.mjs', 'lib/siteConfig.mjs', 'components/Footer.js']) {
+  for (const f of ['app/page.js', 'app/legal/privacy/content.js', 'app/legal/tos/content.js', 'app/legal/dpa/content.js', 'app/legal/subprocessors/page.js', 'lib/planData.js', 'lib/earlyAccess.mjs', 'lib/siteConfig.mjs', 'components/Footer.js']) {
     assert.ok(!readFileSync(new URL(`../${f}`, import.meta.url), 'utf8').includes('hello@zerbiq.com'), f);
   }
 });
