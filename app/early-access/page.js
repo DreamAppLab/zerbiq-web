@@ -5,8 +5,8 @@ import { planFromQuery } from '@/lib/earlyAccess.mjs';
 import { pageMetadata } from '@/lib/seo.mjs';
 
 export const metadata = pageMetadata({
-  title: 'Request Early Access — Zerbiq',
-  description: 'Request early access to Zerbiq. Tell us about your business and we will be in touch within one business day.',
+  title: 'Sign Up — Zerbiq',
+  description: 'Sign up for Zerbiq. Tell us about your business and we will be in touch within one business day.',
   path: '/early-access',
 });
 
@@ -29,7 +29,7 @@ export default function EarlyAccessPage({ searchParams }) {
               textAlign: 'center',
             }}
           >
-            Request early access
+            Sign up for Zerbiq
           </h1>
           <p
             style={{

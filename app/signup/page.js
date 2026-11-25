@@ -7,7 +7,7 @@ const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
 export const metadata = pageMetadata({
   title: 'Sign up — Zerbiq',
-  description: 'Zerbiq is not open for public signup yet. Request early access or book a live demo.',
+  description: 'Zerbiq is not open for public signup yet. Send us your details to sign up, or book a live demo.',
   path: '/signup',
 });
 
@@ -59,10 +59,10 @@ export default function SignupPage() {
           lineHeight: 1.05,
         }}
       >
-        Request Early Access
+        Sign Up
       </h1>
 
-      {/* Early-access note */}
+      {/* Sign-up note */}
       <p
         style={{
           color: 'var(--color-white-60)',
@@ -71,7 +71,7 @@ export default function SignupPage() {
           margin: '0 auto 36px',
         }}
       >
-        Zerbiq isn&apos;t open for public signup yet. Request early access and we&apos;ll be in touch.
+        Zerbiq isn&apos;t open for self-serve signup yet. Sign up here and we&apos;ll be in touch to get you started.
       </p>
 
       {/* Primary CTA */}
@@ -88,7 +88,7 @@ export default function SignupPage() {
           marginBottom: 32,
         }}
       >
-        Request Early Access
+        Sign Up
       </a>
 
       {/* Divider */}

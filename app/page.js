@@ -382,28 +382,24 @@ export default function HomePage() {
                         </span>
                       )}
                     </h3>
-                    <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: '0 0 20px', lineHeight: 1.65, flex: 1 }}>
+                    <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: '0 0 16px', lineHeight: 1.65, flex: 1 }}>
                       {brandify(f.desc)}
                     </p>
                     <div>
-                      <a
-                        href={f.link ? f.link.href : EARLY_ACCESS_HREF}
-                        className="btn-primary"
-                        style={{
-                          display: 'inline-block',
-                          borderRadius: 8,
-                          padding: '10px 20px',
-                          fontWeight: 700,
-                          fontSize: 13,
-                        }}
-                      >
-                        {f.link ? f.link.label : PRIMARY_CTA_LABEL}
-                      </a>
+                      {f.link && (
+                        <a
+                          href={f.link.href}
+                          className="link-muted"
+                          style={{ display: 'inline-block', fontSize: 13, fontWeight: 700, marginBottom: 6 }}
+                        >
+                          {f.link.label}
+                        </a>
+                      )}
                       <div
+                        data-feature-caption
                         style={{
                           fontSize: 11,
                           color: 'rgba(255,255,255,0.4)',
-                          marginTop: 6,
                         }}
                       >
                         {f.badge}

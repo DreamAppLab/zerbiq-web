@@ -169,7 +169,7 @@ export default function SupportPage() {
             </div>
           </div>
 
-          {/* App + legal + early access */}
+          {/* App + legal + sign up */}
           <div style={{ color: 'var(--color-white-60)', fontSize: 15, lineHeight: 1.8 }}>
             <p style={{ margin: '0 0 12px' }}>
               {MOBILE_TEAM_VIEW_NOTE}
@@ -188,7 +188,7 @@ export default function SupportPage() {
             <p style={{ margin: 0 }}>
               Thinking about {brandify('Zerbiq')} for your business?{' '}
               <a href={EARLY_ACCESS_HREF} style={linkStyle}>
-                Request early access
+                Sign up here
               </a>
               .
             </p>
