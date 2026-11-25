@@ -167,7 +167,11 @@ test('the word "archive" is never used for customers anywhere on the site', () =
     }
   };
   ['app', 'components', 'lib'].forEach(walk);
+  // The two generated files below hold Eddie's final Terms and Privacy Policy verbatim. The Terms use
+  // "archival copies" for backups, not for customers, and the wording must not be edited here.
+  const VERBATIM_LEGAL = ['app/legal/tos/content.js', 'app/legal/privacy/content.js'];
   for (const f of files) {
+    if (VERBATIM_LEGAL.includes(f)) continue;
     const hits = read(f).split('\n').filter((l) => /archiv/i.test(l));
     assert.deepEqual(hits, [], `${f} must not use "archive" (say "Inactive")`);
   }
@@ -248,7 +252,7 @@ test('every page exports its own metadata with a canonical path matching its rou
     assert.ok(text.includes(`path: '${route}'`), `${f} canonical path is ${route}`);
     seen.add(route);
   }
-  for (const route of ['/', '/about', '/blog', '/compare', '/early-access', '/features', '/pricing', '/signup', '/support', '/texting', '/legal/privacy', '/legal/tos']) {
+  for (const route of ['/', '/about', '/blog', '/compare', '/early-access', '/features', '/pricing', '/signup', '/support', '/texting', '/legal/privacy', '/legal/tos', '/legal/dpa', '/legal/subprocessors']) {
     assert.ok(seen.has(route), `${route} covered`);
   }
   assert.ok(read('app/blog/[slug]/page.js').includes('path: `/blog/'));
@@ -577,17 +581,23 @@ test('the old 8-week average wording appears nowhere on the site, and the new ru
       assert.ok(!/WEEKLY_VISITS_AVERAGE_WEEKS/.test(text), `${f} still uses the retired constant`);
     }
   }
-  const tos = readFileSync(`${root}app/legal/tos/page.js`, 'utf8');
-  assert.match(tos, /11\. Plan Changes Based on Weekly Visits/);
-  assert.match(tos, /PLAN_ALLOWANCE_RULE/);
-  assert.match(tos, /Last updated: November 20, 2026/);
+  // The Terms are Eddie's final document (app/legal/tos/content.js, generated verbatim from Word). They state
+  // the plan-change rule in Article V in their own words; the site's PLAN_ALLOWANCE_RULE copy must say the same thing.
+  const { HTML } = await import(pathToFileURL(`${root}app/legal/tos/content.js`).href);
+  const tos = HTML.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+  assert.match(tos, /Article V Subscription Plans, Usage Allowances, and Plan Changes/);
+  assert.match(tos, /Section 5\.3 Upward Plan Adjustment\. If Customer completes more than 150% of its Subscription Plan’s weekly visit allowance during each of four consecutive weekly measurement periods/);
+  assert.match(tos, /Zerbiq will provide notice to the Account owner before the adjustment, and the new Subscription Plan and its Fees will take effect thirty days after that notice/);
+  assert.match(tos, /Section 5\.4 Command and Enterprise Plans\..*the next Subscription Plan will be Enterprise\. Zerbiq will quote the applicable Enterprise pricing before the adjustment takes effect/);
+  assert.match(tos, /Section 5\.5 Downward Plan Adjustment\..*for twelve consecutive weekly measurement periods/);
+  assert.match(tos, /overage charge/);
+  assert.match(tos, /Effective Date: November 24, 2026/);
   assert.match(tos, /support@zerbiq\.com/);
-  assert.match(tos, /pay the new plan/);
-  assert.match(tos, /PLAN_MOVE_DOWN_RULE/);
-  assert.match(tos, /PLAN_NEXT_PLAN_NOTE/);
-  assert.match(tos, /12\. Contact/);
-  assert.doesNotMatch(tos, /4A\.|automatic plan changes/);
+  assert.doesNotMatch(tos, /8[- ]week|eight[- ]week|average/i);
+  assert.doesNotMatch(tos, /automatic(ally)? (move|change)s? (your|Customer)/i);
+  // The site copy agrees with it
+  assert.match(pd.PLAN_ALLOWANCE_RULE, /150%/);
+  assert.match(pd.PLAN_ALLOWANCE_RULE, /4 weeks in a row/);
+  assert.match(pd.PLAN_MOVE_DOWN_RULE, /12 weeks in a row/);
   assert.equal(pd.PLAN_NEXT_PLAN_NOTE, 'For Command, the next plan is Enterprise, at a price we quote you before the change.');
-  assert.match(tos, /We email the owner and make the change ourselves/);
-  assert.doesNotMatch(tos, /automatic(ally)? (move|change)s? your/i);
 });
