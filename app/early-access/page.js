@@ -5,8 +5,8 @@ import { planFromQuery } from '@/lib/earlyAccess.mjs';
 import { pageMetadata } from '@/lib/seo.mjs';
 
 export const metadata = pageMetadata({
-  title: 'Sign Up — Zerbiq',
-  description: 'Sign up for Zerbiq. Tell us about your business and we will be in touch within one business day.',
+  title: 'Talk to Us — Zerbiq',
+  description: 'Tell us about your business and we will be in touch within one business day.',
   path: '/early-access',
 });
 
@@ -29,7 +29,7 @@ export default function EarlyAccessPage({ searchParams }) {
               textAlign: 'center',
             }}
           >
-            Sign up for Zerbiq
+            Talk to us
           </h1>
           <p
             style={{
@@ -42,7 +42,7 @@ export default function EarlyAccessPage({ searchParams }) {
             }}
           >
             Tell us a little about your business. We&apos;ll get back to you within one business day.
-            No account is created and nothing is charged.
+            No account is created and nothing is charged. To start now, sign up at app.zerbiq.com/signup.
           </p>
 
           <EarlyAccessForm initialPlan={plan} />

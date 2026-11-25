@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroBackground from '@/components/HeroBackground';
 import { brandify } from '@/components/ZerbiqBrand';
-import { EARLY_ACCESS_HREF, MOBILE_TEAM_VIEW_NOTE } from '@/lib/planData';
+import { MOBILE_TEAM_VIEW_NOTE } from '@/lib/planData';
 import {
   SUPPORT_EMAIL,
   SUPPORT_PHONE,
@@ -11,6 +11,7 @@ import {
   SUPPORT_ADDRESS_LINES,
   SUPPORT_RESPONSE_TIME,
   DELETE_ACCOUNT_HREF,
+  SIGNUP_HREF,
 } from '@/lib/siteConfig.mjs';
 import { pageMetadata } from '@/lib/seo.mjs';
 
@@ -187,8 +188,8 @@ export default function SupportPage() {
             </p>
             <p style={{ margin: 0 }}>
               Thinking about {brandify('Zerbiq')} for your business?{' '}
-              <a href={EARLY_ACCESS_HREF} style={linkStyle}>
-                Sign up here
+              <a href={SIGNUP_HREF} style={linkStyle}>
+                Sign up
               </a>
               .
             </p>

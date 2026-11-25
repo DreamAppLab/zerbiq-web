@@ -245,7 +245,7 @@ test('every page exports its own metadata with a canonical path matching its rou
     assert.ok(text.includes(`path: '${route}'`), `${f} canonical path is ${route}`);
     seen.add(route);
   }
-  for (const route of ['/', '/about', '/blog', '/compare', '/early-access', '/features', '/pricing', '/signup', '/support', '/texting', '/legal/privacy', '/legal/tos']) {
+  for (const route of ['/', '/about', '/blog', '/compare', '/early-access', '/features', '/pricing', '/support', '/texting', '/legal/privacy', '/legal/tos']) {
     assert.ok(seen.has(route), `${route} covered`);
   }
   assert.ok(read('app/blog/[slug]/page.js').includes('path: `/blog/'));

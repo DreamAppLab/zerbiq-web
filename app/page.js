@@ -1,9 +1,9 @@
-import { PRIMARY_CTA_LABEL } from '@/lib/siteConfig.mjs';
+import { PRIMARY_CTA_LABEL, SIGNUP_HREF } from '@/lib/siteConfig.mjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PricingCards from '@/components/PricingCards';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { EARLY_ACCESS_HREF, MULTI_LOCATION_FEE, TEXTING_PRICING_HREF, WHITE_GLOVE_DESCRIPTION, WHITE_GLOVE_PRICES_SENTENCE, WHITE_GLOVE_PRICES_SHORT, groupByBadge, textingPricingLine } from '@/lib/planData';
+import { MULTI_LOCATION_FEE, TEXTING_PRICING_HREF, WHITE_GLOVE_DESCRIPTION, WHITE_GLOVE_PRICES_SENTENCE, WHITE_GLOVE_PRICES_SHORT, groupByBadge, textingPricingLine } from '@/lib/planData';
 import { pageMetadata } from '@/lib/seo.mjs';
 import { ALL_FEATURES } from '@/lib/homeFeatures';
 
@@ -133,7 +133,7 @@ export default function HomePage() {
             }}
           >
             <a
-              href={EARLY_ACCESS_HREF}
+              href={SIGNUP_HREF}
               className="btn-primary"
               style={{
                 borderRadius: 10,
@@ -583,7 +583,7 @@ export default function HomePage() {
               </p>
               <div>
                 <a
-                  href={EARLY_ACCESS_HREF}
+                  href={SIGNUP_HREF}
                   style={{
                     display: 'inline-block',
                     background: 'transparent',
@@ -724,7 +724,7 @@ export default function HomePage() {
           <p style={{ color: 'var(--color-white-60)', fontSize: 14, margin: 0 }}>
             Prefer to explore on your own?{' '}
             <a
-              href={EARLY_ACCESS_HREF}
+              href={SIGNUP_HREF}
               style={{ color: '#fff', fontWeight: 600, textDecoration: 'none' }}
             >
               {PRIMARY_CTA_LABEL} →
