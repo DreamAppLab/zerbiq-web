@@ -220,7 +220,7 @@ export default function EarlyAccessForm({ initialPlan }) {
           opacity: status === 'sending' ? 0.7 : 1,
         }}
       >
-        {status === 'sending' ? 'Sending…' : 'Request Early Access'}
+        {status === 'sending' ? 'Sending…' : 'Send'}
       </button>
     </form>
   );

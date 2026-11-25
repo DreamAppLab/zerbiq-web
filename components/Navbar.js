@@ -3,8 +3,7 @@
 import { useState, useEffect } from 'react';
 import ZerbiqBrand from '@/components/ZerbiqBrand';
 import Link from 'next/link';
-import { EARLY_ACCESS_HREF } from '@/lib/planData';
-import { SIGN_IN_HREF, PRIMARY_CTA_LABEL } from '@/lib/siteConfig.mjs';
+import { SIGN_IN_HREF, PRIMARY_CTA_LABEL, SIGNUP_HREF } from '@/lib/siteConfig.mjs';
 import ZIcon from './ZIcon';
 
 const NAV_LINKS = [
@@ -193,7 +192,7 @@ export default function Navbar() {
               <a href={SIGN_IN_HREF} className="nav-signin">
                 Sign in
               </a>
-              <a href={EARLY_ACCESS_HREF} className="nav-cta">
+              <a href={SIGNUP_HREF} className="nav-cta">
                 {PRIMARY_CTA_LABEL}
               </a>
             </div>
@@ -266,7 +265,7 @@ export default function Navbar() {
           </a>
           <div style={{ marginTop: 32 }}>
             <a
-              href={EARLY_ACCESS_HREF}
+              href={SIGNUP_HREF}
               className="nav-cta"
               onClick={() => setMenuOpen(false)}
               style={{ display: 'inline-block', padding: '14px 28px', fontSize: 16 }}

@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroBackground from '@/components/HeroBackground';
 import { brandify } from '@/components/ZerbiqBrand';
-import { EARLY_ACCESS_HREF, MOBILE_TEAM_VIEW_NOTE } from '@/lib/planData';
+import { MOBILE_TEAM_VIEW_NOTE } from '@/lib/planData';
 import {
   SUPPORT_EMAIL,
   SUPPORT_PHONE,
@@ -11,6 +11,7 @@ import {
   SUPPORT_ADDRESS_LINES,
   SUPPORT_RESPONSE_TIME,
   DELETE_ACCOUNT_HREF,
+  SIGNUP_HREF,
   activeStoreLinks,
 } from '@/lib/siteConfig.mjs';
 import { pageMetadata } from '@/lib/seo.mjs';
@@ -170,7 +171,7 @@ export default function SupportPage() {
             </div>
           </div>
 
-          {/* App + legal + early access */}
+          {/* App + legal + sign up */}
           <div style={{ color: 'var(--color-white-60)', fontSize: 15, lineHeight: 1.8 }}>
             <p style={{ margin: '0 0 12px' }}>
               {MOBILE_TEAM_VIEW_NOTE}
@@ -199,8 +200,8 @@ export default function SupportPage() {
             </p>
             <p style={{ margin: 0 }}>
               Thinking about {brandify('Zerbiq')} for your business?{' '}
-              <a href={EARLY_ACCESS_HREF} style={linkStyle}>
-                Request early access
+              <a href={SIGNUP_HREF} style={linkStyle}>
+                Sign up
               </a>
               .
             </p>

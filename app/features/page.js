@@ -1,8 +1,8 @@
-import { PRIMARY_CTA_LABEL } from '@/lib/siteConfig.mjs';
+import { PRIMARY_CTA_LABEL, SIGNUP_HREF } from '@/lib/siteConfig.mjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ZerbiqBrand, { brandify } from '@/components/ZerbiqBrand';
-import { BADGE, FEATURE_GATE, gateToBadge, PAYMENT_PROCESSORS_NOTE, EARLY_ACCESS_HREF, AI_ASSISTANT_NAME, ROUTE_INTELLIGENCE_DESCRIPTION, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
+import { BADGE, FEATURE_GATE, gateToBadge, PAYMENT_PROCESSORS_NOTE, AI_ASSISTANT_NAME, ROUTE_INTELLIGENCE_DESCRIPTION, TEXTING_ADDON, TEXTING_CARD, TEXTING_WANT_IT_AS_TEXT } from '@/lib/planData';
 import { pageMetadata } from '@/lib/seo.mjs';
 
 export const metadata = pageMetadata({
@@ -841,24 +841,10 @@ export default function FeaturesPage() {
                     {brandify(p)}
                   </p>
                 ))}
-                <a
-                  href={EARLY_ACCESS_HREF}
-                  className="btn-primary"
-                  style={{
-                    display: 'inline-block',
-                    borderRadius: 8,
-                    padding: '12px 24px',
-                    fontWeight: 700,
-                    fontSize: 14,
-                  }}
-                >
-                  {PRIMARY_CTA_LABEL}
-                </a>
                 <div
                   style={{
                     fontSize: 11,
                     color: 'rgba(255,255,255,0.4)',
-                    marginTop: 6,
                   }}
                 >
                   {feature.badge}
@@ -943,24 +929,19 @@ export default function FeaturesPage() {
                         {brandify(p)}
                       </p>
                     ))}
-                    <a
-                      href={feature.link ? feature.link.href : EARLY_ACCESS_HREF}
-                      className="btn-primary"
-                      style={{
-                        display: 'inline-block',
-                        borderRadius: 8,
-                        padding: '12px 24px',
-                        fontWeight: 700,
-                        fontSize: 14,
-                      }}
-                    >
-                      {feature.link ? feature.link.label : PRIMARY_CTA_LABEL}
-                    </a>
+                    {feature.link && (
+                      <a
+                        href={feature.link.href}
+                        className="link-muted"
+                        style={{ display: 'inline-block', fontSize: 14, fontWeight: 700, marginBottom: 6 }}
+                      >
+                        {feature.link.label}
+                      </a>
+                    )}
                     <div
                       style={{
                         fontSize: 11,
                         color: 'rgba(255,255,255,0.4)',
-                        marginTop: 6,
                       }}
                     >
                       {feature.badge}
@@ -981,6 +962,17 @@ export default function FeaturesPage() {
           })}
         </div>
       ))}
+
+      {/* The page's one sign-up button */}
+      <section data-features-cta style={{ padding: '72px 24px', textAlign: 'center' }}>
+        <a
+          href={SIGNUP_HREF}
+          className="btn-primary"
+          style={{ display: 'inline-block', borderRadius: 10, padding: '16px 36px', fontWeight: 700, fontSize: 16 }}
+        >
+          {PRIMARY_CTA_LABEL}
+        </a>
+      </section>
 
       <Footer />
     </>
