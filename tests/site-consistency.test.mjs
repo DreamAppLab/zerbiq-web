@@ -268,9 +268,10 @@ test('pageMetadata gives og title, og description and canonical, and can noindex
   assert.deepEqual(seo.pageMetadata({ title: 'T', description: 'D', path: '/x', noindex: true }).robots, { index: false, follow: true });
 });
 
-test('/blog is noindex while it has no published posts', () => {
+test('/blog is indexable: the static posts always exist, so it is never noindex', () => {
   const blog = read('app/blog/page.js');
-  assert.ok(blog.includes('noindex: posts.length === 0'));
+  assert.ok(!/noindex/.test(blog));
+  assert.ok(blog.includes("path: '/blog'"));
 });
 
 // ── Item 17: AI questions, storage, packs, white-glove, payments, FAQ ─────────
