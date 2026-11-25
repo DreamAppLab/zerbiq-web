@@ -10,7 +10,7 @@ import { pathToFileURL } from 'node:url';
 const dir = mkdtempSync(join(tmpdir(), 'plandata-'));
 const src = readFileSync(new URL('../lib/planData.js', import.meta.url), 'utf8');
 writeFileSync(join(dir, 'planData.mjs'), src);
-for (const f of ['earlyAccess.mjs', 'siteConfig.mjs']) {
+for (const f of ['siteConfig.mjs']) {
   copyFileSync(new URL(`../lib/${f}`, import.meta.url), join(dir, f));
 }
 const pd = await import(pathToFileURL(join(dir, 'planData.mjs')).href);

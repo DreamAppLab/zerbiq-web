@@ -17,7 +17,7 @@ export const metadata = {
     title: 'Zerbiq — Built for the field. Loved by the office.',
     description:
       'Zerbiq is the field service operations platform for owner-operators. Schedule jobs, dispatch crews, invoice customers, and manage your whole operation from one screen.',
-    images: [{ url: '/og-image.png' }], // <!-- Replace with real OG image -->
+    images: [{ url: '/og-image.png' }],
   },
   icons: {
     icon: [
