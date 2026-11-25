@@ -10,7 +10,7 @@ const read = (rel) => readFileSync(new URL(`../${rel}`, import.meta.url), 'utf8'
 // Load the real lib/planData.js (an ES module in a non-module package) as .mjs.
 const dir = mkdtempSync(join(tmpdir(), 'consistency-'));
 writeFileSync(join(dir, 'planData.mjs'), read('lib/planData.js'));
-for (const f of ['earlyAccess.mjs', 'siteConfig.mjs', 'seo.mjs']) {
+for (const f of ['siteConfig.mjs', 'seo.mjs']) {
   copyFileSync(new URL(`../lib/${f}`, import.meta.url), join(dir, f));
 }
 const pd = await import(pathToFileURL(join(dir, 'planData.mjs')).href);
@@ -252,7 +252,7 @@ test('every page exports its own metadata with a canonical path matching its rou
     assert.ok(text.includes(`path: '${route}'`), `${f} canonical path is ${route}`);
     seen.add(route);
   }
-  for (const route of ['/', '/about', '/blog', '/compare', '/early-access', '/features', '/pricing', '/support', '/texting', '/legal/privacy', '/legal/tos', '/legal/dpa', '/legal/subprocessors']) {
+  for (const route of ['/', '/about', '/blog', '/compare', '/features', '/pricing', '/support', '/texting', '/legal/privacy', '/legal/tos', '/legal/dpa', '/legal/subprocessors']) {
     assert.ok(seen.has(route), `${route} covered`);
   }
   assert.ok(read('app/blog/[slug]/page.js').includes('path: `/blog/'));
