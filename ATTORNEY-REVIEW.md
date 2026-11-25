@@ -1,3 +1,12 @@
+# Update, November 25, 2026 (Crisp cookies, Terms 18.14)
+
+- Privacy Policy Section 7 now discloses the Crisp live chat widget on zerbiq.com: Crisp IM SAS sets its own cookies or similar identifiers to run the chat and recognize a returning visitor, with a link to the subprocessor list.
+- Terms Section 18.14 Contact: the closing sentence ("The current terms identify Zerbiq LLC as the Service provider...") was removed.
+- Privacy Policy "Last Updated" is now November 25, 2026 (Effective Date stays November 24, 2026).
+- The two PDFs in public/legal/ were rebuilt to match.
+
+---
+
 # Update, November 25, 2026
 
 On November 25, 2026, Eddie finalized the Terms of Service and Privacy Policy using his own attorney-prepared drafts, and chose to publish the Data Processing Addendum and the subprocessor list without waiting for further attorney review. The content below is kept for history.
