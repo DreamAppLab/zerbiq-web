@@ -11,6 +11,7 @@ const css = `
 .legal-doc .num { color: #fff; font-weight: 600; white-space: nowrap; }
 .legal-doc .sec > p strong { color: #fff; font-weight: 600; }
 .legal-doc .cl { padding-left: 20px; }
+.legal-doc a { color: var(--color-primary); }
 .legal-doc strong { color: #fff; font-weight: 600; }
 @media (max-width: 640px) {
   .legal-doc { font-size: 14.5px; line-height: 1.75; }

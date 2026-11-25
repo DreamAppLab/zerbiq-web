@@ -37,8 +37,8 @@ export default function SubprocessorsPage() {
           <div style={{ color: 'var(--color-white-60)', fontSize: 15, lineHeight: 1.8 }}>
             <p style={{ margin: '0 0 16px' }}>
               These are the subprocessors Zerbiq LLC uses to provide the Service, as described in
-              Section 6 of the{' '}
-              <a href="/legal/dpa#subprocessors" style={linkStyle}>
+              Article IX of the{' '}
+              <a href="/legal/dpa" style={linkStyle}>
                 Data Processing Addendum
               </a>
               . Zerbiq has a written agreement with each one, and remains responsible for their

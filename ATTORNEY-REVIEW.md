@@ -1,3 +1,12 @@
+# Update, November 25, 2026 (attorney's Data Processing Agreement, Terms 7.11)
+
+- The attorney's Data Processing Agreement draft is now published at /legal/dpa (app/legal/dpa/content.js, with a PDF at public/legal/Zerbiq-Data-Processing-Addendum.pdf). It replaces the earlier plain-language addendum.
+- Edits made to the attorney's draft before publishing: Resend replaced by Mailgun as the email subprocessor; Simple Routing data corrected (map coordinates rounded to about 110 meters, no names, addresses or contact details); the drafting note ("uploaded client draft") removed; privacy and security notices go to support@zerbiq.com (not privacy@zerbiq.com); deletion and subprocessor notice set to 30 days; the signature block replaced by click-through acceptance (no signature required).
+- Terms Section 7.11 (Data Processing Addendum) added after Section 7.10: the DPA is incorporated by reference and controls over the Terms on that processing. The Terms PDF was rebuilt to match.
+- The subprocessor list (/legal/subprocessors) is unchanged; its link now goes to /legal/dpa (the old #subprocessors anchor no longer exists).
+
+---
+
 # Update, November 25, 2026 (Crisp cookies, Terms 18.14)
 
 - Privacy Policy Section 7 now discloses the Crisp live chat widget on zerbiq.com: Crisp IM SAS sets its own cookies or similar identifiers to run the chat and recognize a returning visitor, with a link to the subprocessor list.
