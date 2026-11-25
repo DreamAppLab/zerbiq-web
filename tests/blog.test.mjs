@@ -120,7 +120,7 @@ test('posts are written to the content rules: no placeholders, no invented numbe
     assert.ok(!/testimonial|award-winning|#1\b|best-in-class|guarantee/i.test(text), `${p.slug}: unsupported claim`);
     assert.ok(!/\b(housecall ?pro|jobber|servicetitan|service titan|fieldedge|workiz|service fusion|fieldpulse|joblogic)\b/i.test(text), `${p.slug}: competitor named`);
     assert.ok(!/archiv|customer limit|coming soon/i.test(text), `${p.slug}: wording the site avoids`);
-    assert.ok(!/colour/i.test(text), `${p.slug}: US spelling`);
+    assert.ok(!new RegExp(['col', 'our'].join(''), 'i').test(text), `${p.slug}: US spelling`);
   }
 });
 
