@@ -267,7 +267,22 @@ export default function PricingCards() {
           display: grid;
           grid-template-columns: repeat(5, minmax(0, 1fr));
           gap: 14px;
-          align-items: start;
+          align-items: stretch;
+        }
+        .pricing-card { display: flex; flex-direction: column; }
+        /* Desktop: each card spans five shared rows (header, price, limits, button,
+           features) so the price block, limits box and button line up across all
+           cards, whatever each card's text length. Browsers without subgrid keep
+           the plain stacked card. */
+        @media (min-width: 1101px) {
+          @supports (grid-template-rows: subgrid) {
+            .pricing-card {
+              display: grid;
+              grid-row: span 5;
+              grid-template-rows: subgrid;
+              align-content: start;
+            }
+          }
         }
         @media (max-width: 1100px) {
           .pricing-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -280,7 +295,7 @@ export default function PricingCards() {
         {PLANS.map((plan) => (
           <div
             key={plan.name}
-            className={plan.popular ? 'card-popular' : ''}
+            className={`pricing-card${plan.popular ? ' card-popular' : ''}`}
             style={{
               background: 'var(--color-raised)',
               border: plan.popular
@@ -289,8 +304,6 @@ export default function PricingCards() {
               borderRadius: 12,
               padding: '22px 16px',
               position: 'relative',
-              display: 'flex',
-              flexDirection: 'column',
               minWidth: 0,
             }}
           >
@@ -314,6 +327,7 @@ export default function PricingCards() {
               </div>
             )}
 
+            <div>
             <h3 style={{ fontWeight: 800, fontSize: 20, margin: '0 0 4px' }}>{plan.name}</h3>
             <p
               style={{
@@ -325,6 +339,7 @@ export default function PricingCards() {
             >
               {plan.subtitle}
             </p>
+            </div>
 
             {/* Price */}
             <div style={{ marginBottom: 20 }}>
