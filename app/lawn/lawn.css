@@ -1,0 +1,537 @@
+/* /lawn only. Every selector starts with .lawn- so nothing else on the site changes.
+   Flyer colors: forest green #12372A, cream #F6F1E4, lime #C8E65A (buttons and highlights only),
+   white for text on green. Hairline borders, no shadows, square-ish corners. */
+
+.lawn-page {
+  --lawn-green: #12372A;
+  --lawn-cream: #F6F1E4;
+  --lawn-lime: #C8E65A;
+  --lawn-white: #FFFFFF;
+  --lawn-ink-soft: #2F4A3F;
+  --lawn-heading: 'Space Grotesk', 'Inter Variable', 'Inter', sans-serif;
+  position: relative;
+  z-index: 0;
+  background: var(--lawn-cream);
+  color: var(--lawn-green);
+  font-family: 'Inter Variable', 'Inter', sans-serif;
+  overflow-x: clip;
+}
+
+.lawn-page a {
+  color: inherit;
+}
+
+/* Visible focus: green ring on cream, lime ring on green. */
+.lawn-page :focus-visible {
+  outline: 3px solid var(--lawn-green);
+  outline-offset: 3px;
+}
+.lawn-page .lawn-on-green :focus-visible {
+  outline-color: var(--lawn-lime);
+}
+
+.lawn-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.lawn-nowrap {
+  white-space: nowrap;
+}
+
+.lawn-wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.lawn-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 4px;
+  font-family: var(--lawn-heading);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s, color 0.15s;
+}
+.lawn-page .lawn-btn-lime {
+  background: var(--lawn-lime);
+  color: var(--lawn-green);
+  border: 1px solid var(--lawn-lime);
+}
+.lawn-page .lawn-btn-lime:hover {
+  background: #D6EE7A;
+}
+.lawn-page .lawn-btn-green {
+  background: var(--lawn-green);
+  color: var(--lawn-white);
+  border: 1px solid var(--lawn-green);
+}
+.lawn-page .lawn-btn-green:hover {
+  background: #1D4D3B;
+}
+.lawn-btn-small {
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 15px;
+}
+
+/* ── Header (slim, no tab nav) ───────────────────────────────────────────── */
+.lawn-page .lawn-header {
+  background: var(--lawn-green);
+  color: var(--lawn-white);
+  border-bottom: 1px solid rgba(246, 241, 228, 0.16);
+}
+.lawn-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 64px;
+}
+.lawn-page .lawn-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.lawn-logo-word {
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.lawn-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lawn-page .lawn-header-phone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 8px;
+  color: var(--lawn-white);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.lawn-page .lawn-header-phone:hover {
+  text-decoration: underline;
+}
+.lawn-header-phone svg {
+  color: var(--lawn-lime);
+}
+.lawn-header-phone-text {
+  display: none;
+}
+@media (min-width: 560px) {
+  .lawn-header-phone-text {
+    display: inline;
+  }
+}
+
+/* ── Hero (green, echoes the flyer front) ────────────────────────────────── */
+.lawn-page .lawn-hero {
+  background: var(--lawn-green);
+  color: var(--lawn-white);
+  padding: 24px 0 32px;
+}
+.lawn-eyebrow {
+  display: inline-block;
+  margin: 0 0 16px;
+  padding: 6px 12px;
+  border: 1px solid var(--lawn-lime);
+  color: var(--lawn-lime);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+.lawn-h1 {
+  margin: 0 0 12px;
+  font-family: var(--lawn-heading);
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--lawn-cream);
+}
+.lawn-lead {
+  margin: 0 0 20px;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--lawn-white);
+  max-width: 34em;
+}
+.lawn-offer {
+  background: var(--lawn-cream);
+  color: var(--lawn-green);
+  padding: 14px 16px;
+  text-align: center;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+.lawn-offer-title {
+  margin: 0;
+  font-family: var(--lawn-heading);
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 1.2;
+}
+.lawn-offer-note {
+  margin: 4px 0 0;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* Setup code block: lime hairline box like the flyer's "YOUR SETUP CODE". */
+.lawn-code {
+  border: 1px solid var(--lawn-lime);
+  padding: 14px 14px 12px;
+}
+.lawn-code-label {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--lawn-heading);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--lawn-white);
+}
+.lawn-code-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.lawn-code-field {
+  display: flex;
+  align-items: stretch;
+  min-height: 52px;
+  border: 1px solid var(--lawn-cream);
+  background: var(--lawn-cream);
+  border-radius: 2px;
+}
+.lawn-code-field:focus-within {
+  outline: 3px solid var(--lawn-lime);
+  outline-offset: 2px;
+}
+.lawn-code-prefix {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 4px 0 14px;
+  font-family: var(--lawn-heading);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--lawn-green);
+}
+.lawn-page .lawn-code-input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--lawn-green);
+  font-family: var(--lawn-heading);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  padding: 0 12px 0 0;
+}
+.lawn-page .lawn-code-input::placeholder {
+  color: #5E7268;
+  opacity: 1;
+}
+/* The field box shows the focus ring, so the input itself needs none. */
+.lawn-page .lawn-on-green .lawn-code-input:focus-visible {
+  outline: none;
+}
+.lawn-code-row .lawn-btn {
+  min-height: 52px;
+}
+.lawn-code-hint {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--lawn-white);
+}
+@media (min-width: 560px) {
+  .lawn-code-row {
+    flex-direction: row;
+  }
+  .lawn-code-field {
+    flex: 1;
+  }
+}
+
+/* ── Cream sections (echo the flyer back) ────────────────────────────────── */
+.lawn-section {
+  padding: 40px 0 0;
+}
+.lawn-section-tight {
+  padding-top: 28px;
+}
+.lawn-h2 {
+  margin: 0 0 10px;
+  font-family: var(--lawn-heading);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.1;
+  color: var(--lawn-green);
+}
+.lawn-h2-small {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+.lawn-body {
+  margin: 0 0 18px;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--lawn-ink-soft);
+  max-width: 34em;
+}
+.lawn-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px 24px;
+}
+.lawn-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 17px;
+}
+.lawn-checklist svg {
+  flex-shrink: 0;
+}
+@media (min-width: 400px) {
+  .lawn-checklist {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 400px) and (max-width: 440px) {
+  .lawn-checklist li {
+    font-size: 15px;
+  }
+}
+
+/* Plan cards: hairline, no shadow. */
+.lawn-plans {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.lawn-plan {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  align-items: start;
+  gap: 4px 16px;
+  padding: 16px;
+  border: 1.5px solid var(--lawn-green);
+  border-radius: 2px;
+  background: var(--lawn-cream);
+}
+.lawn-plan-name {
+  margin: 0;
+  font-family: var(--lawn-heading);
+  font-weight: 700;
+  font-size: 20px;
+}
+.lawn-plan-blurb {
+  margin: 2px 0 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--lawn-ink-soft);
+}
+.lawn-plan-price {
+  margin: 0;
+  font-family: var(--lawn-heading);
+  font-weight: 700;
+  font-size: 22px;
+  white-space: nowrap;
+}
+.lawn-plan-btn {
+  grid-column: 1 / -1;
+  align-self: end;
+  margin-top: 12px;
+}
+@media (min-width: 720px) {
+  .lawn-plans {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.lawn-more-plans {
+  margin: 12px 0 0;
+  font-size: 15px;
+}
+.lawn-page .lawn-more-plans a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--lawn-ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Lime band. */
+.lawn-band-lime {
+  background: var(--lawn-lime);
+  color: var(--lawn-green);
+  padding: 18px 16px;
+  text-align: center;
+  border-radius: 2px;
+}
+.lawn-band-title {
+  margin: 0;
+  font-family: var(--lawn-heading);
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.25;
+}
+.lawn-band-note {
+  margin: 4px 0 0;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* Green "How to start" band. */
+.lawn-start {
+  background: var(--lawn-green);
+  color: var(--lawn-white);
+  padding: 24px 20px;
+  border-radius: 2px;
+}
+.lawn-start-title {
+  margin: 0 0 12px;
+  font-family: var(--lawn-heading);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--lawn-lime);
+}
+.lawn-steps {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  font-size: 17px;
+  line-height: 1.45;
+}
+.lawn-steps li {
+  display: flex;
+  gap: 6px;
+}
+.lawn-step-num {
+  font-weight: 700;
+  min-width: 1.2em;
+}
+
+/* Contact. */
+.lawn-page .lawn-contact {
+  padding: 32px 0 48px;
+}
+.lawn-contact .lawn-wrap {
+  border-top: 1px solid var(--lawn-green);
+  padding-top: 20px;
+  text-align: center;
+}
+.lawn-contact-title {
+  margin: 0 0 8px;
+  font-family: var(--lawn-heading);
+  font-weight: 700;
+  font-size: 19px;
+}
+.lawn-contact-links {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 28px;
+  font-size: 17px;
+}
+.lawn-page .lawn-contact-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (min-width: 720px) {
+  .lawn-page .lawn-hero {
+    padding: 48px 0 56px;
+  }
+  .lawn-h1 {
+    font-size: 56px;
+    margin-bottom: 16px;
+  }
+  .lawn-lead {
+    font-size: 20px;
+  }
+  .lawn-offer {
+    padding: 22px 24px;
+  }
+  .lawn-offer-title {
+    font-size: 32px;
+  }
+  .lawn-offer-note {
+    font-size: 17px;
+  }
+  .lawn-code {
+    padding: 20px;
+  }
+  .lawn-section {
+    padding-top: 64px;
+  }
+  .lawn-section-tight {
+    padding-top: 40px;
+  }
+  .lawn-h2 {
+    font-size: 44px;
+  }
+  .lawn-h2-small {
+    font-size: 26px;
+  }
+  .lawn-band-title {
+    font-size: 26px;
+  }
+  .lawn-start {
+    padding: 32px;
+  }
+  .lawn-start-title {
+    font-size: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lawn-btn {
+    transition: none;
+  }
+}
