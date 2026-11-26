@@ -1,17 +1,21 @@
 import { ImageResponse } from 'next/og';
-import { POSTS, getStaticPost } from '@/lib/blog/index.mjs';
+import { livePosts, isLive, getStaticPost } from '@/lib/blog/index.mjs';
 
 export const dynamic = 'force-static';
-export const dynamicParams = false;
+// Only posts whose date has arrived get a cover at build time. A scheduled post's cover is a 404
+// until its date, then the hourly refresh generates it on first request (no redeploy), so a
+// scheduled post's title never leaks through its cover image.
+export const revalidate = 3600;
+export const dynamicParams = true;
 
 export function generateStaticParams() {
-  return POSTS.map((p) => ({ slug: p.slug }));
+  return livePosts().map((p) => ({ slug: p.slug }));
 }
 
 // A simple 1200x630 cover in the site palette, generated at build time: no stock photos.
 export async function GET(_request, { params }) {
   const post = getStaticPost(params.slug);
-  if (!post) return new Response('Not found', { status: 404 });
+  if (!post || !isLive(post)) return new Response('Not found', { status: 404 });
   return new ImageResponse(
     (
       <div

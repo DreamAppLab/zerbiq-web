@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { categoryStyle } from '@/lib/categories';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { POSTS, formatPostDate, readingMinutes } from '@/lib/blog/index.mjs';
+import { POSTS, livePosts, formatPostDate, readingMinutes } from '@/lib/blog/index.mjs';
 import { pageMetadata } from '@/lib/seo.mjs';
 import {
   BLOG_META_TITLE,
@@ -18,7 +18,7 @@ export const revalidate = 3600;
 
 async function getAllPosts() {
   const extra = (await getFirestorePosts()).filter((p) => p.slug && !POSTS.some((s) => s.slug === p.slug));
-  const staticPosts = POSTS.map((p) => ({
+  const staticPosts = livePosts().map((p) => ({
     id: p.slug,
     slug: p.slug,
     title: p.title,
@@ -56,7 +56,7 @@ export default async function BlogPage() {
     <>
       <Navbar />
 
-      {blogIndexJsonLd(POSTS).map((obj, i) => (
+      {blogIndexJsonLd(livePosts()).map((obj, i) => (
         <script
           key={i}
           type="application/ld+json"
