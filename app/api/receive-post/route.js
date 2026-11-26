@@ -1,25 +1,9 @@
 import { NextResponse } from 'next/server';
-import crypto from 'crypto';
 import { collection, addDoc, query, where, getDocs, updateDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { isWebhookSecretConfigured, verifyWebhookSignature } from '@/lib/blog/webhookAuth.mjs';
 
 export const dynamic = 'force-dynamic';
-
-// ── Signature validation ────────────────────────────────────────────────────
-
-function verifySignature(payload, signatureHeader) {
-  const secret = process.env.MASSBLOGGER_WEBHOOK_SECRET;
-  if (!secret) {
-    console.warn('MASSBLOGGER_WEBHOOK_SECRET not set — skipping signature check');
-    return true;
-  }
-  const expected = `sha256=${crypto.createHmac('sha256', secret).update(payload).digest('hex')}`;
-  try {
-    return crypto.timingSafeEqual(Buffer.from(signatureHeader ?? ''), Buffer.from(expected));
-  } catch {
-    return false;
-  }
-}
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -46,10 +30,18 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Firestore is not configured' }, { status: 503 });
   }
 
+  // Fail closed: without the webhook secret no request can be verified, so none is
+  // accepted. 503 (like the Firestore check above) because it is a server setup gap,
+  // not a bad request; the body names no secret.
+  const secret = process.env.MASSBLOGGER_WEBHOOK_SECRET;
+  if (!isWebhookSecretConfigured(secret)) {
+    return NextResponse.json({ error: 'Webhook is not configured' }, { status: 503 });
+  }
+
   const rawBody = await request.text();
   const signature = request.headers.get('x-massblogger-signature') || '';
 
-  if (!verifySignature(rawBody, signature)) {
+  if (!verifyWebhookSignature(rawBody, signature, secret)) {
     return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
   }
 
