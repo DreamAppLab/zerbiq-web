@@ -602,3 +602,23 @@ test('the old 8-week average wording appears nowhere on the site, and the new ru
   assert.match(pd.PLAN_MOVE_DOWN_RULE, /12 weeks in a row/);
   assert.equal(pd.PLAN_NEXT_PLAN_NOTE, 'For Command, the next plan is Enterprise, at a price we quote you before the change.');
 });
+
+test('plan cards: one storage note under the capacity line, on the four paid plans only', () => {
+  assert.equal(
+    pd.STORAGE_LOW_NOTE,
+    'Running low? Download your photos, organized by job and customer, to your computer or a flash drive, then free up space. Or add more storage anytime, from $5/mo.',
+  );
+  assert.equal(Math.min(...pd.STORAGE_PACKS.map((p) => p.monthlyPrice)), 5, 'note price is the smallest pack');
+  assert.ok(!/\bGB\b/.test(pd.STORAGE_LOW_NOTE), 'no pack sizes in the note');
+  const cards = read('components/PricingCards.js');
+  assert.equal(cards.split('STORAGE_LOW_NOTE').length - 1, 2, 'imported once, rendered once');
+  assert.ok(!cards.includes('Running low?'), 'wording lives in planData.js, not the component');
+  // The note is rendered inside the same guard as the capacity line, which is empty for unlimited storage.
+  const guard = "{planCapacityShortLabel(plan.name) && (\n                  <div style={{ color: 'var(--color-white-60)', fontSize: 12, lineHeight: 1.45, marginTop: 8 }}>{STORAGE_LOW_NOTE}";
+  assert.ok(cards.includes(guard), 'note sits behind the capacity-line guard');
+  assert.ok(cards.indexOf('{STORAGE_LOW_NOTE}') > cards.indexOf('{planCapacityShortLabel(plan.name)}</div>'), 'note comes after the capacity line');
+  for (const plan of ['Solo', 'Core', 'Field', 'Command']) assert.ok(pd.planCapacityShortLabel(plan), `${plan} shows the note`);
+  assert.equal(pd.planCapacityShortLabel('Enterprise'), '', 'Enterprise (unlimited storage) does not');
+  // Every page that shows the plan cards uses the one component.
+  for (const page of ['app/page.js', 'app/pricing/page.js']) assert.ok(read(page).includes('<PricingCards'), `${page} uses PricingCards`);
+});

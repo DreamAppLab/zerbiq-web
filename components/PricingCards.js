@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { brandify } from '@/components/ZerbiqBrand';
-import { PLAN_METADATA, WEEKLY_VISITS_EXPLAINER, ANNUAL_SAVINGS_LABEL, enterprisePriceLabel, formatPlanPrice, formatAnnualMonthlyEquivalent, PAYMENT_PROCESSORS_NOTE, weeklyVisitsLabel, planStorageLabel, planCapacityShortLabel, assistantQuestionsFeatureLabel } from '@/lib/planData';
+import { PLAN_METADATA, WEEKLY_VISITS_EXPLAINER, ANNUAL_SAVINGS_LABEL, enterprisePriceLabel, formatPlanPrice, formatAnnualMonthlyEquivalent, PAYMENT_PROCESSORS_NOTE, weeklyVisitsLabel, planStorageLabel, planCapacityShortLabel, assistantQuestionsFeatureLabel, STORAGE_LOW_NOTE } from '@/lib/planData';
 
 // Feature lists for each plan (human-readable labels shown on pricing cards).
 // Plan gates (which plan first unlocks a feature) live in lib/planData.js.
@@ -398,6 +398,9 @@ export default function PricingCards() {
                 <div style={{ fontWeight: 600 }}>{planStorageLabel(plan.name)}</div>
                 {planCapacityShortLabel(plan.name) && (
                   <div style={{ color: 'var(--color-white-60)', fontSize: 12, marginTop: 2 }}>{planCapacityShortLabel(plan.name)}</div>
+                )}
+                {planCapacityShortLabel(plan.name) && (
+                  <div style={{ color: 'var(--color-white-60)', fontSize: 12, lineHeight: 1.45, marginTop: 8 }}>{STORAGE_LOW_NOTE}</div>
                 )}
               </div>
             </div>
