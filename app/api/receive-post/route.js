@@ -42,6 +42,10 @@ async function findPostBySlug(slug) {
 // ── Handler ──────────────────────────────────────────────────────────────────
 
 export async function POST(request) {
+  if (!db) {
+    return NextResponse.json({ error: 'Firestore is not configured' }, { status: 503 });
+  }
+
   const rawBody = await request.text();
   const signature = request.headers.get('x-massblogger-signature') || '';
 

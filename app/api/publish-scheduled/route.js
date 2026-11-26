@@ -26,6 +26,10 @@ export async function GET(request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  if (!db) {
+    return NextResponse.json({ error: 'Firestore is not configured' }, { status: 503 });
+  }
+
   try {
     const now = Timestamp.now();
 
