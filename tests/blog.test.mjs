@@ -233,7 +233,7 @@ test('sitemap lists the blog index and every post with a lastmod; robots allows 
   assert.ok(read('app/sitemap.js').includes('sitemapEntries()'), 'app/sitemap.js serves the shared entries');
   const robots = read('app/robots.js');
   assert.ok(robots.includes("allow: '/'") && robots.includes('/sitemap.xml'));
-  assert.ok(!/disallow:[^\]]*\/blog/.test(robots), 'robots does not block the blog');
+  assert.ok(!/disallow\s*:/.test(robots), 'robots blocks nothing (no API routes or admin screens remain)');
 });
 
 test('Atom feed lists every post; llms.txt points at the blog and key pages', () => {
@@ -301,7 +301,7 @@ test('scheduled posts: hidden until their date, then live, everywhere the blog l
   assert.ok(!atomFeed(livePosts('2026-12-02')).includes(postUrl(first.slug)));
   assert.ok(atomFeed(livePosts('2026-12-03')).includes(postUrl(first.slug)));
   // The post page and the index read the date gate.
-  assert.ok(read('app/blog/[slug]/page.js').includes('isLive(staticPost)'), 'post page 404s a scheduled post');
+  assert.ok(read('app/blog/[slug]/page.js').includes('!isLive(post)'), 'post page 404s a scheduled post');
   assert.ok(read('app/blog/page.js').includes('livePosts()'), 'index lists live posts only');
   assert.ok(/revalidate = 3600/.test(read('app/sitemap.js')) && /revalidate = 3600/.test(read('app/blog/feed.xml/route.js')), 'sitemap and feed refresh hourly');
   assert.match(todayEastern(new Date('2026-12-03T12:00:00Z')), /^2026-12-03$/);
