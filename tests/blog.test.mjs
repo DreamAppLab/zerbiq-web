@@ -301,7 +301,7 @@ test('scheduled posts: hidden until their date, then live, everywhere the blog l
   assert.ok(!atomFeed(livePosts('2026-12-02')).includes(postUrl(first.slug)));
   assert.ok(atomFeed(livePosts('2026-12-03')).includes(postUrl(first.slug)));
   // The post page and the index read the date gate.
-  assert.ok(read('app/blog/[slug]/page.js').includes('isLive(staticPost)'), 'post page 404s a scheduled post');
+  assert.ok(read('app/blog/[slug]/page.js').includes('!isLive(post)'), 'post page 404s a scheduled post');
   assert.ok(read('app/blog/page.js').includes('livePosts()'), 'index lists live posts only');
   assert.ok(/revalidate = 3600/.test(read('app/sitemap.js')) && /revalidate = 3600/.test(read('app/blog/feed.xml/route.js')), 'sitemap and feed refresh hourly');
   assert.match(todayEastern(new Date('2026-12-03T12:00:00Z')), /^2026-12-03$/);

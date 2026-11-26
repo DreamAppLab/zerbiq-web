@@ -129,7 +129,6 @@ test('no page or component still shows an old price, an old limit or customer-li
     [/\bsixteen? months?\b|last 6 months|recurring route[^.\n]*counts toward/i, 'old counted-customer rule'],
   ];
   for (const [f, text] of [...siteText, ...OTHER_TEXT]) {
-    if (f.startsWith('app/admin/')) continue;
     for (const [re, what] of OLD) {
       const hits = text.split('\n').filter((l) => re.test(l));
       assert.deepEqual(hits, [], `${f}: ${what}`);
@@ -242,7 +241,7 @@ test('home cards show the same plan badge as the shared gates', () => {
 });
 
 test('every page exports its own metadata with a canonical path matching its route', () => {
-  const pages = SITE.filter((f) => /^app\/(.*\/)?page\.js$/.test(f) && !f.startsWith('app/admin'));
+  const pages = SITE.filter((f) => /^app\/(.*\/)?page\.js$/.test(f));
   const seen = new Set();
   for (const f of pages) {
     const route = '/' + f.replace(/^app\//, '').replace(/\/?page\.js$/, '');
@@ -255,7 +254,9 @@ test('every page exports its own metadata with a canonical path matching its rou
   for (const route of ['/', '/about', '/blog', '/compare', '/features', '/pricing', '/support', '/texting', '/legal/privacy', '/legal/tos', '/legal/dpa', '/legal/subprocessors']) {
     assert.ok(seen.has(route), `${route} covered`);
   }
-  assert.ok(read('app/blog/[slug]/page.js').includes('path: `/blog/'));
+  // Blog posts get their canonical /blog/<slug> path from postMetadata (lib/blog/seo.mjs).
+  assert.ok(read('app/blog/[slug]/page.js').includes('postMetadata(post)'));
+  assert.ok(read('lib/blog/seo.mjs').includes('path: postPath(post.slug)'));
 });
 
 test('pageMetadata gives og title, og description and canonical, and can noindex', () => {

@@ -4,7 +4,6 @@ import { categoryStyle } from '@/lib/categories';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogInline from '@/components/BlogInline';
-import { pageMetadata, SITE_URL } from '@/lib/seo.mjs';
 import {
   livePosts,
   isLive,
@@ -16,13 +15,11 @@ import {
 import {
   postMetadata,
   postJsonLd,
-  breadcrumbJsonLd,
   jsonLdString,
 } from '@/lib/blog/seo.mjs';
-import { getFirestorePostBySlug } from '@/lib/blog/firestorePosts';
 
-// Static posts are generated at build time. A slug that is not a static post is
-// looked up once in Firestore (admin-published posts) and then cached for an hour.
+// Posts are generated at build time. A scheduled post (not yet built) is rendered on
+// demand once its date arrives and then cached for an hour.
 export const revalidate = 3600;
 export const dynamicParams = true;
 
@@ -35,18 +32,9 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const staticPost = getStaticPost(params.slug);
-  if (staticPost) {
-    if (!isLive(staticPost)) return { title: 'Post Not Found — Zerbiq', robots: { index: false, follow: false } };
-    return postMetadata(staticPost);
-  }
-  const post = await getFirestorePostBySlug(params.slug);
-  if (!post) return { title: 'Post Not Found — Zerbiq', robots: { index: false, follow: false } };
-  const title = post.metaTitle || `${post.title} — Zerbiq`;
-  const description = post.metaDescription || post.excerpt || '';
-  const meta = pageMetadata({ title, description, path: `/blog/${post.slug || params.slug}` });
-  if (post.featuredImage) meta.openGraph.images = [{ url: post.featuredImage }];
-  return meta;
+  const post = getStaticPost(params.slug);
+  if (!post || !isLive(post)) return { title: 'Post Not Found — Zerbiq', robots: { index: false, follow: false } };
+  return postMetadata(post);
 }
 
 const label = {
@@ -271,86 +259,14 @@ function StaticPost({ post }) {
   );
 }
 
-function FirestorePost({ post }) {
-  const url = `${SITE_URL}/blog/${post.slug}`;
-  const article = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: post.title,
-    datePublished: post.publishedAt || undefined,
-    dateModified: post.publishedAt || undefined,
-    author: { '@type': 'Organization', name: 'Zerbiq', url: SITE_URL },
-    publisher: { '@type': 'Organization', name: 'Zerbiq', url: SITE_URL },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    ...(post.featuredImage ? { image: [post.featuredImage] } : {}),
-  };
-  const crumbs = breadcrumbJsonLd({ title: post.title, slug: post.slug });
-  return (
-    <>
-      <JsonLd items={[article, crumbs]} />
-      <article style={{ maxWidth: 760, margin: '0 auto', padding: '80px 24px 60px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-          <CategoryBadge category={post.category} />
-          <span style={label}>{post.publishedAt ? formatPostDate(post.publishedAt) : ''}</span>
-        </div>
-        <h1
-          style={{
-            fontWeight: 900,
-            fontSize: 'clamp(28px, 4vw, 44px)',
-            letterSpacing: '-0.03em',
-            lineHeight: 1.1,
-            margin: '0 0 16px',
-          }}
-        >
-          {post.title}
-        </h1>
-        {post.author && <p style={{ ...label, fontSize: 14, margin: '0 0 32px' }}>By {post.author}</p>}
-        {post.featuredImage && (
-          <img
-            src={post.featuredImage}
-            alt={post.title}
-            style={{ width: '100%', borderRadius: 12, marginBottom: 40, objectFit: 'cover', maxHeight: 420 }}
-          />
-        )}
-        <div
-          className="blog-body"
-          dangerouslySetInnerHTML={{ __html: post.body || '' }}
-          style={{ color: 'rgba(255,255,255,0.85)', fontSize: 16, lineHeight: 1.8 }}
-        />
-        {post.tags?.length > 0 && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 40 }}>
-            {post.tags.map((tag) => (
-              <span
-                key={tag}
-                style={{
-                  background: 'var(--color-raised)',
-                  border: '1px solid var(--color-white-10)',
-                  borderRadius: 20,
-                  padding: '4px 12px',
-                  fontSize: 12,
-                  color: 'var(--color-white-60)',
-                }}
-              >
-                #{tag}
-              </span>
-            ))}
-          </div>
-        )}
-        <CtaBox />
-      </article>
-    </>
-  );
-}
-
-export default async function BlogPostPage({ params }) {
-  const staticPost = getStaticPost(params.slug);
-  const post = staticPost || (await getFirestorePostBySlug(params.slug));
-  if (!post || (staticPost && !isLive(staticPost))) notFound();
+export default function BlogPostPage({ params }) {
+  const post = getStaticPost(params.slug);
+  if (!post || !isLive(post)) notFound();
 
   return (
     <>
       <Navbar />
-      {staticPost ? <StaticPost post={staticPost} /> : <FirestorePost post={post} />}
+      <StaticPost post={post} />
       <Footer />
     </>
   );

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { categoryStyle } from '@/lib/categories';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { POSTS, livePosts, formatPostDate, readingMinutes } from '@/lib/blog/index.mjs';
+import { livePosts, formatPostDate, readingMinutes } from '@/lib/blog/index.mjs';
 import { pageMetadata } from '@/lib/seo.mjs';
 import {
   BLOG_META_TITLE,
@@ -10,15 +10,13 @@ import {
   blogIndexJsonLd,
   jsonLdString,
 } from '@/lib/blog/seo.mjs';
-import { getFirestorePosts } from '@/lib/blog/firestorePosts';
 
-// Generated at build time and refreshed hourly, so posts published from the admin
-// screen show up without a redeploy.
+// Generated at build time and refreshed hourly, so a scheduled post shows up on its
+// date without a redeploy.
 export const revalidate = 3600;
 
-async function getAllPosts() {
-  const extra = (await getFirestorePosts()).filter((p) => p.slug && !POSTS.some((s) => s.slug === p.slug));
-  const staticPosts = livePosts().map((p) => ({
+function getAllPosts() {
+  return livePosts().map((p) => ({
     id: p.slug,
     slug: p.slug,
     title: p.title,
@@ -27,15 +25,6 @@ async function getAllPosts() {
     publishedAt: p.publishedAt,
     minutes: readingMinutes(p),
   }));
-  const more = extra.map((p) => ({
-    id: p.id,
-    slug: p.slug,
-    title: p.title,
-    excerpt: p.excerpt,
-    category: p.category,
-    publishedAt: p.publishedAt,
-  }));
-  return [...staticPosts, ...more].sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
 }
 
 // The static posts always exist, so the blog index is always indexable.
@@ -50,7 +39,7 @@ export async function generateMetadata() {
 }
 
 export default async function BlogPage() {
-  const posts = await getAllPosts();
+  const posts = getAllPosts();
 
   return (
     <>
