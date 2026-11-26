@@ -1,3 +1,12 @@
+# Update, November 26, 2026 (blog admin page retired)
+
+- On November 26, 2026, the staff-only blog admin page (/admin/blog) was removed. It used Firebase sign-in (Google sign-in) and loaded the Quill editor stylesheet from cdn.quilljs.com.
+- Also removed: the Firestore blog path (admin-published posts read from Google Firestore), the /api/receive-post webhook, and the hourly /api/publish-scheduled cron.
+- zerbiq.com no longer uses Firebase or Quill. The blog is file-based only: its posts are built into the site, and scheduled posts go live on their date with no outside service.
+- The older entry under "Audit results that the text relies on" (zerbiq.com bullet) describes the removed admin page. It is kept unchanged as a record of what the audit found at the time.
+
+---
+
 # Update, November 25, 2026 (attorney's Data Processing Agreement, Terms 7.11)
 
 - The attorney's Data Processing Agreement draft is now published at /legal/dpa (app/legal/dpa/content.js, with a PDF at public/legal/Zerbiq-Data-Processing-Addendum.pdf). It replaces the earlier plain-language addendum.
