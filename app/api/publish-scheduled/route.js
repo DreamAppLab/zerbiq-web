@@ -10,19 +10,15 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { isAuthorizedCron } from '@/lib/blog/cronAuth.mjs';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(request) {
-  // Protect cron endpoint — Vercel sets this header automatically for cron jobs.
-  // Also allow requests with the correct secret for manual triggering.
-  const authHeader = request.headers.get('authorization');
-  const cronSecret = process.env.CRON_SECRET;
-
-  const isVercelCron = request.headers.get('x-vercel-cron') === '1';
-  const hasSecret = cronSecret && authHeader === `Bearer ${cronSecret}`;
-
-  if (!isVercelCron && !hasSecret) {
+  // Only Vercel's cron (or a manual call) carrying "Authorization: Bearer <CRON_SECRET>"
+  // may run this. The x-vercel-cron header is spoofable and is never accepted; with
+  // CRON_SECRET unset every request is refused.
+  if (!isAuthorizedCron(request.headers, process.env.CRON_SECRET)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
