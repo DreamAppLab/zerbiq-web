@@ -233,7 +233,7 @@ test('sitemap lists the blog index and every post with a lastmod; robots allows 
   assert.ok(read('app/sitemap.js').includes('sitemapEntries()'), 'app/sitemap.js serves the shared entries');
   const robots = read('app/robots.js');
   assert.ok(robots.includes("allow: '/'") && robots.includes('/sitemap.xml'));
-  assert.ok(!/disallow:[^\]]*\/blog/.test(robots), 'robots does not block the blog');
+  assert.ok(!/disallow\s*:/.test(robots), 'robots blocks nothing (no API routes or admin screens remain)');
 });
 
 test('Atom feed lists every post; llms.txt points at the blog and key pages', () => {
