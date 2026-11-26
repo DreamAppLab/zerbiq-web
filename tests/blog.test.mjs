@@ -307,3 +307,17 @@ test('scheduled posts: hidden until their date, then live, everywhere the blog l
   assert.match(todayEastern(new Date('2026-12-03T12:00:00Z')), /^2026-12-03$/);
   assert.equal(todayEastern(new Date('2026-12-03T03:00:00Z')), '2026-12-02', 'midnight Eastern, not UTC');
 });
+
+test('scheduled posts: the cover image route hides a scheduled post and refreshes hourly', () => {
+  const og = read('app/blog/og/[slug]/route.js');
+  assert.ok(og.includes('isLive(post)'), 'cover 404s a scheduled post');
+  assert.ok(og.includes('livePosts().map'), 'only live posts are built up front');
+  assert.ok(!/POSTS\.map/.test(og), 'the build list is not every post');
+  assert.ok(/revalidate = 3600/.test(og) && /dynamicParams = true/.test(og), 'a post that goes live gets its cover without a redeploy');
+});
+
+test('posts name only the payment processors Zerbiq supports today (Stripe, Square, Authorize.net)', () => {
+  for (const p of POSTS) {
+    assert.ok(!/paypal|venmo/i.test(JSON.stringify(p)), `${p.slug}: names a processor that is not live yet`);
+  }
+});
