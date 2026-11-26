@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import {
   POSTS,
+  livePosts,
+  isLive,
+  todayEastern,
   bodyTexts,
   plainText,
   inlineTokens,
@@ -23,7 +26,7 @@ import {
 import { SITE_URL, pageMetadata } from '../lib/seo.mjs';
 
 const read = (rel) => readFileSync(new URL(`../${rel}`, import.meta.url), 'utf8');
-const LAST_ALLOWED_DATE = '2026-11-25'; // the owner's cut-off: no post is dated after it
+const LAST_ALLOWED_DATE = '2027-02-18'; // the last post of the scheduled lawn care series; later dates must be added on purpose
 const ISO = /^\d{4}-\d{2}-\d{2}$/;
 const words = (s) => s.trim().split(/\s+/).filter(Boolean).length;
 
@@ -54,7 +57,7 @@ function routes() {
 }
 
 test('at least 10 posts are published', () => {
-  assert.ok(POSTS.length >= 10, `${POSTS.length} posts`);
+  assert.ok(livePosts().length >= 10, `${livePosts().length} live posts`);
 });
 
 test('slugs are clean and unique; titles, meta titles and descriptions are unique and within limits', () => {
@@ -94,13 +97,11 @@ test('every post has the required parts: answer-first paragraph, takeaways, sect
 });
 
 test('dates are real ISO dates, never after the cut-off, and updated is not before published', () => {
-  const today = new Date().toISOString().slice(0, 10);
   for (const p of POSTS) {
     for (const key of ['publishedAt', 'updatedAt']) {
       assert.match(p[key], ISO, `${p.slug}: ${key} format`);
       assert.ok(!Number.isNaN(Date.parse(p[key])), `${p.slug}: ${key} is a date`);
       assert.ok(p[key] <= LAST_ALLOWED_DATE, `${p.slug}: ${key} ${p[key]} is after ${LAST_ALLOWED_DATE}`);
-      if (today >= LAST_ALLOWED_DATE) assert.ok(p[key] <= today, `${p.slug}: ${key} is in the future`);
     }
     assert.ok(p.updatedAt >= p.publishedAt, `${p.slug}: updated before published`);
   }
@@ -190,11 +191,11 @@ test('JSON-LD: BlogPosting, FAQPage and BreadcrumbList parse, are complete and m
 });
 
 test('blog index JSON-LD: Blog, CollectionPage with an ItemList of every post, BreadcrumbList', () => {
-  const [blog, collection, crumbs] = blogIndexJsonLd(POSTS).map((o) => JSON.parse(jsonLdString(o)));
+  const [blog, collection, crumbs] = blogIndexJsonLd(livePosts()).map((o) => JSON.parse(jsonLdString(o)));
   assert.equal(blog['@type'], 'Blog');
   assert.equal(collection['@type'], 'CollectionPage');
   assert.equal(collection.mainEntity['@type'], 'ItemList');
-  assert.deepEqual(collection.mainEntity.itemListElement.map((i) => i.url), POSTS.map((p) => postUrl(p.slug)));
+  assert.deepEqual(collection.mainEntity.itemListElement.map((i) => i.url), livePosts().map((p) => postUrl(p.slug)));
   assert.equal(crumbs['@type'], 'BreadcrumbList');
 });
 
@@ -224,7 +225,7 @@ test('sitemap lists the blog index and every post with a lastmod; robots allows 
   const urls = entries.map((e) => e.url);
   assert.equal(new Set(urls).size, urls.length, 'no duplicate sitemap URLs');
   assert.ok(urls.includes(`${SITE_URL}/blog`));
-  for (const p of POSTS) {
+  for (const p of livePosts()) {
     const e = entries.find((x) => x.url === postUrl(p.slug));
     assert.ok(e, `${p.slug} in sitemap`);
     assert.equal(e.lastModified, p.updatedAt);
@@ -237,7 +238,7 @@ test('sitemap lists the blog index and every post with a lastmod; robots allows 
 
 test('Atom feed lists every post; llms.txt points at the blog and key pages', () => {
   const feed = atomFeed();
-  for (const p of POSTS) assert.ok(feed.includes(`<id>${postUrl(p.slug)}</id>`), `${p.slug} in feed`);
+  for (const p of livePosts()) assert.ok(feed.includes(`<id>${postUrl(p.slug)}</id>`), `${p.slug} in feed`);
   assert.ok(feed.startsWith('<?xml'));
   assert.ok(read('app/blog/feed.xml/route.js').includes('atomFeed()'));
   const llms = read('public/llms.txt');
@@ -253,7 +254,7 @@ const haveBuild = existsSync(built('blog.html'));
 const skipBuilt = !process.env.CI && !haveBuild;
 
 test('built post pages: one H1, canonical, server-rendered JSON-LD that parses, visible FAQ', { skip: skipBuilt }, () => {
-  for (const p of POSTS) {
+  for (const p of livePosts()) {
     const html = readFileSync(built(`blog/${p.slug}.html`), 'utf8');
     assert.equal((html.match(/<h1[ >]/g) || []).length, 1, `${p.slug}: exactly one H1`);
     assert.ok(html.includes(`<link rel="canonical" href="${postUrl(p.slug)}"`), `${p.slug}: canonical`);
@@ -272,8 +273,37 @@ test('built blog index and sitemap: JSON-LD in the HTML and every post listed', 
   assert.equal((html.match(/<h1[ >]/g) || []).length, 1);
   const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
   assert.deepEqual(blocks.map((b) => b['@type']), ['Blog', 'CollectionPage', 'BreadcrumbList']);
-  for (const p of POSTS) assert.ok(html.includes(`href="/blog/${p.slug}"`), `${p.slug} linked from the index`);
+  for (const p of livePosts()) assert.ok(html.includes(`href="/blog/${p.slug}"`), `${p.slug} linked from the index`);
   const sitemap = readFileSync(built('sitemap.xml.body'), 'utf8');
-  for (const p of POSTS) assert.ok(sitemap.includes(`<loc>${postUrl(p.slug)}</loc>`), `${p.slug} in built sitemap`);
+  for (const p of livePosts()) assert.ok(sitemap.includes(`<loc>${postUrl(p.slug)}</loc>`), `${p.slug} in built sitemap`);
   assert.ok(sitemap.includes(`<loc>${SITE_URL}/blog</loc>`));
+});
+
+test('scheduled posts: hidden until their date, then live, everywhere the blog lists posts', () => {
+  const lawn = POSTS.filter((p) => p.publishedAt >= '2026-12-03');
+  assert.equal(lawn.length, 12, 'twelve scheduled lawn care posts');
+  assert.deepEqual(
+    lawn.map((p) => p.publishedAt).sort(),
+    ['2026-12-03', '2026-12-10', '2026-12-17', '2026-12-24', '2026-12-31', '2027-01-07', '2027-01-14', '2027-01-21', '2027-01-28', '2027-02-04', '2027-02-11', '2027-02-18'],
+    'one post every Thursday',
+  );
+  const first = lawn.find((p) => p.publishedAt === '2026-12-03');
+  const second = lawn.find((p) => p.publishedAt === '2026-12-10');
+  // The day before a post's date it is hidden; on its date it is live.
+  assert.ok(!isLive(first, '2026-12-02') && isLive(first, '2026-12-03'));
+  assert.ok(!livePosts('2026-12-02').some((p) => p.slug === first.slug));
+  assert.ok(livePosts('2026-12-03').some((p) => p.slug === first.slug));
+  assert.ok(!livePosts('2026-12-03').some((p) => p.slug === second.slug), 'next week stays hidden');
+  // Hidden posts stay out of the sitemap and feed, live ones go in.
+  const before = sitemapEntries(livePosts('2026-12-02')).map((e) => e.url);
+  const after = sitemapEntries(livePosts('2026-12-03')).map((e) => e.url);
+  assert.ok(!before.includes(postUrl(first.slug)) && after.includes(postUrl(first.slug)));
+  assert.ok(!atomFeed(livePosts('2026-12-02')).includes(postUrl(first.slug)));
+  assert.ok(atomFeed(livePosts('2026-12-03')).includes(postUrl(first.slug)));
+  // The post page and the index read the date gate.
+  assert.ok(read('app/blog/[slug]/page.js').includes('isLive(staticPost)'), 'post page 404s a scheduled post');
+  assert.ok(read('app/blog/page.js').includes('livePosts()'), 'index lists live posts only');
+  assert.ok(/revalidate = 3600/.test(read('app/sitemap.js')) && /revalidate = 3600/.test(read('app/blog/feed.xml/route.js')), 'sitemap and feed refresh hourly');
+  assert.match(todayEastern(new Date('2026-12-03T12:00:00Z')), /^2026-12-03$/);
+  assert.equal(todayEastern(new Date('2026-12-03T03:00:00Z')), '2026-12-02', 'midnight Eastern, not UTC');
 });

@@ -6,7 +6,8 @@ import Footer from '@/components/Footer';
 import BlogInline from '@/components/BlogInline';
 import { pageMetadata, SITE_URL } from '@/lib/seo.mjs';
 import {
-  POSTS,
+  livePosts,
+  isLive,
   BLOG_AUTHOR,
   getStaticPost,
   formatPostDate,
@@ -28,12 +29,17 @@ export const dynamicParams = true;
 const DEMO_URL = 'https://calendly.com/zerbiq-demos/30min';
 
 export function generateStaticParams() {
-  return POSTS.map((p) => ({ slug: p.slug }));
+  // Only posts whose date has arrived are built up front. A scheduled post is a 404 until
+  // its date, then the hourly refresh (revalidate) publishes it with no redeploy.
+  return livePosts().map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }) {
   const staticPost = getStaticPost(params.slug);
-  if (staticPost) return postMetadata(staticPost);
+  if (staticPost) {
+    if (!isLive(staticPost)) return { title: 'Post Not Found — Zerbiq', robots: { index: false, follow: false } };
+    return postMetadata(staticPost);
+  }
   const post = await getFirestorePostBySlug(params.slug);
   if (!post) return { title: 'Post Not Found — Zerbiq', robots: { index: false, follow: false } };
   const title = post.metaTitle || `${post.title} — Zerbiq`;
@@ -134,7 +140,7 @@ function CategoryBadge({ category }) {
 }
 
 function StaticPost({ post }) {
-  const related = post.related.map((s) => getStaticPost(s)).filter(Boolean);
+  const related = post.related.map((s) => getStaticPost(s)).filter((r) => r && isLive(r));
   return (
     <>
       <JsonLd items={postJsonLd(post)} />
@@ -339,7 +345,7 @@ function FirestorePost({ post }) {
 export default async function BlogPostPage({ params }) {
   const staticPost = getStaticPost(params.slug);
   const post = staticPost || (await getFirestorePostBySlug(params.slug));
-  if (!post) notFound();
+  if (!post || (staticPost && !isLive(staticPost))) notFound();
 
   return (
     <>
