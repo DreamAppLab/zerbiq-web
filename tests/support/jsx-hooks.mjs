@@ -3,6 +3,7 @@
 // Registered by tests that render pages: register('./support/jsx-hooks.mjs', import.meta.url).
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
+import { sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { transform } from 'sucrase';
 
@@ -12,7 +13,8 @@ const ROOT_PATH = fileURLToPath(ROOT);
 function inRepoSource(url) {
   if (!url.startsWith('file:')) return false;
   const p = fileURLToPath(url);
-  return p.startsWith(ROOT_PATH) && !p.includes('/node_modules/');
+  // fileURLToPath gives the platform's separators (backslashes on Windows).
+  return p.startsWith(ROOT_PATH) && !p.split(sep).includes('node_modules');
 }
 
 export async function resolve(specifier, context, nextResolve) {

@@ -258,7 +258,9 @@
   padding: 0 12px 0 0;
 }
 .lawn-page .lawn-code-input::placeholder {
-  color: #5E7268;
+  /* 6.7:1 on cream; regular weight and lighter green than the bold typed digits (#12372A). */
+  color: #3E5A4E;
+  font-weight: 400;
   opacity: 1;
 }
 /* The field box shows the focus ring, so the input itself needs none. */
